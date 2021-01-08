@@ -1,0 +1,17 @@
+<%= base %>
+
+<template id="custom-template">
+  This is my custom template
+  Hello {{hello}}!!
+  <script>
+    console.warn("im a template")
+  </script>
+</template>
+
+<script>
+  var client = new window.SgOmniClientSdk("123456");
+  window.SgOmniEnablement.init({
+    apiKey: '1234',
+    template: document.querySelector('#custom-template').innerHTML,
+  });
+</script>
