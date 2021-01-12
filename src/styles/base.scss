@@ -1,5 +1,8 @@
-#sg-omni, .sg-omni-int {
-  .hello {
-    font-size: 16px;
+#sg-omni.sg-omni-int {
+  * {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   }
+
+  @import "reset";
+  @import "modal";
 }

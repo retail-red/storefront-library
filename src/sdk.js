@@ -1,13 +1,155 @@
+import { isMobileBrowser, getOS } from './util/browser';
+
+const API_URLS = {
+  development: 'https://storefront-api.shopgatedev.io',
+  staging: 'https://storefront-api.shopgatepg.io',
+  production: 'https://storefront-api.shopgate.io',
+};
+
+/**
+ * Wrapper around the Storefront API
+ */
 class StorefrontAPI {
-  constructor(apiKey) {}
+  constructor(apiKey, stage = 'production') {
+    this.apiKey = apiKey;
 
-  async createOrder(orderData) {}
+    // Build base url for all requests.
+    const baseUrl = API_URLS[stage];
+    if (!baseUrl) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `[SG Enablement] API stage must be one of (${Object.keys(API_URLS).join(', ')}) but was ${stage}`,
+      );
+      return;
+    }
+    this.baseUrl = baseUrl;
+  }
 
-  async getProductInventory(productCode, locationCodes, catalogCode = null) {}
+  /**
+   * Triggers a generic request.
+   * @param {Object} options Options for request.
+   * @param {String} options.method HTTP Method
+   * @param {String} options.endpoint API Endpoint
+   * @param {String|Object} options.body Request body.
+   * @param {Object} options.query URL query parameters.
+   * @return {Object}
+   */
+  async _genericRequest(options) {
+    const queryObject = { ...options.query, apiKey: this.apiKey };
+    const query = Object
+      .entries(queryObject)
+      .filter(([_, value]) => !!value)
+      .map(([key, value]) => `${key}=${encodeURIComponent(typeof value === 'object' ? JSON.stringify(value) : value)}`)
+      .join('&');
+    const url = `${this.baseUrl}${options.endpoint}?${query}`;
 
-  async getProductsInventory(productLocationCodePairs) {}
+    return fetch({
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: options.method || 'GET',
+      body: typeof options.body === 'object'
+        ? JSON.stringify(options.body)
+        : options.body,
+    });
+  }
 
-  async getLocations(options) {}
+  /**
+   * Creates multiple orders.
+   * @note Platform and OS is automatically enriched to data.
+   * @param {Object} orders Storefront Orders.
+   * @returns {Object}
+   */
+  async createOrders(orders) {
+    return this._genericRequest({
+      endpoint: '/v1/orders',
+      method: 'POST',
+      body: {
+        orders: orders.map((order) => ({
+          platform: isMobileBrowser() ? 'mobile' : 'desktop',
+          os: getOS(),
+          ...order,
+        })),
+      },
+    });
+  }
+
+  /**
+   * Creates a single order
+   * @see StorefrontAPI.createOrders
+   * @param {Object} orderData Order data
+   * @returns {Object}
+   */
+  async createOrder(orderData) {
+    return this.createOrders([orderData]);
+  }
+
+  /**
+   * Receives the current inventory for each pair of "product a given location"
+   * @param {Array} productLocationCodePairs Code pairs
+   * @returns {Object}
+   */
+  async getInventories(productLocationCodePairs) {
+    // Validate
+    if (!productLocationCodePairs
+      .every(({ productCode, locationCode }) => !!productCode && !!locationCode)
+    ) {
+      // eslint-disable-next-line no-console
+      console.error('[SG Enablement] StorefrontAPI.getInventory pairs must each contain a product code AND a location code');
+      return null;
+    }
+
+    return this._genericRequest({
+      endpoint: '/v1/inventories',
+      method: 'POST',
+      body: productLocationCodePairs,
+    });
+  }
+
+  /**
+   * Receives a products inventory at one or more locations
+   * @param {String} productCode Product code
+   * @param {String[]|String} locationCodesOrCode  One or more location codes.
+   * @param {String} catalogCode Catalog code.
+   * @returns {Object}
+   */
+  async getProductInventories(productCode, locationCodesOrCode, catalogCode = null) {
+    const locationCodes = Array.isArray(locationCodesOrCode)
+      ? locationCodesOrCode
+      : [locationCodesOrCode];
+
+    return this._genericRequest({
+      endpoint: `/v1/products/${productCode}/inventories`,
+      query: {
+        locationsCodes: locationCodes.join(','),
+        catalogCode,
+      },
+    });
+  }
+
+  /**
+   * Receives all or locations available for specific product.
+   * @param {Object} options Options for the location.
+   * @param {Object} options.productCode Allows requesting locations available for a product.
+   * @see StoreFront API Document for all options.
+   * @returns {Object}
+   */
+  async getLocations(options) {
+    const { productCode, ...query } = options;
+
+    if (productCode) {
+      return this._genericRequest({
+        endpoint: `/v1/products/${productCode}/locations`,
+        query,
+      });
+    }
+
+    return this._genericRequest({
+      endpoint: '/v1/locations',
+      query,
+    });
+  }
 }
 
 export default StorefrontAPI;

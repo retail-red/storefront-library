@@ -1,5 +1,8 @@
 import { createConfig, validateConfigForRendering } from './config';
 import { updateCustomTranslations, updateLanguage } from './locales';
+import DummyController from './ui/dummy';
+import App from './ui/app';
+import reserveButtonTemplate from './templates/reserveButton.hbs';
 
 class Instance {
   /**
@@ -8,14 +11,27 @@ class Instance {
    */
   constructor(config) {
     this.config = createConfig(config);
+    this.sdk = {};
     this._handleConfigUpdate();
   }
 
   _handleConfigUpdate() {
     // Update i18n
-    const { localeCode, ...languages } = this.config.localization.localeCode;
+    const { localeCode, ...languages } = this.config.localization;
     updateLanguage(localeCode);
     updateCustomTranslations(languages);
+  }
+
+  static _globalModalPlaceholderSingleton() {
+    if (Instance._modalPlaceholder) {
+      return Instance._modalPlaceholder;
+    }
+    const div = document.createElement('div');
+    div.id = 'sg-omni-modal-placeholder';
+    div.innerHTML = '';
+    document.body.appendChild(div);
+    Instance._modalPlaceholder = div;
+    return div;
   }
 
   /**
@@ -40,6 +56,18 @@ class Instance {
 
     // Target can be either a string or element.
     const targetElement = typeof target === 'string' ? document.querySelector(target) : target;
+
+    // Initialize application.
+    const app = new App(this.config, this.sdk);
+    app.addController(DummyController);
+
+    // Render button
+    targetElement.innerHTML = reserveButtonTemplate();
+    const button = targetElement.querySelector('#sg-omni-reserve-button');
+    button.addEventListener('click', () => {
+      const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
+      app.start(modalPlaceholder);
+    });
   }
 }
 

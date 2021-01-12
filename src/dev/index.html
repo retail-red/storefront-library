@@ -1,6 +1,27 @@
 <%= base %>
 
 <script>
-  var client = new window.SgOmniClientSdk("123456");
-  window.SgOmniEnablement.init(client);
+  // Initialize our script.
+  const omniEnablement = window.SgOmniEnablement.create({
+    apiKey: "123456",
+  });
+
+  // In a later time update with product data.
+  omniEnablement.updateConfig({
+    product: {
+      code: '123',
+      name: 'hello world',
+      options: [{
+        name: 'Color',
+        value: 'Red',
+      }],
+      quantity: 2,
+      imageUrl: 'foo',
+      price: 12.5,
+      currencyCode: 'EUR',
+    },
+  });
+
+  // Whenever application is ready render the reseve button
+  omniEnablement.renderReserveButton('#omni-dropin');
 </script>

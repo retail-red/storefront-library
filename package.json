@@ -6,7 +6,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development",
+    "start": "webpack serve --mode development --watch",
     "build": "webpack --mode production"
   },
   "repository": {
@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "handlebars": "^4.7.6",
+    "history": "^5.0.0",
     "lodash": "^4.17.20"
   }
 }

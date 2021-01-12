@@ -8,5 +8,5 @@ export const OmniEnablement = {
   create(config) { return new Instance(config); },
 };
 
-window.SgOmniSdk = OmniSdk;
+window.SgOmniClientSdk = OmniSdk;
 window.SgOmniEnablement = OmniEnablement;

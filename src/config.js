@@ -1,3 +1,4 @@
+import handlebars from 'handlebars';
 import defaultsDeep from 'lodash/defaultsDeep';
 import get from 'lodash/get';
 import { getBrowserLanguage } from './util/browser';
@@ -15,6 +16,7 @@ const requiredRenderProperties = [
 ];
 
 const defaultConfig = {
+  apiStage: 'production',
   locationCode: null,
   customer: {
     firstName: '',
@@ -25,7 +27,7 @@ const defaultConfig = {
   localization: {
     localeCode: getBrowserLanguage(),
   },
-  template: {
+  templates: {
     customVariables: {},
     customTemplates: {},
   },
@@ -33,10 +35,12 @@ const defaultConfig = {
 
 /**
  * Creates a new config object with merged defaults and validation.
- * @param {Object} config incoming config
+ * @param {Object} config Incoming config
+ * @param {Object} previous Previous configuration that is updated.
  * @returns {Object}
  */
-export const createConfig = (config, previous = {}) => {
+export const createConfig = (config = {}, previous = {}) => {
+  // Merge with defaults.
   const merged = defaultsDeep({ ...defaultConfig }, previous, config);
   requiredProperties.forEach((property) => {
     if (!get(merged, property)) {
@@ -44,6 +48,14 @@ export const createConfig = (config, previous = {}) => {
       console.error(`[SG Enablement] The property '${property}' is required for initialization`);
     }
   });
+  // Compile custom templates that have not been compiled yet.
+  Object.entries(merged.templates.customTemplates)
+    .filter(([, template]) => typeof template === 'string')
+    .forEach(([name, template]) => {
+      const compiled = handlebars.compile(template);
+      merged.templates.customTemplates[name] = compiled;
+    });
+
   return merged;
 };
 
@@ -90,7 +102,7 @@ const config = {
       'common.ok': 'OK',
     },
   },
-  template: {
+  templates: {
     customVariables: {}, // optional, defaults to empty obj
     customTemplates: { // optional, defaults to our templates
       storeSelection: 'a',
