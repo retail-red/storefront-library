@@ -3,7 +3,7 @@ import { t } from '../locales';
 
 class SuccessController extends Controller {
   getTitle() {
-    return t('success_title');
+    return t('success.title');
   }
 
   async load() {
@@ -61,7 +61,6 @@ class SuccessController extends Controller {
 
     const primaryAddress = location.addresses.find((address) => address.isPrimary === true) || location.addresses[0];
 
-    console.warn('loading success');
     return {
       reservationNumber: 123456890,
       location,
