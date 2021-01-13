@@ -1,0 +1,30 @@
+<div class="sg-success">
+  <h1 class="sg-headline">{{t "success_headline" }}</h1>
+
+  <p class="sg-text">We will send you a email/text message shortly when your reservation is ready to pickup.</p>
+
+  <p>Your reservation number is:</p>
+  <p class="sg-reservation-number">{{reservationNumber}}</p>
+
+  <div class="sg-location">
+    <p class="sg-location-name">{{location.name}}</p>
+
+    <div class="sg-location-info">
+      <div>
+        <p class="sg-bold">Address</p>
+        <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
+        <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
+        <p>Phone {{primaryAddress.phoneNumber}}</p>
+      </div>
+
+      <div>
+        <p class="sg-bold">Store Hours</p>
+        {{#each location.operationHours}}
+          <p>{{@key}}: {{this}}</p>
+        {{/each}}
+      </div>
+    </div>
+    <a class="sg-link" href="https://www.google.com/maps/dir/?api=1&destination={{primaryAddress.street}},{{primaryAddress.city}} {{primaryAddress.postalCode}}">Directions</a>
+  </div>
+</div>
+

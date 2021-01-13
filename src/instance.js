@@ -1,6 +1,7 @@
 import { createConfig, validateConfigForRendering } from './config';
 import { updateCustomTranslations, updateLanguage } from './locales';
 import DummyController from './ui/dummy';
+import SuccessController from './ui/success';
 import App from './ui/app';
 import reserveButtonTemplate from './templates/reserveButton.hbs';
 
@@ -60,6 +61,7 @@ class Instance {
     // Initialize application.
     const app = new App(this.config, this.sdk);
     app.addController(DummyController);
+    app.addController(SuccessController);
 
     // Render button
     targetElement.innerHTML = reserveButtonTemplate();
