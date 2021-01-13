@@ -1,5 +1,5 @@
-import dummy from './dummy.hbs';
+import storeList from './storeList.hbs';
 
 export default {
-  dummy,
+  storeList,
 };

@@ -3,20 +3,30 @@
 <script>
   // Initialize our script.
   const omniEnablement = window.SgOmniEnablement.create({
-    apiKey: "123456",
+    apiKey: "6q4YRH6fauJfsDdryQYeYZujAYX6k9o",
+    apiStage: 'development',
+    localization: {
+      countries: ['de', 'us'],
+    },
   });
 
   // In a later time update with product data.
   omniEnablement.updateConfig({
     product: {
       code: '123',
-      name: 'hello world',
-      options: [{
-        name: 'Color',
-        value: 'Red',
-      }],
+      name: 'My Awesome product',
+      options: [
+        {
+          name: 'Color',
+          value: 'Red',
+        },
+        {
+          name: 'Size',
+          value: 'M'
+        }
+      ],
       quantity: 2,
-      imageUrl: 'foo',
+      imageUrl: 'https://loremflickr.com/g/320/240/cat',
       price: 12.5,
       currencyCode: 'EUR',
     },

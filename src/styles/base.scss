@@ -3,6 +3,11 @@
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   }
 
+  --color-primary: 98, 0, 238;
+  --color-state-alarm : 176, 0, 32;
+
   @import "reset";
   @import "modal";
+  @import "storeList";
+  @import "form";
 }

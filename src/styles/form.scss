@@ -1,0 +1,184 @@
+.sg-text-field {
+  position: relative;
+
+  label {
+    position: absolute;
+    font-size: 1rem;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: gray;
+    padding: 0 0.3rem;
+    margin: 0 0.5rem;
+    transition: .1s ease-out;
+    transform-origin: left top;
+    pointer-events: none;
+  }
+  input {
+    font-size: 1rem;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0.8rem 0.7rem;
+    color: gray;
+    transition: 0.1s ease-out;
+  }
+  input:focus {
+    border-color: rgb(var(--color-primary));
+  }
+  input:focus + label {
+    color: rgb(var(--color-primary));
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+  input:not(:placeholder-shown) + label {
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+}
+
+.sg-select-field {
+  position: relative;
+
+  label {
+    position: absolute;
+    font-size: 1rem;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: gray;
+    padding: 0 0.3rem;
+    margin: 0 0.5rem;
+    transition: .1s ease-out;
+    transform-origin: left top;
+    pointer-events: none;
+  }
+  select {
+    font-size: 1rem;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0.8rem 0.7rem;
+    color: gray;
+    transition: 0.1s ease-out;
+  }
+  select:focus {
+    border-color: rgb(var(--color-primary));
+  }
+  select:focus + label {
+    color: rgb(var(--color-primary));
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+  select:not(:placeholder-shown) + label {
+    top: 0;
+    transform: translateY(-50%) scale(.9);
+  }
+}
+
+.sg-button {
+  outline: none;
+  border: none;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  padding: 0 16px;
+  min-width: 48px;
+  height: 36px;
+  vertical-align: middle;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: rgb(var(--color-primary, 33, 150, 243));
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 36px;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+
+  // Icon button
+  svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+    margin-top: 5px;
+  }
+
+  &::-moz-focus-inner {
+    border: none;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    padding: 50%;
+    width: 32px; /* Safari */
+    height: 32px; /* Safari */
+    background-color: #fff;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 1s, transform 0.5s;
+  }
+
+  &:hover, &:focus {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus::before {
+    opacity: 0.24;
+  }
+
+  &:hover:focus::before {
+    opacity: 0.3;
+  }
+
+  &:active {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  &:active::after {
+    opacity: 0.32;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0s;
+  }
+
+  &:disabled {
+    color: rgba(var(--color-primary, 0, 0, 0), 0.38);
+    background-color: rgba(var(--color-primary, 0, 0, 0), 0.12);
+    box-shadow: none;
+    cursor: initial;
+    &::before {
+      opacity: 0;
+    }
+    &::after {
+      opacity: 0;
+    }
+  }
+}

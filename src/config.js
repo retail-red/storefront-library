@@ -26,6 +26,7 @@ const defaultConfig = {
   },
   localization: {
     localeCode: getBrowserLanguage(),
+    countries: ['de'],
   },
   templates: {
     customVariables: {},
