@@ -38,13 +38,12 @@ class StorefrontAPI {
     const queryObject = { ...options.query, apiKey: this.apiKey };
     const query = Object
       .entries(queryObject)
-      .filter(([_, value]) => !!value)
+      .filter(([, value]) => !!value)
       .map(([key, value]) => `${key}=${encodeURIComponent(typeof value === 'object' ? JSON.stringify(value) : value)}`)
       .join('&');
     const url = `${this.baseUrl}${options.endpoint}?${query}`;
 
-    return fetch({
-      url,
+    const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -53,6 +52,14 @@ class StorefrontAPI {
         ? JSON.stringify(options.body)
         : options.body,
     });
+
+    if (response.status === 201) {
+      return null;
+    }
+    if (response.status !== 200) {
+      throw new Error(response);
+    }
+    return response.json();
   }
 
   /**

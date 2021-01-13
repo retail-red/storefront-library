@@ -1,0 +1,73 @@
+<div class="sg-store-list">
+  {{!-- Header --}}
+  <div class="sg-header">
+    {{!-- Product infos --}}
+    <div class="sg-header-product">
+      <img src="{{product.imageUrl}}" />
+      <div class="sg-product-info">
+        <span>{{product.name}}</span>
+        <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
+        <span>
+          {{#each product.options}}
+            {{name}}: {{value}}
+            {{#unless @last}}
+            ,&nbsp;
+            {{/unless}}
+          {{/each}}
+        </span>
+      </div>
+    </div>
+
+    {{!-- Search header --}}
+    <div class="sg-header-search">
+      {{#> select id="sg-store-list-country" label="storeList.search.countryLabel" }}
+        {{#each countries}}
+          <option value="{{code}}">{{name}}</option>
+        {{/each}}
+      {{/select}}
+      {{> textField id="sg-store-list-search-input" label="storeList.search.label" }}
+      {{> button id="sg-store-list-search" label="storeList.search.buttonLabel" }}
+      {{#> button id="sg-store-list-geo" }}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+      {{/button}}
+    </div>
+    <div class="sg-divider" />
+  </div>
+
+  {{!-- Store list --}}
+  <div class="sg-list">
+    {{#if emptyList}}
+      <span class="sg-error">
+        {{t 'storeList.emptyList' }}
+      </span>
+    {{/if}}
+
+    {{#each locations }}
+      <div class="sg-store">
+        {{!-- Name row --}}
+        <span class="sg-name-row">
+          {{name}}
+        </span>
+      </div>
+      <div class="sg-hr" />
+    {{/each}}
+  </div>
+</div>
+
+<script>
+  SgOmniEnablement.onLoad(function (controller) {
+    {{!-- Updates countries --}}
+    var countryList = document.querySelector('#sg-store-list-country');
+    countryList.addEventListener('change', function () {
+      controller.setCountryCode(countryList.value);
+    });
+    {{!-- Updates store list on search --}}
+    document.querySelector('#sg-store-list-search').addEventListener('click', function () {
+      controller.setPostalCode(document.querySelector('#sg-store-list-search-input').value);
+    });
+    {{!-- Update by geolocation --}}
+    document.querySelector('#sg-store-list-geo').addEventListener('click', function () {
+      controller.setGeolocation();
+    });
+  });
+</script>

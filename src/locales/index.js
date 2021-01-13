@@ -61,3 +61,12 @@ export const t = (key, parameters = {}) => {
   });
   return value;
 };
+
+/**
+ * Returns a list of all available countries and their translated name.
+ * @return {Array}
+ */
+export const getCountries = () => {
+  const value = activeTranslations.countries;
+  return Object.entries(value).map(([code, name]) => ({ code, name }));
+};

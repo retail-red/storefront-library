@@ -1,7 +1,7 @@
-import dummy from './dummy.hbs';
+import storeList from './storeList.hbs';
 import success from './success.hbs';
 
 export default {
-  dummy,
+  storeList,
   success,
 };

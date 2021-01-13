@@ -51,7 +51,11 @@ class App {
     const asyncHandler = async () => {
       if (!controller.loaded) {
         const output = await controller.load();
-        controller.state = { ...controller.state, ...(output || {}) };
+        controller.state = {
+          route: state,
+          ...controller.state,
+          ...(output || {}),
+        };
         controller.loaded = true;
       }
 
@@ -88,6 +92,7 @@ class App {
     // Transition modal in.
     const baseElement = document.querySelector('#sg-omni');
     setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('sg-modal-open')), 0);
+    //this.pushRoute('storeList');
     this.pushRoute('success');
     this.modalBase = baseElement;
   }

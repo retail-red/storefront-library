@@ -1,9 +1,10 @@
 import { createConfig, validateConfigForRendering } from './config';
 import { updateCustomTranslations, updateLanguage } from './locales';
-import DummyController from './ui/dummy';
+import StoreListController from './ui/storeList';
 import SuccessController from './ui/success';
 import App from './ui/app';
 import reserveButtonTemplate from './templates/reserveButton.hbs';
+import Sdk from './sdk';
 
 class Instance {
   /**
@@ -12,7 +13,7 @@ class Instance {
    */
   constructor(config) {
     this.config = createConfig(config);
-    this.sdk = {};
+    this.sdk = new Sdk(config.apiKey, config.apiStage);
     this._handleConfigUpdate();
   }
 
@@ -60,7 +61,7 @@ class Instance {
 
     // Initialize application.
     const app = new App(this.config, this.sdk);
-    app.addController(DummyController);
+    app.addController(StoreListController);
     app.addController(SuccessController);
 
     // Render button
