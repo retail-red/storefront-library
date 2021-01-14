@@ -13,6 +13,13 @@ export default {
       buttonLabel: 'Search',
     },
   },
+  mon: 'Monday',
+  tue: 'Tuesday',
+  wed: 'Wednesday',
+  thu: 'Thursday',
+  fri: 'Friday',
+  sat: 'Saturday',
+  sun: 'Sunday',
   success: {
     title: 'Reservation Confirmation',
     headline: 'Thank you for your reservation',
