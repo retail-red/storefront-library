@@ -2,6 +2,7 @@ import { createConfig, validateConfigForRendering } from './config';
 import { updateCustomTranslations, updateLanguage } from './locales';
 import StoreListController from './ui/storeList';
 import ReserveController from './ui/reserve';
+import SuccessController from './ui/success';
 import App from './ui/app';
 import reserveButtonTemplate from './templates/reserveButton.hbs';
 import Sdk from './sdk';
@@ -63,6 +64,7 @@ class Instance {
     const app = new App(this.config, this.sdk);
     app.addController(StoreListController);
     app.addController(ReserveController);
+    app.addController(SuccessController);
 
     // Render button
     targetElement.innerHTML = reserveButtonTemplate();
