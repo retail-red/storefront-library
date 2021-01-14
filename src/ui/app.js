@@ -30,7 +30,7 @@ class App {
     }
 
     // Create the routes controller if not available yet.
-    const { controllerId } = state || {};
+    const { controllerId, ...routeState } = state || {};
     if (!controllerId) {
       const RouteController = targetRoute;
       const newController = new RouteController(
@@ -42,7 +42,7 @@ class App {
       );
       const newId = Object.keys(routes).length;
       routes[newId] = newController;
-      this.history.replace(targetRoute, { controllerId: newId });
+      this.history.replace(targetRoute, { ...routeState, controllerId: newId });
       return;
     }
     const controller = routes[controllerId];
@@ -50,7 +50,7 @@ class App {
     // Load content
     const asyncHandler = async () => {
       if (!controller.loaded) {
-        const output = await controller.load();
+        const output = await controller.load(routeState);
         controller.state = {
           route: state,
           ...controller.state,
@@ -64,6 +64,13 @@ class App {
 
       // Update title.
       this.modalTitle.innerText = controller.getTitle();
+
+      // Update back button
+      if (this.historyIndex >= 2 && this.modalBack.classList.contains('sg-back-hidden')) {
+        this.modalBack.classList.remove('sg-back-hidden');
+      } else if (this.historyIndex <= 1 && !this.modalBack.classList.contains('sg-back-hidden')) {
+        this.modalBack.classList.add('sg-back-hidden');
+      }
     };
     asyncHandler();
   }
@@ -80,14 +87,17 @@ class App {
     // Store modal content placeholder.
     const modalContent = document.querySelector('#sg-omni .modal-content');
     const modalTitle = document.querySelector('#sg-omni .modal-title');
+    const modalBack = document.querySelector('#sg-omni .sg-back');
     this.modalContent = modalContent;
     this.modalTitle = modalTitle;
+    this.modalBack = modalBack;
 
     // Handle modal closing.
     const modalBackdrop = document.querySelector('#sg-omni .modal-backdrop');
     modalBackdrop.addEventListener('click', () => this.destroy());
     const modalClose = document.querySelector('#sg-omni .modal-close');
     modalClose.addEventListener('click', () => this.destroy());
+    modalBack.addEventListener('click', () => this.popRoute());
 
     // Transition modal in.
     const baseElement = document.querySelector('#sg-omni');
@@ -110,6 +120,7 @@ class App {
         this.modalBase = null;
         this.modalContent = null;
         this.modalTitle = null;
+        this.modalBack = null;
         this.element.innerHTML = '';
         this.element = null;
       }, 225);
@@ -120,8 +131,8 @@ class App {
     this.routes[controller.routeName] = controller;
   }
 
-  pushRoute(name) {
-    this.history.push(`/${name}`);
+  pushRoute(name, state = {}) {
+    this.history.push(`/${name}`, state);
   }
 
   popRoute() {

@@ -32,4 +32,7 @@ export default {
       rough: '{{x}}+ Available',
     },
   },
+  reserve: {
+    title: 'Submit Reservation',
+  },
 };

@@ -25,14 +25,12 @@ class StoreListController extends Controller {
 
     // Receive all locations for initial loading.
     const locations = await this._receiveLocations();
-    console.warn('inv config', inventory);
 
     return {
       product,
       locations,
       countries,
       inventoryConfig: inventory,
-      inv: inventory,
     };
   }
 
@@ -107,6 +105,11 @@ class StoreListController extends Controller {
       this.geolocation = coords;
       this._updateStoreList();
     });
+  }
+
+  initiateReservation(locationCode) {
+    const location = this.state.locations.find((l) => l.code === locationCode);
+    this.app.pushRoute('reserve', { location });
   }
 }
 
