@@ -31,7 +31,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
       {{/button}}
     </div>
-    <div class="sg-divider" />
+    <div class="sg-divider"></div>
   </div>
 
   {{!-- Store list --}}
@@ -44,12 +44,82 @@
 
     {{#each locations }}
       <div class="sg-store">
-        {{!-- Name row --}}
-        <span class="sg-name-row">
+        {{!-- Name, distance, availability row --}}
+        <div class="sg-name-row">
           {{name}}
-        </span>
+          {{#if distance}}
+            <span class="sg-distance">
+              - {{distance distance unitSystem}}
+            </span>
+          {{/if}}
+
+          {{!-- Product not available --}}
+          {{#unless inventory.isAvailable }}
+            <span class="sg-available-negative">
+              {{t "storeList.inventory.unavailable"}}
+            </span>
+          {{else}}
+            {{!-- Only show if product is available or not --}}
+            {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
+              <span class="sg-available-positive">
+                {{t "storeList.inventory.available"}}
+              </span>
+            {{else}}
+              {{!-- Rough numbers (10+) --}}
+              {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
+                <span class="sg-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                  {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
+                </span>
+              {{else}}
+                {{!-- Detailed numbers --}}
+                <span class="sg-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                  {{t "storeList.inventory.exact" x=inventory.visible }}
+                </span>
+              {{/if}}
+            {{/if}}
+          {{/unless}}
+        </div>
+        {{!-- Details row--}}
+        <div class="sg-detail">
+          <div class="sg-left">
+            {{primaryAddress.phoneNumber}}
+
+            <div class="sg-collapsing sg-closed" data-code={{code}}>
+              <div>
+                <p class="sg-bold">{{t "storeList.location.address" }}</p>
+                <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
+                <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
+                {{> link 
+                    class="sg-directions" 
+                    label="storeList.location.directions" 
+                    href=(direction primaryAddress)
+                    target="_blank"
+                }}
+              </div>
+              <div>
+                <p class="sg-bold">{{t "storeList.location.storeHours" }}</p>
+                {{#each operationHours}}
+                  {{#if this}}
+                    <p>{{@key}}: {{this}}</p>
+                  {{/if}}
+                {{/each}}
+              </div>
+            </div>
+            {{> link class="sg-detail-collapse" label="storeList.uncollapse" href="#" data=(object code=code)}}
+          </div>
+          <div class="sg-action">
+            {{#if isComingSoon }}
+            {{> button label="storeList.comingSoon" disabled=true}}
+            {{else}}
+            {{> button class="sg-store-select" label="storeList.reserve" data=(object code=code)}}
+            {{/if}}
+          </div>
+        </div>
       </div>
-      <div class="sg-hr" />
+
+      {{#unless @last}}
+        <div class="sg-hr"></div>
+      {{/unless}}
     {{/each}}
   </div>
 </div>
@@ -68,6 +138,15 @@
     {{!-- Update by geolocation --}}
     document.querySelector('#sg-store-list-geo').addEventListener('click', function () {
       controller.setGeolocation();
+    });
+    {{!-- Handle store selection and collapsing --}}
+    document.querySelector('.sg-store-list').addEventListener('click', function (e) {
+      if (e.target.classList.contains('sg-store-select')) {
+        controller.initiateReservation(e.target.dataset.code);
+      } else if (e.target.classList.contains('sg-detail-collapse')) {
+        e.preventDefault();
+        document.querySelector('.sg-collapsing[data-code="' + e.target.dataset.code + '"]').classList.toggle('sg-closed');
+      }
     });
   });
 </script>

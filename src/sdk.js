@@ -127,10 +127,11 @@ class StorefrontAPI {
       : [locationCodesOrCode];
 
     return this._genericRequest({
-      endpoint: `/v1/products/${productCode}/inventories`,
+      endpoint: `/v1/products/${encodeURIComponent(productCode)}/inventories`,
       query: {
-        locationsCodes: locationCodes.join(','),
+        locationCodes: locationCodes.join(','),
         catalogCode,
+        productCode,
       },
     });
   }
@@ -147,7 +148,7 @@ class StorefrontAPI {
 
     if (productCode) {
       return this._genericRequest({
-        endpoint: `/v1/products/${productCode}/locations`,
+        endpoint: `/v1/products/${encodeURIComponent(productCode)}/locations`,
         query,
       });
     }

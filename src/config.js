@@ -1,5 +1,5 @@
 import handlebars from 'handlebars';
-import defaultsDeep from 'lodash/defaultsDeep';
+import merge from 'lodash/merge';
 import get from 'lodash/get';
 import { getBrowserLanguage } from './util/browser';
 
@@ -18,11 +18,17 @@ const requiredRenderProperties = [
 const defaultConfig = {
   apiStage: 'production',
   locationCode: null,
+  unitSystem: 'metric',
   customer: {
     firstName: '',
     lastName: '',
     phone: '',
     emailAddress: '',
+  },
+  inventory: {
+    hideNumber: false,
+    showExactUntil: Number.MAX_VALUE,
+    showLowUntil: 5,
   },
   localization: {
     localeCode: getBrowserLanguage(),
@@ -42,7 +48,7 @@ const defaultConfig = {
  */
 export const createConfig = (config = {}, previous = {}) => {
   // Merge with defaults.
-  const merged = defaultsDeep({ ...defaultConfig }, previous, config);
+  const merged = merge({}, defaultConfig, previous, config);
   requiredProperties.forEach((property) => {
     if (!get(merged, property)) {
       // eslint-disable-next-line no-console
@@ -72,43 +78,3 @@ export const validateConfigForRendering = (config) => requiredRenderProperties.e
   }
   return true;
 });
-
-/*
-const config = {
-  locationCode: '123', // optional, default none
-  product: {
-    code: '123', // required
-    name: 'hello world', // required
-    options: [{ // default empty
-      name: 'Color',
-      value: 'Red',
-    }],
-    quantity: 2, // optional, defaults 0
-    imageUrl: 'foo', // optional
-    price: 12.5, // required
-    currencyCode: 'EUR', // required
-  },
-  customer: {
-    firstName: '', // optional, defaults to empty,
-    lastName: '', // optional, defaults to empty,
-    phone: '', // optional, defaults to empty,
-    emailAddress: '', // optional, defaults to empty,
-  },
-  localization: {
-    localeCode: 'de-DE', // optional, defaults to browser locale
-    de: { // optional, default empty
-      'common.ok': 'OKAY',
-    },
-    en: { // optional, default empty
-      'common.ok': 'OK',
-    },
-  },
-  templates: {
-    customVariables: {}, // optional, defaults to empty obj
-    customTemplates: { // optional, defaults to our templates
-      storeSelection: 'a',
-      success: 'b',
-    },
-  },
-};
-*/

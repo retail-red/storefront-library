@@ -3,8 +3,11 @@
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   }
 
-  --color-primary: 98, 0, 238;
+  //--color-primary: 98, 0, 238;
+  --color-primary: 0, 0, 0;
   --color-state-alarm : 176, 0, 32;
+  --color-state-warning: 241, 156, 69;
+  --color-state-success: 50, 172, 92;
 
   @import "reset";
   @import "modal";

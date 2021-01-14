@@ -14,7 +14,7 @@ class StoreListController extends Controller {
 
   async load() {
     // Product data.
-    const { product } = this.config;
+    const { product, inventory } = this.config;
 
     // Countries
     const countries = this.config.localization.countries.map((code) => ({
@@ -25,26 +25,54 @@ class StoreListController extends Controller {
 
     // Receive all locations for initial loading.
     const locations = await this._receiveLocations();
+    console.warn('inv config', inventory);
 
     return {
       product,
       locations,
       countries,
+      inventoryConfig: inventory,
+      inv: inventory,
     };
   }
 
   async _receiveLocations() {
+    const { unitSystem } = this.config;
+
     try {
+      // Fetch location data
       const { locations } = await this.sdk.getLocations({
+        productCode: this.config.product.code,
         postalCode: this.postalCode,
         countryCode: this.countryCode,
+        ...(this.postalCode || this.geolocation ? ({
+          unitSystem,
+        }) : {}),
         ...(this.geolocation ? ({
           longitude: this.geolocation.longitude,
           latitude: this.geolocation.latitude,
         }) : {}),
       });
-      this.state.emptyList = false;
-      return locations;
+
+      // Fetch inventory data.
+      const { inventories } = await this.sdk.getProductInventories(
+        this.config.product.code,
+        locations.map((l) => l.code),
+      );
+
+      // Aggregate inventory data onto location
+      const aggregatedLocations = locations
+        .map((location) => ({
+          ...location,
+          primaryAddress: location.addresses.find((a) => a.isPrimary) || location.addresses[0],
+          inventory: inventories.find((i) => i.locationCode === location.code),
+        }))
+        .filter((l) => !!l.inventory);
+
+      if (aggregatedLocations.length !== 0) {
+        this.state.emptyList = false;
+      }
+      return aggregatedLocations;
     } catch (err) {
       this.state.emptyList = true;
       return [];

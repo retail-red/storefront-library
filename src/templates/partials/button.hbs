@@ -1,4 +1,13 @@
-<button id="{{id}}" class="sg-button">
+<button
+  {{#if id}}id={{id}}{{/if}}
+  class="sg-button {{#if class}}{{class}}{{/if}}"
+  {{#if disabled}}disabled {{/if}}
+  {{#if data }}
+    {{#each data}}
+      data-{{@key}}="{{this}}"
+    {{/each}}
+  {{/if}}
+>
   {{#if label }}
     {{t label}}
   {{/if}}

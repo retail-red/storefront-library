@@ -1,0 +1,13 @@
+<a
+  class="sg-link {{#if class}}{{class}}{{/if}}"
+  {{#if id}}id={{id}}{{/if}}
+  {{#if href}}href="{{href}}"{{/if}}
+  {{#if target}}target="{{target}}"{{/if}}
+  {{#if data }}
+    {{#each data}}
+      data-{{@key}}="{{this}}"
+    {{/each}}
+  {{/if}}
+>
+  {{t label}}
+</a>
