@@ -78,21 +78,22 @@ class App {
     this.element = target;
 
     // Store modal content placeholder.
-    const modalContent = document.querySelector('#sg-omni .modal-content');
-    const modalTitle = document.querySelector('#sg-omni .modal-title');
+    const modalContent = document.querySelector('#sg-omni .sg-modal-content');
+    const modalTitle = document.querySelector('#sg-omni .sg-modal-title');
     this.modalContent = modalContent;
     this.modalTitle = modalTitle;
 
     // Handle modal closing.
-    const modalBackdrop = document.querySelector('#sg-omni .modal-backdrop');
+    const modalBackdrop = document.querySelector('#sg-omni .sg-modal-backdrop');
     modalBackdrop.addEventListener('click', () => this.destroy());
-    const modalClose = document.querySelector('#sg-omni .modal-close');
+    const modalClose = document.querySelector('#sg-omni .sg-modal-close');
     modalClose.addEventListener('click', () => this.destroy());
 
     // Transition modal in.
     const baseElement = document.querySelector('#sg-omni');
-    setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('modal-open')), 0);
-    this.pushRoute('storeList');
+    setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('sg-modal-open')), 0);
+    //this.pushRoute('storeList');
+    this.pushRoute('success');
     this.modalBase = baseElement;
   }
 
@@ -104,7 +105,7 @@ class App {
     routes = {};
 
     // Hide modal and remove from DOM.
-    this.modalBase.classList.remove('modal-open');
+    this.modalBase.classList.remove('sg-modal-open');
     requestAnimationFrame(() => {
       setTimeout(() => {
         this.modalBase = null;

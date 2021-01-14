@@ -1,0 +1,30 @@
+<div class="sg-success">
+  <h1 class="sg-headline">{{t "success.headline" }}</h1>
+
+  <p class="sg-text">{{t "success.text" }}</p>
+
+  <p>{{t "success.reservation_number" }}</p>
+  <p class="sg-reservation-number">{{reservationNumber}}</p>
+
+  <div class="sg-location">
+    <p class="sg-location-name">{{location.name}}</p>
+
+    <div class="sg-location-info">
+      <div>
+        <p class="sg-bold">{{t "success.location.address" }}</p>
+        <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
+        <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
+        <p>{{t "success.location.phone" }} {{primaryAddress.phoneNumber}}</p>
+      </div>
+
+      <div>
+        <p class="sg-bold">{{t "success.location.store_hours" }}</p>
+        {{#each location.operationHours}}
+          <p>{{t @key }}: {{this}}</p>
+        {{/each}}
+      </div>
+    </div>
+    <a class="sg-link" href="https://www.google.com/maps/dir/?api=1&destination={{primaryAddress.street}},{{primaryAddress.city}} {{primaryAddress.postalCode}}">{{t "success.location.directions"}}</a>
+  </div>
+</div>
+

@@ -1,0 +1,45 @@
+.sg-success {
+  text-align: center;
+  .sg-bold {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  .sg-text {
+    margin-bottom: 20px;
+  }
+
+  .sg-reservation-number {
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .sg-location {
+    margin-top: 30px;
+    padding: 20px 40px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: left;
+
+    .sg-location-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .sg-location-info {
+      display: flex;
+
+      >div {
+        width: 50%;
+      }
+    }
+  }
+}
