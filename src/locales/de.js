@@ -1,35 +1,86 @@
-import countriesList from 'i18n-iso-countries/langs/de.json';
+import countriesList from 'i18n-iso-countries/langs/en.json';
 import { countryListTransform } from './util';
 
 export default {
   countries: countryListTransform(countriesList),
-  storeList: {
-    title: 'Filiale in der Nähe finden',
-    emptyList: 'In dieser Gegend haben wir leider keine Filialen.',
-    quantity: 'Anzahl',
-    search: {
-      label: 'Postleitzahl',
-      countryLabel: 'Land',
-      buttonLabel: 'Suchen',
+  format: {
+    decimalSymbol: '.',
+    groupSymbol: ',',
+  },
+  date: {
+    mon: 'Monday',
+    tue: 'Tuesday',
+    wed: 'Wednesday',
+    thu: 'Thursday',
+    fri: 'Friday',
+    sat: 'Saturday',
+    sun: 'Sunday',
+  },
+  errors: {
+    unknown: 'Failed to submit resevation',
+    validation: {
+      isRequired: 'Field is required',
+      isEmail: 'Field must be a valid email address',
+      isPhone: 'Field must be a valid phone number with country code (+49 1234)',
     },
   },
-  mon: 'Montag',
-  tue: 'Dienstag',
-  wed: 'Mittwoch',
-  thu: 'Donnerstag',
-  fri: 'Freitag',
-  sat: 'Samstag',
-  sun: 'Sonntag',
-  success: {
-    title: 'Reservierungsbestätigung',
-    headline: 'Vielen Dank für Ihre Reservierung!',
-    text: 'Wir senden Ihnen in Kürze eine E-Mail/SMS Nachricht, sobald Ihre Reservierung bereit zur Abholung ist.',
-    reservation_number: 'Ihre Reservierungs-Nr. ist:',
+  storeList: {
+    title: 'Find a store near you',
+    emptyList: 'No nearby stores found at your location.',
+    quantity: 'Quantity',
+    uncollapse: 'Show store details',
+    collapse: 'Hide store details',
+    reserve: 'Reserve',
+    comingSoon: 'Coming Soon',
     location: {
-      address: 'Adresse',
-      phone: 'Tel.',
-      store_hours: 'Öffnungszeiten',
-      directions: 'Route anzeigen',
+      address: 'Address',
+      storeHours: 'Store Hours',
+      directions: 'Directions',
+    },
+    search: {
+      label: 'Postal Code',
+      countryLabel: 'Country',
+      buttonLabel: 'Search',
+    },
+    inventory: {
+      available: 'Available',
+      unavailable: 'Unavailable',
+      exact: '{{x}} Available',
+      rough: '{{x}}+ Available',
+    },
+  },
+  reserve: {
+    title: 'Submit Reservation',
+    changeStore: 'Change Store',
+    contactInfo: 'Reservation Contact Info',
+    pickupQuestion: 'Who will pickup this reservation?',
+    me: 'Me',
+    someoneElse: 'Someone else',
+    pickupInfo: 'Who will pickup this reservation?',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    phoneNumber: 'Phone Number',
+    email: 'Email Address',
+    submit: 'Submit Reservation',
+    terms: {
+      text: 'I have read and accepted the',
+      link: 'terms and conditions',
+    },
+    privacy: {
+      text: 'I have read and accepted the',
+      link: 'privacy policy',
+    },
+  },
+  success: {
+    title: 'Reservation Confirmation',
+    headline: 'Thank you for your reservation',
+    text: 'We will send you a email/text message shortly when your reservation is ready to pickup.',
+    reservationNumber: 'Your reservation number is:',
+    location: {
+      address: 'Address',
+      phone: 'Phone',
+      storeHours: 'Store Hours',
+      directions: 'Directions',
     },
   },
 };

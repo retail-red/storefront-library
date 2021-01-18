@@ -154,11 +154,11 @@ class App {
   resetTo(name, state) {
     this.destroyWhenEmpty = false;
     this.history.go(-this.historyIndex);
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       this.historyIndex = 0;
       this.history.push(`/${name}`, state);
       this.destroyWhenEmpty = true;
-    });
+    }, 10);
   }
 
   popToRoot() {

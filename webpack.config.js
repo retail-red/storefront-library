@@ -35,13 +35,15 @@ module.exports = {
       {
         test: /\.hbs$/,
         exclude: /(node_modules)/,
-        use: {
-          loader: 'handlebars-loader',
-          options: {
-            runtime: 'handlebars/dist/handlebars.min.js',
-            ignorePartials: true,
+        use: [
+          {
+            loader: 'handlebars-loader',
+            options: {
+              runtime: 'handlebars/dist/handlebars.min.js',
+              ignorePartials: true,
+            },
           },
-        },
+        ],
       },
     ],
   },

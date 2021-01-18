@@ -12,7 +12,7 @@ class StoreListController extends Controller {
     return t('storeList.title');
   }
 
-  async load({ locationCode }) {
+  async load({ locationCode = null }) {
     // Product data.
     const { product, inventory } = this.config;
 
@@ -27,14 +27,15 @@ class StoreListController extends Controller {
     const locations = await this._receiveLocations();
 
     // Initiate reservation at given location.
-    if (locationCode) {
+    const location = locations.find((l) => l.code === locationCode);
+    if (location) {
       requestAnimationFrame(() => {
         this.initiateReservation(locationCode);
       });
     }
 
     return {
-      skipRendering: !!locationCode,
+      skipRendering: !!location,
       product,
       locations,
       countries,
