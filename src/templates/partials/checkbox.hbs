@@ -1,0 +1,11 @@
+<div class="sg-checkbox">
+  <input id={{id}} type="checkbox">
+  <label for="{{id}}">
+    {{#if label }}
+      {{t label}}
+    {{/if}}
+    {{#if @partial-block }}
+      {{> @partial-block }}
+    {{/if}}
+  </label>
+</div>

@@ -3,14 +3,24 @@
 <script>
   // Initialize our script.
   const omniEnablement = window.SgOmniEnablement.create({
-    apiKey: "6q4YRH6fauJfsDdryQYeYZujAYX6k9o",
+    apiKey: "ARotRbXpalxVcmMNz9Yd",
     apiStage: 'development',
+    locationCode: '1',
     localization: {
       countries: ['de', 'us'],
     },
     inventory: {
       showExactUntil: 80,
       showLowUntil: 65,
+    },
+    legal: {
+      terms: 'https://google.de',
+      privacy: 'https://google.de',
+    },
+    customer: {
+      firstName: 'Rene',
+      lastName: 'Eichhorn',
+      emailAddress: 'rene.eichhorn@shopgate.com',
     },
   });
 
@@ -30,9 +40,9 @@
         }
       ],
       quantity: 2,
-      imageUrl: 'https://loremflickr.com/g/320/240/cat',
-      price: 12.5,
-      currencyCode: 'EUR',
+      imageUrl: 'https://loremflickr.com/320/240/cute_cat',
+      price: 34.0,
+      currencyCode: 'USD',
     },
   });
 

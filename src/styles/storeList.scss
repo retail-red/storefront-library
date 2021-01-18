@@ -29,11 +29,19 @@
     padding: 16px 24px;
     padding-bottom: 8px;
 
+    .sg-select-field select {
+      height: 44px;
+    }
+
     .sg-select-field, .sg-text-field, .sg-button:not(:last-child) {
       margin-right: 11px;
     }
 
-    .sg-text-field {
+    .sg-field {
+      margin-top: 3px;
+    }
+
+    .sg-text-field, .sg-field {
       flex: 1;
 
       input {

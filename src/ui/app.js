@@ -11,6 +11,7 @@ class App {
     this.history = createHashHistory();
     this.historyIndex = 0;
     this.historyUnlisten = null;
+    this.destroyWhenEmpty = true;
   }
 
   _handleHistoryChange({ location, action }) {
@@ -25,7 +26,9 @@ class App {
     const { pathname, state } = location;
     const targetRoute = this.routes[pathname.slice(1)];
     if (!targetRoute) {
-      this.destroy();
+      if (this.destroyWhenEmpty) {
+        this.destroy();
+      }
       return;
     }
 
@@ -50,13 +53,16 @@ class App {
     // Load content
     const asyncHandler = async () => {
       if (!controller.loaded) {
-        const output = await controller.load(routeState);
+        const { skipRendering = false, ...output } = await controller.load(routeState);
         controller.state = {
           route: state,
           ...controller.state,
           ...(output || {}),
         };
         controller.loaded = true;
+
+        // Allows redirects to not trigger unneeded first time render.
+        if (skipRendering) return;
       }
 
       // Render content.
@@ -77,6 +83,7 @@ class App {
 
   start(target) {
     // Start listening to history
+    this.historyIndex = 0;
     this.historyUnlisten = this.history.listen((o) => this._handleHistoryChange(o));
 
     // Build base.
@@ -102,16 +109,20 @@ class App {
     // Transition modal in.
     const baseElement = document.querySelector('#sg-omni');
     setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('sg-modal-open')), 0);
-    // this.pushRoute('storeList');
-    this.pushRoute('success');
     this.modalBase = baseElement;
+
+    // Push starting route configuration
+    this.pushRoute('storeList', { locationCode: this.config.locationCode });
+  }
+
+  updateConfig(config) {
+    this.config = config;
   }
 
   destroy() {
     // Clear up all resources.
     this.historyUnlisten();
     this.popToRoot();
-    this.historyIndex = 0;
     routes = {};
 
     // Hide modal and remove from DOM.
@@ -140,8 +151,23 @@ class App {
     this.history.back();
   }
 
-  popToRoot() {
+  resetTo(name, state) {
+    this.destroyWhenEmpty = false;
     this.history.go(-this.historyIndex);
+    requestAnimationFrame(() => {
+      this.historyIndex = 0;
+      this.history.push(`/${name}`, state);
+      this.destroyWhenEmpty = true;
+    });
+  }
+
+  popToRoot() {
+    if (this.historyIndex === 0) return;
+
+    this.history.go(-this.historyIndex);
+    requestAnimationFrame(() => {
+      this.historyIndex = 0;
+    });
   }
 }
 

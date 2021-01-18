@@ -37,12 +37,22 @@ class Instance {
     return div;
   }
 
+  _createApp() {
+    this.app = new App(this.config, this.sdk);
+    this.app.addController(StoreListController);
+    this.app.addController(ReserveController);
+    this.app.addController(SuccessController);
+  }
+
   /**
    * Updates the current config with the given keys.
    * Does a partial update if not all keys are provided.
    * @param {Object} config Config
    */
   updateConfig(config) {
+    if (this.app) {
+      this.app.updateConfig(config);
+    }
     this.config = createConfig(config, this.config);
     this._handleConfigUpdate();
   }
@@ -61,18 +71,32 @@ class Instance {
     const targetElement = typeof target === 'string' ? document.querySelector(target) : target;
 
     // Initialize application.
-    const app = new App(this.config, this.sdk);
-    app.addController(StoreListController);
-    app.addController(ReserveController);
-    app.addController(SuccessController);
+    this._createApp();
 
     // Render button
     targetElement.innerHTML = reserveButtonTemplate();
     const button = targetElement.querySelector('#sg-omni-reserve-button');
     button.addEventListener('click', () => {
       const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
-      app.start(modalPlaceholder);
+      this.app.start(modalPlaceholder);
     });
+  }
+
+  /**
+   * Manually opens the reservation modal with active configs.
+   */
+  openReservationModal() {
+    // Validate config
+    if (!validateConfigForRendering(this.config)) {
+      return;
+    }
+
+    // Initialize application.
+    this._createApp();
+
+    // Render modal
+    const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
+    this.app.start(modalPlaceholder);
   }
 }
 

@@ -63,6 +63,13 @@ export const t = (key, parameters = {}) => {
 };
 
 /**
+ * Checks if the given translation is available in current language.
+ * @param {String} key Translation key.
+ * @returns {boolean}
+ */
+export const hasTranslation = (key) => !!activeTranslations[activeLanguage][key];
+
+/**
  * Returns a list of all available countries and their translated name.
  * @return {Array}
  */

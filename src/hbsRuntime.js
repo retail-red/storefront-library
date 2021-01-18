@@ -5,12 +5,19 @@ import textFieldPartial from './templates/partials/textField.hbs';
 import selectFieldPartial from './templates/partials/select.hbs';
 import buttonPartial from './templates/partials/button.hbs';
 import linkPartial from './templates/partials/link.hbs';
+import radioPartial from './templates/partials/radio.hbs';
+import checkboxPartial from './templates/partials/checkbox.hbs';
 
 handlebars.registerHelper('t', (p, options) => new handlebars.SafeString(t(p, options.hash || {})));
 handlebars.registerHelper('select', (condition, a, b) => (condition ? a : b));
+handlebars.registerHelper('concat', (...args) => {
+  args.pop();
+  return args.join('');
+});
 // eslint-disable-next-line no-console
 handlebars.registerHelper('debug', (a) => console.log(a));
 handlebars.registerHelper('or', (a, b) => a || b);
+handlebars.registerHelper('not', (a) => !a);
 handlebars.registerHelper('isNull', (a) => a === null);
 handlebars.registerHelper('gte', (a, b) => a >= b);
 handlebars.registerHelper('gt', (a, b) => a > b);
@@ -28,3 +35,5 @@ handlebars.registerPartial('textField', textFieldPartial);
 handlebars.registerPartial('select', selectFieldPartial);
 handlebars.registerPartial('button', buttonPartial);
 handlebars.registerPartial('link', linkPartial);
+handlebars.registerPartial('radio', radioPartial);
+handlebars.registerPartial('checkbox', checkboxPartial);

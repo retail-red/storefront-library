@@ -1,0 +1,99 @@
+.sg-reserve {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .sg-header-product {
+    padding: 0 24px;
+    display: flex;
+    flex-direction: row;
+
+    img {
+      width: 72px;
+      margin-right: 26px;
+    }
+
+    .sg-product-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      span {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .sg-divider {
+    height: 8px;
+    background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .sg-store {
+    padding: 16px 24px;
+    .sg-store-name {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: row;
+      font-size: 16px;
+      font-weight: bold;
+      .sg-store-change {
+        font-size: 14;
+        font-weight: normal;
+        margin-left: 12px;
+      }
+    }
+
+    .sg-store-detail {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: row;
+      font-size: 14px;
+      >div:first-child {
+        margin-right: 16px;
+      }
+      .sg-bold {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+  .sg-hidden {
+    display: none;
+  }
+  .sg-form {
+    .sg-section {
+      margin-top: 32px;
+      >span {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .sg-form-radio-row {
+        &:first-child {
+          margin-top: 8px;
+        }
+        display: flex;
+        flex-direction: row;
+      }
+
+      .sg-form-row {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: row;
+        input {
+          width: calc(100% - 32px);
+        }
+        .sg-field, .sg-text-field {
+          flex: 1;
+          max-width: 400px;
+        }
+        .sg-field:first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+}

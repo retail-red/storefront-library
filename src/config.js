@@ -20,10 +20,15 @@ const defaultConfig = {
   locationCode: null,
   unitSystem: 'metric',
   customer: {
+    code: null,
     firstName: '',
     lastName: '',
     phone: '',
     emailAddress: '',
+  },
+  legal: {
+    terms: null,
+    privacy: null,
   },
   inventory: {
     hideNumber: false,

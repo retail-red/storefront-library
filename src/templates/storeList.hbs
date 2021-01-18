@@ -89,20 +89,22 @@
                 <p class="sg-bold">{{t "storeList.location.address" }}</p>
                 <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
                 <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
-                {{> link 
-                    class="sg-directions" 
-                    label="storeList.location.directions" 
+                {{> link
+                    class="sg-directions"
+                    label="storeList.location.directions"
                     href=(direction primaryAddress)
                     target="_blank"
                 }}
               </div>
               <div>
-                <p class="sg-bold">{{t "storeList.location.storeHours" }}</p>
-                {{#each operationHours}}
-                  {{#if this}}
-                    <p>{{@key}}: {{this}}</p>
-                  {{/if}}
-                {{/each}}
+                {{#if operationHours}}
+                  <p class="sg-bold">{{t "storeList.location.storeHours" }}</p>
+                  {{#each operationHours}}
+                    {{#if this}}
+                      <p>{{t (concat "date." @key) }}: {{this}}</p>
+                    {{/if}}
+                  {{/each}}
+                {{/if}}
               </div>
             </div>
             {{> link class="sg-detail-collapse" label="storeList.uncollapse" href="#" data=(object code=code)}}
@@ -111,7 +113,12 @@
             {{#if isComingSoon }}
             {{> button label="storeList.comingSoon" disabled=true}}
             {{else}}
-            {{> button class="sg-store-select" label="storeList.reserve" data=(object code=code)}}
+            {{> button
+                class="sg-store-select"
+                label="storeList.reserve"
+                data=(object code=code)
+                disabled=(not inventory.isAvailable)
+            }}
             {{/if}}
           </div>
         </div>

@@ -5,14 +5,14 @@ class StoreListController extends Controller {
   constructor(...params) {
     super(...params);
     this.postalCode = null;
-    this.countryCode = 'de';
+    [this.countryCode] = this.config.localization.countries;
   }
 
   getTitle() {
     return t('storeList.title');
   }
 
-  async load() {
+  async load({ locationCode }) {
     // Product data.
     const { product, inventory } = this.config;
 
@@ -26,7 +26,15 @@ class StoreListController extends Controller {
     // Receive all locations for initial loading.
     const locations = await this._receiveLocations();
 
+    // Initiate reservation at given location.
+    if (locationCode) {
+      requestAnimationFrame(() => {
+        this.initiateReservation(locationCode);
+      });
+    }
+
     return {
+      skipRendering: !!locationCode,
       product,
       locations,
       countries,
@@ -64,6 +72,11 @@ class StoreListController extends Controller {
           ...location,
           primaryAddress: location.addresses.find((a) => a.isPrimary) || location.addresses[0],
           inventory: inventories.find((i) => i.locationCode === location.code),
+          operationHours: Object
+            .entries(location.operationHours || {})
+            .filter(([, v]) => !!v)
+            .length
+            ? location.operationHours : null,
         }))
         .filter((l) => !!l.inventory);
 
@@ -109,7 +122,10 @@ class StoreListController extends Controller {
 
   initiateReservation(locationCode) {
     const location = this.state.locations.find((l) => l.code === locationCode);
-    this.app.pushRoute('reserve', { location });
+    this.app.pushRoute('reserve', {
+      product: this.state.product,
+      location,
+    });
   }
 }
 

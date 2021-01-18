@@ -6,6 +6,14 @@ const API_URLS = {
   production: 'https://storefront-api.shopgate.io',
 };
 
+class RequestError extends Error {
+  constructor(status, body = {}) {
+    super(`Server request failed with status = ${status}`);
+    this.status = status;
+    this.body = body;
+  }
+}
+
 /**
  * Wrapper around the Storefront API
  */
@@ -53,12 +61,24 @@ class StorefrontAPI {
         : options.body,
     });
 
+    // Response doesn't contain a body.
     if (response.status === 201) {
       return null;
     }
+
+    // Any other unexpect response type.
     if (response.status !== 200) {
-      throw new Error(response);
+      let errorBody = {};
+      try {
+        const body = await response.json();
+        errorBody = body;
+      } catch (err) {
+        // No need to attach data.
+      }
+
+      throw new RequestError(response.status, errorBody);
     }
+
     return response.json();
   }
 
