@@ -1,5 +1,5 @@
 import handlebars from 'handlebars';
-import { t } from './locales';
+import { t, hasTranslation } from './locales';
 import { createDirectionsLink } from './util/map';
 import textFieldPartial from './templates/partials/textField.hbs';
 import selectFieldPartial from './templates/partials/select.hbs';
@@ -9,6 +9,7 @@ import radioPartial from './templates/partials/radio.hbs';
 import checkboxPartial from './templates/partials/checkbox.hbs';
 
 handlebars.registerHelper('t', (p, options) => new handlebars.SafeString(t(p, options.hash || {})));
+handlebars.registerHelper('hasTranslation', (p) => hasTranslation(p));
 handlebars.registerHelper('select', (condition, a, b) => (condition ? a : b));
 handlebars.registerHelper('concat', (...args) => {
   args.pop();

@@ -20,11 +20,13 @@
 
     {{!-- Search header --}}
     <div class="rr-header-search">
-      {{#> select id="rr-store-list-country" label="storeList.search.countryLabel" }}
-        {{#each countries}}
-          <option value="{{code}}">{{name}}</option>
-        {{/each}}
-      {{/select}}
+      {{#if (gt countries.length 1) }}
+        {{#> select id="rr-store-list-country" label="storeList.search.countryLabel" }}
+          {{#each countries}}
+            <option value="{{code}}">{{name}}</option>
+          {{/each}}
+        {{/select}}
+      {{/if}}
       {{> textField id="rr-store-list-search-input" label="storeList.search.label" }}
       {{> button id="rr-store-list-search" label="storeList.search.buttonLabel" }}
       {{#> button id="rr-store-list-geo" }}
@@ -135,9 +137,11 @@
   RetailRedEnablement.onLoad(function (controller) {
     {{!-- Updates countries --}}
     var countryList = document.querySelector('#rr-store-list-country');
-    countryList.addEventListener('change', function () {
-      controller.setCountryCode(countryList.value);
-    });
+    if (countryList) {
+      countryList.addEventListener('change', function () {
+        controller.setCountryCode(countryList.value);
+      });
+    }
     {{!-- Updates store list on search --}}
     document.querySelector('#rr-store-list-search').addEventListener('click', function () {
       controller.setPostalCode(document.querySelector('#rr-store-list-search-input').value);

@@ -64,11 +64,11 @@ export default {
     submit: 'Submit Reservation',
     terms: {
       text: 'I have read and accepted the',
-      link: 'terms and conditions',
+      link: 'terms and conditions.',
     },
     privacy: {
       text: 'I have read and accepted the',
-      link: 'privacy policy',
+      link: 'privacy policy.',
     },
   },
   success: {

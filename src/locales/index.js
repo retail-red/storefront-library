@@ -32,7 +32,7 @@ let activeLanguage = 'en';
  * @param {Object} custom Custom translations
  */
 export const updateCustomTranslations = (custom) => {
-  activeTranslations = merge({}, defaultTranslations, custom[activeLanguage]);
+  activeTranslations = merge({}, defaultTranslations, custom);
 };
 
 /**

@@ -20,7 +20,7 @@ class Instance {
 
   _handleConfigUpdate() {
     // Update i18n
-    const { localeCode, ...languages } = this.config.localization;
+    const { localeCode, countries, ...languages } = this.config.localization;
     updateLanguage(localeCode);
     updateCustomTranslations(languages);
   }

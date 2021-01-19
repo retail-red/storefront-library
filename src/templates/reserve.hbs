@@ -100,6 +100,11 @@
             {{> link href=legal.privacy label="reserve.privacy.link" target="_blank" }}
           {{/checkbox}}
         {{/if}}
+        {{#if (hasTranslation "reserve.footerText") }}
+          <div class="rr-footer-text">
+            {{t "reserve.footerText"}}
+          </div>
+        {{/if}}
         {{> button id="rr-reserve-submit" label="reserve.submit" disabled=(or legal.terms legal.privacy) }}
       </div>
     </div>

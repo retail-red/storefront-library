@@ -111,18 +111,18 @@ These will be used to prefill the reservation form with the currently logged in 
 
 ### Localization Configuration
 
-| Property                  | Default             | Required | Description                                              |
-|---------------------------|---------------------|----------|----------------------------------------------------------|
-| `localization.localeCode` | The browsers locale | NO       | Overrides the users locale which will affect UI language |
-| `localization.countries`  | `['de']`            | NO       | Set the available countries for the store list search   |
-| `localization.??.???`     | `null`              | NO       | Add or overrides a translation key. See example below   |
+| Property                    | Default             | Required | Description                                              |
+|-----------------------------|---------------------|----------|----------------------------------------------------------|
+| `localization.localeCode`   | The browsers locale | NO       | Overrides the users locale which will affect UI language |
+| `localization.countries`    | `['de']`            | NO       | Set the available countries for the store list search   |
+| `localization.[lang].[key]` | `null`              | NO       | Add or overrides a translation key. See example below   |
 
 ```js
 {
   ...
   localization: {
-    de: { reserve: { submit: 'Reserve JETZT' } }
-    en: { reserve: { submit: 'Reserve NOW' } }
+    de: { 'reserve.submit': 'Reserve JETZT' },
+    en: { 'reserve.submit': 'Reserve NOW' },
   }
 }
 ```

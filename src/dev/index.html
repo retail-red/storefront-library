@@ -5,10 +5,14 @@
       apiKey: "ARotRbXpalxVcmMNz9Yd",
       apiStage: 'development',
       locationCode: '1',
+      unitSystem: 'metric',
       localization: {
-        countries: ['de', 'us'],
+        countries: ['de'],
+        de: { 'reserve.footerText': 'Hello World' },
+        en: { 'reserve.footerText': 'Hello World' },
       },
       inventory: {
+        hideNumber: false,
         showExactUntil: 80,
         showLowUntil: 65,
       },
@@ -17,8 +21,10 @@
         privacy: 'https://google.de',
       },
       customer: {
+        code: null,
         firstName: 'Rene',
         lastName: 'Eichhorn',
+        phone: '',
         emailAddress: 'rene.eichhorn@shopgate.com',
       },
     });
