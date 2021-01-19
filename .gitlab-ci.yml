@@ -45,4 +45,4 @@ upload prod:
     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_LIVE
     AWS_S3_BUCKET: $AWS_S3_BUCKET_PROD
   script:
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}main.js --body dist/main.js --content-type application/javascript --acl public-read 
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}main.js --body dist/main.js --content-type application/javascript
