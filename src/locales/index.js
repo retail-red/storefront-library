@@ -1,4 +1,4 @@
-import defaultsDeep from 'lodash/defaultsDeep';
+import merge from 'lodash/merge';
 import de from './de';
 import en from './en';
 
@@ -32,7 +32,7 @@ let activeLanguage = 'en';
  * @param {Object} custom Custom translations
  */
 export const updateCustomTranslations = (custom) => {
-  activeTranslations = defaultsDeep(defaultTranslations, custom);
+  activeTranslations = merge({}, defaultTranslations, custom[activeLanguage]);
 };
 
 /**
