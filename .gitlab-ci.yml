@@ -23,7 +23,6 @@ build:
     - docker
   only:
     - tags
-  when: manual
   dependencies:
     - build
   variables:
@@ -36,13 +35,16 @@ upload dev:
   extends: .upload
   script:
     - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/main.js --body dist/main.js --content-type application/javascript --acl public-read
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/index.html --body dist/index.html --content-type text/html --acl public-read 
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/index.html --body dist/index.html --content-type text/html --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/main.js --body dist/main.js --content-type application/javascript --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/index.html --body dist/index.html --content-type text/html --acl public-read
 
 upload prod:
   extends: .upload
+  when: manual
   variables:
     AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_LIVE
     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_LIVE
     AWS_S3_BUCKET: $AWS_S3_BUCKET_LIVE
   script:
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/main.js --body dist/main.js --content-type application/javascript
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/retailred-quickreserve-${CI_COMMIT_TAG:1}.js --body dist/main.js --content-type application/javascript

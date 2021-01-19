@@ -218,3 +218,28 @@ This wil by default host the test site at http://localhost:8080
 ## License
 This product is available under the Apache License, Version 2.0.
 See the LICENSE.md file for more information.
+
+
+## Distribution
+
+Gitlab CI publishes a new version to a publicly available S3 bucket on dev and production behind a Cloudfront.
+
+### Development
+
+Versioned:
+
+`https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/<version>/index.html`
+
+`https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/<version>/main.js`
+
+Latest:
+
+https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html
+
+https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/main.js
+
+
+### Production
+
+https://cdn.retail.red/omni-enablement/retailred-quickreserve-1.0.0.js
+
