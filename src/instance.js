@@ -30,7 +30,7 @@ class Instance {
       return Instance._modalPlaceholder;
     }
     const div = document.createElement('div');
-    div.id = 'sg-omni-modal-placeholder';
+    div.id = 'rr-omni-modal-placeholder';
     div.innerHTML = '';
     document.body.appendChild(div);
     Instance._modalPlaceholder = div;
@@ -75,7 +75,7 @@ class Instance {
 
     // Render button
     targetElement.innerHTML = reserveButtonTemplate();
-    const button = targetElement.querySelector('#sg-omni-reserve-button');
+    const button = targetElement.querySelector('#rr-omni-reserve-button');
     button.addEventListener('click', () => {
       const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
       this.app.start(modalPlaceholder);

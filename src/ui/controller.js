@@ -87,8 +87,8 @@ class Controller {
     if (!silent) {
       [...target.querySelectorAll('script')].forEach(executeScript);
       requestAnimationFrame(() => {
-        window.__SgOmniCallbacks.forEach((cb) => cb(this));
-        window.__SgOmniCallbacks = [];
+        window.__RrOmniCallbacks.forEach((cb) => cb(this));
+        window.__RrOmniCallbacks = [];
       });
     }
   }

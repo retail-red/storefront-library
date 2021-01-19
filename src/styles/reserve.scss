@@ -1,9 +1,9 @@
-.sg-reserve {
+.rr-reserve {
   display: flex;
   flex-direction: column;
   height: 100%;
 
-  .sg-header-product {
+  .rr-header-product {
     padding: 0 24px;
     display: flex;
     flex-direction: row;
@@ -13,7 +13,7 @@
       margin-right: 26px;
     }
 
-    .sg-product-info {
+    .rr-product-info {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -23,7 +23,7 @@
     }
   }
 
-  .sg-divider {
+  .rr-divider {
     height: 8px;
     background-color: #fff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
@@ -31,22 +31,22 @@
     margin-top: 12px;
   }
 
-  .sg-store {
+  .rr-store {
     padding: 16px 24px;
-    .sg-store-name {
+    .rr-store-name {
       margin-top: 8px;
       display: flex;
       flex-direction: row;
       font-size: 16px;
       font-weight: bold;
-      .sg-store-change {
+      .rr-store-change {
         font-size: 14;
         font-weight: normal;
         margin-left: 12px;
       }
     }
 
-    .sg-store-detail {
+    .rr-store-detail {
       margin-top: 16px;
       display: flex;
       flex-direction: row;
@@ -54,24 +54,24 @@
       >div:first-child {
         margin-right: 16px;
       }
-      .sg-bold {
+      .rr-bold {
         font-size: 15px;
         font-weight: bold;
       }
     }
   }
-  .sg-hidden {
+  .rr-hidden {
     display: none;
   }
-  .sg-form {
-    .sg-section {
+  .rr-form {
+    .rr-section {
       margin-top: 32px;
       >span {
         font-size: 16px;
         font-weight: bold;
       }
 
-      .sg-form-radio-row {
+      .rr-form-radio-row {
         &:first-child {
           margin-top: 8px;
         }
@@ -79,18 +79,18 @@
         flex-direction: row;
       }
 
-      .sg-form-row {
+      .rr-form-row {
         margin-top: 16px;
         display: flex;
         flex-direction: row;
         input {
           width: calc(100% - 32px);
         }
-        .sg-field, .sg-text-field {
+        .rr-field, .rr-text-field {
           flex: 1;
           max-width: 400px;
         }
-        .sg-field:first-child {
+        .rr-field:first-child {
           margin-right: 16px;
         }
       }

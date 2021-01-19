@@ -1,51 +1,53 @@
-<%= base %>
-
 <script>
-  // Initialize our script.
-  const omniEnablement = window.SgOmniEnablement.create({
-    apiKey: "ARotRbXpalxVcmMNz9Yd",
-    apiStage: 'development',
-    locationCode: '1',
-    localization: {
-      countries: ['de', 'us'],
-    },
-    inventory: {
-      showExactUntil: 80,
-      showLowUntil: 65,
-    },
-    legal: {
-      terms: 'https://google.de',
-      privacy: 'https://google.de',
-    },
-    customer: {
-      firstName: 'Rene',
-      lastName: 'Eichhorn',
-      emailAddress: 'rene.eichhorn@shopgate.com',
-    },
-  });
+  window.onload = function () {
+    // Initialize our script.
+    const retailred = window.RetailRedEnablement.create({
+      apiKey: "ARotRbXpalxVcmMNz9Yd",
+      apiStage: 'development',
+      locationCode: '1',
+      localization: {
+        countries: ['de', 'us'],
+      },
+      inventory: {
+        showExactUntil: 80,
+        showLowUntil: 65,
+      },
+      legal: {
+        terms: 'https://google.de',
+        privacy: 'https://google.de',
+      },
+      customer: {
+        firstName: 'Rene',
+        lastName: 'Eichhorn',
+        emailAddress: 'rene.eichhorn@shopgate.com',
+      },
+    });
 
-  // In a later time update with product data.
-  omniEnablement.updateConfig({
-    product: {
-      code: '24-MB01',
-      name: 'My Awesome product',
-      options: [
-        {
-          name: 'Color',
-          value: 'Red',
-        },
-        {
-          name: 'Size',
-          value: 'M'
-        }
-      ],
-      quantity: 2,
-      imageUrl: 'https://loremflickr.com/320/240/cute_cat',
-      price: 34.0,
-      currencyCode: 'USD',
-    },
-  });
+    // In a later time update with product data.
+    retailred.updateConfig({
+      product: {
+        code: '24-MB01',
+        name: 'My Awesome product',
+        options: [
+          {
+            name: 'Color',
+            value: 'Red',
+          },
+          {
+            name: 'Size',
+            value: 'M'
+          }
+        ],
+        quantity: 2,
+        imageUrl: 'https://loremflickr.com/320/240/cute_cat',
+        price: 34.0,
+        currencyCode: 'USD',
+      },
+    });
 
-  // Whenever application is ready render the reseve button
-  omniEnablement.renderReserveButton('#omni-dropin');
+    // Whenever application is ready render the reseve button
+    retailred.renderReserveButton('#omni-dropin');
+  }
 </script>
+
+<%= base %>

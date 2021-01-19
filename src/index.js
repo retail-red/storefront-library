@@ -5,7 +5,7 @@ import Sdk from './sdk';
 import './styles/base.scss';
 import './hbsRuntime';
 
-window.__SgOmniCallbacks = [];
+window.__RrOmniCallbacks = [];
 
 export const OmniSdk = Sdk;
 export const OmniEnablement = {
@@ -19,7 +19,7 @@ export const OmniEnablement = {
    * Registers a callback that will be executed after template rendering.
    * @param {function} callback Callback
    */
-  onLoad(callback) { window.__SgOmniCallbacks.push(callback); },
+  onLoad(callback) { window.__RrOmniCallbacks.push(callback); },
   /**
    * Registers a new / overrides a helper that can be used within all templates.
    * @param {String} name Name that will be used in the template.
@@ -28,5 +28,5 @@ export const OmniEnablement = {
   registerTemplateHelper(name, helper) { handlebars.registerHelper(name, helper); },
 };
 
-window.SgOmniClientSdk = OmniSdk;
-window.SgOmniEnablement = OmniEnablement;
+window.RetailRedClientSdk = OmniSdk;
+window.RetailRedEnablement = OmniEnablement;

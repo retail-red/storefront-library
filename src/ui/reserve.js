@@ -3,14 +3,14 @@ import { t, hasTranslation } from '../locales';
 import { isRequired, isEmail, isPhone } from '../util/validation';
 
 const formData = {
-  firstName: 'sg-reserve-first-name',
-  lastName: 'sg-reserve-last-name',
-  phone: 'sg-reserve-phone-number',
-  emailAddress: 'sg-reserve-email',
-  pickupFirstName: 'sg-reserve-pickup-first-name',
-  pickupLastName: 'sg-reserve-pickup-last-name',
-  pickupPhone: 'sg-reserve-pickup-phone-number',
-  pickupEmailAddress: 'sg-reserve-pickup-email',
+  firstName: 'rr-reserve-first-name',
+  lastName: 'rr-reserve-last-name',
+  phone: 'rr-reserve-phone-number',
+  emailAddress: 'rr-reserve-email',
+  pickupFirstName: 'rr-reserve-pickup-first-name',
+  pickupLastName: 'rr-reserve-pickup-last-name',
+  pickupPhone: 'rr-reserve-pickup-phone-number',
+  pickupEmailAddress: 'rr-reserve-pickup-email',
 };
 
 const validation = {
@@ -63,7 +63,7 @@ class ReserveController extends Controller {
     const submitData = Object.assign({}, ...Object
       .entries(formData)
       .map(([name, id]) => ({ [name]: document.querySelector(`#${id}`).value })));
-    const customPickupPerson = !document.querySelector('#sg-reserve-pickup-me').checked;
+    const customPickupPerson = !document.querySelector('#rr-reserve-pickup-me').checked;
 
     // Handle validation.
     const validationRules = { ...validation, ...(customPickupPerson ? pickupValidation : {}) };
@@ -74,11 +74,11 @@ class ReserveController extends Controller {
       return Object.entries(rules).every(([ruleName, ruleEval]) => {
         const outcome = ruleEval(submitData[property]);
         if (!outcome) {
-          elementError.classList.remove('sg-hidden');
+          elementError.classList.remove('rr-hidden');
           elementError.innerText = t(`errors.validation.${ruleName}`);
           return false;
         }
-        elementError.classList.add('sg-hidden');
+        elementError.classList.add('rr-hidden');
         return outcome;
       });
     });

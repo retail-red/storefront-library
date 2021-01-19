@@ -93,7 +93,7 @@ class StoreListController extends Controller {
 
   async _updateStoreList() {
     this.state.locations = await this._receiveLocations();
-    this.partialRender('.sg-list');
+    this.partialRender('.rr-list');
   }
 
   setPostalCode(code) {

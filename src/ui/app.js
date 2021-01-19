@@ -72,10 +72,10 @@ class App {
       this.modalTitle.innerText = controller.getTitle();
 
       // Update back button
-      if (this.historyIndex >= 2 && this.modalBack.classList.contains('sg-back-hidden')) {
-        this.modalBack.classList.remove('sg-back-hidden');
-      } else if (this.historyIndex <= 1 && !this.modalBack.classList.contains('sg-back-hidden')) {
-        this.modalBack.classList.add('sg-back-hidden');
+      if (this.historyIndex >= 2 && this.modalBack.classList.contains('rr-back-hidden')) {
+        this.modalBack.classList.remove('rr-back-hidden');
+      } else if (this.historyIndex <= 1 && !this.modalBack.classList.contains('rr-back-hidden')) {
+        this.modalBack.classList.add('rr-back-hidden');
       }
     };
     asyncHandler();
@@ -92,23 +92,23 @@ class App {
     this.element = target;
 
     // Store modal content placeholder.
-    const modalContent = document.querySelector('#sg-omni .sg-modal-content');
-    const modalTitle = document.querySelector('#sg-omni .sg-modal-title');
-    const modalBack = document.querySelector('#sg-omni .sg-back');
+    const modalContent = document.querySelector('#rr-omni .rr-modal-content');
+    const modalTitle = document.querySelector('#rr-omni .rr-modal-title');
+    const modalBack = document.querySelector('#rr-omni .rr-back');
     this.modalContent = modalContent;
     this.modalTitle = modalTitle;
     this.modalBack = modalBack;
 
     // Handle modal closing.
-    const modalBackdrop = document.querySelector('#sg-omni .sg-modal-backdrop');
+    const modalBackdrop = document.querySelector('#rr-omni .rr-modal-backdrop');
     modalBackdrop.addEventListener('click', () => this.destroy());
-    const modalClose = document.querySelector('#sg-omni .sg-modal-close');
+    const modalClose = document.querySelector('#rr-omni .rr-modal-close');
     modalClose.addEventListener('click', () => this.destroy());
     modalBack.addEventListener('click', () => this.popRoute());
 
     // Transition modal in.
-    const baseElement = document.querySelector('#sg-omni');
-    setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('sg-modal-open')), 0);
+    const baseElement = document.querySelector('#rr-omni');
+    setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('rr-modal-open')), 0);
     this.modalBase = baseElement;
 
     // Push starting route configuration
@@ -126,7 +126,7 @@ class App {
     routes = {};
 
     // Hide modal and remove from DOM.
-    this.modalBase.classList.remove('sg-modal-open');
+    this.modalBase.classList.remove('rr-modal-open');
     requestAnimationFrame(() => {
       setTimeout(() => {
         this.modalBase = null;

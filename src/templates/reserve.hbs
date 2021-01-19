@@ -1,11 +1,11 @@
 
-<div class="sg-reserve">
+<div class="rr-reserve">
   {{!-- Header --}}
-  <div class="sg-header">
+  <div class="rr-header">
     {{!-- Product infos --}}
-    <div class="sg-header-product">
+    <div class="rr-header-product">
       <img src="{{product.imageUrl}}" />
-      <div class="sg-product-info">
+      <div class="rr-product-info">
         <span>{{product.name}}</span>
         <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
         <span>
@@ -18,23 +18,23 @@
         </span>
       </div>
     </div>
-    <div class="sg-divider"></div>
+    <div class="rr-divider"></div>
   </div>
 
   {{!-- Store infos --}}
-  <div class="sg-store">
-    <div class="sg-store-name">
+  <div class="rr-store">
+    <div class="rr-store-name">
       {{location.name}}
-      {{>link label="reserve.changeStore" href="#" class="sg-store-change"}}
+      {{>link label="reserve.changeStore" href="#" class="rr-store-change"}}
     </div>
 
-    <div class="sg-store-detail">
+    <div class="rr-store-detail">
       <div>
-        <p class="sg-bold">{{t "storeList.location.address" }}</p>
+        <p class="rr-bold">{{t "storeList.location.address" }}</p>
         <p>{{location.primaryAddress.street}} {{location.primaryAddress.street2}}</p>
         <p>{{location.primaryAddress.city}}, {{location.primaryAddress.region}} {{location.primaryAddress.postalCode}}</p>
         {{> link
-            class="sg-directions"
+            class="rr-directions"
             label="storeList.location.directions"
             href=(direction location.primaryAddress)
             target="_blank"
@@ -42,7 +42,7 @@
       </div>
       <div>
         {{#if location.operationHours}}
-          <p class="sg-bold">{{t "storeList.location.storeHours" }}</p>
+          <p class="rr-bold">{{t "storeList.location.storeHours" }}</p>
           {{#each location.operationHours}}
             {{#if this}}
               <p>{{t (concat "date." @key) }}: {{this}}</p>
@@ -53,76 +53,76 @@
     </div>
 
     {{!-- Form --}}
-    <div class="sg-form">
-      <div class="sg-section">
+    <div class="rr-form">
+      <div class="rr-section">
         <span>{{t "reserve.contactInfo" }}</span>
-        <div class="sg-form-row">
-          {{> textField id="sg-reserve-first-name" label="reserve.firstName" }}
-          {{> textField id="sg-reserve-last-name" label="reserve.lastName" }}
+        <div class="rr-form-row">
+          {{> textField id="rr-reserve-first-name" label="reserve.firstName" }}
+          {{> textField id="rr-reserve-last-name" label="reserve.lastName" }}
         </div>
-        <div class="sg-form-row">
-          {{> textField id="sg-reserve-phone-number" label="reserve.phoneNumber" }}
-          {{> textField id="sg-reserve-email" label="reserve.email" }}
+        <div class="rr-form-row">
+          {{> textField id="rr-reserve-phone-number" label="reserve.phoneNumber" }}
+          {{> textField id="rr-reserve-email" label="reserve.email" }}
         </div>
       </div>
-      <div class="sg-section">
+      <div class="rr-section">
         <span>{{t "reserve.pickupQuestion" }}</span>
-        <fieldset id="sg-reserve-pickup">
-          <div class="sg-form-radio-row">
-            {{>radio id="sg-reserve-pickup-me" name="sg-reserve-pickup" value="me" label="reserve.me" checked=true}}
+        <fieldset id="rr-reserve-pickup">
+          <div class="rr-form-radio-row">
+            {{>radio id="rr-reserve-pickup-me" name="rr-reserve-pickup" value="me" label="reserve.me" checked=true}}
           </div>
-          <div class="sg-form-radio-row">
-            {{>radio name="sg-reserve-pickup" value="someoneElse" label="reserve.someoneElse"}}
+          <div class="rr-form-radio-row">
+            {{>radio name="rr-reserve-pickup" value="someoneElse" label="reserve.someoneElse"}}
           </div>
         </fieldset>
       </div>
-      <div class="sg-section sg-pickup-contact sg-hidden">
+      <div class="rr-section rr-pickup-contact rr-hidden">
         <span>{{t "reserve.pickupInfo" }}</span>
-        <div class="sg-form-row">
-          {{> textField id="sg-reserve-pickup-first-name" label="reserve.firstName" }}
-          {{> textField id="sg-reserve-pickup-last-name" label="reserve.lastName" }}
+        <div class="rr-form-row">
+          {{> textField id="rr-reserve-pickup-first-name" label="reserve.firstName" }}
+          {{> textField id="rr-reserve-pickup-last-name" label="reserve.lastName" }}
         </div>
-        <div class="sg-form-row">
-          {{> textField id="sg-reserve-pickup-phone-number" label="reserve.phoneNumber" }}
-          {{> textField id="sg-reserve-pickup-email" label="reserve.email" }}
+        <div class="rr-form-row">
+          {{> textField id="rr-reserve-pickup-phone-number" label="reserve.phoneNumber" }}
+          {{> textField id="rr-reserve-pickup-email" label="reserve.email" }}
         </div>
       </div>
-      <div class="sg-section sg-legal">
+      <div class="rr-section rr-legal">
         {{#if legal.terms }}
-          {{#> checkbox id="sg-reserve-terms" }}
+          {{#> checkbox id="rr-reserve-terms" }}
             {{t "reserve.terms.text" }}
             {{> link href=legal.terms label="reserve.terms.link" target="_blank" }}
           {{/checkbox}}
         {{/if}}
         {{#if legal.privacy }}
-          {{#> checkbox id="sg-reserve-privacy" }}
+          {{#> checkbox id="rr-reserve-privacy" }}
             {{t "reserve.privacy.text" }}
             {{> link href=legal.privacy label="reserve.privacy.link" target="_blank" }}
           {{/checkbox}}
         {{/if}}
-        {{> button id="sg-reserve-submit" label="reserve.submit" disabled=(or legal.terms legal.privacy) }}
+        {{> button id="rr-reserve-submit" label="reserve.submit" disabled=(or legal.terms legal.privacy) }}
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  SgOmniEnablement.onLoad(function (controller) {
+  RetailRedEnablement.onLoad(function (controller) {
     {{!-- Prefill data --}}
     controller.prefillFormData();
     {{!-- Handle store change --}}
-    document.querySelector('#sg-omni .sg-store-change').addEventListener('click', function (e) {
+    document.querySelector('#rr-omni .rr-store-change').addEventListener('click', function (e) {
       e.preventDefault();
       controller.app.popRoute();
     });
     {{!-- Handle reserve submit --}}
-    var reserveButton = document.querySelector('#sg-reserve-submit');
+    var reserveButton = document.querySelector('#rr-reserve-submit');
     reserveButton.addEventListener('click', function (e) {
       e.preventDefault();
       controller.submit();
     });
     {{!-- Handle terms/privacy checkbox --}}
-    var legals = Array.prototype.slice.call(document.querySelectorAll('#sg-omni .sg-legal input[type="checkbox"]'));
+    var legals = Array.prototype.slice.call(document.querySelectorAll('#rr-omni .rr-legal input[type="checkbox"]'));
     legals.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
         var allChecked = legals.every(function(check) { return check.checked === true });
@@ -130,13 +130,13 @@
       });
     });
     {{!-- Handle pickup person switcher --}}
-    var reservePickup = document.querySelector('#sg-reserve-pickup');
-    var reservePickupSection = document.querySelector('#sg-omni .sg-pickup-contact');
+    var reservePickup = document.querySelector('#rr-reserve-pickup');
+    var reservePickupSection = document.querySelector('#rr-omni .rr-pickup-contact');
     reservePickup.addEventListener('change', function (e) {
       if (e.target.value === 'me') {
-        reservePickupSection.classList.add('sg-hidden');
+        reservePickupSection.classList.add('rr-hidden');
       } else {
-        reservePickupSection.classList.remove('sg-hidden');
+        reservePickupSection.classList.remove('rr-hidden');
         reservePickupSection.scrollIntoView({ behavior: 'smooth' });
       }
     });

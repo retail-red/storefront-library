@@ -1,6 +1,6 @@
-.sg-success {
+.rr-success {
   text-align: center;
-  .sg-bold {
+  .rr-bold {
     font-weight: bold;
   }
 
@@ -11,30 +11,30 @@
     margin-bottom: 40px;
   }
 
-  .sg-text {
+  .rr-text {
     margin-bottom: 20px;
   }
 
-  .sg-reservation-number {
+  .rr-reservation-number {
     font-size: 18px;
     margin-top: 10px;
     font-weight: bold;
   }
 
-  .sg-location {
+  .rr-location {
     margin-top: 30px;
     padding: 20px 40px;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     text-align: left;
 
-    .sg-location-name {
+    .rr-location-name {
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 10px;
     }
 
-    .sg-location-info {
+    .rr-location-info {
       display: flex;
 
       >div {

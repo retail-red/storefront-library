@@ -1,4 +1,4 @@
-.sg-text-field {
+.rr-text-field {
   position: relative;
   height: 44px;
 
@@ -39,20 +39,20 @@
   }
 }
 
-.sg-field {
+.rr-field {
   display: flex;
   flex-direction: column;
-  .sg-field-error {
+  .rr-field-error {
     margin-top: 4px;
     color: rgb(var(--color-state-alarm));
     font-size: 0.85rem;
-    &.sg-hidden {
+    &.rr-hidden {
       display: hidden;
     }
   }
 }
 
-.sg-select-field {
+.rr-select-field {
   position: relative;
 
   label {
@@ -92,7 +92,7 @@
   }
 }
 
-.sg-button {
+.rr-button {
   outline: none;
   border: none;
   position: relative;
@@ -197,7 +197,7 @@
   }
 }
 
-.sg-link {
+.rr-link {
   color: #3C9BB5;
   text-decoration: underline;
   font-size: 16px;
@@ -207,7 +207,7 @@
   }
 }
 
-.sg-radio {
+.rr-radio {
   box-sizing: border-box;
   display: inline-block;
   position: relative;
@@ -280,7 +280,7 @@ $md-checkmark-width: 0.125em;
 $md-checkmark-color: #fff;
 $md-checkbox-label-padding: .75em;
 
-.sg-checkbox {
+.rr-checkbox {
   font-size: 15px;
   position: relative;
   margin: $md-checkbox-margin;

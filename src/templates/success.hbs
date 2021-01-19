@@ -1,17 +1,17 @@
-<div class="sg-success">
-  <h1 class="sg-headline">{{t "success.headline" }}</h1>
+<div class="rr-success">
+  <h1 class="rr-headline">{{t "success.headline" }}</h1>
 
-  <p class="sg-text">{{t "success.text" }}</p>
+  <p class="rr-text">{{t "success.text" }}</p>
 
   <p>{{t "success.reservationNumber" }}</p>
-  <p class="sg-reservation-number">{{reservationNumber}}</p>
+  <p class="rr-reservation-number">{{reservationNumber}}</p>
 
-  <div class="sg-location">
-    <p class="sg-location-name">{{location.name}}</p>
+  <div class="rr-location">
+    <p class="rr-location-name">{{location.name}}</p>
 
-    <div class="sg-location-info">
+    <div class="rr-location-info">
       <div>
-        <p class="sg-bold">{{t "success.location.address" }}</p>
+        <p class="rr-bold">{{t "success.location.address" }}</p>
         <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
         <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
         <p>{{t "success.location.phone" }} {{primaryAddress.phoneNumber}}</p>
@@ -19,7 +19,7 @@
 
       <div>
         {{#if location.operationHours}}
-          <p class="sg-bold">{{t "success.location.storeHours" }}</p>
+          <p class="rr-bold">{{t "success.location.storeHours" }}</p>
           {{#each location.operationHours}}
             {{#if this}}
               <p>{{t (concat "date." @key) }}: {{this}}</p>
@@ -29,7 +29,7 @@
       </div>
     </div>
     {{> link
-        class="sg-directions"
+        class="rr-directions"
         label="storeList.location.directions"
         href=(direction primaryAddress)
         target="_blank"
