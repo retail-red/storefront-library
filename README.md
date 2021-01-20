@@ -201,6 +201,40 @@ retailred.updateConfig({
 });
 ```
 
+## API Client SDK
+
+Additionally to the enablement UI script we also provide a client sdk for the storefront api. The methods are all `async` and therefore return a `Promise` that holds the result.
+
+```js
+var sdk = window.RetailRedClientSdk('my-api-key');
+sdk.getLocations({ countryCode: 'de', postalCode: '35510' }).then(function(result) {
+  console.log("Result:", result);
+});
+```
+
+| Function                  | Parameters                 | Description                                                                                        |
+|---------------------------|----------------------------|----------------------------------------------------------------------------------------------------|
+| **createOrders**          |                            | Creates multiple orders at once - the created order numbers are returned once completed            |
+|                           | `orders`                   | Array of orders - refer to the API docs for a full look at the object structure                    |
+| **createOrder**           |                            | Creates a single new order - the created order number is returned once completed                   |
+|                           | `order`                    | Order object - refer to the API docs for a full look at the object structure                       |
+| **getInventories**        |                            | Fetches the inventory for products at a given location                                             |
+|                           | `codePairs`                | Array of multiple location/product code pairs                                                      |
+|                           | `codePairs[].locationCode` | The location code                                                                                  |
+|                           | `codePairs[].productCode`  | The product code                                                                                   |
+| **getProductInventories** |                            | Fetches the inventory for a product at multiple locations                                          |
+|                           | `productCode`              | The product code                                                                                   |
+|                           | `locationCodes`            | Array of location codes / or single location code                                                  |
+|                           | `catalogCode`              | Optional: Specifies a specific catalog                                                             |
+| **getLocations**          |                            | Fetches a list of locations                                                                        |
+|                           | `productCode`              | Optional: Will only fetch locations that have this product available                               |
+|                           | `postalCode`               | Optional: Postal code to filter and sort by distance.                                              |
+|                           | `countryCode`              | Optional: Country code                                                                             |
+|                           | `longitude`                | Optional: Longitude of the user to filter and sort by distance (Must be combined with `latitude`)  |
+|                           | `latitude`                 | Optional: Longitude of the user to filter and sort by distance (Must be combined with `longitude`) |
+|                           | ...                        | Optional: Refer to the API docs for a full look at all available options                           |
+
+
 ## Development
 
 **Requirements**
