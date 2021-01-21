@@ -146,6 +146,7 @@ class ReserveController extends Controller {
 
     // Submit to API.
     try {
+      this.app.setLoading(true);
       const { orderNumbers, errors } = await this.sdk.createOrder(orderData);
       if (errors && errors.length) {
         const specific = `errors.${errors[0].code}`;
@@ -158,6 +159,7 @@ class ReserveController extends Controller {
       // eslint-disable-next-line no-alert
       alert(t('errors.unknown'));
     }
+    this.app.setLoading(false);
   }
 }
 

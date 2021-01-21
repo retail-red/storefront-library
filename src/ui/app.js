@@ -49,7 +49,13 @@ class App {
       this.history.replace(targetRoute, { ...routeState, controllerId: newId });
       return;
     }
+
     const controller = routes[controllerId];
+
+    // Route has been removed already.
+    if (!controller) {
+      return;
+    }
 
     // Load content
     const asyncHandler = async () => {
