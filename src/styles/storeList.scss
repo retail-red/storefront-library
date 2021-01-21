@@ -145,22 +145,51 @@
 
       .rr-detail {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        line-height: 18px;
+
+        .rr-detail-header {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 8px;
+        }
+
         .rr-left {
           flex: 1;
           display: flex;
-          margin-top: 8px;
           flex-direction: column;
-          .rr-link {
-            margin-top: 4px;
+          justify-content: flex-end;
+          margin-right: 8px;
+        }
+
+        .rr-link {
+          margin-top: 4px;
+
+          &.rr-phone-number {
+            text-decoration: none;
+          }
+
+          &.rr-closed::after {
+            content: attr(data-label-closed)
+          }
+
+          &.rr-opened::after {
+            content: attr(data-label-opened)
           }
         }
 
         .rr-collapsing {
-          margin-top: 12px;
           display: flex;
           flex-direction: row;
           font-size: 14;
+
+          @include xs {
+            flex-direction: column;
+          }
+
+          > div {
+            margin-top: 12px;
+          }
 
           > div:first-child {
             margin-right: 16px;
