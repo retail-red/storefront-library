@@ -3,6 +3,10 @@
   flex-direction: column;
   height: 100%;
 
+  .rr-header {
+    position: relative;
+  }
+
   .rr-header-product {
     padding: 0 24px;
     display: flex;

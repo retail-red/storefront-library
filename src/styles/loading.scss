@@ -1,0 +1,46 @@
+@keyframes rr-running-progress {
+  0% { margin-left: 0px; margin-right: 100%; }
+  50% { margin-left: 25%; margin-right: 0%; }
+  100% { margin-left: 100%; margin-right: 0; }
+}
+
+.rr-progress-line, .rr-progress-line:before {
+  height: 3px;
+  width: 100%;
+  margin: 0;
+}
+
+.rr-progress-line {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(var(--color-primary), 0.4);
+  display: flex;
+  opacity: 0;
+  transition: opacity 257ms cubic-bezier(0.4, 0, 0.2, 1);
+  &.rr-progress-visible {
+    opacity: 1;
+    &:before {
+      animation: rr-running-progress 1.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      background-color: rgb(var(--color-primary));
+      content: '';
+    }
+  }
+}
+
+.rr-placeholder {
+  min-height: 100px;
+  background-color: #eee;
+}
+
+.rr-animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: rr-place-holder-shimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 100px;
+  position: relative;
+}

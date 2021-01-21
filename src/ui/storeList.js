@@ -46,6 +46,7 @@ class StoreListController extends Controller {
   async _receiveLocations() {
     const { unitSystem } = this.config;
 
+    this.app.setLoading(true);
     try {
       // Fetch location data
       const { locations } = await this.sdk.getLocations({
@@ -84,9 +85,11 @@ class StoreListController extends Controller {
       if (aggregatedLocations.length !== 0) {
         this.state.emptyList = false;
       }
+      this.app.setLoading(false);
       return aggregatedLocations;
     } catch (err) {
       this.state.emptyList = true;
+      this.app.setLoading(false);
       return [];
     }
   }

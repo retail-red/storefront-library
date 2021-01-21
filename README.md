@@ -10,7 +10,7 @@ The next step is to execute the retail.red script with your own config. This nee
 ```html
 <script type="text/javascript">
   window.addEventListener('load', function () {
-    const retailred = window.RetailRedEnablement.create({
+    var retailred = window.RetailRedEnablement.create({
       apiKey: "your_api_key",
       product: {
         code: 'TEST-01',

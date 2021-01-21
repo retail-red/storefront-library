@@ -12,6 +12,7 @@ class App {
     this.historyIndex = 0;
     this.historyUnlisten = null;
     this.destroyWhenEmpty = true;
+    this.loading = false;
   }
 
   _handleHistoryChange({ location, action }) {
@@ -67,6 +68,7 @@ class App {
 
       // Render content.
       controller.render(this.modalContent);
+      this.setLoading(false);
 
       // Update title.
       this.modalTitle.innerText = controller.getTitle();
@@ -78,6 +80,8 @@ class App {
         this.modalBack.classList.add('rr-back-hidden');
       }
     };
+
+    this.setLoading(true);
     asyncHandler();
   }
 
@@ -112,7 +116,7 @@ class App {
     this.modalBase = baseElement;
 
     // Push starting route configuration
-    this.pushRoute('storeList', { locationCode: this.config.locationCode });
+    // this.pushRoute('storeList', { locationCode: this.config.locationCode });
   }
 
   updateConfig(config) {
@@ -168,6 +172,24 @@ class App {
     requestAnimationFrame(() => {
       this.historyIndex = 0;
     });
+  }
+
+  syncLoadingState() {
+    const progressLine = document.querySelector('.rr-progress-line');
+    if (!progressLine) {
+      return;
+    }
+
+    if (this.loading) {
+      progressLine.classList.add('rr-progress-visible');
+    } else {
+      progressLine.classList.remove('rr-progress-visible');
+    }
+  }
+
+  setLoading(value) {
+    this.loading = value;
+    this.syncLoadingState();
   }
 }
 

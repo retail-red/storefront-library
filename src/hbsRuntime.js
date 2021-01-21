@@ -7,6 +7,7 @@ import buttonPartial from './templates/partials/button.hbs';
 import linkPartial from './templates/partials/link.hbs';
 import radioPartial from './templates/partials/radio.hbs';
 import checkboxPartial from './templates/partials/checkbox.hbs';
+import skeletonPartial from './templates/partials/skeleton.hbs';
 
 handlebars.registerHelper('t', (p, options) => new handlebars.SafeString(t(p, options.hash || {})));
 handlebars.registerHelper('hasTranslation', (p) => hasTranslation(p));
@@ -38,3 +39,4 @@ handlebars.registerPartial('button', buttonPartial);
 handlebars.registerPartial('link', linkPartial);
 handlebars.registerPartial('radio', radioPartial);
 handlebars.registerPartial('checkbox', checkboxPartial);
+handlebars.registerPartial('skeleton', skeletonPartial);
