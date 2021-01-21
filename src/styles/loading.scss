@@ -32,6 +32,15 @@
   background-color: #eee;
 }
 
+@keyframes rr-place-holder-shimmer{
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
 .rr-animated-background {
   animation-duration: 1.25s;
   animation-fill-mode: forwards;

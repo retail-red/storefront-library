@@ -119,7 +119,7 @@ class App {
     document.querySelector('body').classList.add('rr-modal-backdrop-body-fix');
 
     // Push starting route configuration
-    // this.pushRoute('storeList', { locationCode: this.config.locationCode });
+    this.pushRoute('storeList', { locationCode: this.config.locationCode });
   }
 
   updateConfig(config) {
