@@ -49,6 +49,9 @@ export default {
       rough: '{{x}}+ Available',
     },
   },
+  reserveButton: {
+    title: 'Reserve in Store',
+  },
   reserve: {
     title: 'Submit Reservation',
     changeStore: 'Change Store',
