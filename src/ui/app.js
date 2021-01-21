@@ -115,6 +115,9 @@ class App {
     setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('rr-modal-open')), 0);
     this.modalBase = baseElement;
 
+    // Prevent document from scrolling
+    document.querySelector('body').classList.add('rr-modal-backdrop-body-fix');
+
     // Push starting route configuration
     // this.pushRoute('storeList', { locationCode: this.config.locationCode });
   }
@@ -141,6 +144,9 @@ class App {
         this.element = null;
       }, 225);
     });
+
+    // Re-enable document scrolling
+    document.querySelector('body').classList.remove('rr-modal-backdrop-body-fix');
   }
 
   addController(controller) {

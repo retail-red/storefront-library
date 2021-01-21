@@ -17,7 +17,7 @@ export default {
     sun: 'Sunday',
   },
   errors: {
-    unknown: 'Failed to submit resevation',
+    unknown: 'Failed to submit reservation',
     validation: {
       isRequired: 'Field is required',
       isEmail: 'Field must be a valid email address',
