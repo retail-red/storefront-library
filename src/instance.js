@@ -77,7 +77,9 @@ class Instance {
     const customTemplate = this.config.templates.customTemplates.reserveButton;
     targetElement.innerHTML = customTemplate ? customTemplate() : reserveButtonTemplate();
     const button = targetElement.querySelector('#rr-omni-reserve-button');
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
       const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
       this.app.start(modalPlaceholder);
     });

@@ -121,12 +121,14 @@
     {{!-- Handle store change --}}
     document.querySelector('#rr-omni .rr-store-change').addEventListener('click', function (e) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       controller.app.popRoute();
     });
     {{!-- Handle reserve submit --}}
     var reserveButton = document.querySelector('#rr-reserve-submit');
     reserveButton.addEventListener('click', function (e) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       controller.submit();
     });
     {{!-- Handle terms/privacy checkbox --}}

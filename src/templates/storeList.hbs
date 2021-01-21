@@ -156,7 +156,8 @@
       });
     }
     {{!-- Updates store list on search --}}
-    document.querySelector('#rr-store-list-search').addEventListener('click', function () {
+    document.querySelector('#rr-store-list-search').addEventListener('click', function (e) {
+      e.stopImmediatePropagation();
       controller.setPostalCode(document.querySelector('#rr-store-list-search-input').value);
     });
 
@@ -171,11 +172,13 @@
       }
     })
     {{!-- Update by geolocation --}}
-    document.querySelector('#rr-store-list-geo').addEventListener('click', function () {
+    document.querySelector('#rr-store-list-geo').addEventListener('click', function (event) {
+      event.stopImmediatePropagation();
       controller.setGeolocation();
     });
     {{!-- Handle store selection and collapsing --}}
     document.querySelector('.rr-store-list').addEventListener('click', function (e) {
+      e.stopImmediatePropagation();
       if (e.target.classList.contains('rr-store-select')) {
         controller.initiateReservation(e.target.dataset.code);
       } else if (e.target.classList.contains('rr-detail-collapse')) {

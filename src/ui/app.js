@@ -111,10 +111,22 @@ class App {
 
     // Handle modal closing.
     const modalBackdrop = document.querySelector('#rr-omni .rr-modal-backdrop');
-    modalBackdrop.addEventListener('click', () => this.destroy());
+    modalBackdrop.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      this.destroy();
+    });
     const modalClose = document.querySelector('#rr-omni .rr-modal-close');
-    modalClose.addEventListener('click', () => this.destroy());
-    modalBack.addEventListener('click', () => this.popRoute());
+    modalClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      this.destroy();
+    });
+    modalBack.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      this.popRoute();
+    });
 
     // Transition modal in.
     const baseElement = document.querySelector('#rr-omni');
