@@ -4,10 +4,10 @@
     const retailred = window.RetailRedEnablement.create({
       apiKey: "ARotRbXpalxVcmMNz9Yd",
       apiStage: 'development',
-      locationCode: '1',
+    //  locationCode: '1',
       unitSystem: 'metric',
       localization: {
-        countries: ['de'],
+        countries: ['de', 'us'],
         de: { 'reserve.footerText': 'Hello World' },
         en: { 'reserve.footerText': 'Hello World' },
       },
@@ -51,7 +51,7 @@
       },
     });
 
-    // Whenever application is ready render the reseve button
+    // Whenever application is ready render the reserve button
     retailred.renderReserveButton('#omni-dropin');
   }
 </script>

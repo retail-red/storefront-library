@@ -8,9 +8,12 @@
     display: flex;
     flex-direction: row;
 
-    img {
-      width: 72px;
-      margin-right: 26px;
+    .rr-product-image-wrapper {
+      margin-right: 24px;
+
+      img {
+        width: 72px;
+      }
     }
 
     .rr-product-info {
@@ -32,6 +35,7 @@
   }
 
   .rr-store {
+    overflow: auto;
     padding: 16px 24px;
     .rr-store-name {
       margin-top: 8px;
@@ -69,6 +73,10 @@
       >span {
         font-size: 16px;
         font-weight: bold;
+
+        + .rr-form-row {
+          margin-top: 12px;
+        }
       }
 
       .rr-form-radio-row {
@@ -80,18 +88,26 @@
       }
 
       .rr-form-row {
-        margin-top: 16px;
+        margin: 0 -12px;
         display: flex;
         flex-direction: row;
-        input {
-          width: calc(100% - 32px);
-        }
-        .rr-field, .rr-text-field {
-          flex: 1;
+
+        .rr-field {
+          padding: 12px 12px 6px;
+          flex-grow: 1;
           max-width: 400px;
+
+          input {
+            width: 100%;
+          }
         }
-        .rr-field:first-child {
-          margin-right: 16px;
+
+        @include xs {
+          flex-direction: column;
+
+          .rr-field {
+            max-width: 100%;
+          }
         }
       }
 

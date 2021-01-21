@@ -4,7 +4,9 @@
   <div class="rr-header">
     {{!-- Product infos --}}
     <div class="rr-header-product">
-      <img src="{{product.imageUrl}}" />
+      <div class="rr-product-image-wrapper">
+        <img src="{{product.imageUrl}}" />
+      </div>
       <div class="rr-product-info">
         <span>{{product.name}}</span>
         <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>

@@ -8,10 +8,16 @@
   --color-state-warning: 241, 156, 69;
   --color-state-success: 50, 172, 92;
 
+  @import "breakpoints";
+  @import "mixins";
   @import "reset";
   @import "modal";
   @import "form";
   @import "storeList";
   @import "reserve";
   @import "success";
+}
+
+.rr-modal-backdrop-body-fix {
+  overflow: hidden;
 }
