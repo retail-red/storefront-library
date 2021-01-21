@@ -1,7 +1,7 @@
 /* Configs */
 (() => {
-  const url = 'http://localhost:8080/main.js';
-  const target = '#app > section > section:nth-child(5) > section > div.sc-19tq43e-1.dIDNtJ > div > div > div > div.sc-1nhfg0-1.fglQpp > div > button';
+  const url = 'https://cdn.retail.red/omni-enablement/retailred-quickreserve-0.1.1-6.js';
+  const target = '#product-offer > div.col.product-info.col-lg-6.col-12 > div > div.product-offer > div > div.col.col-12 > div';
   const config = {
     apiKey: 'ARotRbXpalxVcmMNz9Yd',
     apiStage: 'development',

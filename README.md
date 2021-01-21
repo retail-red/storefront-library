@@ -201,6 +201,17 @@ retailred.updateConfig({
 });
 ```
 
+If your template needs further helpers you can also add those:
+```js
+window.RetailRedEnablement.registerTemplateHelper('my-helper', function (name) { return 'Hello ' + name });
+``` 
+and use them like any other helper
+```html
+<div>
+  {{my-helper "World"}}
+</div>
+```
+
 ## API Client SDK
 
 Additionally to the enablement UI script we also provide a client sdk for the storefront api. The methods are all `async` and therefore return a `Promise` that holds the result.
