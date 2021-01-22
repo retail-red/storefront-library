@@ -11,15 +11,22 @@
 
     <div class="rr-location-info">
       <div>
-        <p class="rr-bold">{{t "success.location.address" }}</p>
+        <h4 class="rr-bold">{{t "success.location.address" }}</h4>
         <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
         <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
         <p>{{t "success.location.phone" }} {{primaryAddress.phoneNumber}}</p>
+
+        {{> link
+          class="rr-directions"
+          label="storeList.location.directions"
+          href=(direction primaryAddress)
+          target="_blank"
+        }}
       </div>
 
       <div>
         {{#if location.operationHours}}
-          <p class="rr-bold">{{t "success.location.storeHours" }}</p>
+          <h4 class="rr-bold">{{t "success.location.storeHours" }}</h4>
           {{#each location.operationHours}}
             {{#if this}}
               <p>{{t (concat "date." @key) }}: {{this}}</p>
@@ -28,12 +35,6 @@
         {{/if}}
       </div>
     </div>
-    {{> link
-        class="rr-directions"
-        label="storeList.location.directions"
-        href=(direction primaryAddress)
-        target="_blank"
-    }}
   </div>
 </div>
 

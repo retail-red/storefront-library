@@ -296,7 +296,7 @@ $md-checkbox-border-width: 2px;
 $md-checkbox-border-radius: 0.125em;
 $md-checkmark-width: 0.125em;
 $md-checkmark-color: #fff;
-$md-checkbox-label-padding: .75em;
+$md-checkbox-label-padding: 2em;
 
 .rr-checkbox {
   font-size: 15px;
@@ -314,13 +314,18 @@ $md-checkbox-label-padding: .75em;
 
   label {
     cursor: pointer;
-    display: inline;
+    display: inline-flex;
     line-height: $md-checkbox-size;
     vertical-align: top;
     clear: both;
     padding-left: 1px;
     &:not(:empty) {
       padding-left: $md-checkbox-label-padding;
+
+      @include xs {
+        line-height: 24px;
+        margin-top: -2px;
+      }
     }
 
     &:before, &:after {
@@ -349,6 +354,7 @@ $md-checkbox-label-padding: .75em;
     margin: 0;
     display: block;
     float: left;
+    position: absolute;
     font-size: inherit;
 
     &:checked {

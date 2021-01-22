@@ -1,11 +1,13 @@
 <div class="rr-checkbox">
   <input id={{id}} type="checkbox">
   <label for="{{id}}">
-    {{#if label }}
-      {{t label}}
-    {{/if}}
-    {{#if @partial-block }}
-      {{> @partial-block }}
-    {{/if}}
+    <span>
+      {{#if label }}
+        {{t label}}
+      {{/if}}
+      {{#if @partial-block }}
+        {{> @partial-block }}
+      {{/if}}
+    </span>
   </label>
 </div>
