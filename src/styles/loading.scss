@@ -12,6 +12,7 @@
 
 .rr-progress-line {
   position: absolute;
+  z-index: 3;
   bottom: 0;
   background-color: rgba(var(--color-primary), 0.4);
   display: flex;

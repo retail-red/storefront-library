@@ -46,6 +46,8 @@ For colors we provided CSS variables that can be overridden once for all usages.
 #rr-omni #rr-omni-custom {
   /* Primary color used for form elements and buttons */
   --color-primary: 0, 0, 0;
+  /* Color used for links */
+  --color-link: 60, 155, 181;
   /* Color used for alerting texts like errors */
   --color-state-alarm : 176, 0, 32;
   /* Color used for highlighting problems like low stock */

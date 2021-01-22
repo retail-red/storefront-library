@@ -6,9 +6,6 @@ const sass = require('sass');
 const baseDevTemplate = fs.readFileSync(path.join(__dirname, 'src/dev/base.html'));
 
 module.exports = {
-  output: {
-    libraryTarget: 'umd',
-  },
   module: {
     rules: [
       {
