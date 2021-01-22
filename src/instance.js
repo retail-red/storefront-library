@@ -50,10 +50,10 @@ class Instance {
    * @param {Object} config Config
    */
   updateConfig(config) {
-    if (this.app) {
-      this.app.updateConfig(config);
-    }
     this.config = createConfig(config, this.config);
+    if (this.app) {
+      this.app.updateConfig(this.config);
+    }
     this._handleConfigUpdate();
   }
 

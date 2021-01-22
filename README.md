@@ -43,7 +43,7 @@ All of the rendered UI are using CSS classes that can be used to override **any*
 ```
 For colors we provided CSS variables that can be overridden once for all usages. Please stick to RGB style color definitions. These allow automatically generated sub colors.
 ```css
-#rr-omni #rr-omni-custom {
+#rr-omni #rr-omni-custom, #rr-omni-reserve-button {
   /* Primary color used for form elements and buttons */
   --color-primary: 0, 0, 0;
   /* Color used for links */

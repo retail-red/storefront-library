@@ -2,10 +2,12 @@
   window.onload = function () {
     // Initialize our script.
     const retailred = window.RetailRedEnablement.create({
-      apiKey: "ARotRbXpalxVcmMNz9Yd",
+      apiKey: '8v4SLSyxR7xq0BSkbOSscO1y',
+      //apiKey: "ARotRbXpalxVcmMNz9Yd",
       //apiKey: "6q4YRH6fauJfsDdryQYeYZujAYX6k9o",
-      apiStage: 'development',
-    //  locationCode: '1',
+      //apiStage: 'development',
+      apiStage: 'staging',
+      //locationCode: '1',
       unitSystem: 'metric',
       localization: {
         countries: ['de', 'us'],
@@ -46,11 +48,17 @@
           }
         ],
         quantity: 2,
-        imageUrl: 'https://loremflickr.com/320/240/cute_cat',
+        imageUrl: 'https://picsum.photos/id/237/580/435',
         price: 34.0,
         currencyCode: 'USD',
       },
     });
+
+    setTimeout(() => {
+      retailred.updateConfig({
+        product: { quantity: 1 },
+      });
+    }, 2000);
 
     // Whenever application is ready render the reserve button
     retailred.renderReserveButton('#omni-dropin');

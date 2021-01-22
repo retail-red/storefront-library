@@ -1,10 +1,10 @@
 /* Configs */
-const url = 'https://cdn.retail.red/omni-enablement/retailred-quickreserve-0.1.1-6.js';
-const target = '#product-offer > div.col.product-info.col-lg-6.col-12 > div > div.product-offer > div > div.col.col-12 > div';
+// const url = 'https://cdn.retail.red/omni-enablement/retailred-quickreserve-0.1.1-6.js';
+const url = 'http://localhost:8080/main.js';
+const target = '#add-to-cart > div';
 const config = {
-  apiKey: 'ARotRbXpalxVcmMNz9Yd',
-  apiStage: 'development',
-  //  locationCode: '1',
+  apiKey: '8v4SLSyxR7xq0BSkbOSscO1y',
+  apiStage: 'staging',
   unitSystem: 'metric',
   localization: {
     countries: ['de', 'us'],
@@ -29,7 +29,7 @@ const config = {
   },
   product: {
     code: '24-MB01',
-    name: 'My Awesome product',
+    name: 'retail.red PRODUKT',
     options: [
       {
         name: 'Color',
@@ -40,17 +40,17 @@ const config = {
         value: 'M',
       },
     ],
-    quantity: 2,
-    imageUrl: 'https://loremflickr.com/320/240/cute_cat',
+    quantity: 1,
+    imageUrl: 'https://picsum.photos/id/237/580/435',
     price: 34.0,
-    currencyCode: 'USD',
+    currencyCode: 'EUR',
   },
 };
 const css = `
-      #rr-omni #rr-omni-custom {
-        --color-primary: 1, 121, 200;
-      }
-    `;
+  #rr-omni #rr-omni-custom, #rr-omni-reserve-button {
+    --color-primary: 199, 0, 57;
+  }
+`;
 
 /* DO NOT CHANGE */
 const interval = setInterval(() => {
