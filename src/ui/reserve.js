@@ -67,22 +67,30 @@ class ReserveController extends Controller {
 
     // Handle validation.
     const validationRules = { ...validation, ...(customPickupPerson ? pickupValidation : {}) };
-    const isValid = Object.entries(validationRules).every(([property, rules]) => {
+    let isValid = true;
+    let firstError = null;
+    Object.entries(validationRules).forEach(([property, rules]) => {
       const [, elementId] = Object.entries(formData).find(([name]) => name === property);
       const elementError = document.querySelector(`.${elementId}-error`);
 
-      return Object.entries(rules).every(([ruleName, ruleEval]) => {
+      Object.entries(rules).forEach(([ruleName, ruleEval]) => {
         const outcome = ruleEval(submitData[property]);
         if (!outcome) {
           elementError.classList.remove('rr-hidden');
           elementError.innerText = t(`errors.validation.${ruleName}`);
-          return false;
+          isValid = false;
+          if (!firstError) {
+            firstError = elementId;
+          }
+          return;
         }
         elementError.classList.add('rr-hidden');
-        return outcome;
       });
     });
-    if (!isValid) return;
+    if (!isValid) {
+      document.querySelector(`#${firstError}`).scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
 
     // Build basic order.
     const orderPrice = Math.round(product.price * product.quantity * 100) / 100;

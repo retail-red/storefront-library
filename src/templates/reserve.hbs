@@ -60,12 +60,12 @@
       <div class="rr-section">
         <span>{{t "reserve.contactInfo" }}</span>
         <div class="rr-form-row">
-          {{> textField id="rr-reserve-first-name" label="reserve.firstName" }}
-          {{> textField id="rr-reserve-last-name" label="reserve.lastName" }}
+          {{> textField id="rr-reserve-first-name" label="reserve.firstName" autocomplete="given-name" }}
+          {{> textField id="rr-reserve-last-name" label="reserve.lastName" autocomplete="family-name" }}
         </div>
         <div class="rr-form-row">
-          {{> textField id="rr-reserve-phone-number" label="reserve.phoneNumber" }}
-          {{> textField id="rr-reserve-email" label="reserve.email" }}
+          {{> textField id="rr-reserve-phone-number" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
+          {{> textField id="rr-reserve-email" label="reserve.email" type="email" autocomplete="email" }}
         </div>
       </div>
       <div class="rr-section">
@@ -82,12 +82,12 @@
       <div class="rr-section rr-pickup-contact rr-hidden">
         <span>{{t "reserve.pickupInfo" }}</span>
         <div class="rr-form-row">
-          {{> textField id="rr-reserve-pickup-first-name" label="reserve.firstName" }}
-          {{> textField id="rr-reserve-pickup-last-name" label="reserve.lastName" }}
+          {{> textField id="rr-reserve-pickup-first-name" label="reserve.firstName" autocomplete="given-name" }}
+          {{> textField id="rr-reserve-pickup-last-name" label="reserve.lastName" autocomplete="family-name" }}
         </div>
         <div class="rr-form-row">
-          {{> textField id="rr-reserve-pickup-phone-number" label="reserve.phoneNumber" }}
-          {{> textField id="rr-reserve-pickup-email" label="reserve.email" }}
+          {{> textField id="rr-reserve-pickup-phone-number" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
+          {{> textField id="rr-reserve-pickup-email" label="reserve.email" type="email" autocomplete="email" }}
         </div>
       </div>
       <div class="rr-section rr-legal">

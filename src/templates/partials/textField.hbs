@@ -1,6 +1,17 @@
 <div class="rr-field">
   <div class="rr-text-field">
-    <input id={{id}} placeholder=" " type="text" >
+    <input 
+      id={{id}}
+      placeholder=" "
+      {{#if type}}
+      type="{{type}}"
+      {{else}}
+      type="text"
+      {{/if}}
+      {{#if autocomplete}} 
+      autocomplete="{{autocomplete}}"
+      {{/if}}
+    />
     <label>{{t label}}</label>
   </div>
   <span class="rr-field-error rr-hidden {{id}}-error"></span>
