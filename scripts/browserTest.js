@@ -1,5 +1,5 @@
 /* Configs */
-const url = 'https://cdn.retail.red/omni-enablement/retailred-quickreserve-0.1.1-9.js';
+const url = 'https://cdn.retail.red/omni-enablement/retailred-quickreserve-0.1.1-12.js';
 // const url = 'http://localhost:8080/main.js';
 const target = '#add-to-cart > div';
 const config = {

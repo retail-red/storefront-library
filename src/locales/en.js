@@ -66,11 +66,11 @@ export default {
     email: 'Email Address',
     submit: 'Submit Reservation',
     terms: {
-      text: 'I have read and accepted the {{child}}.',
+      text: 'I have read and accepted the {{child}}',
       link: 'terms and conditions.',
     },
     privacy: {
-      text: 'I have read and accepted the {{child}}.',
+      text: 'I have read and accepted the {{child}}',
       link: 'privacy policy.',
     },
   },
