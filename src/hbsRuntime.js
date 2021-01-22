@@ -40,3 +40,4 @@ handlebars.registerPartial('link', linkPartial);
 handlebars.registerPartial('radio', radioPartial);
 handlebars.registerPartial('checkbox', checkboxPartial);
 handlebars.registerPartial('skeleton', skeletonPartial);
+handlebars.registerPartial('tt', (key, { data }) => t(key, { child: data['partial-block'](data.root) }));

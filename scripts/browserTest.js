@@ -7,14 +7,12 @@ const config = {
   apiStage: 'staging',
   unitSystem: 'metric',
   localization: {
-    countries: ['de', 'us'],
-    de: { 'reserve.footerText': 'Hello World' },
-    en: { 'reserve.footerText': 'Hello World' },
+    countries: ['de'],
   },
   inventory: {
     hideNumber: false,
-    showExactUntil: 80,
-    showLowUntil: 65,
+    showExactUntil: 10,
+    showLowUntil: 5,
   },
   legal: {
     terms: 'https://google.de',
@@ -28,7 +26,7 @@ const config = {
     emailAddress: 'rene.eichhorn@shopgate.com',
   },
   product: {
-    code: '24-MB01',
+    code: 'acai-bowl',
     name: 'retail.red PRODUKT',
     options: [
       {

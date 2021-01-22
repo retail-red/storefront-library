@@ -93,14 +93,16 @@
       <div class="rr-section rr-legal">
         {{#if legal.terms }}
           {{#> checkbox id="rr-reserve-terms" }}
-            {{t "reserve.terms.text" }}
-            {{> link href=legal.terms label="reserve.terms.link" target="_blank" }}
+            {{#> tt "reserve.terms.text" }}
+              {{> link href=legal.terms label="reserve.terms.link" target="_blank" }}
+            {{/tt}}
           {{/checkbox}}
         {{/if}}
         {{#if legal.privacy }}
           {{#> checkbox id="rr-reserve-privacy" }}
-            {{t "reserve.privacy.text" }}
-            {{> link href=legal.privacy label="reserve.privacy.link" target="_blank" }}
+            {{#> tt "reserve.privacy.text" }}
+              {{> link href=legal.privacy label="reserve.privacy.link" target="_blank" }}
+            {{/tt}}
           {{/checkbox}}
         {{/if}}
         {{#if (hasTranslation "reserve.footerText") }}

@@ -50,7 +50,7 @@ export default {
     },
   },
   reserveButton: {
-    title: 'Reserve in Store',
+    title: 'Reserve and Pickup',
   },
   reserve: {
     title: 'Submit Reservation',
@@ -66,11 +66,11 @@ export default {
     email: 'Email Address',
     submit: 'Submit Reservation',
     terms: {
-      text: 'I have read and accepted the',
+      text: 'I have read and accepted the {{child}}.',
       link: 'terms and conditions.',
     },
     privacy: {
-      text: 'I have read and accepted the',
+      text: 'I have read and accepted the {{child}}.',
       link: 'privacy policy.',
     },
   },
