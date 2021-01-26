@@ -4,8 +4,8 @@ import { countryListTransform } from './util';
 export default {
   countries: countryListTransform(countriesList),
   format: {
-    decimalSymbol: '.',
-    groupSymbol: ',',
+    decimalSymbol: ',',
+    groupSymbol: '.',
   },
   date: {
     mon: 'Montag',
