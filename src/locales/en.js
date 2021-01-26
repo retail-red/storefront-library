@@ -56,10 +56,10 @@ export default {
     title: 'Submit Reservation',
     changeStore: 'Change Store',
     contactInfo: 'Reservation Contact Info',
-    pickupQuestion: 'Who will pickup this reservation?',
+    pickupQuestion: 'Who will pick up this reservation?',
     me: 'Me',
     someoneElse: 'Someone else',
-    pickupInfo: 'Who will pickup this reservation?',
+    pickupInfo: 'Who will pick up this reservation?',
     firstName: 'First Name',
     lastName: 'Last Name',
     phoneNumber: 'Phone Number',
@@ -77,7 +77,7 @@ export default {
   success: {
     title: 'Reservation Confirmation',
     headline: 'Thank you for your reservation',
-    text: 'We will send you a email/text message shortly when your reservation is ready to pickup.',
+    text: 'We will send you a email/text message shortly when your reservation is ready to pick up.',
     reservationNumber: 'Your reservation number is:',
     location: {
       address: 'Address',
