@@ -1,4 +1,4 @@
-import countriesList from 'i18n-iso-countries/langs/en.json';
+import countriesList from 'i18n-iso-countries/langs/de.json';
 import { countryListTransform } from './util';
 
 export default {
