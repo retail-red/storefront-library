@@ -1,4 +1,4 @@
-# Retail Red JS
+# retail.red Storefront Library
 
 ## Quick Integration
 
@@ -10,7 +10,7 @@ The next step is to execute the retail.red script with your own config. This nee
 ```html
 <script type="text/javascript">
   window.addEventListener('load', function () {
-    var retailred = window.RetailRedEnablement.create({
+    var retailred = window.RetailRedStorefront.create({
       apiKey: "your_api_key",
       product: {
         code: 'TEST-01',
@@ -205,7 +205,7 @@ retailred.updateConfig({
 
 If your template needs further helpers you can also add those:
 ```js
-window.RetailRedEnablement.registerTemplateHelper('my-helper', function (name) { return 'Hello ' + name });
+window.RetailRedStorefront.registerTemplateHelper('my-helper', function (name) { return 'Hello ' + name });
 ```
 and use them like any other helper
 ```html
@@ -219,7 +219,7 @@ and use them like any other helper
 Additionally to the enablement UI script we also provide a client sdk for the storefront api. The methods are all `async` and therefore return a `Promise` that holds the result.
 
 ```js
-var sdk = window.RetailRedClientSdk('my-api-key');
+var sdk = new window.RetailRedStorefrontSdk('my-api-key');
 sdk.getLocations({ countryCode: 'de', postalCode: '35510' }).then(function(result) {
   console.log("Result:", result);
 });
@@ -265,28 +265,3 @@ This wil by default host the test site at http://localhost:8080
 ## License
 This product is available under the Apache License, Version 2.0.
 See the LICENSE.md file for more information.
-
-
-## Distribution
-
-Gitlab CI publishes a new version to a publicly available S3 bucket on dev and production behind a Cloudfront.
-
-### Development
-
-Versioned:
-
-`https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/<version>/index.html`
-
-`https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/<version>/main.js`
-
-Latest:
-
-https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html
-
-https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/main.js
-
-
-### Production
-
-https://cdn.retail.red/omni-enablement/retailred-quickreserve-1.0.0.js
-

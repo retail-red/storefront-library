@@ -7,8 +7,8 @@ import './hbsRuntime';
 
 window.__RrOmniCallbacks = [];
 
-export const OmniSdk = Sdk;
-export const OmniEnablement = {
+export const StorefrontSdk = Sdk;
+export const Storefront = {
   /**
    * Creates a new enablement instance
    * @param {Object} config  Configuration
@@ -28,5 +28,5 @@ export const OmniEnablement = {
   registerTemplateHelper(name, helper) { handlebars.registerHelper(name, helper); },
 };
 
-window.RetailRedClientSdk = OmniSdk;
-window.RetailRedEnablement = OmniEnablement;
+window.RetailRedStorefrontSdk = StorefrontSdk;
+window.RetailRedStorefront = Storefront;
