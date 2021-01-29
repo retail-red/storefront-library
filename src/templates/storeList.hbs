@@ -115,8 +115,8 @@
           <div class="rr-collapsing rr-closed" data-code={{code}}>
             <div>
               <p class="rr-bold">{{t "storeList.location.address" }}</p>
-              <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
-              <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
+              <p>{{t "addresses.line1" street=primaryAddress.street street2=primaryAddress.street2}}</p>
+              <p>{{t "addresses.line2" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
               {{> link
                   class="rr-directions"
                   label="storeList.location.directions"
@@ -147,7 +147,7 @@
 </div>
 
 <script>
-  RetailRedEnablement.onLoad(function (controller) {
+  RetailRedStorefront.onLoad(function (controller) {
     {{!-- Updates countries --}}
     var countryList = document.querySelector('#rr-store-list-country');
     if (countryList) {

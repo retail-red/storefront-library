@@ -34,8 +34,9 @@
     <div class="rr-store-detail">
       <div>
         <p class="rr-bold">{{t "storeList.location.address" }}</p>
-        <p>{{location.primaryAddress.street}} {{location.primaryAddress.street2}}</p>
-        <p>{{location.primaryAddress.city}}, {{location.primaryAddress.region}} {{location.primaryAddress.postalCode}}</p>
+
+        <p>{{t "addresses.line1" street=location.primaryAddress.street street2=location.primaryAddress.street2}}</p>
+        <p>{{t "addresses.line2" city=location.primaryAddress.city region=location.primaryAddress.region postalCode=location.primaryAddress.postalCode}}</p>
         {{> link
             class="rr-directions"
             label="storeList.location.directions"
@@ -117,7 +118,7 @@
 </div>
 
 <script>
-  RetailRedEnablement.onLoad(function (controller) {
+  RetailRedStorefront.onLoad(function (controller) {
     {{!-- Prefill data --}}
     controller.prefillFormData();
     {{!-- Handle store change --}}

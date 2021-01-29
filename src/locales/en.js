@@ -16,6 +16,10 @@ export default {
     sat: 'Saturday',
     sun: 'Sunday',
   },
+  addresses: {
+    line1: '{{street}} {{street2}}',
+    line2: '{{city}}, {{region}} {{postalCode}}',
+  },
   errors: {
     unknown: 'Failed to submit reservation',
     validation: {

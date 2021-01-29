@@ -19,6 +19,9 @@ class App {
     // Store history index
     if (action === 'PUSH') {
       this.historyIndex += 1;
+    } else if (action === 'POP' && this.historyIndex <= 1) {
+      this.destroy();
+      return;
     } else if (action === 'POP') {
       this.historyIndex -= 1;
     }
@@ -35,7 +38,7 @@ class App {
 
     // Create the routes controller if not available yet.
     const { controllerId, ...routeState } = state || {};
-    if (!controllerId) {
+    if (typeof controllerId === 'undefined') {
       const RouteController = targetRoute;
       const newController = new RouteController(
         RouteController.routeName,
@@ -181,7 +184,9 @@ class App {
 
   resetTo(name, state) {
     this.destroyWhenEmpty = false;
-    this.history.go(-this.historyIndex);
+    if (this.historyIndex > 0) {
+      this.history.go(-this.historyIndex);
+    }
     setTimeout(() => {
       this.historyIndex = 0;
       this.history.push(`/${name}`, state);

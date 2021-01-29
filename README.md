@@ -4,7 +4,7 @@
 
 To include our scripts and all its dependencies you need to add the following snippet to your shops core template. It's recommended to place it next to your other JavaScript dependencies.
 ```html
-<script type='text/javascript' src='https://cdn.retail.red/v1/enablement.js'></script>
+<script type='text/javascript' src='https://cdn.retail.red/omni/retailred-storefront-library-v1.js'></script>
 ```
 The next step is to execute the retail.red script with your own config. This needs to be executed after the product page has been completely rendered. For static pages its enough to put the following snippet at the end of your HTML page. If you are unsure when the product page is completely rendered you can use the browser `load` event.
 ```html
