@@ -18,10 +18,10 @@ export default {
   },
   addresses: {
     line1: '{{street}} {{street2}}',
-    line2: '{{postalCode}} {{city}}, {{region}}',
+    line2: '{{postalCode}} {{city}}',
   },
   errors: {
-    unknown: 'Reservierung konnte nicht aufgegebn werden.',
+    unknown: 'Reservierung konnte nicht aufgegeben werden.',
     validation: {
       isRequired: 'Feld is erforderlich.',
       isEmail: 'Feld muss eine korrekte E-Mail-Adresse sein.',

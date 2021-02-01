@@ -31,7 +31,7 @@ As a last step you need to define the place where the reservation button should 
 ```
 
 ### Example Integration
-See `src/dev/index.html` for a basic integration example.
+See `src/dev/index.html` for a basic integration example or visit the [demo page.](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
 
 ### Custom Styling
 All of the rendered UI are using CSS classes that can be used to override **any** styling like colors, spacings and fonts. To avoid the need of `!important` statements you can simply override all of the styling using the prefix `"#rr-omni #rr-omni-custom"`. This will ensure that your custom styling outweighs the defaults. For a button for example simply use
