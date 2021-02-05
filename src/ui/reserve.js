@@ -162,7 +162,7 @@ class ReserveController extends Controller {
         alert(hasTranslation() ? t(specific) : t('errors.unknown'));
         return;
       }
-      this.app.resetTo('success', { location, reservationNumber: orderNumbers[0] });
+      this.app.pushEndRoute('success', { location, reservationNumber: orderNumbers[0] });
     } catch (ex) {
       // eslint-disable-next-line no-alert
       alert(t('errors.unknown'));

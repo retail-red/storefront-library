@@ -36,7 +36,7 @@
  <div class=product-img-box>
  <div class=product-img-box>
  <div class=product-img-box>
- <img class=main_image id=main_image rel=image_src width=580 src="https://picsum.photos/id/237/580/435" alt=base> 
+ <img class=main_image id=main_image rel=image_src width=580 src="https://www.thesprucepets.com/thmb/MvGbvyjlmorL0z1ZiiS0C2ZsgZE=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/cutelizard-5af06fe6c673350037e7be98.JPG" alt=base> 
  <div id=media_overlay_bg class="product_media_overlay_bg hidden sf-hidden"></div>
  <div id=media_overlay class="product_media_overlay hidden sf-hidden">
  
@@ -130,8 +130,86 @@
  </div>
  </div>
 </div>
+
+<style>
+  .demos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 64px;
+  }
+  .demo {
+    width: 250px;
+    padding: 16px 8px;
+    border-radius: 4px;
+    border: 1px #eaeaea solid;
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+  }
+  .demo h4 {
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .demo span {
+    color: #666;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .demos .wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: -8px;
+  }
+</style>
+
+<div class="demos">
+  <h3>Demos</h3>
+  <div class="wrapper">
+    <a href="index.html" class="demo">
+      <h4>Live Inventory (Default Variant)</h4>
+      <span>Showcases the live inventory function on a pdp</span>
+      <button>Open</button>
+    </a>
+    <a href="index.html?variant=list" class="demo">
+      <h4>Live Inventory (List Variant)</h4>
+      <span>Showcases the live inventory function. This variant can be used for shops with a low amount of locations</span>
+      <button>Open</button>
+    </a>
+    <a href="quick.html" class="demo">
+      <h4>Quick Button</h4>
+      <span>Showcases the integration of a simple reservation button.</span>
+      <button>Open</button>
+    </a>
+  </div>
+</div>
+
+<div class="demos">
+  <h3>Helper</h3>
+  <div style="display: flex; flex-direction: row;">
+    <button id="reset">Reset</button>
+    <button style="margin-left: 8px;" id="setUnavailable">Set to Unavailable Store</button>
+  </div>
+  <script>
+    document.querySelector('#reset').addEventListener('click', () => {
+      window.localStorage.removeItem('rr-config-v1');
+      window.location.reload();
+    });
+    document.querySelector('#setUnavailable').addEventListener('click', () => {
+      window.localStorage.setItem('rr-config-v1', JSON.stringify({ locationCode: 'rr-frankfurt' }));
+      window.location.reload();
+    });
+  </script>
+</div>
  
- <div class=dbglong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis posuere eros, at facilisis elit ultrices nec. Vivamus maximus tristique nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum et pellentesque nibh. Morbi aliquet varius venenatis. Nullam cursus scelerisque elit. Donec fringilla enim at mi convallis commodo.
+ <div class=dbglong>
+    <h3>Description</h3>
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis posuere eros, at facilisis elit ultrices nec. Vivamus maximus tristique nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum et pellentesque nibh. Morbi aliquet varius venenatis. Nullam cursus scelerisque elit. Donec fringilla enim at mi convallis commodo.
  </div>
  
  <div class=dbglong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis posuere eros, at facilisis elit ultrices nec. Vivamus maximus tristique nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum et pellentesque nibh. Morbi aliquet varius venenatis. Nullam cursus scelerisque elit. Donec fringilla enim at mi convallis commodo.

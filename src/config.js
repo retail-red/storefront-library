@@ -1,6 +1,7 @@
 import handlebars from 'handlebars';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
+import set from 'lodash/set';
 import { getBrowserLanguage } from './util/browser';
 
 const requiredProperties = [
@@ -14,11 +15,25 @@ const requiredRenderProperties = [
   'product.price',
   'product.currencyCode',
 ];
+const storedProperties = [
+  'locationCode',
+];
 
-const defaultConfig = {
+// Load default config from location code.
+const LOCAL_STORAGE_KEY = 'rr-config-v1';
+let storedConfig = {};
+try {
+  const storedConfigString = window.localStorage.getItem(LOCAL_STORAGE_KEY) || '{}';
+  storedConfig = JSON.parse(storedConfigString);
+} catch (err) {
+  // Ignore local storage access issues
+}
+
+const defaultConfig = merge({
   apiStage: 'production',
   locationCode: null,
   unitSystem: 'metric',
+  browserHistory: true,
   customer: {
     code: null,
     firstName: '',
@@ -43,7 +58,7 @@ const defaultConfig = {
     customVariables: {},
     customTemplates: {},
   },
-};
+}, storedConfig);
 
 /**
  * Creates a new config object with merged defaults and validation.
@@ -67,6 +82,17 @@ export const createConfig = (config = {}, previous = {}) => {
       const compiled = handlebars.compile(template);
       merged.templates.customTemplates[name] = compiled;
     });
+
+  // Store config in local storage.
+  const toBeStored = {};
+  storedProperties.forEach((property) => {
+    set(toBeStored, property, get(merged, property));
+  });
+  try {
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toBeStored));
+  } catch (err) {
+    // Ignore local storage access issues
+  }
 
   return merged;
 };

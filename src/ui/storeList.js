@@ -1,18 +1,18 @@
 import Controller from './controller';
+import Cache, { locationInventoryKey } from '../cache';
 import { t } from '../locales';
 
 class StoreListController extends Controller {
   constructor(...params) {
     super(...params);
-    this.postalCode = null;
-    [this.countryCode] = this.config.localization.countries;
+    this.state.postalCode = null;
   }
 
   getTitle() {
     return t('storeList.title');
   }
 
-  async load({ locationCode = null }) {
+  async load({ locationCode = null, options = {}, select = false }) {
     // Product data.
     const { product, inventory } = this.config;
 
@@ -23,19 +23,25 @@ class StoreListController extends Controller {
     }));
     this.countryCode = countries[0].code;
 
+    // Prefill search
+    if (options.postalCode) {
+      this.state.postalCode = options.postalCode;
+    }
+
     // Receive all locations for initial loading.
     const locations = await this._receiveLocations();
 
     // Initiate reservation at given location.
     const location = locations.find((l) => l.code === locationCode);
-    if (location) {
+    if (location && !select) {
       requestAnimationFrame(() => {
-        this.initiateReservation(locationCode);
+        this.selectLocation(locationCode);
       });
     }
 
     return {
-      skipRendering: !!location,
+      skipRendering: !!location && !select,
+      select,
       product,
       locations,
       countries,
@@ -51,9 +57,9 @@ class StoreListController extends Controller {
       // Fetch location data
       const { locations } = await this.sdk.getLocations({
         productCode: this.config.product.code,
-        postalCode: this.postalCode,
+        postalCode: this.state.postalCode,
         countryCode: this.countryCode,
-        ...(this.postalCode || this.geolocation ? ({
+        ...(this.state.postalCode || this.geolocation ? ({
           unitSystem,
         }) : {}),
         ...(this.geolocation ? ({
@@ -101,7 +107,7 @@ class StoreListController extends Controller {
 
   setPostalCode(code) {
     this.geolocation = null;
-    this.postalCode = code;
+    this.state.postalCode = code;
     this._updateStoreList();
   }
 
@@ -115,7 +121,7 @@ class StoreListController extends Controller {
     }
 
     // Reset existing filters.
-    this.postalCode = null;
+    this.state.postalCode = null;
 
     // Ask for the current location and update store list.
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -124,8 +130,20 @@ class StoreListController extends Controller {
     });
   }
 
-  initiateReservation(locationCode) {
+  selectLocation(locationCode) {
+    // Find location data and emit public event.
     const location = this.state.locations.find((l) => l.code === locationCode);
+    this.app.publicInterface._triggerEvent('locationChanged', { location });
+
+    // In selection mode we simply update the current config.
+    if (this.state.select) {
+      Cache.set(locationInventoryKey(locationCode), location);
+      this.app.publicInterface.updateConfig({ locationCode });
+      this.app.destroy();
+      return;
+    }
+
+    // Navigate to reservation form.
     this.app.pushRoute('reserve', {
       product: this.state.product,
       location,

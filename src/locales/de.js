@@ -35,6 +35,7 @@ export default {
     uncollapse: 'Mehr Details',
     collapse: 'Weniger Details',
     reserve: 'Reservieren',
+    select: 'Wählen',
     comingSoon: 'Bald Verfügbar',
     location: {
       address: 'Adresse',
@@ -88,6 +89,22 @@ export default {
       phone: 'Tel.Nr.',
       storeHours: 'Öffnungszeiten',
       directions: 'Wegbeschreibung',
+    },
+  },
+  liveInventory: {
+    searchPostalCode: 'Verfügbarkeit bei Filialen in der Nähe anzeigen.',
+    searchDirect: 'Verfügbarkeit in Ihrer Filiale anzeigen.',
+    postalCode: 'PLZ',
+    reserveOther: 'Andere Filiale prüfen',
+    find: 'Filiale finden',
+    yourStore: 'Ihre Filiale:',
+    change: 'ändern',
+    select: 'Ihre Filiale wählen',
+    pleaseSelect: 'Bitte wählen Sie Ihre Filiale',
+    cancel: 'abbrechen',
+    list: {
+      unavailable: '(Nicht Verfügbar)',
+      comingSoon: '(Bald Verfügbar)',
     },
   },
 };

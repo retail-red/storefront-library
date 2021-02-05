@@ -59,8 +59,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: 'head',
-      filename: 'custom',
-      template: './src/dev/custom.html',
+      filename: 'quick.html',
+      template: './src/dev/quick.html',
       templateParameters: {
         base: baseDevTemplate,
       },

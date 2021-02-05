@@ -18,6 +18,7 @@ handlebars.registerHelper('concat', (...args) => {
 });
 // eslint-disable-next-line no-console
 handlebars.registerHelper('debug', (a) => console.log(a));
+handlebars.registerHelper('eq', (a, b) => a === b);
 handlebars.registerHelper('or', (a, b) => a || b);
 handlebars.registerHelper('not', (a) => !a);
 handlebars.registerHelper('isNull', (a) => a === null);

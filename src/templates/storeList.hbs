@@ -30,7 +30,12 @@
             {{/each}}
           {{/select}}
         {{/if}}
-        {{> textField id="rr-store-list-search-input" label="storeList.search.label" autocomplete="postal-code" }}
+        {{> textField 
+          id="rr-store-list-search-input" 
+          label="storeList.search.label" 
+          autocomplete="postal-code" 
+          value=postalCode
+        }}
       </div>
       <div class="rr-store-list-search-buttons">
         {{> button id="rr-store-list-search" label="storeList.search.buttonLabel" }}
@@ -105,7 +110,7 @@
               {{else}}
                 {{> button
                     class="rr-store-select"
-                    label="storeList.reserve"
+                    label=(select ../select "storeList.select" "storeList.reserve")
                     data=(object code=code)
                     disabled=(not inventory.isAvailable)
                 }}
@@ -180,7 +185,7 @@
     document.querySelector('.rr-store-list').addEventListener('click', function (e) {
       e.stopImmediatePropagation();
       if (e.target.classList.contains('rr-store-select')) {
-        controller.initiateReservation(e.target.dataset.code);
+        controller.selectLocation(e.target.dataset.code);
       } else if (e.target.classList.contains('rr-detail-collapse')) {
         e.preventDefault();
         e.target.classList.toggle('rr-closed');

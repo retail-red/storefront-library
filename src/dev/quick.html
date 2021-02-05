@@ -2,20 +2,14 @@
   window.onload = function () {
     // Initialize our script.
     const retailred = window.RetailRedStorefront.create({
-      apiKey: "8v4SLSyxR7xq0BSkbOSscO1y",
-      apiStage: 'staging',
+      apiKey: "ARotRbXpalxVcmMNz9Yd",
+      apiStage: 'development',
       //locationCode: '1',
       unitSystem: 'metric',
       localization: {
         countries: ['de', 'us'],
-        de: { 
-          'reserve.footerText': 'Custom optional footer text.',
-          'liveInventory.footerText': 'Custom optional footer text.',
-        },
-        en: { 
-          'reserve.footerText': 'Custom optional footer text.',
-          'liveInventory.footerText': 'Custom optional footer text.',
-        },
+        de: { 'reserve.footerText': 'Hello World' },
+        en: { 'reserve.footerText': 'Hello World' },
       },
       inventory: {
         hideNumber: false,
@@ -38,8 +32,7 @@
     // In a later time update with product data.
     retailred.updateConfig({
       product: {
-        //code: '24-MB01',
-        code: 'acai-bowl',
+        code: '24-MB01',
         name: 'My Awesome product',
         options: [
           {
@@ -65,14 +58,7 @@
     }, 2000);
 
     // Whenever application is ready render the reserve button
-    const urlParams = new URLSearchParams(window.location.search);
-    const variant = urlParams.get('variant') || 'modal';
-    retailred.renderLiveInventory('#omni-dropin', { variant });
-
-    // Attach event listener
-    retailred.addEventListener('locationChanged', ({ location }) => {
-      console.log(`[DEBUG] Location was changed to '${location.name}'`);
-    });
+    retailred.renderReserveButton('#omni-dropin');
   }
 </script>
 

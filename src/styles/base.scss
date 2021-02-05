@@ -1,4 +1,4 @@
-#rr-omni.rr-omni-int {
+#rr-omni.rr-omni-int, #rr-inventory {
   * {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   }
@@ -19,6 +19,8 @@
   @import "success";
   @import "loading";
 }
+
+@import "liveInventory";
 
 .rr-modal-backdrop-body-fix {
   overflow: hidden;

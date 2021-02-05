@@ -1,0 +1,110 @@
+#rr-inventory {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+    padding: 12px 16px;
+
+    .rr-inventory-head {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        svg {
+            width: 42px;
+            height: 42px;
+        }
+        span {
+            margin-left: 16px;
+            font-size: 14px;
+        }
+    }
+
+    .rr-inventory-postalsearch {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .rr-text-field {
+            margin-right: 4px;
+            input {
+                width: 100%;
+            }
+        }
+        .rr-button {
+            margin-top: -3px;
+            font-size: 12px;
+            height: 41px;
+        }
+    }
+
+    .rr-inventory-cancel {
+        text-align: left;
+        margin-top: 12px;
+    }
+
+    .rr-inventory-select {
+        .rr-placeholder {
+            margin-top: 12px;
+        }
+    }
+
+    .rr-select-field {
+        margin-top:  16px;
+    }
+
+    #rr-inventory-select {
+        width: 100%;
+    }
+
+    .rr-inventory-store {
+        font-weight: bold;
+        line-height: 2;
+    }
+
+    .rr-inventory-name {
+        display: flex;
+        flex-direction: row;
+        line-height: 1.6;
+        span {
+            flex: 1;
+        }
+    }
+
+    .rr-placeholder:nth-child(2) {
+        margin-bottom: 4px;
+    }
+    .rr-placeholder:nth-child(3) {
+        margin-top: 4px;
+    }
+
+    .rr-placeholder {
+        margin-bottom: 4px;
+    }
+
+    #rr-inventory-reserve {
+        margin-top: 8px;
+    }
+
+    span {
+        text-align: left;
+    }
+
+    .rr-footer-text {
+        margin-bottom: 4px;
+    }
+
+    .rr-inventory-availability {
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 8px;
+        .rr-available-positive {
+            color: rgb(var(--color-state-success));
+        }
+        .rr-available-negative {
+            color: rgb(var(--color-state-alarm));
+        }
+        .rr-available-neutral {
+            color: rgb(var(--color-state-warning));
+        }
+    }
+}

@@ -1,0 +1,184 @@
+<div id="rr-inventory-custom">
+    <div id="rr-inventory">
+        {{#if (or (not locationCode) selection) }}
+            {{#unless selection }}
+                <div class="rr-inventory-head">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/></svg>
+                    <span>
+                            {{t (select (eq variant "modal") "liveInventory.searchPostalCode" "liveInventory.searchDirect") }}
+                    </span>
+                </div>
+            {{else}}
+                <span class="rr-inventory-store">
+                    {{t "liveInventory.yourStore" }}
+                </span>
+            {{/unless}}
+            {{#if (eq variant "modal") }}
+                {{!-- Default search by zip --}}
+                <div class="rr-inventory-postalsearch">
+                    {{> textField id="rr-inventory-postalcode" label="liveInventory.postalCode" autocomplete="postal-code" }}
+                    {{> button id="rr-inventory-find" label="liveInventory.find" }}
+                </div>
+            {{else}}
+                <div class="rr-inventory-select">
+                    {{!-- Search by list --}}
+                    {{#unless locations }}
+                        {{> skeleton height="32px" width="100%" }}
+                    {{else}}
+                        {{#> select id="rr-inventory-select" label="liveInventory.select" }}
+                            <option value="">{{t "liveInventory.pleaseSelect" }}</option>
+                            {{#each locations}}
+                                <option 
+                                    value="{{code}}"
+                                    {{#if (or (not inventory.isAvailable) isComingSoon) }}
+                                        disabled="disabled"
+                                    {{/if}}
+                                >
+                                    {{name}}
+                                    {{#unless inventory.isAvailable }}
+                                        &nbsp;{{t "liveInventory.list.unavailable"}}
+                                    {{/unless}}
+                                    {{#if isComingSoon}}
+                                        &nbsp;{{t "liveInventory.list.comingSoon"}}
+                                    {{/if}}
+                                </option>
+                            {{/each}}
+                        {{/select}}
+                    {{/unless}}
+                </div>
+            {{/if}}
+            {{#if selection }}
+                {{> link
+                    class="rr-inventory-cancel"
+                    label="liveInventory.cancel"
+                    href="#"
+                }}
+            {{/if}}
+        {{else}}
+            <span class="rr-inventory-store">
+                {{t "liveInventory.yourStore" }}
+            </span>
+            {{#if location }}
+                {{!-- Location already configured --}}
+                <div class="rr-inventory-name">
+                    <span>
+                        {{location.name}}
+                    </span>
+                    {{> link
+                        class="rr-inventory-link"
+                        label="liveInventory.change"
+                        href="#"
+                    }}
+                </div>
+                <div class="rr-inventory-availability">
+                    {{!-- Product not available --}}
+                    {{#unless inventory.isAvailable }}
+                        <span class="rr-available-negative">
+                        {{t "storeList.inventory.unavailable"}}
+                        </span>
+                    {{else}}
+                        {{!-- Only show if product is available or not --}}
+                        {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
+                        <span class="rr-available-positive">
+                            {{t "storeList.inventory.available"}}
+                        </span>
+                        {{else}}
+                        {{!-- Rough numbers (10+) --}}
+                        {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
+                            <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                            {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
+                            </span>
+                        {{else}}
+                            {{!-- Detailed numbers --}}
+                            <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                            {{t "storeList.inventory.exact" x=inventory.visible }}
+                            </span>
+                        {{/if}}
+                        {{/if}}
+                {{/unless}}
+                </div>
+                {{#if (hasTranslation "liveInventory.footerText") }}
+                    <span class="rr-footer-text">
+                        {{t "liveInventory.footerText"}}
+                    </span>
+                {{/if}}
+                {{#if inventory.isAvailable }}
+                    {{> button id="rr-inventory-reserve" label="reserveButton.title" }}
+                {{else}}
+                    {{> button id="rr-inventory-reserve" label="liveInventory.reserveOther" }}
+                {{/if}}
+            {{else}}
+                {{!-- Location configured but loading --}}
+                {{> skeleton height="16px" width="100%" }}
+                {{> skeleton height="16px" width="130px" }}
+                {{#if (hasTranslation "liveInventory.footerText") }}
+                    {{> skeleton height="16px" width="150px" }}
+                {{/if}}
+                {{> button id="rr-inventory-reserve" label="reserveButton.title" disabled=true }}
+            {{/if}}
+        {{/if}}
+    </div>
+</div>
+
+<script>
+  RetailRedStorefront.onLoad(function (controller) {
+      {{!-- Handle enter key --}}
+      var input = document.querySelector('#rr-inventory-postalcode')
+      if (input) {
+          input.addEventListener('keydown', function (event) {
+              switch (event.key) {
+                  case 'Enter':
+                    controller.search({ postalCode: input.value });
+                    event.target.blur();
+                  default:
+                    return;
+                }
+            })
+      }
+      {{!-- Find button --}}
+      var findButton = document.querySelector('#rr-inventory-find');
+      if (findButton) {
+        findButton.addEventListener('click', function () {
+            const postalCode = input.value;
+            controller.search({ postalCode: postalCode });
+        });
+      }
+
+      {{!-- Find other store --}}
+      var reserveButton = document.querySelector('#rr-inventory-reserve');
+      if (reserveButton) {
+        reserveButton.addEventListener('click', function () {
+            controller.reserve();
+        });
+      }
+
+      {{!-- Change store --}}
+      var changeLink = document.querySelector('.rr-inventory-link');
+      if (changeLink) {
+        changeLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            controller.search();
+        });
+      }
+
+      {{!-- Change store in list --}}
+      var changeSelect = document.querySelector('#rr-inventory-select')
+      if (changeSelect) {
+        changeSelect.addEventListener('change', function (e) {
+            if (e.target.value === '') {
+                return;
+            }
+            controller.setLocation(e.target.value);
+        });
+      }
+
+      {{!-- Cancel selection --}}
+      var cancelSelect = document.querySelector('.rr-inventory-cancel')
+      if (cancelSelect) {
+        cancelSelect.addEventListener('click', function (e) {
+            e.preventDefault();
+            controller.cancelSelection();
+        });
+      }
+  });
+</script>

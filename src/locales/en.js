@@ -35,6 +35,7 @@ export default {
     uncollapse: 'Show store details',
     collapse: 'Hide store details',
     reserve: 'Reserve',
+    select: 'Choose',
     comingSoon: 'Coming Soon',
     location: {
       address: 'Address',
@@ -88,6 +89,22 @@ export default {
       phone: 'Phone',
       storeHours: 'Store Hours',
       directions: 'Directions',
+    },
+  },
+  liveInventory: {
+    searchPostalCode: 'Show availability in stores nearby.',
+    searchDirect: 'Show availability in your store.',
+    postalCode: 'Postal Code',
+    reserveOther: 'Check other Stores',
+    find: 'Find Store',
+    yourStore: 'Your Store:',
+    change: 'Change',
+    select: 'Select Store',
+    pleaseSelect: 'Please select your store',
+    cancel: 'Cancel',
+    list: {
+      unavailable: '(Unavailable)',
+      comingSoon: '(Coming Soon)',
     },
   },
 };

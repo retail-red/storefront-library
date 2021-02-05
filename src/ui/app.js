@@ -1,21 +1,27 @@
-import { createHashHistory } from 'history';
+import { createHashHistory, createMemoryHistory } from 'history';
 import modalTemplate from '../templates/modal.hbs';
 
 let routes = {};
 
 class App {
-  constructor(config, sdk) {
+  constructor(config, sdk, instance) {
     this.config = config;
     this.sdk = sdk;
     this.routes = {};
-    this.history = createHashHistory();
+    this.history = config.browserHistory ? createHashHistory() : createMemoryHistory();
     this.historyIndex = 0;
     this.historyUnlisten = null;
-    this.destroyWhenEmpty = true;
+    this.endReached = false;
     this.loading = false;
+    this.publicInterface = instance;
   }
 
   _handleHistoryChange({ location, action }) {
+    // Close if terminal route reached.
+    if (this.endReached) {
+      this.destroy();
+    }
+
     // Store history index
     if (action === 'PUSH') {
       this.historyIndex += 1;
@@ -30,9 +36,7 @@ class App {
     const { pathname, state } = location;
     const targetRoute = this.routes[pathname.slice(1)];
     if (!targetRoute) {
-      if (this.destroyWhenEmpty) {
-        this.destroy();
-      }
+      this.destroy();
       return;
     }
 
@@ -94,7 +98,10 @@ class App {
     asyncHandler();
   }
 
-  start(target) {
+  /**
+   * Initiates flow and opens the reservation modal.
+   */
+  start(target, state = {}) {
     // Start listening to history
     this.historyIndex = 0;
     this.historyUnlisten = this.history.listen((o) => this._handleHistoryChange(o));
@@ -133,24 +140,54 @@ class App {
 
     // Transition modal in.
     const baseElement = document.querySelector('#rr-omni');
-    setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('rr-modal-open')), 0);
+    setTimeout(() => requestAnimationFrame(() => baseElement.classList.add('rr-modal-open')), 10);
     this.modalBase = baseElement;
 
     // Prevent document from scrolling
     document.querySelector('body').classList.add('rr-modal-backdrop-body-fix');
 
     // Push starting route configuration
-    this.pushRoute('storeList', { locationCode: this.config.locationCode });
+    this.pushRoute('storeList', { locationCode: this.config.locationCode, ...state });
   }
 
-  updateConfig(config) {
+  /**
+   * Renders a controller inlined into any given container.
+   * DOES NOT SUPPORT history within the inline element yet.
+   */
+  renderInline(target, route, state = {}) {
+    // Initialize controller
+    const RouteController = this.routes[route];
+    const controller = new RouteController(
+      RouteController.routeName,
+      RouteController.templateName,
+      this,
+      this.config,
+      this.sdk,
+    );
+    this.activeInlineController = controller;
+
+    // Render content
+    const handler = async () => {
+      const loadState = await controller.load(state);
+      controller.state = loadState || {};
+      controller.render(target);
+    };
+    handler();
+  }
+
+  updateConfig(config, changed) {
     this.config = config;
+
+    // Update the active inline controller.
+    if (this.activeInlineController && this.activeInlineController.updateConfig) {
+      this.activeInlineController.updateConfig(config, changed);
+    }
   }
 
   destroy() {
     // Clear up all resources.
     this.historyUnlisten();
-    this.popToRoot();
+    this.historyIndex = 0;
     routes = {};
 
     // Hide modal and remove from DOM.
@@ -163,6 +200,7 @@ class App {
         this.modalBack = null;
         this.element.innerHTML = '';
         this.element = null;
+        this.endReached = false;
       }, 225);
     });
 
@@ -178,29 +216,19 @@ class App {
     this.history.push(`/${name}`, state);
   }
 
+  pushEndRoute(name, state) {
+    this.historyIndex = 0;
+    this.history.push(`/${name}`, state);
+
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        this.endReached = true;
+      }, 100);
+    });
+  }
+
   popRoute() {
     this.history.back();
-  }
-
-  resetTo(name, state) {
-    this.destroyWhenEmpty = false;
-    if (this.historyIndex > 0) {
-      this.history.go(-this.historyIndex);
-    }
-    setTimeout(() => {
-      this.historyIndex = 0;
-      this.history.push(`/${name}`, state);
-      this.destroyWhenEmpty = true;
-    }, 10);
-  }
-
-  popToRoot() {
-    if (this.historyIndex === 0) return;
-
-    this.history.go(-this.historyIndex);
-    requestAnimationFrame(() => {
-      this.historyIndex = 0;
-    });
   }
 
   syncLoadingState() {

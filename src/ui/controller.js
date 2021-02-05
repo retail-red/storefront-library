@@ -40,6 +40,14 @@ class Controller {
   }
 
   /**
+   * Updates the configuration that the controller is storing.
+   * @param {Object} config New configuration
+   */
+  updateConfig(config) {
+    this.config = config;
+  }
+
+  /**
    * Updates template state and triggers a rerender
    * @param {Object} state State
    */
