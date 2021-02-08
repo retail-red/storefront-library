@@ -62,4 +62,9 @@
   }
 </script>
 
-<%= base %>
+<%= require('html-loader!./base.html') %>
+
+<hr />
+<div class="docs">
+  <%= require('../../README.md') %>
+</div>

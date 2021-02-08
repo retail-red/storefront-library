@@ -1,9 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const fs = require('fs');
-const path = require('path');
 const sass = require('sass');
-
-const baseDevTemplate = fs.readFileSync(path.join(__dirname, 'src/dev/base.html'));
 
 module.exports = {
   module: {
@@ -42,6 +38,17 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+          {
+            loader: 'markdown-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -53,17 +60,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: 'head',
       template: './src/dev/index.html',
-      templateParameters: {
-        base: baseDevTemplate,
-      },
     }),
     new HtmlWebpackPlugin({
       inject: 'head',
       filename: 'quick.html',
       template: './src/dev/quick.html',
-      templateParameters: {
-        base: baseDevTemplate,
-      },
     }),
   ],
   devServer: {

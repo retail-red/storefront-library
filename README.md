@@ -1,4 +1,7 @@
 # retail.red Storefront Library
+[![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/retail-red/storefront-library)
+![GitHub](https://img.shields.io/github/license/retail-red/storefront-library)
 
 ## Quick Integration
 
@@ -32,6 +35,21 @@ As a last step you need to define the place where the reservation button should 
 
 ### Example Integration
 See `src/dev/index.html` for a basic integration example or visit the [demo page.](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
+
+## Interface
+
+### Instance
+After creating your retail.red instance with `window.RetailRedStorefront.create` you have the following available functions.
+
+| Name                   | Parameters              | Description                                                                                                                                                                                                                                                                                                                                                                                |
+|------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `updateConfig`         | `config`                | Used to update the config at any time. Everything already rendered by the library won't be affected. See further documentation for the whole config.                                                                                                                                                                                                                                       |
+| `addEventListener`     | `eventName`, `callback` | Adds a new event listener for the event named "`eventName`". The only event currently available is `locationChanged` which is executed whenever the user switched his location.                                                                                                                                                                                                            |
+| `openReservationModal` | -                       | Immediately opens the reservation modal with the loaded settings. This can be used when a custom reservation button is used which is not rendered using the template system.                                                                                                                                                                                                               |
+| `renderReserveButton`  | `target`                | Renders the `reserveButton` template (which is by default a simple button that triggers `openReservationModal` on press) in `target`. `target` can be both a selector as a string or a `HTMLElement`                                                                                                                                                                                      |
+| `renderLiveInventory`  | `target`, `options`     | Renders the `liveInventory` template (which is by default a block that displays the products inventory directly in the PDP and lets the user start the reservation flow).                                                                                                                                                                                                                  |
+|                        | `options.variant`       | When set to `"modal"` (default behavior) the user can choose a store using the retail.red store list modal. This is recommended if you have many stores in different locations.<br /> When set to `"list"` the user can choose a store using simple dropdown without the overhead of going through the store list modal. This is recommended if you have less than 10 locations available. |
+
 
 ### Custom Styling
 All of the rendered UI are using CSS classes that can be used to override **any** styling like colors, spacings and fonts. To avoid the need of `!important` statements you can simply override all of the styling using the prefix `"#rr-omni #rr-omni-custom"`. This will ensure that your custom styling outweighs the defaults. For a button for example simply use
@@ -141,12 +159,13 @@ These will be used to prefill the reservation form with the currently logged in 
 If styling and configuration is not enough for your needs you can always completely override the default templates.
 Following templates can be overridden:
 
-| Name          | Default                           | Description                                                         |
-|---------------|-----------------------------------|---------------------------------------------------------------------|
-| storeList     | `src/templates/storeList.hbs`     | The store list that includes searching for nearby stores            |
-| reserve       | `src/templates/reserve.hbs`       | Reserve form that asks the user for name, email and phone           |
-| success       | `src/templates/success.hbs`       | Success page that is displayed after an reservation has been placed |
-| reserveButton | `src/templates/reserveButton.hbs` | The reserve button that triggers the reservation modal              |
+| Name          | Default                           | Description                                                          |
+|---------------|-----------------------------------|----------------------------------------------------------------------|
+| storeList     | `src/templates/storeList.hbs`     | The store list that includes searching for nearby stores.            |
+| reserve       | `src/templates/reserve.hbs`       | Reserve form that asks the user for name, email and phone.           |
+| success       | `src/templates/success.hbs`       | Success page that is displayed after an reservation has been placed. |
+| reserveButton | `src/templates/reserveButton.hbs` | The reserve button that triggers the reservation modal.              |
+| liveInventory | `src/templates/liveInventory.hbs` | The live inventory block that shows inventory directly on the pdp.   |
 
 A custom template can be added directly to your html
 
