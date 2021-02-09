@@ -58,53 +58,76 @@
 
     {{#each locations }}
       <div class="rr-store">
-        {{!-- Name, distance, availability row --}}
-        <div class="rr-name-row">
-          {{name}}
-          {{#if distance}}
-            <span class="rr-distance">
-              - {{distance distance unitSystem}}
-            </span>
-          {{/if}}
-
-          {{!-- Product not available --}}
-          {{#unless inventory.isAvailable }}
-            <span class="rr-available-negative">
-              {{t "storeList.inventory.unavailable"}}
-            </span>
-          {{else}}
-            {{!-- Only show if product is available or not --}}
-            {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
-              <span class="rr-available-positive">
-                {{t "storeList.inventory.available"}}
-              </span>
-            {{else}}
-              {{!-- Rough numbers (10+) --}}
-              {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
-                <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                  {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
-                </span>
-              {{else}}
-                {{!-- Detailed numbers --}}
-                <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                  {{t "storeList.inventory.exact" x=inventory.visible }}
-                </span>
-              {{/if}}
-            {{/if}}
-          {{/unless}}
-        </div>
         {{!-- Details row--}}
         <div class="rr-detail">
           <div class="rr-detail-header">
             <div class="rr-left">
-
-              {{#if primaryAddress.phoneNumber}}
-                {{> link class="rr-phone-number" href=(concat "tel:" primaryAddress.phoneNumber) label=primaryAddress.phoneNumber }}
-              {{/if}}
-
-              {{> link class="rr-detail-collapse rr-closed" href="#" data=(object code=code label-closed=(t "storeList.uncollapse") label-opened=(t "storeList.collapse"))}}
+              {{!-- Name, distance, availability row --}}
+              <div class="rr-name-row">
+                {{name}}
+                {{#if distance}}
+                  <span class="rr-distance">
+                    - {{distance distance unitSystem}}
+                  </span>
+                {{/if}}
+              </div>
+              <div class="rr-store-details">
+                <div>
+                  <p class="rr-bold">{{t "storeList.location.address" }}</p>
+                  <p>{{t "addresses.line1" street=primaryAddress.street street2=primaryAddress.street2}}</p>
+                  <p>{{t "addresses.line2" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
+                  {{#if primaryAddress.phoneNumber}}
+                    <p>
+                      {{t "addresses.tel" }}
+                      {{> link class="rr-phone-number" href=(concat "tel:" primaryAddress.phoneNumber) label=primaryAddress.phoneNumber }}
+                    </p>
+                  {{/if}}
+                  {{> link
+                      class="rr-directions"
+                      label="storeList.location.directions"
+                      href=(direction primaryAddress)
+                      target="_blank"
+                  }}
+                </div>
+                <div>
+                  {{#if operationHours}}
+                    <p class="rr-bold">{{t "storeList.location.storeHours" }}</p>
+                    {{#each operationHours}}
+                      {{#if this}}
+                        <p>{{t (concat "date." @key) }}: {{this}}</p>
+                      {{/if}}
+                    {{/each}}
+                  {{/if}}
+                </div>
+              </div>
             </div>
             <div class="rr-action">
+              {{!-- Product not available --}}
+              {{#unless inventory.isAvailable }}
+                <span class="rr-available-negative">
+                  {{t "storeList.inventory.unavailable"}}
+                </span>
+              {{else}}
+                {{!-- Only show if product is available or not --}}
+                {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
+                  <span class="rr-available-positive">
+                    {{t "storeList.inventory.available"}}
+                  </span>
+                {{else}}
+                  {{!-- Rough numbers (10+) --}}
+                  {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
+                    <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                      {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
+                    </span>
+                  {{else}}
+                    {{!-- Detailed numbers --}}
+                    <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                      {{t "storeList.inventory.exact" x=inventory.visible }}
+                    </span>
+                  {{/if}}
+                {{/if}}
+              {{/unless}}
+
               {{#if isComingSoon }}
                {{> button label="storeList.comingSoon" disabled=true}}
               {{else}}
@@ -114,29 +137,6 @@
                     data=(object code=code)
                     disabled=(not inventory.isAvailable)
                 }}
-              {{/if}}
-            </div>
-          </div>
-          <div class="rr-collapsing rr-closed" data-code={{code}}>
-            <div>
-              <p class="rr-bold">{{t "storeList.location.address" }}</p>
-              <p>{{t "addresses.line1" street=primaryAddress.street street2=primaryAddress.street2}}</p>
-              <p>{{t "addresses.line2" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
-              {{> link
-                  class="rr-directions"
-                  label="storeList.location.directions"
-                  href=(direction primaryAddress)
-                  target="_blank"
-              }}
-            </div>
-            <div>
-              {{#if operationHours}}
-                <p class="rr-bold">{{t "storeList.location.storeHours" }}</p>
-                {{#each operationHours}}
-                  {{#if this}}
-                    <p>{{t (concat "date." @key) }}: {{this}}</p>
-                  {{/if}}
-                {{/each}}
               {{/if}}
             </div>
           </div>
@@ -186,11 +186,6 @@
       e.stopImmediatePropagation();
       if (e.target.classList.contains('rr-store-select')) {
         controller.selectLocation(e.target.dataset.code);
-      } else if (e.target.classList.contains('rr-detail-collapse')) {
-        e.preventDefault();
-        e.target.classList.toggle('rr-closed');
-        e.target.classList.toggle('rr-opened');
-        document.querySelector('.rr-collapsing[data-code="' + e.target.dataset.code + '"]').classList.toggle('rr-closed');
       }
     });
   });

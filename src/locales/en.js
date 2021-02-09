@@ -19,6 +19,7 @@ export default {
   addresses: {
     line1: '{{street}} {{street2}}',
     line2: '{{city}}, {{region}} {{postalCode}}',
+    tel: 'Tel.:',
   },
   errors: {
     unknown: 'Failed to submit reservation',
@@ -50,8 +51,8 @@ export default {
     inventory: {
       available: 'Available',
       unavailable: 'Unavailable',
-      exact: '{{x}} Available',
-      rough: '{{x}}+ Available',
+      exact: 'Available ({{x}})',
+      rough: 'Available ({{x}}+)',
     },
   },
   reserveButton: {

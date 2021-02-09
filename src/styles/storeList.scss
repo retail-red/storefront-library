@@ -131,18 +131,6 @@
           font-weight: normal;
           color: rgba(0, 0, 0, 0.53);
         }
-        .rr-available-positive, .rr-available-neutral, .rr-available-negative {
-          margin-left: 8px;
-        }
-        .rr-available-positive {
-          color: rgb(var(--color-state-success));
-        }
-        .rr-available-negative {
-          color: rgb(var(--color-state-alarm));
-        }
-        .rr-available-neutral {
-          color: rgb(var(--color-state-warning));
-        }
       }
 
       .rr-detail {
@@ -169,6 +157,7 @@
 
           &.rr-phone-number {
             text-decoration: none;
+            font-size: 14;
           }
 
           &.rr-closed::after {
@@ -180,7 +169,7 @@
           }
         }
 
-        .rr-collapsing {
+        .rr-store-details {
           display: flex;
           flex-direction: row;
           font-size: 14;
@@ -197,15 +186,40 @@
             margin-right: 16px;
           }
 
-          &.rr-closed {
-            display: none;
-          }
-
           .rr-bold {
             font-weight: bold;
           }
         }
       }
+    }
+  }
+
+  .rr-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .rr-available-positive, .rr-available-neutral, .rr-available-negative {
+      margin-left: 8px;
+      margin-bottom: 16px;
+      &::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        background: #000;
+        display: inline-block;
+        border-radius: 100%;
+        margin-right: 4px;
+      }
+    }
+    .rr-available-positive::before {
+      background: rgb(var(--color-state-success));
+    }
+    .rr-available-negative::before {
+      background: rgb(var(--color-state-alarm));
+    }
+    .rr-available-neutral::before {
+      background: rgb(var(--color-state-warning));
     }
   }
 

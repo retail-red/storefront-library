@@ -19,6 +19,7 @@ export default {
   addresses: {
     line1: '{{street}} {{street2}}',
     line2: '{{postalCode}} {{city}}',
+    tel: 'Tel.:',
   },
   errors: {
     unknown: 'Reservierung konnte nicht aufgegeben werden.',
@@ -40,7 +41,7 @@ export default {
     location: {
       address: 'Adresse',
       storeHours: 'Öffnungszeiten',
-      directions: 'Wegbeschreibung',
+      directions: 'Route berechnen',
     },
     search: {
       label: 'Postleitzahl',
@@ -50,8 +51,8 @@ export default {
     inventory: {
       available: 'Verfügbar',
       unavailable: 'Nicht Verfügbar',
-      exact: '{{x}} Verfügbar',
-      rough: '{{x}}+ Verfügbar',
+      exact: 'Verfügbar ({{x}})',
+      rough: 'Verfügbar ({{x}}+)',
     },
   },
   reserveButton: {

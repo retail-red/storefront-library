@@ -1,6 +1,7 @@
 # retail.red Storefront Library
 [![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/retail-red/storefront-library)
+[![Changelog](https://img.shields.io/badge/latest-Changelog-brightgreen)](CHANGELOG.md)
 ![GitHub](https://img.shields.io/github/license/retail-red/storefront-library)
 
 ## Quick Integration
@@ -88,12 +89,13 @@ retailred.updateConfig({
 
 ### Core Configuration
 
-| Property       | Default      | Required | Description                                                          |
-|----------------|--------------|----------|----------------------------------------------------------------------|
-| `apiKey`       |              | YES      | Storefront API Key for your retail.red account                       |
-| `apiStage`     | `production` | NO       | Use `staging` to use our `staging` environment when testing.         |
-| `unitSystem`   | `metric`     | NO       | Either `metric` or `imperial`                                        |
-| `locationCode` | `null`       | NO       | Preselect a location to bring the user directly to reservation form. |
+| Property         | Default      | Required | Description                                                                                                                                                                                                                                                   |
+|------------------|--------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `apiKey`         |              | YES      | Storefront API Key for your retail.red account                                                                                                                                                                                                                |
+| `apiStage`       | `production` | NO       | Use `staging` to use our `staging` environment when testing.                                                                                                                                                                                                  |
+| `unitSystem`     | `metric`     | NO       | Either `metric` or `imperial`                                                                                                                                                                                                                                 |
+| `locationCode`   | `null`       | NO       | Preselect a location to bring the user directly to reservation form.                                                                                                                                                                                          |
+| `browserHistory` | `true`       | NO       | If enabled the browsers history will be used within the reservation modal allowing the users to navigate with the native controls. Can be disabled when your store is already using the browsers history internally and the modals history conflicts with it. |
 
 ### Product Configuration
 
