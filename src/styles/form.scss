@@ -241,6 +241,7 @@
   margin: 0 0 10px;
   line-height: 24px;
   input {
+    display: block;
     position: absolute;
     top: 4px;
     left: 0;
@@ -249,7 +250,7 @@
     cursor: pointer;
     height: 20px;
     opacity: 0;
-    z-index: 0;
+    z-index: 3;
   }
   label {
     display: block;
@@ -342,6 +343,9 @@ $md-checkbox-label-padding: 2em;
       position: absolute;
       left: 0;
       top: 0;
+      font-size: inherit;
+      min-height: initial;
+      min-width: initial;
     }
 
     &:before {
