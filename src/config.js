@@ -17,6 +17,7 @@ const requiredRenderProperties = [
 ];
 const storedProperties = [
   'locationCode',
+  'customer.emailAddress',
 ];
 
 // Load default config from location code.
@@ -40,6 +41,7 @@ const defaultConfig = merge({
     lastName: '',
     phone: '',
     emailAddress: '',
+    saveEmailAddress: true,
   },
   legal: {
     terms: null,

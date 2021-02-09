@@ -55,6 +55,13 @@ class ReserveController extends Controller {
     });
   }
 
+  saveEmailAddress(value) {
+    if (!this.config.customer.saveEmailAddress) {
+      return;
+    }
+    this.app.publicInterface.updateConfig({ customer: { emailAddress: value } });
+  }
+
   async submit() {
     const { product } = this.config;
     const { location } = this.state;

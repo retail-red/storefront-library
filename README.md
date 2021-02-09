@@ -121,6 +121,7 @@ These will be used to prefill the reservation form with the currently logged in 
 | `customer.lastName`     | `""`    | NO       | Last name                                                                                                     |
 | `customer.emailAddress` | `""`    | NO       | Email address                                                                                                 |
 | `customer.phone`        | `""`    | NO       | Phone number, ex. `"+49123456"`                                                                               |
+| `customer.saveEmailAddress` | `true`    | NO       |  If enabled the customers entered email will be stored for the next time he initiates a reservation.                                                                              |
 
 
 ### Inventory Configuration
