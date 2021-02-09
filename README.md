@@ -96,6 +96,8 @@ retailred.updateConfig({
 | `unitSystem`     | `metric`     | NO       | Either `metric` or `imperial`                                                                                                                                                                                                                                 |
 | `locationCode`   | `null`       | NO       | Preselect a location to bring the user directly to reservation form.                                                                                                                                                                                          |
 | `browserHistory` | `true`       | NO       | If enabled the browsers history will be used within the reservation modal allowing the users to navigate with the native controls. Can be disabled when your store is already using the browsers history internally and the modals history conflicts with it. |
+| `useGeolocationImmediately` | `true`       | NO       | If enabled, whenever the user opens the store list the browsers geolocation will be requested immediately instead of only after pressing the locate me button. |
+
 
 ### Product Configuration
 

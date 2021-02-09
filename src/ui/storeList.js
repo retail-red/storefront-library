@@ -1,6 +1,7 @@
 import Controller from './controller';
 import Cache, { locationInventoryKey } from '../cache';
 import { t } from '../locales';
+import { getImmediateGeolocation } from '../util/geolocation';
 
 class StoreListController extends Controller {
   constructor(...params) {
@@ -14,7 +15,7 @@ class StoreListController extends Controller {
 
   async load({ locationCode = null, options = {}, select = false }) {
     // Product data.
-    const { product, inventory } = this.config;
+    const { product, inventory, useGeolocationImmediately } = this.config;
 
     // Countries
     const countries = this.config.localization.countries.map((code) => ({
@@ -22,6 +23,21 @@ class StoreListController extends Controller {
       name: t(`countries.${code}`),
     }));
     this.countryCode = countries[0].code;
+
+    // Get geolocation immediately
+    if (useGeolocationImmediately && !options.postalCode) {
+      try {
+        const { coords } = await getImmediateGeolocation(({ coords: innerCoords }) => {
+          console.warn('with timeout', innerCoords);
+          this.state.postalCode = null;
+          this.geolocation = innerCoords;
+          this._updateStoreList();
+        });
+        this.geolocation = coords;
+      } catch (err) {
+        // Error can be ignored / user probably just rejected geolocation permission.
+      }
+    }
 
     // Prefill search
     if (options.postalCode) {
@@ -120,11 +136,9 @@ class StoreListController extends Controller {
       return;
     }
 
-    // Reset existing filters.
-    this.state.postalCode = null;
-
     // Ask for the current location and update store list.
     navigator.geolocation.getCurrentPosition(({ coords }) => {
+      this.state.postalCode = null;
       this.geolocation = coords;
       this._updateStoreList();
     });
