@@ -1,8 +1,11 @@
 # retail.red Storefront Library
-[![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
+[![retail.red](https://img.shields.io/badge/retail-.red-red)](https://retail.red/)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/retail-red/storefront-library)
-[![Changelog](https://img.shields.io/badge/latest-Changelog-brightgreen)](CHANGELOG.md)
+[![Changelog](https://img.shields.io/github/package-json/v/retail-red/storefront-library?label=changelog)](CHANGELOG.md)
+[![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
 ![GitHub](https://img.shields.io/github/license/retail-red/storefront-library)
+
+This library enables merchants to easily offer click & reserve functionality to their existing ecommerce website. The script can add a “reserve” button to the product detail page, via which a new reservation can be placed.
 
 ## Quick Integration
 
