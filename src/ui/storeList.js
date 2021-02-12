@@ -25,10 +25,9 @@ class StoreListController extends Controller {
     this.countryCode = countries[0].code;
 
     // Get geolocation immediately
-    if (useGeolocationImmediately && !options.postalCode) {
+    if (useGeolocationImmediately && !locationCode && !options.postalCode) {
       try {
         const { coords } = await getImmediateGeolocation(({ coords: innerCoords }) => {
-          console.warn('with timeout', innerCoords);
           this.state.postalCode = null;
           this.geolocation = innerCoords;
           this._updateStoreList();
@@ -51,7 +50,7 @@ class StoreListController extends Controller {
     const location = locations.find((l) => l.code === locationCode);
     if (location && !select) {
       requestAnimationFrame(() => {
-        this.selectLocation(locationCode);
+        this.selectLocation(locationCode, true);
       });
     }
 
@@ -144,10 +143,12 @@ class StoreListController extends Controller {
     });
   }
 
-  selectLocation(locationCode) {
+  selectLocation(locationCode, silent = false) {
     // Find location data and emit public event.
     const location = this.state.locations.find((l) => l.code === locationCode);
-    this.app.publicInterface._triggerEvent('locationChanged', { location });
+    if (silent) {
+      this.app.publicInterface._triggerEvent('locationChanged', { location });
+    }
 
     // In selection mode we simply update the current config.
     if (this.state.select) {

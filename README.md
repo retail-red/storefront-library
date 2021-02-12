@@ -126,7 +126,7 @@ These will be used to prefill the reservation form with the currently logged in 
 | `customer.lastName`     | `""`    | NO       | Last name                                                                                                     |
 | `customer.emailAddress` | `""`    | NO       | Email address                                                                                                 |
 | `customer.phone`        | `""`    | NO       | Phone number, ex. `"+49123456"`                                                                               |
-| `customer.saveEmailAddress` | `true`    | NO       |  If enabled the customers entered email will be stored for the next time he initiates a reservation.                                                                              |
+| `customer.remember`     | `true`    | NO       |  If enabled the customers entered data will be stored for the next time he initiates a reservation.                                                                              |
 
 
 ### Inventory Configuration
@@ -288,6 +288,9 @@ npm i
 npm start
 ```
 This wil by default host the test site at http://localhost:8080
+
+## Support
+If you have any questions or feedback, please contact us at [mail@retail.red](mailto:mail@retail.red)
 
 ## License
 This product is available under the Apache License, Version 2.0.

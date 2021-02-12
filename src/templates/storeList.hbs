@@ -135,7 +135,7 @@
                     class="rr-store-select"
                     label=(select ../select "storeList.select" "storeList.reserve")
                     data=(object code=code)
-                    disabled=(not inventory.isAvailable)
+                    disabled=(and (not inventory.isAvailable) (not ../select))
                 }}
               {{/if}}
             </div>

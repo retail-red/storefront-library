@@ -135,12 +135,7 @@
       controller.submit();
     });
     {{!-- Handle email save --}}
-    var email = document.querySelector('#rr-reserve-email');
-    email.addEventListener('blur', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      controller.saveEmailAddress(e.target.value);
-    });
+    controller.syncCustomerData();
     {{!-- Handle terms/privacy checkbox --}}
     var legals = Array.prototype.slice.call(document.querySelectorAll('#rr-omni .rr-legal input[type="checkbox"]'));
     legals.forEach(function (checkbox) {

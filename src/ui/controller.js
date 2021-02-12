@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce';
 import defaultTemplates from '../templates/defaults';
 
 /**
@@ -30,6 +31,7 @@ class Controller {
     // Load template
     this.template = this.config.templates.customTemplates[templateName]
       || defaultTemplates[templateName];
+    this.renderDebounced = debounce(() => this.render(this.previousTarget), 200);
   }
 
   // eslint-disable-next-line no-empty-function
@@ -53,7 +55,7 @@ class Controller {
    */
   setState(state) {
     this.state = { ...this.state, ...state };
-    this.render(this.previousTarget);
+    this.renderDebounced();
   }
 
   /**
@@ -88,8 +90,14 @@ class Controller {
       ...this.state,
     };
     const html = this.template(templateVariables);
-    // eslint-disable-next-line no-param-reassign
-    target.innerHTML = html;
+
+    /* eslint-disable no-param-reassign */
+    target.innerHTML = '';
+    const newContent = document.createElement('div');
+    newContent.innerHTML = html;
+    target.appendChild(newContent);
+    // target.innerHTML = html;
+    /* eslint-enable no-param-reassign */
 
     // Evaluates all script tags within template.
     if (!silent) {

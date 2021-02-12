@@ -4,7 +4,6 @@
     const retailred = window.RetailRedStorefront.create({
       apiKey: "8v4SLSyxR7xq0BSkbOSscO1y",
       apiStage: 'staging',
-      //locationCode: '1',
       unitSystem: 'metric',
       localization: {
         countries: ['de', 'us'],
@@ -30,7 +29,6 @@
         code: null,
         firstName: 'Rene',
         lastName: 'Eichhorn',
-        phone: '',
         emailAddress: 'rene.eichhorn@shopgate.com',
       },
     });
@@ -38,7 +36,6 @@
     // In a later time update with product data.
     retailred.updateConfig({
       product: {
-        //code: '24-MB01',
         code: 'acai-bowl',
         name: 'My Awesome product',
         options: [
@@ -71,7 +68,7 @@
 
     // Attach event listener
     retailred.addEventListener('locationChanged', ({ location }) => {
-      console.log(`[DEBUG] Location was changed to '${location.name}'`);
+      console.warn(`[DEBUG] Location was changed to '${location.name}'`);
     });
   }
 </script>

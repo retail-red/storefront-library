@@ -2,9 +2,8 @@
   window.onload = function () {
     // Initialize our script.
     const retailred = window.RetailRedStorefront.create({
-      apiKey: "ARotRbXpalxVcmMNz9Yd",
-      apiStage: 'development',
-      //locationCode: '1',
+      apiKey: "8v4SLSyxR7xq0BSkbOSscO1y",
+      apiStage: 'staging',
       unitSystem: 'metric',
       localization: {
         countries: ['de', 'us'],
@@ -20,19 +19,12 @@
         terms: 'https://google.de',
         privacy: 'https://google.de',
       },
-      customer: {
-        code: null,
-        firstName: 'Rene',
-        lastName: 'Eichhorn',
-        phone: '',
-        emailAddress: 'rene.eichhorn@shopgate.com',
-      },
     });
 
     // In a later time update with product data.
     retailred.updateConfig({
       product: {
-        code: '24-MB01',
+        code: 'acai-bowl',
         name: 'My Awesome product',
         options: [
           {

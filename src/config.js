@@ -17,6 +17,9 @@ const requiredRenderProperties = [
 ];
 const storedProperties = [
   'locationCode',
+  'customer.firstName',
+  'customer.lastName',
+  'customer.phone',
   'customer.emailAddress',
 ];
 
@@ -42,7 +45,7 @@ const defaultConfig = merge({
     lastName: '',
     phone: '',
     emailAddress: '',
-    saveEmailAddress: true,
+    remember: true,
   },
   legal: {
     terms: null,

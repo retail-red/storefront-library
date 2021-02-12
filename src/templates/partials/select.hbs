@@ -1,5 +1,10 @@
 <div class="rr-select-field">
-  <select id={{id}}>
+  <select 
+    id={{id}}
+    {{#if value}}
+    value="{{value}}"
+    {{/if}}
+  >
     {{> @partial-block }}
   </select>
   <label>{{t label}}</label>

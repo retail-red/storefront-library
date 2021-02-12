@@ -25,8 +25,10 @@
                     {{#unless locations }}
                         {{> skeleton height="32px" width="100%" }}
                     {{else}}
-                        {{#> select id="rr-inventory-select" label="liveInventory.select" }}
-                            <option value="">{{t "liveInventory.pleaseSelect" }}</option>
+                        {{#> select id="rr-inventory-select" label="liveInventory.select" value=(select locationCode locationCode "") }}
+                            {{#unless selection }}
+                                <option value="">{{t "liveInventory.pleaseSelect" }}</option>
+                            {{/unless}}
                             {{#each locations}}
                                 <option 
                                     value="{{code}}"

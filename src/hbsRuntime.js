@@ -20,6 +20,7 @@ handlebars.registerHelper('concat', (...args) => {
 handlebars.registerHelper('debug', (a) => console.log(a));
 handlebars.registerHelper('eq', (a, b) => a === b);
 handlebars.registerHelper('or', (a, b) => a || b);
+handlebars.registerHelper('and', (a, b) => a && b);
 handlebars.registerHelper('not', (a) => !a);
 handlebars.registerHelper('isNull', (a) => a === null);
 handlebars.registerHelper('gte', (a, b) => a >= b);

@@ -8,7 +8,7 @@ https://cdn.retail.red/omni/retailred-storefront-library-1.1.0.js
 - Introduced event `locationChanged` that is triggered whenever the customer changed the location.
 - Introduced `browserHistory` config to enable/disable the use of the browser history.
 - Fixed a bug that caused the modal to be removed after reaching the success page.
-- Introduced `customer.saveEmailAddress` config to remember the users email.
+- Introduced `customer.remember` config to remember the users form data.
 - Introduced `useGeolocationImmediately` config to open store list search based on geolocation by default.
 
 ## v1.0.0

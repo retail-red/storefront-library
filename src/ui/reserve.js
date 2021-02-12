@@ -55,11 +55,20 @@ class ReserveController extends Controller {
     });
   }
 
-  saveEmailAddress(value) {
-    if (!this.config.customer.saveEmailAddress) {
+  syncCustomerData() {
+    if (!this.config.customer.remember) {
       return;
     }
-    this.app.publicInterface.updateConfig({ customer: { emailAddress: value } });
+
+    const stored = ['firstName', 'lastName', 'phone', 'emailAddress'];
+    stored.forEach((property) => {
+      const element = document.querySelector(`#${formData[property]}`);
+      element.addEventListener('blur', (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        this.app.publicInterface.updateConfig({ customer: { [property]: e.target.value } });
+      });
+    });
   }
 
   async submit() {
