@@ -69,8 +69,11 @@ class Instance {
   /**
    * Renders and injects the quick reserve button.
    * @param {String|HTMLElement} target The target element or container
+   * @param {Object} options Options.
+   * @param {function} callback Callback to block event handling.
    */
-  renderReserveButton(target) {
+  // eslint-disable-next-line no-unused-vars
+  renderReserveButton(target, options = {}, callback = (cb) => cb()) {
     // Validate config
     if (!validateConfigForRendering(this.config)) {
       return;
@@ -89,8 +92,10 @@ class Instance {
     button.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
-      const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
-      this.app.start(modalPlaceholder);
+      callback(() => {
+        const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
+        this.app.start(modalPlaceholder);
+      });
     });
   }
 
