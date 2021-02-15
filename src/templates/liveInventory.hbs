@@ -25,21 +25,21 @@
                     {{#unless locations }}
                         {{> skeleton height="32px" width="100%" }}
                     {{else}}
-                        {{#> select id="rr-inventory-select" label="liveInventory.select" value=(select locationCode locationCode "") }}
+                        {{#> select id="rr-inventory-select" label="liveInventory.select" }}
                             {{#unless selection }}
                                 <option value="">{{t "liveInventory.pleaseSelect" }}</option>
                             {{/unless}}
                             {{#each locations}}
                                 <option 
                                     value="{{code}}"
-                                    {{#if (or (not inventory.isAvailable) isComingSoon) }}
+                                    {{#if (eq ../locationCode code) }}
+                                    selected="selected"
+                                    {{/if}}
+                                    {{#if isComingSoon }}
                                         disabled="disabled"
                                     {{/if}}
                                 >
                                     {{name}}
-                                    {{#unless inventory.isAvailable }}
-                                        &nbsp;{{t "liveInventory.list.unavailable"}}
-                                    {{/unless}}
                                     {{#if isComingSoon}}
                                         &nbsp;{{t "liveInventory.list.comingSoon"}}
                                     {{/if}}
