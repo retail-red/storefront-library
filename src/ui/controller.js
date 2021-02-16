@@ -94,6 +94,7 @@ class Controller {
     /* eslint-disable no-param-reassign */
     target.innerHTML = '';
     const newContent = document.createElement('div');
+    newContent.className = 'rr-modal-inner';
     newContent.innerHTML = html;
     target.appendChild(newContent);
     // target.innerHTML = html;

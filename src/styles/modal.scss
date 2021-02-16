@@ -79,6 +79,10 @@
 }
 
 .rr-modal-content {
+  .rr-modal-inner {
+    height: 100%;
+  }
+
   .rr-header-skeleton {
     display: flex;
     flex-direction: row;
