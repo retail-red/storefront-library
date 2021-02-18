@@ -65,13 +65,13 @@
         display: flex;
         flex-direction: row;
         line-height: 1.6;
-        span {
+        a:first-child {
             flex: 1;
         }
     }
 
     .rr-placeholder:nth-child(2) {
-        margin-bottom: 4px;
+        margin-bottom: 8px;
     }
     .rr-placeholder:nth-child(3) {
         margin-top: 4px;
@@ -96,7 +96,8 @@
     .rr-inventory-availability {
         font-weight: bold;
         text-align: left;
-        margin-bottom: 8px;
+        margin-top: 8px;
+        margin-bottom: 6px;
         .rr-available-positive {
             color: rgb(var(--color-state-success));
         }

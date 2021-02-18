@@ -63,9 +63,11 @@
             {{#if location }}
                 {{!-- Location already configured --}}
                 <div class="rr-inventory-name">
-                    <span>
-                        {{location.name}}
-                    </span>
+                    {{> link
+                        class="rr-inventory-link"
+                        label=location.name
+                        href="#"
+                    }}
                     {{> link
                         class="rr-inventory-link"
                         label="liveInventory.change"
@@ -128,6 +130,7 @@
       var input = document.querySelector('#rr-inventory-postalcode')
       if (input) {
           input.addEventListener('keydown', function (event) {
+            event.preventDefault();
               switch (event.key) {
                   case 'Enter':
                     controller.search({ postalCode: input.value });
@@ -140,7 +143,8 @@
       {{!-- Find button --}}
       var findButton = document.querySelector('#rr-inventory-find');
       if (findButton) {
-        findButton.addEventListener('click', function () {
+        findButton.addEventListener('click', function (e) {
+            e.preventDefault();
             const postalCode = input.value;
             controller.search({ postalCode: postalCode });
         });
@@ -149,24 +153,26 @@
       {{!-- Find other store --}}
       var reserveButton = document.querySelector('#rr-inventory-reserve');
       if (reserveButton) {
-        reserveButton.addEventListener('click', function () {
+        reserveButton.addEventListener('click', function (e) {
+            e.preventDefault();
             controller.reserve();
         });
       }
 
       {{!-- Change store --}}
-      var changeLink = document.querySelector('.rr-inventory-link');
-      if (changeLink) {
-        changeLink.addEventListener('click', function (e) {
+      var changeLink = document.querySelectorAll('.rr-inventory-link');
+      if (changeLink && changeLink.length) {
+        changeLink.forEach(link => link.addEventListener('click', function (e) {
             e.preventDefault();
             controller.search();
-        });
+        }));
       }
 
       {{!-- Change store in list --}}
       var changeSelect = document.querySelector('#rr-inventory-select')
       if (changeSelect) {
         changeSelect.addEventListener('change', function (e) {
+            e.preventDefault();
             if (e.target.value === '') {
                 return;
             }
