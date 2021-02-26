@@ -130,7 +130,6 @@
       var input = document.querySelector('#rr-inventory-postalcode')
       if (input) {
           input.addEventListener('keydown', function (event) {
-            event.preventDefault();
               switch (event.key) {
                   case 'Enter':
                     controller.search({ postalCode: input.value });
@@ -172,7 +171,6 @@
       var changeSelect = document.querySelector('#rr-inventory-select')
       if (changeSelect) {
         changeSelect.addEventListener('change', function (e) {
-            e.preventDefault();
             if (e.target.value === '') {
                 return;
             }
