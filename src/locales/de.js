@@ -83,7 +83,7 @@ export default {
   success: {
     title: 'Reservierungs Bestätigung',
     headline: 'Danke für Deine Reservierung',
-    text: 'Wir senden eine Benachrichtigung sobald Deine Reservierung abholbreit ist.',
+    text: 'Wir senden eine Benachrichtigung sobald Deine Reservierung abholbereit ist.',
     reservationNumber: 'Deine Reservierungs Nr.:',
     location: {
       address: 'Adresse',
