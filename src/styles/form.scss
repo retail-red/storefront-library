@@ -81,7 +81,6 @@
   select {
     line-height: normal;
     visibility: visible;
-    float: none;
     height: auto;
     background-color: transparent;
     font-size: 1em;
@@ -328,6 +327,7 @@ $md-checkbox-label-padding: 2em;
   label {
     cursor: pointer;
     display: inline-flex;
+    float: none;
     line-height: $md-checkbox-size;
     vertical-align: top;
     clear: both;
