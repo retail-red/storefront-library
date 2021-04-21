@@ -144,6 +144,16 @@ class ReserveController extends Controller {
           image: product.imageUrl,
           price: productPrice,
           currencyCode: product.currencyCode,
+          ...(product.identifiers ? {
+            identifiers: {
+              ean: product.identifiers.ean,
+              isbn: product.identifiers.isbn,
+              sku: product.identifiers.sku,
+              upc: product.identifiers.upc,
+              distiPartNum: product.identifiers.distiPartNum,
+              mfgPartNum: product.identifiers.mfgPartNum,
+            },
+          } : {}),
         },
       }],
       subTotal: orderPrice,

@@ -104,17 +104,24 @@ retailred.updateConfig({
 
 ### Product Configuration
 
-| Property                  | Default | Required        | Description                                    |
-|---------------------------|---------|-----------------|------------------------------------------------|
-| `product.code`            |         | *before render* | The unique identifer for the active product    |
-| `product.quantity`        |         | *before render* | The amount of products that should be reserved |
-| `product.name`            |         | *before render* | Name - Visible to the user                     |
-| `product.imageUrl`        |         | *before render* | Url to an image of the product.                |
-| `product.price`           |         | *before render* | Price as a float, ex. `12.5`                   |
-| `product.currencyCode`    |         | *before render* | ISO 4217 code for the currency, ex. `"EUR"`    |
-| `product.options`         | `[]`    | NO              | Array of options for product                   |
-| `product.options[].name`  | `null`  | YES             | Visible name of the option, ex. `"Color"`      |
-| `product.options[].value` | `null`  | YES             | Visible value of the option, ex. `"Red"`       |
+| Property                  | Default | Required        | Description                                     |
+|---------------------------|---------|-----------------|-------------------------------------------------|
+| `product.code`            |         | *before render* | The unique identifer for the active product     |
+| `product.quantity`        |         | *before render* | The amount of products that should be reserved  |
+| `product.name`            |         | *before render* | Name - Visible to the user                      |
+| `product.imageUrl`        |         | *before render* | Url to an image of the product.                 |
+| `product.price`           |         | *before render* | Price as a float, ex. `12.5`                    |
+| `product.currencyCode`    |         | *before render* | ISO 4217 code for the currency, ex. `"EUR"`     |
+| `product.options`         | `[]`    | NO              | Array of options for product                    |
+| `product.options[].name`  | `null`  | YES             | Visible name of the option, ex. `"Color"`       |
+| `product.options[].value` | `null`  | YES             | Visible value of the option, ex. `"Red"`        |
+| `product.identifiers`     | `{}`    | NO              | Object with various identifiers                 |
+| `product.identifiers.ean` |         | NO              | An European Article Number (EAN)                |
+| `product.identifiers.isbn`|         | NO              | An International Standard Book Number (ISBN)    |
+| `product.identifiers.sku` |         | NO              | A Stock-Keeping Unit (SKU)                      |
+| `product.identifiers.upc` |         | NO              | A Universal Product Code (UPC)                  |
+| `product.identifiers.distiPartNum`  |           | NO  | A Distributor Part Number                       |
+| `product.identifiers.mfgPartNum`    |           | NO  | A Manufacturing Part Number                     |
 
 ### Customer Configuration
 These will be used to prefill the reservation form with the currently logged in user.
