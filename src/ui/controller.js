@@ -58,6 +58,8 @@ class Controller {
     this.renderDebounced();
   }
 
+  domUpdated() {}
+
   /**
    * Rerenders the template but only updates the DOM partially.
    * @param {String} targetSelector Selector for part that should be re-rendered.
@@ -108,6 +110,9 @@ class Controller {
         window.__RrOmniCallbacks = [];
       });
     }
+    requestAnimationFrame(() => {
+      this.domUpdated(target, silent);
+    });
   }
 }
 

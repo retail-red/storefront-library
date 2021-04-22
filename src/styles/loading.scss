@@ -30,7 +30,14 @@
 
 .rr-placeholder {
   min-height: 100px;
-  background-color: #eee;
+  background-color: #e0e0e0;
+}
+
+.rr-placeholder-light {
+  .rr-animated-background {
+    background: linear-gradient(to right, #fafafa 10%, #eeeeee 18%, #fafafa 33%);
+    background-size: 800px 104px;
+  }
 }
 
 @keyframes rr-place-holder-shimmer{

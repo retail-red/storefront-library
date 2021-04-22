@@ -32,9 +32,13 @@ class ReserveController extends Controller {
     return t('reserve.title');
   }
 
-  async load({ location, product }) {
+  async load({
+    location, product, showHeader = true, showLocation = true,
+  }) {
     const { customer, legal } = this.config;
     return {
+      showHeader,
+      showLocation,
       location,
       legal,
       product,

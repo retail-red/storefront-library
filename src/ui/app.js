@@ -16,6 +16,18 @@ class App {
     this.publicInterface = instance;
   }
 
+  _buildController(targetRoute) {
+    const RouteController = targetRoute;
+    const newController = new RouteController(
+      RouteController.routeName,
+      RouteController.templateName,
+      this,
+      this.config,
+      this.sdk,
+    );
+    return newController;
+  }
+
   _handleHistoryChange({ location, action }) {
     // Close if terminal route reached.
     if (this.endReached) {
@@ -43,14 +55,7 @@ class App {
     // Create the routes controller if not available yet.
     const { controllerId, ...routeState } = state || {};
     if (typeof controllerId === 'undefined') {
-      const RouteController = targetRoute;
-      const newController = new RouteController(
-        RouteController.routeName,
-        RouteController.templateName,
-        this,
-        this.config,
-        this.sdk,
-      );
+      const newController = this._buildController(targetRoute);
       const newId = Object.keys(routes).length;
       routes[newId] = newController;
       this.history.replace(targetRoute, { ...routeState, controllerId: newId });
@@ -79,7 +84,6 @@ class App {
         if (skipRendering) return;
       }
 
-      // Render content.
       controller.render(this.modalContent);
       this.setLoading(false);
 
@@ -164,7 +168,8 @@ class App {
       this.config,
       this.sdk,
     );
-    this.activeInlineController = controller;
+    this.activeInlineController = this.activeInlineController || [];
+    this.activeInlineController.push(controller);
 
     // Render content
     const handler = async () => {
@@ -179,8 +184,12 @@ class App {
     this.config = config;
 
     // Update the active inline controller.
-    if (this.activeInlineController && this.activeInlineController.updateConfig) {
-      this.activeInlineController.updateConfig(config, changed);
+    if (this.activeInlineController) {
+      this.activeInlineController.forEach((controller) => {
+        if (controller.updateConfig) {
+          controller.updateConfig(config, changed);
+        }
+      });
     }
   }
 
@@ -217,6 +226,21 @@ class App {
   }
 
   pushEndRoute(name, state) {
+    // Render content.
+    if (this.activeInlineController) {
+      const newController = this._buildController(this.routes[name]);
+      const load = async () => {
+        const output = await newController.load(state);
+        newController.state = output || {};
+        newController.render(
+          this.activeInlineController[this.activeInlineController.length - 1]
+            .previousTarget,
+        );
+      };
+      load();
+      return;
+    }
+
     this.historyIndex = 0;
     this.history.push(`/${name}`, state);
 

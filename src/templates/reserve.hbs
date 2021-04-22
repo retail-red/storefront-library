@@ -1,60 +1,64 @@
 
 <div class="rr-reserve">
-  {{!-- Header --}}
-  <div class="rr-header">
-    {{!-- Product infos --}}
-    <div class="rr-header-product">
-      <div class="rr-product-image-wrapper">
-        <img src="{{product.imageUrl}}" />
+  {{#if showHeader }}
+    {{!-- Header --}}
+    <div class="rr-header">
+      {{!-- Product infos --}}
+      <div class="rr-header-product">
+        <div class="rr-product-image-wrapper">
+          <img src="{{product.imageUrl}}" />
+        </div>
+        <div class="rr-product-info">
+          <span>{{product.name}}</span>
+          <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
+          <span>
+            {{#each product.options}}
+              {{name}}: {{value}}
+              {{#unless @last}}
+              ,&nbsp;
+              {{/unless}}
+            {{/each}}
+          </span>
+        </div>
       </div>
-      <div class="rr-product-info">
-        <span>{{product.name}}</span>
-        <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
-        <span>
-          {{#each product.options}}
-            {{name}}: {{value}}
-            {{#unless @last}}
-            ,&nbsp;
-            {{/unless}}
-          {{/each}}
-        </span>
-      </div>
+      <div class="rr-progress-line"></div>
+      <div class="rr-divider"></div>
     </div>
-    <div class="rr-progress-line"></div>
-    <div class="rr-divider"></div>
-  </div>
+  {{/if}}
 
   {{!-- Store infos --}}
   <div class="rr-store">
-    <div class="rr-store-name">
-      {{location.name}}
-      {{>link label="reserve.changeStore" href="#" class="rr-store-change"}}
-    </div>
-
-    <div class="rr-store-detail">
-      <div>
-        <p class="rr-bold">{{t "storeList.location.address" }}</p>
-
-        <p>{{t "addresses.line1" street=location.primaryAddress.street street2=location.primaryAddress.street2}}</p>
-        <p>{{t "addresses.line2" city=location.primaryAddress.city region=location.primaryAddress.region postalCode=location.primaryAddress.postalCode}}</p>
-        {{> link
-            class="rr-directions"
-            label="storeList.location.directions"
-            href=(direction location.primaryAddress)
-            target="_blank"
-        }}
+    {{#if showLocation }}
+      <div class="rr-store-name">
+        {{location.name}}
+        {{>link label="reserve.changeStore" href="#" class="rr-store-change"}}
       </div>
-      <div>
-        {{#if location.operationHours}}
-          <p class="rr-bold">{{t "storeList.location.storeHours" }}</p>
-          {{#each location.operationHours}}
-            {{#if this}}
-              <p>{{t (concat "date." @key) }}: {{this}}</p>
-            {{/if}}
-          {{/each}}
-        {{/if}}
+
+      <div class="rr-store-detail">
+        <div>
+          <p class="rr-bold">{{t "storeList.location.address" }}</p>
+
+          <p>{{t "addresses.line1" street=location.primaryAddress.street street2=location.primaryAddress.street2}}</p>
+          <p>{{t "addresses.line2" city=location.primaryAddress.city region=location.primaryAddress.region postalCode=location.primaryAddress.postalCode}}</p>
+          {{> link
+              class="rr-directions"
+              label="storeList.location.directions"
+              href=(direction location.primaryAddress)
+              target="_blank"
+          }}
+        </div>
+        <div>
+          {{#if location.operationHours}}
+            <p class="rr-bold">{{t "storeList.location.storeHours" }}</p>
+            {{#each location.operationHours}}
+              {{#if this}}
+                <p>{{t (concat "date." @key) }}: {{this}}</p>
+              {{/if}}
+            {{/each}}
+          {{/if}}
+        </div>
       </div>
-    </div>
+    {{/if}}
 
     {{!-- Form --}}
     <div class="rr-form">
@@ -121,12 +125,16 @@
   RetailRedStorefront.onLoad(function (controller) {
     {{!-- Prefill data --}}
     controller.prefillFormData();
+
     {{!-- Handle store change --}}
-    document.querySelector('#rr-omni .rr-store-change').addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      controller.app.popRoute();
-    });
+    {{#if showHeader }}
+      document.querySelector('.rr-store-change').addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        controller.app.popRoute();
+      });
+    {{/if}}
+
     {{!-- Handle reserve submit --}}
     var reserveButton = document.querySelector('#rr-reserve-submit');
     reserveButton.addEventListener('click', function (e) {
@@ -134,19 +142,22 @@
       e.stopImmediatePropagation();
       controller.submit();
     });
+
     {{!-- Handle email save --}}
     controller.syncCustomerData();
+
     {{!-- Handle terms/privacy checkbox --}}
-    var legals = Array.prototype.slice.call(document.querySelectorAll('#rr-omni .rr-legal input[type="checkbox"]'));
+    var legals = Array.prototype.slice.call(document.querySelectorAll('.rr-legal input[type="checkbox"]'));
     legals.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
         var allChecked = legals.every(function(check) { return check.checked === true });
         reserveButton.disabled = !allChecked;
       });
     });
+    
     {{!-- Handle pickup person switcher --}}
     var reservePickup = document.querySelector('#rr-reserve-pickup');
-    var reservePickupSection = document.querySelector('#rr-omni .rr-pickup-contact');
+    var reservePickupSection = document.querySelector('.rr-pickup-contact');
     reservePickup.addEventListener('change', function (e) {
       if (e.target.value === 'me') {
         reservePickupSection.classList.add('rr-hidden');

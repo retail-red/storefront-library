@@ -178,6 +178,43 @@ class StorefrontAPI {
       query,
     });
   }
+
+  /**
+   * Receives data of a specific product.
+   * @param {String} productCode The target product code.
+   * @param {Array} fields Data fields that should be fetched.
+   * @returns {Object}
+   */
+  async getProduct(productCode, fields) {
+    return this._genericRequest({
+      endpoint: `/v1/products/${encodeURIComponent(productCode)}`,
+      query: {
+        fields: fields.join(','),
+      },
+    });
+  }
+
+  /**
+   * Validates the given product configuration and returns all further
+   * The configuration consists of an array of selected options.
+
+   * Each option looks like `{ code: 'codeOfOption', valueCode: 'codeOfValue' }`
+   * available configurations from this point.
+   * The configuration consists of an array of selected options.
+   * Each option looks like `{ code: 'codeOfOption', valueCode: 'codeOfValue' }`
+   * @param {String} productCode
+   * @param {Array} selectedOptions
+   * @returns {Object}
+   */
+  async validateProductConfiguration(productCode, selectedOptions) {
+    return this._genericRequest({
+      method: 'POST',
+      endpoint: `/v1/products/${encodeURIComponent(productCode)}/validate`,
+      body: {
+        selectedOptions,
+      },
+    });
+  }
 }
 
 export default StorefrontAPI;

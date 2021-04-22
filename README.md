@@ -252,28 +252,34 @@ sdk.getLocations({ countryCode: 'de', postalCode: '35510' }).then(function(resul
 });
 ```
 
-| Function                  | Parameters                 | Description                                                                                        |
-|---------------------------|----------------------------|----------------------------------------------------------------------------------------------------|
-| **createOrders**          |                            | Creates multiple orders at once - the created order numbers are returned once completed            |
-|                           | `orders`                   | Array of orders - refer to the API docs for a full look at the object structure                    |
-| **createOrder**           |                            | Creates a single new order - the created order number is returned once completed                   |
-|                           | `order`                    | Order object - refer to the API docs for a full look at the object structure                       |
-| **getInventories**        |                            | Fetches the inventory for products at a given location                                             |
-|                           | `codePairs`                | Array of multiple location/product code pairs                                                      |
-|                           | `codePairs[].locationCode` | The location code                                                                                  |
-|                           | `codePairs[].productCode`  | The product code                                                                                   |
-| **getProductInventories** |                            | Fetches the inventory for a product at multiple locations                                          |
-|                           | `productCode`              | The product code                                                                                   |
-|                           | `locationCodes`            | Array of location codes / or single location code                                                  |
-|                           | `catalogCode`              | Optional: Specifies a specific catalog                                                             |
-| **getLocations**          |                            | Fetches a list of locations                                                                        |
-|                           | `productCode`              | Optional: Will only fetch locations that have this product available                               |
-|                           | `postalCode`               | Optional: Postal code to filter and sort by distance.                                              |
-|                           | `countryCode`              | Optional: Country code                                                                             |
-|                           | `longitude`                | Optional: Longitude of the user to filter and sort by distance (Must be combined with `latitude`)  |
-|                           | `latitude`                 | Optional: Longitude of the user to filter and sort by distance (Must be combined with `longitude`) |
-|                           | ...                        | Optional: Refer to the API docs for a full look at all available options                           |
-
+| Function                         | Parameters                    | Description                                                                                                 |
+|----------------------------------|-------------------------------|-------------------------------------------------------------------------------------------------------------|
+| **createOrders**                 |                               | Creates multiple orders at once - the created order numbers are returned once completed                     |
+|                                  | `orders`                      | Array of orders - refer to the API docs for a full look at the object structure                             |
+| **createOrder**                  |                               | Creates a single new order - the created order number is returned once completed                            |
+|                                  | `order`                       | Order object - refer to the API docs for a full look at the object structure                                |
+| **getInventories**               |                               | Fetches the inventory for products at a given location                                                      |
+|                                  | `codePairs`                   | Array of multiple location/product code pairs                                                               |
+|                                  | `codePairs[].locationCode`    | The location code                                                                                           |
+|                                  | `codePairs[].productCode`     | The product code                                                                                            |
+| **getProductInventories**        |                               | Fetches the inventory for a product at multiple locations                                                   |
+|                                  | `productCode`                 | The product code                                                                                            |
+|                                  | `locationCodes`               | Array of location codes / or single location code                                                           |
+|                                  | `catalogCode`                 | Optional: Specifies a specific catalog                                                                      |
+| **getLocations**                 |                               | Fetches a list of locations                                                                                 |
+|                                  | `productCode`                 | Optional: Will only fetch locations that have this product available                                        |
+|                                  | `postalCode`                  | Optional: Postal code to filter and sort by distance.                                                       |
+|                                  | `countryCode`                 | Optional: Country code                                                                                      |
+|                                  | `longitude`                   | Optional: Longitude of the user to filter and sort by distance (Must be combined with `latitude`)           |
+|                                  | `latitude`                    | Optional: Longitude of the user to filter and sort by distance (Must be combined with `longitude`)          |
+|                                  | ...                           | Optional: Refer to the API docs for a full look at all available options                                    |
+| **getProduct**                   |                               | Fetches the data of a given product.                                                                        |
+|                                  | `productCode`                 | The target product code                                                                                     |
+|                                  | `fields`                      | An array of fields that should be fetched for example: `['code', 'parentProductCode']`                      |
+| **validateProductConfiguration** |                               | Validates the given product configuration and returns all further available configurations from this point. |
+|                                  | `productCode`                 | The target product code                                                                                     |
+|                                  | `selectedOptions[].code`      | The code of a selected option                                                                               |
+|                                  | `selectedOptions[].valueCode` | The code of the value                                                                                       |
 
 ## Development
 

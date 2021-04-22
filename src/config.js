@@ -3,6 +3,7 @@ import merge from 'lodash/merge';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import { getBrowserLanguage } from './util/browser';
+import { getExtraDefaultConfig, getExtraStoredConfig } from './internal';
 
 const requiredProperties = [
   'apiKey',
@@ -21,6 +22,7 @@ const storedProperties = [
   'customer.lastName',
   'customer.phone',
   'customer.emailAddress',
+  ...getExtraStoredConfig(),
 ];
 
 // Load default config from location code.
@@ -64,7 +66,7 @@ const defaultConfig = merge({
     customVariables: {},
     customTemplates: {},
   },
-}, storedConfig);
+}, getExtraDefaultConfig(), storedConfig);
 
 /**
  * Creates a new config object with merged defaults and validation.

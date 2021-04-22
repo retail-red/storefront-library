@@ -1,3 +1,6 @@
-<div class="rr-placeholder" style="width:{{width}};min-height:{{height}};">
+<div 
+  class="rr-placeholder {{#if light}}rr-placeholder-light{{/if}} {{#if class}}{{class}}{{/if}}" 
+  style="width:{{width}};min-height:{{height}};{{#if marginBottom}}margin-bottom:{{marginBottom}}{{/if}}"
+>
   <div class="rr-animated-background" style="height:{{height}};" ></div>
 </div>
