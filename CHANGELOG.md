@@ -1,6 +1,6 @@
 # retail.red Storefront Library Changelog
 
-## v1.2.0
+## v1.2.0 (Planned)
 - Added new SDK method `getProduct` to receive product data.
 - Added new SDK method `validateProductConfiguration` for product option validations.
 - Improved internal extensibility for further usages like the retail.red Checkout Page.

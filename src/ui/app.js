@@ -105,7 +105,7 @@ class App {
   /**
    * Initiates flow and opens the reservation modal.
    */
-  start(target, state = {}) {
+  start(target, state = {}, initialRoute = 'storeList') {
     // Start listening to history
     this.historyIndex = 0;
     this.historyUnlisten = this.history.listen((o) => this._handleHistoryChange(o));
@@ -151,7 +151,7 @@ class App {
     document.querySelector('body').classList.add('rr-modal-backdrop-body-fix');
 
     // Push starting route configuration
-    this.pushRoute('storeList', { locationCode: this.config.locationCode, ...state });
+    this.pushRoute(initialRoute, { locationCode: this.config.locationCode, ...state });
   }
 
   /**
