@@ -48,6 +48,7 @@ const defaultConfig = merge({
     lastName: '',
     phone: '',
     emailAddress: '',
+    country: 'DE',
     remember: true,
   },
   legal: {

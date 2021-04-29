@@ -127,14 +127,15 @@ retailred.updateConfig({
 ### Customer Configuration
 These will be used to prefill the reservation form with the currently logged in user.
 
-| Property                | Default | Required | Description                                                                                                   |
-|-------------------------|---------|----------|---------------------------------------------------------------------------------------------------------------|
+| Property                | Default | Required | Description                                                                                                  |
+|-------------------------|---------|----------|--------------------------------------------------------------------------------------------------------------|
 | `customer.code`         | `null`  | NO       | Add a unique identifier to the customer, inside the order this will be stored as the `externalCustomerNumer` |
-| `customer.firstName`    | `""`    | NO       | First name                                                                                                    |
-| `customer.lastName`     | `""`    | NO       | Last name                                                                                                     |
-| `customer.emailAddress` | `""`    | NO       | Email address                                                                                                 |
-| `customer.phone`        | `""`    | NO       | Phone number, ex. `"+49123456"`                                                                               |
-| `customer.remember`     | `true`    | NO       |  If enabled the customers entered data will be stored for the next time he initiates a reservation.                                                                              |
+| `customer.firstName`    | `""`    | NO       | First name                                                                                                   |
+| `customer.lastName`     | `""`    | NO       | Last name                                                                                                    |
+| `customer.emailAddress` | `""`    | NO       | Email address                                                                                                |
+| `customer.phone`        | `""`    | NO       | Phone number, ex. `"+49123456"` or `"0123456"`                                                               |
+| `customer.country`      | `"DE"`  | NO       | The customers country (ISO 3166-1 alpha-2). Also used for correct phone number formatting.                   |
+| `customer.remember`     | `true`  | NO       | If enabled the customers entered data will be stored for the next time he initiates a reservation.           |
 
 
 ### Inventory Configuration

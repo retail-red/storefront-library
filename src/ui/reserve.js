@@ -132,6 +132,7 @@ class ReserveController extends Controller {
           lastName: submitData.lastName,
           phone: submitData.phone,
           emailAddress: submitData.emailAddress,
+          country: this.config.customer.country,
         },
       ],
       lineItems: [{
