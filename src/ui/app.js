@@ -256,7 +256,7 @@ class App {
   }
 
   syncLoadingState() {
-    const progressLine = document.querySelector('.rr-progress-line');
+    const progressLine = document.querySelector('.rr-header .rr-progress-line');
     if (!progressLine) {
       return;
     }

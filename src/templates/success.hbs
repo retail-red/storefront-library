@@ -12,7 +12,10 @@
     <div class="rr-location-info">
       <div>
         <h4 class="rr-bold">{{t "success.location.address" }}</h4>
-        <p>{{primaryAddress.street}} {{primaryAddress.street2}}</p>
+        <p>{{primaryAddress.street}}</p>
+        {{#if primaryAddress.street2}}
+        <p>{{primaryAddress.street2}}</p>
+        {{/if}}
         <p>{{primaryAddress.city}}, {{primaryAddress.region}} {{primaryAddress.postalCode}}</p>
         <p>{{t "success.location.phone" }} {{primaryAddress.phoneNumber}}</p>
 

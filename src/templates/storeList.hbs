@@ -74,8 +74,11 @@
               <div class="rr-store-details">
                 <div>
                   <p class="rr-bold">{{t "storeList.location.address" }}</p>
-                  <p>{{t "addresses.line1" street=primaryAddress.street street2=primaryAddress.street2}}</p>
-                  <p>{{t "addresses.line2" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
+                  <p>{{t "addresses.line1" street=primaryAddress.street}}</p>
+                  {{#if primaryAddress.street2}}
+                  <p>{{t "addresses.line2" street2=primaryAddress.street2}}</p>
+                  {{/if}}
+                  <p>{{t "addresses.line3" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
                   {{#if primaryAddress.phoneNumber}}
                     <p>
                       {{t "addresses.tel" }}

@@ -17,8 +17,9 @@ export default {
     sun: 'Sonntag',
   },
   addresses: {
-    line1: '{{street}} {{street2}}',
-    line2: '{{postalCode}} {{city}}',
+    line1: '{{street}}',
+    line2: '{{street2}}',
+    line3: '{{postalCode}} {{city}}',
     tel: 'Tel.:',
   },
   errors: {

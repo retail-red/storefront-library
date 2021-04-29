@@ -38,8 +38,11 @@
         <div>
           <p class="rr-bold">{{t "storeList.location.address" }}</p>
 
-          <p>{{t "addresses.line1" street=location.primaryAddress.street street2=location.primaryAddress.street2}}</p>
-          <p>{{t "addresses.line2" city=location.primaryAddress.city region=location.primaryAddress.region postalCode=location.primaryAddress.postalCode}}</p>
+          <p>{{t "addresses.line1" street=location.primaryAddress.street}}</p>
+          {{#if location.primaryAddress.street2}}
+            <p>{{t "addresses.line2" street2=location.primaryAddress.street2}}</p>
+          {{/if}}
+          <p>{{t "addresses.line3" city=location.primaryAddress.city region=location.primaryAddress.region postalCode=location.primaryAddress.postalCode}}</p>
           {{> link
               class="rr-directions"
               label="storeList.location.directions"
