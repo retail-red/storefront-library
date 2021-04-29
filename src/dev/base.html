@@ -247,6 +247,7 @@
   <script>
     document.querySelector('#reset').addEventListener('click', () => {
       window.localStorage.removeItem('rr-config-v1');
+      window.localStorage.removeItem('rr-testing-v1');
       window.location.reload();
     });
     document.querySelector('#setUnavailable').addEventListener('click', () => {

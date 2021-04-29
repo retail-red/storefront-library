@@ -5,8 +5,11 @@ import ReserveController from './ui/reserve';
 import LiveInventoryController from './ui/liveInventory';
 import SuccessController from './ui/success';
 import App from './ui/app';
+import { getQueryParameter } from './util/browser';
 import reserveButtonTemplate from './templates/reserveButton.hbs';
 import Sdk from './sdk';
+
+const LOCAL_STORAGE_KEY = 'rr-testing-v1';
 
 class Instance {
   /**
@@ -19,6 +22,7 @@ class Instance {
     this.sdk = new Sdk(config.apiKey, config.apiStage);
     this.Class = Instance;
     this._handleConfigUpdate();
+    this._handleTestingParam();
   }
 
   static _globalModalPlaceholderSingleton() {
@@ -38,6 +42,36 @@ class Instance {
     const { localeCode, countries, ...languages } = this.config.localization;
     updateLanguage(localeCode);
     updateCustomTranslations(languages);
+  }
+
+  _handleTestingParam() {
+    const rrTesting = getQueryParameter('rrTesting');
+
+    if (rrTesting === 'start') {
+      try {
+        window.localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+      } catch (r) { /* */ }
+    } else if (rrTesting === 'end') {
+      try {
+        window.localStorage.removeItem(LOCAL_STORAGE_KEY);
+      } catch (e) { /* */ }
+    }
+  }
+
+  _isRenderAllowed() {
+    const { testMode } = this.config;
+
+    if (testMode !== true) {
+      return true;
+    }
+
+    let rrTesting;
+
+    try {
+      rrTesting = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+    } catch (r) { /* */ }
+
+    return rrTesting === 'true';
   }
 
   _createApp() {
@@ -75,7 +109,7 @@ class Instance {
   // eslint-disable-next-line no-unused-vars
   renderReserveButton(target, options = {}, callback = (cb) => cb()) {
     // Validate config
-    if (!validateConfigForRendering(this.config)) {
+    if (!this._isRenderAllowed() || !validateConfigForRendering(this.config)) {
       return;
     }
 
@@ -106,7 +140,7 @@ class Instance {
    */
   renderLiveInventory(target, options = { variant: 'modal' }) {
     // Validate config
-    if (!validateConfigForRendering(this.config)) {
+    if (!this._isRenderAllowed() || !validateConfigForRendering(this.config)) {
       return;
     }
 
@@ -125,7 +159,7 @@ class Instance {
    */
   openReservationModal() {
     // Validate config
-    if (!validateConfigForRendering(this.config)) {
+    if (!this._isRenderAllowed() || !validateConfigForRendering(this.config)) {
       return;
     }
 

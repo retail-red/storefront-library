@@ -41,6 +41,7 @@ const defaultConfig = merge({
   unitSystem: 'metric',
   browserHistory: true,
   useGeolocationImmediately: true,
+  testMode: false,
   customer: {
     code: null,
     firstName: '',

@@ -48,3 +48,13 @@ export const getOS = () => {
   // All other
   return 'other';
 };
+
+/**
+ * Determines the value a a query parameter
+ * @param {string} name The parameter name
+ * @returns {*}
+ */
+export const getQueryParameter = (name = '') => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+};
