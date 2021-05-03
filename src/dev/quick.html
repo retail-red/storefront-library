@@ -38,7 +38,7 @@
         ],
         quantity: 2,
         imageUrl: 'https://www.thesprucepets.com/thmb/MvGbvyjlmorL0z1ZiiS0C2ZsgZE=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/cutelizard-5af06fe6c673350037e7be98.JPG',
-        price: 34.0,
+        price: 34.25,
         currencyCode: 'USD',
       },
     });
@@ -51,6 +51,10 @@
 
     // Whenever application is ready render the reserve button
     retailred.renderReserveButton('#omni-dropin');
+
+    retailred.addEventListener('orderCreated', ({ order }) => {
+      console.warn('[DEBUG] Order created', order);
+    });
   }
 </script>
 

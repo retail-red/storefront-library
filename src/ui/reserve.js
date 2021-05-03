@@ -75,6 +75,22 @@ class ReserveController extends Controller {
     });
   }
 
+  sanitizeOrderTrackingData(orderData) {
+    const {
+      addressSequences,
+      primaryBillToAddressSequenceIndex,
+      primaryShipToAddressSequenceIndex,
+      ...trackingData
+    } = orderData;
+
+    trackingData.lineItems = trackingData.lineItems.map((lineItem) => {
+      const { shipToAddressSequenceIndex, ...entry } = lineItem;
+      return entry;
+    });
+
+    return trackingData;
+  }
+
   async submit() {
     const { product } = this.config;
     const { location } = this.state;
@@ -193,6 +209,11 @@ class ReserveController extends Controller {
         alert(hasTranslation() ? t(specific) : t('errors.unknown'));
         return;
       }
+
+      this.app.publicInterface._triggerEvent('orderCreated', {
+        order: this.sanitizeOrderTrackingData(orderData),
+      });
+
       this.app.pushEndRoute('success', { location, reservationNumber: orderNumbers[0] });
     } catch (ex) {
       // eslint-disable-next-line no-alert

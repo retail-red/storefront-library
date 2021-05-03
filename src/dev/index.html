@@ -73,6 +73,10 @@
     retailred.addEventListener('locationChanged', ({ location }) => {
       console.warn(`[DEBUG] Location was changed to '${location.name}'`);
     });
+
+    retailred.addEventListener('orderCreated', ({ order }) => {
+      console.warn('[DEBUG] Order created', order);
+    });
   }
 </script>
 
