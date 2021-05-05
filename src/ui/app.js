@@ -158,7 +158,7 @@ class App {
    * Renders a controller inlined into any given container.
    * DOES NOT SUPPORT history within the inline element yet.
    */
-  renderInline(target, route, state = {}) {
+  renderInline(target, route, state = {}, isMain = false) {
     // Initialize controller
     const RouteController = this.routes[route];
     const controller = new RouteController(
@@ -170,6 +170,7 @@ class App {
     );
     this.activeInlineController = this.activeInlineController || [];
     this.activeInlineController.push(controller);
+    this.activeInlineControllerMain = isMain;
 
     // Render content
     const handler = async () => {
@@ -227,7 +228,7 @@ class App {
 
   pushEndRoute(name, state) {
     // Render content.
-    if (this.activeInlineController) {
+    if (this.activeInlineController && this.activeInlineControllerMain) {
       const newController = this._buildController(this.routes[name]);
       const load = async () => {
         const output = await newController.load(state);

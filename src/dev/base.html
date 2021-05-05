@@ -85,7 +85,7 @@
  <div class=product-img-box>
  <div class=product-img-box>
  <div class=product-img-box>
- <img class=main_image id=main_image rel=image_src width=580 src="https://www.thesprucepets.com/thmb/MvGbvyjlmorL0z1ZiiS0C2ZsgZE=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/cutelizard-5af06fe6c673350037e7be98.JPG" alt=base> 
+ <img class=main_image id=main_image rel=image_src width=580 src="https://live.staticflickr.com/735/32901852082_38ee69309d_b.jpg" alt=base> 
  <div id=media_overlay_bg class="product_media_overlay_bg hidden sf-hidden"></div>
  <div id=media_overlay class="product_media_overlay hidden sf-hidden">
  
@@ -253,6 +253,18 @@
     document.querySelector('#setUnavailable').addEventListener('click', () => {
       window.localStorage.setItem('rr-config-v1', JSON.stringify({ locationCode: 'rr-frankfurt' }));
       window.location.reload();
+    });
+  </script>
+</div>
+
+<div class="demos">
+  <h3>Custom Config</h3>
+  <textarea id="custom-config" style="width: 50%; height: 200px"></textarea>
+  <script>
+    window.customConfig = JSON.parse(window.localStorage.getItem('rr-custom-config') || '{}'); 
+    document.querySelector('#custom-config').value = JSON.stringify(window.customConfig, null, 2);
+    document.querySelector('#custom-config').addEventListener('change', e => {
+      window.localStorage.setItem('rr-custom-config', e.target.value);
     });
   </script>
 </div>
