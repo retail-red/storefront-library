@@ -26,7 +26,7 @@
     border: 1px solid gray;
     border-radius: 5px;
     padding: 0.8em 0.7em;
-    color: #000;
+    color: rgb(var(--color-input));
     transition: 0.1s ease-out;
     min-height: auto;
     height: auto;
@@ -137,7 +137,7 @@
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
-  color: #fff;
+  color: rgb(var(--color-primary-contrast, 255, 255, 255));
   background-color: rgb(var(--color-primary, 33, 150, 243));
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   font-size: 14px;
@@ -149,7 +149,7 @@
 
   // Icon button
   svg {
-    fill: #fff;
+    fill: rgb(var(--color-primary-contrast, 255, 255, 255));;
     width: 24px;
     height: 24px;
   }
