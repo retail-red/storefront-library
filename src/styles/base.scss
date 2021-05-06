@@ -1,13 +1,17 @@
 #rr-omni.rr-omni-int, #rr-inventory {
-  * {
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  }
-
+  --color-text: 0, 0, 0;
   --color-primary: 0, 0, 0;
+  --color-primary-contrast: 255, 255, 255;
   --color-link: 60, 155, 181;
   --color-state-alarm : 176, 0, 32;
   --color-state-warning: 241, 156, 69;
   --color-state-success: 50, 172, 92;
+  --color-input: var(--color-text);
+
+  * {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: rgb(var(--color-text, 0, 0, 0));
+  }
 
   @import "breakpoints";
   @import "mixins";
@@ -28,4 +32,5 @@
 
 #rr-omni-reserve-button {
   background: rgb(var(--color-primary, 0, 0, 0));
+  color: rgb(var(--color-primary-contrast, 255, 255, 255));
 }

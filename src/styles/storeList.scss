@@ -129,7 +129,7 @@
         font-weight: bold;
         .rr-distance {
           font-weight: normal;
-          color: rgba(0, 0, 0, 0.53);
+          color: rgb(var(--color-text, 0, 0, 0), 0.53)
         }
       }
 

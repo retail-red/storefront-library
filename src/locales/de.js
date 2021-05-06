@@ -25,7 +25,7 @@ export default {
   errors: {
     unknown: 'Reservierung konnte nicht aufgegeben werden.',
     validation: {
-      isRequired: 'Feld is erforderlich.',
+      isRequired: 'Feld ist erforderlich.',
       isEmail: 'Feld muss eine korrekte E-Mail-Adresse sein.',
       isPhone: 'Feld muss eine korrekte Telefon-Nr sein. (+49 1234)',
     },

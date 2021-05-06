@@ -66,16 +66,21 @@ All of the rendered UI are using CSS classes that can be used to override **any*
 For colors we provided CSS variables that can be overridden once for all usages. Please stick to RGB style color definitions. These allow automatically generated sub colors.
 ```css
 #rr-omni #rr-omni-custom, #rr-omni-reserve-button, #rr-inventory-custom {
+  /* Color for common text */
+  --color-text: 255, 255, 255;
   /* Primary color used for form elements and buttons */
   --color-primary: 0, 0, 0;
+  /* Contrast color for the primary color - used as button text color  */
+  --color-primary-contrast: 255, 255, 255;
   /* Color used for links */
   --color-link: 60, 155, 181;
   /* Color used for alerting texts like errors */
   --color-state-alarm : 176, 0, 32;
   /* Color used for highlighting problems like low stock */
   --color-state-warning: 241, 156, 69;
-  /* Color used for positve highlighting like successful reservation text. */
+  /* Color used for positive highlighting like successful reservation text */
   --color-state-success: 50, 172, 92;
+
 }
 ```
 
