@@ -4,6 +4,9 @@
 - Added new SDK method `getProduct` to receive product data.
 - Added new SDK method `validateProductConfiguration` for product option validations.
 - Improved internal extensibility for further usages like the retail.red Checkout Page.
+- Introduced new config `testMode` which allows integration without affecting all customers.
+- Introduced event `orderCreated` which is fired after an order has been placed.
+- Additional but optional product data `identifiers` is now supported.
 
 ## v1.1.0
 https://cdn.retail.red/omni/retailred-storefront-library-1.1.0.js

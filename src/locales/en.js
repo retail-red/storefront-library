@@ -19,7 +19,7 @@ export default {
   addresses: {
     line1: '{{street}}',
     line2: '{{street2}}',
-    line3: '{{city}}, {{region}} {{postalCode}}',
+    line3: '{{city}}, {{postalCode}}',
     tel: 'Tel.:',
   },
   errors: {
