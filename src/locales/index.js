@@ -75,6 +75,18 @@ export const hasTranslation = (key) => !!activeTranslations[activeLanguage][key]
  * @return {Array}
  */
 export const getCountries = () => {
-  const value = activeTranslations.countries;
-  return Object.entries(value).map(([code, name]) => ({ code, name }));
+  if (!activeTranslations[activeLanguage]) {
+    return null;
+  }
+
+  return Object.entries(activeTranslations[activeLanguage]).reduce((result, [key, value]) => {
+    if (!key.startsWith('countries.')) {
+      return result;
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    result[key.replace('countries.', '')] = value;
+
+    return result;
+  }, {});
 };

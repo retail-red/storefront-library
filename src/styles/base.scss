@@ -13,6 +13,8 @@
     color: rgb(var(--color-text, 0, 0, 0));
   }
 
+  $flagsImagePath: '../static/';
+
   @import "breakpoints";
   @import "mixins";
   @import "reset";
@@ -22,6 +24,7 @@
   @import "reserve";
   @import "success";
   @import "loading";
+  @import "~intl-tel-input/src/css/intlTelInput";
 }
 
 @import "liveInventory";

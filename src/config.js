@@ -22,6 +22,7 @@ const storedProperties = [
   'customer.lastName',
   'customer.phone',
   'customer.emailAddress',
+  'customer.country',
   ...getExtraStoredConfig(),
 ];
 

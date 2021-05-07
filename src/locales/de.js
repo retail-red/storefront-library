@@ -23,11 +23,11 @@ export default {
     tel: 'Tel.:',
   },
   errors: {
-    unknown: 'Reservierung konnte nicht aufgegeben werden.',
+    unknown: 'Reservierung konnte nicht aufgegeben werden',
     validation: {
-      isRequired: 'Feld ist erforderlich.',
-      isEmail: 'Feld muss eine korrekte E-Mail-Adresse sein.',
-      isPhone: 'Feld muss eine korrekte Telefon-Nr sein. (+49 1234)',
+      isRequired: 'Feld ist erforderlich',
+      isEmail: 'Feld muss eine korrekte E-Mail-Adresse sein',
+      isPhone: 'Feld muss eine korrekte Telefon-Nr sein',
     },
   },
   storeList: {

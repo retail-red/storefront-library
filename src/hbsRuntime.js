@@ -2,6 +2,7 @@ import handlebars from 'handlebars';
 import { t, hasTranslation } from './locales';
 import { createDirectionsLink } from './util/map';
 import textFieldPartial from './templates/partials/textField.hbs';
+import textFieldPhonePartial from './templates/partials/textFieldPhone.hbs';
 import selectFieldPartial from './templates/partials/select.hbs';
 import buttonPartial from './templates/partials/button.hbs';
 import linkPartial from './templates/partials/link.hbs';
@@ -36,6 +37,7 @@ handlebars.registerHelper('distance', (distance, unitSystem) => `${distance
 handlebars.registerHelper('direction', (address) => createDirectionsLink(address));
 
 handlebars.registerPartial('textField', textFieldPartial);
+handlebars.registerPartial('textFieldPhone', textFieldPhonePartial);
 handlebars.registerPartial('select', selectFieldPartial);
 handlebars.registerPartial('button', buttonPartial);
 handlebars.registerPartial('link', linkPartial);

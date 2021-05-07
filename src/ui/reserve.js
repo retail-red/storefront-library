@@ -1,5 +1,8 @@
+import intlTelInput from 'intl-tel-input';
+// Static file import
+import utilsScript from '../static/utils';
 import Controller from './controller';
-import { t, hasTranslation } from '../locales';
+import { t, hasTranslation, getCountries } from '../locales';
 import { isRequired, isEmail, isPhone } from '../util/validation';
 
 const formData = {
@@ -7,10 +10,12 @@ const formData = {
   lastName: 'rr-reserve-last-name',
   phone: 'rr-reserve-phone-number',
   emailAddress: 'rr-reserve-email',
+  country: 'rr-reserve-country',
   pickupFirstName: 'rr-reserve-pickup-first-name',
   pickupLastName: 'rr-reserve-pickup-last-name',
   pickupPhone: 'rr-reserve-pickup-phone-number',
   pickupEmailAddress: 'rr-reserve-pickup-email',
+  pickupCountry: 'rr-reserve-pickup-country',
 };
 
 const validation = {
@@ -48,6 +53,7 @@ class ReserveController extends Controller {
         pickupLastName: '',
         pickupEmailAddress: '',
         pickupPhone: '',
+        pickupCountry: '',
       },
     };
   }
@@ -59,12 +65,24 @@ class ReserveController extends Controller {
     });
   }
 
+  initIntlTelInput(input, extraOptions = {}) {
+    const initialCountry = (this.config.customer.country || '').toLowerCase();
+
+    return intlTelInput(input, {
+      initialCountry: initialCountry || 'auto',
+      localizedCountries: getCountries() || {},
+      nationalMode: true,
+      utilsScript,
+      ...extraOptions,
+    });
+  }
+
   syncCustomerData() {
     if (!this.config.customer.remember) {
       return;
     }
 
-    const stored = ['firstName', 'lastName', 'phone', 'emailAddress'];
+    const stored = ['firstName', 'lastName', 'phone', 'emailAddress', 'country'];
     stored.forEach((property) => {
       const element = document.querySelector(`#${formData[property]}`);
       element.addEventListener('blur', (e) => {
@@ -141,6 +159,7 @@ class ReserveController extends Controller {
           lastName: submitData.lastName,
           phone: submitData.phone,
           emailAddress: submitData.emailAddress,
+          country: submitData.country,
         },
         {
           type: 'pickup',
@@ -148,7 +167,7 @@ class ReserveController extends Controller {
           lastName: submitData.lastName,
           phone: submitData.phone,
           emailAddress: submitData.emailAddress,
-          country: this.config.customer.country,
+          country: submitData.country,
         },
       ],
       lineItems: [{
@@ -196,6 +215,7 @@ class ReserveController extends Controller {
         lastName: submitData.pickupLastName,
         phone: submitData.pickupPhone,
         emailAddress: submitData.pickupEmailAddress,
+        country: submitData.pickupCountry,
       };
     }
 

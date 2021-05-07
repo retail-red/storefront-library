@@ -41,6 +41,7 @@
     "handlebars": "^4.7.6",
     "history": "^5.0.0",
     "i18n-iso-countries": "^6.4.0",
+    "intl-tel-input": "~17.0.12",
     "lodash": "^4.17.20"
   }
 }
