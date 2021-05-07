@@ -43,6 +43,7 @@ upload dev:
     - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/quick.html --body dist/dev/quick.html --content-type "text/html; charset=utf-8" --acl public-read
     - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/flags.png --body dist/dev/flags.png --content-type image/png --acl public-read
     - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/flags@2x.png --body dist/dev/flags@2x.png --content-type image/png --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/utils.js --body dist/dev/utils.js --content-type application/javascript --acl public-read
 
 upload prod:
   extends: .upload
@@ -56,3 +57,4 @@ upload prod:
     - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/retailred-storefront-library-v1.js --body dist/prod/main.js --content-type application/javascript
     - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/flags.png --body dist/prod/flags.png --content-type image/png
     - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/flags@2x.png --body dist/prod/flags@2x.png --content-type image/png
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/utils.js --body dist/prod/utils.js --content-type application/javascript
