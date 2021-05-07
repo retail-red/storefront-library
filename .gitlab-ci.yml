@@ -9,7 +9,7 @@ build:
     - docker
   before_script:
     - npm i
-    - npm audit
+    - npm run checkVulnerabilities
   script:
     - STAGE=development npm run build
     - STAGE=production npm run build
