@@ -1,0 +1,11 @@
+{
+  "decisions": {
+    "1677|eslint-plugin-import>read-pkg-up>read-pkg>normalize-package-data>hosted-git-info": {
+      "decision": "ignore",
+      "madeAt": 1620405916649,
+      "expiresAt": 1621010656265
+    }
+  },
+  "rules": {},
+  "version": 1
+}
