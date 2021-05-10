@@ -27,7 +27,7 @@ export default {
     validation: {
       isRequired: 'Field is required',
       isEmail: 'Field must be a valid email address',
-      isPhone: 'Field must be a valid phone number with country code (+49 1234)',
+      isPhone: 'Field must be a valid phone number',
     },
   },
   storeList: {

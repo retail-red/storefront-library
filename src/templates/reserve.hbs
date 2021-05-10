@@ -72,7 +72,7 @@
           {{> textField id="rr-reserve-last-name" label="reserve.lastName" autocomplete="family-name" }}
         </div>
         <div class="rr-form-row">
-          {{> textField id="rr-reserve-phone-number" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
+          {{> textFieldPhone id="rr-reserve-phone-number" countryFieldId="rr-reserve-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
           {{> textField id="rr-reserve-email" label="reserve.email" type="email" autocomplete="email" }}
         </div>
       </div>
@@ -94,7 +94,7 @@
           {{> textField id="rr-reserve-pickup-last-name" label="reserve.lastName" autocomplete="family-name" }}
         </div>
         <div class="rr-form-row">
-          {{> textField id="rr-reserve-pickup-phone-number" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
+          {{> textFieldPhone id="rr-reserve-pickup-phone-number" countryFieldId="rr-reserve-pickup-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
           {{> textField id="rr-reserve-pickup-email" label="reserve.email" type="email" autocomplete="email" }}
         </div>
       </div>
@@ -157,7 +157,7 @@
         reserveButton.disabled = !allChecked;
       });
     });
-    
+
     {{!-- Handle pickup person switcher --}}
     var reservePickup = document.querySelector('#rr-reserve-pickup');
     var reservePickupSection = document.querySelector('.rr-pickup-contact');

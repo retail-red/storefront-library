@@ -44,6 +44,33 @@
     top: 0;
     transform: translateY(-50%) scale(.9);
   }
+
+  div.iti {
+    width: 100%;
+
+    label {
+      left: 40px;
+    }
+
+    input {
+    //  padding-left: 50px;
+      &:focus + label {
+        left: 0;
+      }
+      &:not(:placeholder-shown) + label {
+        left: 0;
+      }
+    }
+
+    .iti__dial-code {
+      color: rgb(var(--color-text, 0, 0, 0), 0.53);
+      vertical-align: middle;
+    }
+
+    .iti__country-list {
+      z-index: 1001;
+    }
+  }
 }
 
 .rr-field {

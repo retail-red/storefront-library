@@ -9,9 +9,10 @@ build:
     - docker
   before_script:
     - npm i
-    - npm audit
+    - npm run checkVulnerabilities
   script:
-    - npm run build
+    - STAGE=development npm run build
+    - STAGE=production npm run build
   artifacts:
     paths:
       - dist
@@ -34,12 +35,15 @@ build:
 upload dev:
   extends: .upload
   script:
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/main.js --body dist/main.js --content-type application/javascript --acl public-read
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/index.html --body dist/index.html --content-type "text/html; charset=utf-8" --acl public-read
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/quick.html --body dist/quick.html --content-type "text/html; charset=utf-8" --acl public-read
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/main.js --body dist/main.js --content-type application/javascript --acl public-read
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/index.html --body dist/index.html --content-type "text/html; charset=utf-8" --acl public-read
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/quick.html --body dist/quick.html --content-type "text/html; charset=utf-8" --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/main.js --body dist/dev/main.js --content-type application/javascript --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/index.html --body dist/dev/index.html --content-type "text/html; charset=utf-8" --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/${CI_COMMIT_TAG:1}/quick.html --body dist/dev/quick.html --content-type "text/html; charset=utf-8" --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/main.js --body dist/dev/main.js --content-type application/javascript --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/index.html --body dist/dev/index.html --content-type "text/html; charset=utf-8" --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/quick.html --body dist/dev/quick.html --content-type "text/html; charset=utf-8" --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/flags.png --body dist/dev/flags.png --content-type image/png --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/flags@2x.png --body dist/dev/flags@2x.png --content-type image/png --acl public-read
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni-enablement/latest/utils.js --body dist/dev/utils.js --content-type application/javascript --acl public-read
 
 upload prod:
   extends: .upload
@@ -49,5 +53,8 @@ upload prod:
     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_LIVE
     AWS_S3_BUCKET: $AWS_S3_BUCKET_LIVE
   script:
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/retailred-storefront-library-${CI_COMMIT_TAG:1}.js --body dist/main.js --content-type application/javascript
-    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/retailred-storefront-library-v1.js --body dist/main.js --content-type application/javascript
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/retailred-storefront-library-${CI_COMMIT_TAG:1}.js --body dist/prod/main.js --content-type application/javascript
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/retailred-storefront-library-v1.js --body dist/prod/main.js --content-type application/javascript
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/flags.png --body dist/prod/flags.png --content-type image/png
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/flags@2x.png --body dist/prod/flags@2x.png --content-type image/png
+    - aws s3api put-object --bucket $AWS_S3_BUCKET --key omni/utils.js --body dist/prod/utils.js --content-type application/javascript

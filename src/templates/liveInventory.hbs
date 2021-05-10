@@ -161,10 +161,12 @@
       {{!-- Change store --}}
       var changeLink = document.querySelectorAll('.rr-inventory-link');
       if (changeLink && changeLink.length) {
-        changeLink.forEach(link => link.addEventListener('click', function (e) {
-            e.preventDefault();
-            controller.search();
-        }));
+        changeLink.forEach(function(link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                controller.search();
+            });
+        });
       }
 
       {{!-- Change store in list --}}
