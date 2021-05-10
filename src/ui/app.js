@@ -174,9 +174,14 @@ class App {
 
     // Render content
     const handler = async () => {
-      const loadState = await controller.load(state);
-      controller.state = loadState || {};
-      controller.render(target);
+      try {
+        const loadState = await controller.load(state);
+        controller.state = loadState || {};
+        controller.render(target);
+      } catch (error) {
+        // Fallback to error page.
+        this.renderInline(target, 'error', { error });
+      }
     };
     handler();
   }

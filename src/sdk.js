@@ -163,7 +163,7 @@ class StorefrontAPI {
    * @see StoreFront API Document for all options.
    * @returns {Object}
    */
-  async getLocations(options) {
+  async getLocations(options = {}) {
     const { productCode, ...query } = options;
 
     if (productCode) {
