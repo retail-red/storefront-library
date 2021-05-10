@@ -43,6 +43,7 @@ const defaultConfig = merge({
   browserHistory: true,
   useGeolocationImmediately: true,
   testMode: false,
+  platform: null,
   customer: {
     code: null,
     firstName: '',

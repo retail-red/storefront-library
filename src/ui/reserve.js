@@ -110,7 +110,7 @@ class ReserveController extends Controller {
   }
 
   async submit() {
-    const { product } = this.config;
+    const { product, platform } = this.config;
     const { location } = this.state;
 
     // Retrieve form data from document.
@@ -150,6 +150,7 @@ class ReserveController extends Controller {
     const orderPrice = Math.round(product.price * product.quantity * 100) / 100;
     const productPrice = Math.round(product.price * 100) / 100;
     const orderData = {
+      platform: platform || undefined,
       currencyCode: product.currencyCode,
       localeCode: location.localeCode,
       addressSequences: [

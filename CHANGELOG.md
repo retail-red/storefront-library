@@ -7,6 +7,7 @@
 - Introduced new config `testMode` which allows integration without affecting all customers.
 - Introduced event `orderCreated` which is fired after an order has been placed.
 - Additional but optional product data `identifiers` is now supported.
+- Introduced new config `platform` to set the orders platform.
 
 ## v1.1.0
 https://cdn.retail.red/omni/retailred-storefront-library-1.1.0.js
