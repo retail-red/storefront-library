@@ -67,7 +67,7 @@ For colors we provided CSS variables that can be overridden once for all usages.
 ```css
 #rr-omni #rr-omni-custom, #rr-omni-reserve-button, #rr-inventory-custom {
   /* Color for common text */
-  --color-text: 255, 255, 255;
+  --color-text: 0, 0, 0;
   /* Primary color used for form elements and buttons */
   --color-primary: 0, 0, 0;
   /* Contrast color for the primary color - used as button text color  */
