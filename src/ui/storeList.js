@@ -151,8 +151,8 @@ class StoreListController extends Controller {
     }
 
     // In selection mode we simply update the current config.
+    Cache.set(locationInventoryKey(locationCode), location);
     if (this.state.select) {
-      Cache.set(locationInventoryKey(locationCode), location);
       this.app.publicInterface.updateConfig({ locationCode });
       this.app.destroy();
       return;

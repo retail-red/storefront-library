@@ -84,7 +84,7 @@ export default {
   success: {
     title: 'Reservation Confirmation',
     headline: 'Thank you for your reservation',
-    text: 'We will send you a email/text message shortly when your reservation is ready to pick up.',
+    text: 'We will send you an email/text message shortly when your reservation is ready to pick up.',
     reservationNumber: 'Your reservation number is:',
     location: {
       address: 'Address',

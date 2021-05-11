@@ -4,6 +4,7 @@ import utilsScript from '../static/utils';
 import Controller from './controller';
 import { t, hasTranslation, getCountries } from '../locales';
 import { isRequired, isEmail, isPhone } from '../util/validation';
+import Cache, { locationInventoryKey } from '../cache';
 
 const formData = {
   firstName: 'rr-reserve-first-name',
@@ -35,6 +36,14 @@ const pickupValidation = {
 class ReserveController extends Controller {
   getTitle() {
     return t('reserve.title');
+  }
+
+  updateConfig(config, changed) {
+    super.updateConfig(config, changed);
+    if (changed.locationCode) {
+      const cachedLocation = Cache.get(locationInventoryKey(changed.locationCode));
+      this.state.location = cachedLocation || this.state.location;
+    }
   }
 
   async load({
