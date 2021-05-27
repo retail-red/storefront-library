@@ -13,7 +13,11 @@
           <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
           <span>
             {{#each product.options}}
-              {{name}}: {{value}}
+              {{#if value.name}}
+                {{name}}: {{value.name}}
+              {{else}}
+                {{name}}: {{value}}
+              {{/if}}
               {{#unless @last}}
               ,&nbsp;
               {{/unless}}
