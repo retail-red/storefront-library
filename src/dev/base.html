@@ -85,7 +85,7 @@
  <div class=product-img-box>
  <div class=product-img-box>
  <div class=product-img-box>
- <img class=main_image id=main_image rel=image_src width=580 src="https://live.staticflickr.com/735/32901852082_38ee69309d_b.jpg" alt=base> 
+ <img class=main_image id=main_image rel=image_src width=580 src="https://i.redd.it/lnulqyphjom31.jpg" alt=base> 
  <div id=media_overlay_bg class="product_media_overlay_bg hidden sf-hidden"></div>
  <div id=media_overlay class="product_media_overlay hidden sf-hidden">
  
@@ -109,8 +109,8 @@
 </div> </div>
  </form>
  <div class="secondary-column product-shop">
- <div class=product-name>Test Product</div><div id=magicStarCalculation class="clearifx dont_show sf-hidden"></div>
- <div class=product_brand_name>Hello World</div>
+ <div class=product-name>Test Panda</div><div id=magicStarCalculation class="clearifx dont_show sf-hidden"></div>
+ <div class=product_brand_name>Not actually for sale! Sorry</div>
  
  
  <div class=special_product_collections_overlay_background style=display:none></div>
@@ -243,6 +243,7 @@
   <div style="display: flex; flex-direction: row;">
     <button id="reset">Reset</button>
     <button style="margin-left: 8px;" id="setUnavailable">Set to Unavailable Store</button>
+    <button style="margin-left: 8px;" id="changeProduct">Change Product</button>
   </div>
   <script>
     document.querySelector('#reset').addEventListener('click', () => {
@@ -253,6 +254,20 @@
     document.querySelector('#setUnavailable').addEventListener('click', () => {
       window.localStorage.setItem('rr-config-v1', JSON.stringify({ locationCode: 'rr-frankfurt' }));
       window.location.reload();
+    });
+    let changedProduct = false;
+    document.querySelector('#changeProduct').addEventListener('click', () => {
+      window.retailredInstance.updateConfig({
+        product: {
+          code: changedProduct ? 'acai-bowl' : 'ben-jerrys',
+          name: 'My Other product',
+          quantity: 1,
+          imageUrl: 'https://i.redd.it/lnulqyphjom31.jpg',
+          price: 100.0,
+          currencyCode: 'USD',
+        },
+      });
+      changedProduct = !changedProduct;
     });
   </script>
 </div>

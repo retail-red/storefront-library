@@ -1,5 +1,9 @@
 # retail.red Storefront Library Changelog
 
+## v1.2.1
+https://cdn.retail.red/omni/retailred-storefront-library-1.2.1.js
+- Fixed a bug that caused the product to be not updated in the live inventory view.
+
 ## v1.2.0
 https://cdn.retail.red/omni/retailred-storefront-library-1.2.0.js
 - Added new SDK method `getProduct` to receive product data.

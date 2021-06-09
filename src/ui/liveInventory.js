@@ -81,9 +81,17 @@ class LiveInventoryController extends Controller {
     super.updateConfig(config, updated);
 
     // React to location code changes
-    const { locationCode } = updated;
+    const { locationCode, product } = updated;
     if (locationCode) {
       this._updateLocation(locationCode);
+    }
+
+    // React to product changes.
+    if (product && product.code) {
+      this.setState({ location: null, inventory: null });
+      requestAnimationFrame(() => {
+        this._loadLocationData(config.locationCode);
+      });
     }
   }
 
