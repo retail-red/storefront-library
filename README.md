@@ -67,7 +67,7 @@ For colors we provided CSS variables that can be overridden once for all usages.
 ```css
 #rr-omni #rr-omni-custom, #rr-omni-reserve-button, #rr-inventory-custom {
   /* Color for common text */
-  --color-text: 255, 255, 255;
+  --color-text: 0, 0, 0;
   /* Primary color used for form elements and buttons */
   --color-primary: 0, 0, 0;
   /* Contrast color for the primary color - used as button text color  */
@@ -121,8 +121,11 @@ retailred.updateConfig({
 | `product.price`           |         | *before render* | Price as a float, ex. `12.5`                    |
 | `product.currencyCode`    |         | *before render* | ISO 4217 code for the currency, ex. `"EUR"`     |
 | `product.options`         | `[]`    | NO              | Array of options for product                    |
-| `product.options[].name`  | `null`  | YES             | Visible name of the option, ex. `"Color"`       |
-| `product.options[].value` | `null`  | YES             | Visible value of the option, ex. `"Red"`        |
+| `product.options[].code`        |   | YES             | The unique identifier of the option             |
+| `product.options[].name`        |   | YES             | Visible name of the option, ex. `"Color"`       |
+| `product.options[].value`       | `{}`    | YES       | Object for the option value                     |
+| `product.options[].value.code`  |   | YES             | The unique identifier of the option value       |
+| `product.options[].value.name`  |   | YES             | Visible value of the option, ex. `"Red"`        |
 | `product.identifiers`     | `{}`    | NO              | Object with various identifiers                 |
 | `product.identifiers.ean` |         | NO              | An European Article Number (EAN)                |
 | `product.identifiers.isbn`|         | NO              | An International Standard Book Number (ISBN)    |

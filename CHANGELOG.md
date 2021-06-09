@@ -1,8 +1,12 @@
 # retail.red Storefront Library Changelog
 
-## v1.2.1
-https://cdn.retail.red/omni/retailred-storefront-library-1.2.1.js
+## v1.3.1
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.1.js
 - Fixed a bug that caused the product to be not updated in the live inventory view.
+
+## v1.3.0
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.0.js
+- Deprecated product options format and introduced new format that fits with the API. 
 
 ## v1.2.0
 https://cdn.retail.red/omni/retailred-storefront-library-1.2.0.js

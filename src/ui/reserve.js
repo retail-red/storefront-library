@@ -158,6 +158,24 @@ class ReserveController extends Controller {
     // Build basic order.
     const orderPrice = Math.round(product.price * product.quantity * 100) / 100;
     const productPrice = Math.round(product.price * 100) / 100;
+
+    let orderOptions;
+
+    if (Array.isArray(product.options)) {
+      // Check if the options have the correct format to use them at order creation
+      const optionsValid = product.options.every(({ code, name, value }) => {
+        if (typeof value !== 'object' || value === null) {
+          return false;
+        }
+
+        return [code, name, value.code, value.name].every((entry) => entry !== undefined);
+      });
+
+      if (optionsValid) {
+        orderOptions = product.options;
+      }
+    }
+
     const orderData = {
       platform: platform || undefined,
       currencyCode: product.currencyCode,
@@ -194,6 +212,7 @@ class ReserveController extends Controller {
           image: product.imageUrl,
           price: productPrice,
           currencyCode: product.currencyCode,
+          options: orderOptions,
           ...(product.identifiers ? {
             identifiers: {
               ean: product.identifiers.ean,

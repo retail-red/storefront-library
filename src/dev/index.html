@@ -41,16 +41,24 @@
         name: 'My Awesome product',
         options: [
           {
+            code: 'code-color',
             name: 'Color',
-            value: 'Red',
+            value: {
+              code: 'code-color-red',
+              name: 'Red'
+            }
           },
           {
+            code: 'code-size',
             name: 'Size',
-            value: 'M'
+            value: {
+              code: 'code-size-m',
+              name: 'M'
+            }
           }
         ],
         quantity: 2,
-        imageUrl: 'https://i.redd.it/lnulqyphjom31.jpg',
+        imageUrl: 'https://live.staticflickr.com/7164/6431990733_730d10ba63_b.jpg',
         price: 34.0,
         currencyCode: 'USD',
         identifiers: {
