@@ -1,9 +1,9 @@
 {
   "decisions": {
-    "1677|eslint-plugin-import>read-pkg-up>read-pkg>normalize-package-data>hosted-git-info": {
+    "1751|webpack-dev-server>chokidar>glob-parent": {
       "decision": "ignore",
-      "madeAt": 1620405916649,
-      "expiresAt": 1621010656265
+      "madeAt": 1623239778233,
+      "expiresAt": 1623844561322
     }
   },
   "rules": {},

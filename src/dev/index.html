@@ -91,10 +91,10 @@
   }
 </script>
 
-<%= require('html-loader!./base.html') %>
+<%= require('html-loader!./base.html').default %>
 
 <hr />
 <div class="docs">
-  <%= require('../../README.md') %>
+  <%= require('../../README.md').default %>
 </div>
 
