@@ -2,6 +2,7 @@ import merge from 'lodash/merge';
 import { getExtraLanguages } from '../internal';
 import de from './de';
 import en from './en';
+import ru from './ru';
 
 function flattenObject(ob) {
   const toReturn = {};
@@ -21,9 +22,11 @@ function flattenObject(ob) {
 const extraLanguages = getExtraLanguages();
 const deFlat = flattenObject({ ...de, ...extraLanguages.de });
 const enFlat = flattenObject({ ...en, ...extraLanguages.en });
+const ruFlat = flattenObject({ ...ru, ...extraLanguages.ru });
 const defaultTranslations = {
   de: deFlat,
   en: enFlat,
+  ru: ruFlat,
 };
 let activeTranslations = { ...defaultTranslations };
 let activeLanguage = 'en';
