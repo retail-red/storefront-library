@@ -1,5 +1,9 @@
 # retail.red Storefront Library Changelog
 
+## v1.3.2
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.2.js
+- Added localization support for russian. 
+
 ## v1.3.1
 https://cdn.retail.red/omni/retailred-storefront-library-1.3.1.js
 - Fixed a bug that caused the product to be not updated in the live inventory view.
