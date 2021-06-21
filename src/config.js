@@ -95,6 +95,10 @@ export const createConfig = (config = {}, previous = {}) => {
       merged.templates.customTemplates[name] = compiled;
     });
 
+  // Post processing of config
+  merged.inventory.showExactUntil = merged.inventory.showExactUntil === null
+    ? Number.MAX_VALUE : merged.inventory.showExactUntil;
+
   // Store config in local storage.
   const toBeStored = {};
   storedProperties.forEach((property) => {
