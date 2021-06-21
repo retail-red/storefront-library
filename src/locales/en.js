@@ -60,9 +60,9 @@ export default {
     title: 'Reserve and Pickup',
   },
   reserve: {
-    title: 'Submit Reservation',
+    title: 'Submit reservation',
     changeStore: 'Change Store',
-    contactInfo: 'Reservation Contact Info',
+    contactInfo: 'Reservation contact info',
     pickupQuestion: 'Who will pick up this reservation?',
     me: 'Me',
     someoneElse: 'Someone else',
@@ -71,7 +71,7 @@ export default {
     lastName: 'Last Name',
     phoneNumber: 'Phone Number',
     email: 'Email Address',
-    submit: 'Submit Reservation',
+    submit: 'Submit reservation',
     terms: {
       text: 'I have read and accepted the {{child}}',
       link: 'terms and conditions.',
@@ -83,7 +83,7 @@ export default {
   },
   success: {
     title: 'Reservation Confirmation',
-    headline: 'Thank you for your reservation',
+    headline: 'Thank you for your reservation!',
     text: 'We will send you an email/text message shortly when your reservation is ready to pick up.',
     reservationNumber: 'Your reservation number is:',
     location: {

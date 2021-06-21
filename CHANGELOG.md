@@ -1,5 +1,9 @@
 # retail.red Storefront Library Changelog
 
+## v1.3.3
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.2.js
+- Text improvements. 
+
 ## v1.3.2
 https://cdn.retail.red/omni/retailred-storefront-library-1.3.2.js
 - Added localization support for russian. 

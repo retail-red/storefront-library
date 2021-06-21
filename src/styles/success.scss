@@ -20,9 +20,14 @@
     margin-bottom: 20px;
   }
 
+  .rr-reservation-content {
+    display: flex;
+    align-items: center;
+  }
+
   .rr-reservation-number {
     font-size: 18px;
-    margin-top: 10px;
+    margin-left: 8px;
     font-weight: bold;
   }
 

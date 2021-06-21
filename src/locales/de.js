@@ -62,7 +62,7 @@ export default {
   reserve: {
     title: 'Reservierung abschicken',
     changeStore: 'Filiale wechseln',
-    contactInfo: 'Reservierungs Kontakt',
+    contactInfo: 'Reservierungskontakt',
     pickupQuestion: 'Wer wird die Bestellung abholen?',
     me: 'Ich',
     someoneElse: 'Jemand anderes',
@@ -82,10 +82,10 @@ export default {
     },
   },
   success: {
-    title: 'Reservierungs Bestätigung',
-    headline: 'Danke für Deine Reservierung',
-    text: 'Wir senden eine Benachrichtigung sobald Deine Reservierung abholbereit ist.',
-    reservationNumber: 'Deine Reservierungs Nr.:',
+    title: 'Reservierungsbestätigung',
+    headline: 'Danke für Deine Reservierung!',
+    text: 'Wir senden eine Benachrichtigung, sobald Deine Reservierung abholbereit ist.',
+    reservationNumber: 'Deine Reservierungsnummer:',
     location: {
       address: 'Adresse',
       phone: 'Tel.Nr.',

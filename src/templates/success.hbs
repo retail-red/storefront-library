@@ -3,8 +3,10 @@
 
   <p class="rr-text">{{t "success.text" }}</p>
 
-  <p>{{t "success.reservationNumber" }}</p>
-  <p class="rr-reservation-number">{{reservationNumber}}</p>
+  <div class="rr-reservation-content">
+    {{t "success.reservationNumber" }}
+    <p class="rr-reservation-number">{{reservationNumber}}</p>
+  </div>
 
   <div class="rr-location">
     <p class="rr-location-name">{{location.name}}</p>
