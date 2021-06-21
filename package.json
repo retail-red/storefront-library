@@ -1,6 +1,6 @@
 {
   "name": "@retail.red/storefront-library",
-  "version": "1.3.4-beta.1",
+  "version": "1.3.4-beta.2",
   "description": "",
   "license": "Apache License 2.0",
   "main": "src/index.js",
