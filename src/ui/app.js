@@ -1,4 +1,5 @@
 import { createHashHistory, createMemoryHistory } from 'history';
+import isEqual from 'lodash/isEqual';
 import modalTemplate from '../templates/modal.hbs';
 
 let routes = {};
@@ -9,6 +10,7 @@ class App {
     this.sdk = sdk;
     this.routes = {};
     this.history = config.browserHistory ? createHashHistory() : createMemoryHistory();
+    this.lastHistory = {};
     this.historyIndex = 0;
     this.historyUnlisten = null;
     this.endReached = false;
@@ -33,6 +35,12 @@ class App {
     if (this.endReached) {
       this.destroy();
     }
+
+    // Avoid history void loop - Happens when browser history interferes with the "history" module.
+    if (isEqual(this.lastHistory, location)) {
+      return;
+    }
+    this.lastHistory = JSON.parse(JSON.stringify(location));
 
     // Store history index
     if (action === 'PUSH') {
