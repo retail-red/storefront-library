@@ -31,16 +31,19 @@ class App {
   }
 
   _handleHistoryChange({ location, action }) {
+    console.warn('[dbg] history change', location, action);
+
     // Close if terminal route reached.
     if (this.endReached) {
       this.destroy();
     }
 
     // Avoid history void loop - Happens when browser history interferes with the "history" module.
-    if (isEqual(this.lastHistory, location)) {
+    const { key, ...comparedLocation } = location;
+    if (isEqual(this.lastHistory, comparedLocation)) {
       return;
     }
-    this.lastHistory = JSON.parse(JSON.stringify(location));
+    this.lastHistory = JSON.parse(JSON.stringify(comparedLocation));
 
     // Store history index
     if (action === 'PUSH') {
