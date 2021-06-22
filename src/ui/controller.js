@@ -99,16 +99,13 @@ class Controller {
     newContent.className = 'rr-modal-inner';
     newContent.innerHTML = html;
     target.appendChild(newContent);
-    // target.innerHTML = html;
     /* eslint-enable no-param-reassign */
 
     // Evaluates all script tags within template.
     if (!silent) {
       [...target.querySelectorAll('script')].forEach(executeScript);
-      requestAnimationFrame(() => {
-        window.__RrOmniCallbacks.forEach((cb) => cb(this));
-        window.__RrOmniCallbacks = [];
-      });
+      window.__RrOmniCallbacks.forEach((cb) => cb(this));
+      window.__RrOmniCallbacks = [];
     }
     requestAnimationFrame(() => {
       this.domUpdated(target, silent);

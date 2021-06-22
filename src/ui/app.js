@@ -31,8 +31,6 @@ class App {
   }
 
   _handleHistoryChange({ location, action }) {
-    console.warn('[dbg] history change', location, action);
-
     // Close if terminal route reached.
     if (this.endReached) {
       this.destroy();
