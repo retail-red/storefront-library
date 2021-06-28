@@ -80,6 +80,7 @@ export default {
       text: 'I have read and accepted the {{child}}',
       link: 'privacy policy.',
     },
+    newsletterOptIn: 'I want to subscribe to your newsletter and get updates about new products & offers. I can unsubscribe at any moment.',
   },
   success: {
     title: 'Reservation Confirmation',

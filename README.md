@@ -181,6 +181,12 @@ These will be used to prefill the reservation form with the currently logged in 
 | `legal.terms`   | `null`  | NO       | Add an url to the terms and condition page, also enforces the user to accept them before placing an reservation |
 | `legal.privacy` | `null`  | NO       | Add an url to the privacy page, also enforces the user to accept them before placing an reservation             |
 
+### Newsletter Opt-In Configuration
+| Property        | Default | Required | Description                                                                                                      |
+|-----------------|---------|----------|------------------------------------------------------------------------------------------------------------------|
+| `newsletterOptIn.enabled`     | `false`  | NO       | Add a checkbox to the reservation page, which allows customers to opt-in to a newsletter |
+| `newsletterOptIn.preselected` | `false`  | NO       | Whether the opt-in checkbox is checked by default        |
+
 ### Custom Templates
 
 If styling and configuration is not enough for your needs you can always completely override the default templates.

@@ -117,13 +117,18 @@
             {{/tt}}
           {{/checkbox}}
         {{/if}}
-        {{#if (hasTranslation "reserve.footerText") }}
-          <div class="rr-footer-text">
-            {{t "reserve.footerText"}}
-          </div>
-        {{/if}}
-        {{> button id="rr-reserve-submit" label="reserve.submit" disabled=(or legal.terms legal.privacy) }}
       </div>
+      {{#if newsletterOptIn.enabled }}
+        {{#> checkbox id="rr-reserve-newsletter-opt-in" checked=(and newsletterOptIn.preselected) }}
+            {{t "reserve.newsletterOptIn"}}
+        {{/checkbox}}
+      {{/if}}
+      {{#if (hasTranslation "reserve.footerText") }}
+        <div class="rr-footer-text">
+          {{t "reserve.footerText"}}
+        </div>
+      {{/if}}
+      {{> button id="rr-reserve-submit" label="reserve.submit" disabled=(or legal.terms legal.privacy) }}
     </div>
   </div>
 </div>

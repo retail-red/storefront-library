@@ -80,6 +80,7 @@ export default {
       text: 'Ich habe die {{child}} gelesen und erkläre mich einverstanden.',
       link: 'Datenschutzerklärung',
     },
+    newsletterOptIn: 'Ich möchte mich für Ihren Newsletter anmelden und über neue Produkte & Angebote informiert werden. Ich kann mich jederzeit wieder abmelden.',
   },
   success: {
     title: 'Reservierungsbestätigung',

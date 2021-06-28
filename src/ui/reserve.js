@@ -49,12 +49,14 @@ class ReserveController extends Controller {
   async load({
     location, product, showHeader = true, showLocation = true,
   }) {
-    const { customer, legal } = this.config;
+    const { customer, legal, newsletterOptIn } = this.config;
+
     return {
       showHeader,
       showLocation,
       location,
       legal,
+      newsletterOptIn,
       product,
       formData: {
         ...customer,
@@ -127,6 +129,11 @@ class ReserveController extends Controller {
       .entries(formData)
       .map(([name, id]) => ({ [name]: document.querySelector(`#${id}`).value })));
     const customPickupPerson = !document.querySelector('#rr-reserve-pickup-me').checked;
+    let marketingOptIn;
+
+    if (document.querySelector('#rr-reserve-newsletter-opt-in')) {
+      marketingOptIn = !!document.querySelector('#rr-reserve-newsletter-opt-in').checked;
+    }
 
     // Handle validation.
     const validationRules = { ...validation, ...(customPickupPerson ? pickupValidation : {}) };
@@ -180,6 +187,7 @@ class ReserveController extends Controller {
       platform: platform || undefined,
       currencyCode: product.currencyCode,
       localeCode: location.localeCode,
+      ...(typeof marketingOptIn !== 'undefined' ? { marketingOptIn } : {}),
       addressSequences: [
         {
           type: 'billing',
