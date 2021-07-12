@@ -27,11 +27,7 @@ class StoreListController extends Controller {
     // Get geolocation immediately
     if (useGeolocationImmediately && !locationCode && !options.postalCode) {
       try {
-        const { coords } = await getImmediateGeolocation(({ coords: innerCoords }) => {
-          this.state.postalCode = null;
-          this.geolocation = innerCoords;
-          this._updateStoreList();
-        });
+        const { coords } = await getImmediateGeolocation();
         this.geolocation = coords;
       } catch (err) {
         // Error can be ignored / user probably just rejected geolocation permission.
