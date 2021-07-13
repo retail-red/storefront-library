@@ -299,6 +299,7 @@ sdk.getLocations({ countryCode: 'de', postalCode: '35510' }).then(function(resul
 |                                  | `productCode`                 | The target product code                                                                                     |
 |                                  | `selectedOptions[].code`      | The code of a selected option                                                                               |
 |                                  | `selectedOptions[].valueCode` | The code of the value                                                                                       |
+|                                  | `locationCode`                | The location code. Only needed if the locations inventory should be checked                                 |
 
 ## Development
 
