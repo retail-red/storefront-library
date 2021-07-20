@@ -120,8 +120,6 @@ class Instance {
     // Initialize application.
     this._createApp();
 
-    // TODO check callback purpose
-
     // Render content.
     this.app.renderInline(targetElement, 'reserveButton', {
       ...options,

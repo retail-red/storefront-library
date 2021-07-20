@@ -5,8 +5,8 @@ import { getImmediateGeolocation } from '../util/geolocation';
 import { validateConfigForProduct } from '../config';
 
 class StoreListController extends Controller {
-  constructor(...params) {
-    super(...params);
+  constructor(routeName, templateName, app, config, sdk) {
+    super(routeName, templateName, app, config, sdk, 'rr-modal-inner');
     this.state.postalCode = null;
   }
 

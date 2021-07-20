@@ -34,6 +34,10 @@ const pickupValidation = {
 };
 
 class ReserveController extends Controller {
+  constructor(routeName, templateName, app, config, sdk) {
+    super(routeName, templateName, app, config, sdk, 'rr-modal-inner');
+  }
+
   getTitle() {
     return t('reserve.title');
   }

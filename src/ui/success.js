@@ -2,6 +2,10 @@ import Controller from './controller';
 import { t } from '../locales';
 
 class SuccessController extends Controller {
+  constructor(routeName, templateName, app, config, sdk) {
+    super(routeName, templateName, app, config, sdk, 'rr-modal-inner');
+  }
+
   getTitle() {
     return t('success.title');
   }
