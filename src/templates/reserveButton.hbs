@@ -1,3 +1,15 @@
-<button id="rr-omni-reserve-button" class="button btn btn-primary">
-  {{t "reserveButton.title" }}
-</button>
+{{> button id="rr-omni-reserve-button" class="button btn btn-primary" label="reserveButton.title" disabled=buttonDisabled}}
+
+<script>
+   RetailRedStorefront.onLoad(function (controller) {
+     const button = document.querySelector('#rr-omni-reserve-button');
+     button.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      controller.state.callback(() => {
+        const modalPlaceholder = controller.app.publicInterface.Class._globalModalPlaceholderSingleton();
+        controller.app.start(modalPlaceholder);
+      });
+    });
+   });
+</script>

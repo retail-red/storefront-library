@@ -1,5 +1,6 @@
 import Controller from './controller';
 import Cache, { locationInventoryKey } from '../cache';
+import { validateConfigForProduct, isButtonDisabled } from '../config';
 
 class LiveInventoryController extends Controller {
   /**
@@ -23,16 +24,27 @@ class LiveInventoryController extends Controller {
    * @param {String} locationCode The location code
    */
   async _loadLocationData(locationCode) {
-    const { code: productCode } = this.config.product;
+    const { code: productCode } = this.config.product || {};
+    const buttonDisabled = isButtonDisabled(this.config);
     try {
       const { locations } = await this.sdk.getLocations({ codes: locationCode });
       if (!locations[0]) {
         throw new Error();
       }
-      const { inventories } = await this.sdk.getProductInventories(productCode, locationCode);
-      this.setState({ location: locations[0], inventory: inventories[0] });
+
+      let inventories = [];
+
+      if (validateConfigForProduct(this.config)) {
+        ({ inventories } = await this.sdk.getProductInventories(productCode, locationCode));
+      }
+
+      this.setState({
+        location: locations[0],
+        inventory: inventories[0],
+        buttonDisabled,
+      });
     } catch (err) {
-      this.setState({ locationCode: null, location: null });
+      this.setState({ locationCode: null, location: null, buttonDisabled });
     }
   }
 
@@ -40,13 +52,21 @@ class LiveInventoryController extends Controller {
    * Loads all available locations into state.
    */
   async _loadLocations() {
-    const { code: productCode } = this.config.product;
+    const { code: productCode } = this.config.product || {};
+
     const { locations } = await this.sdk.getLocations({});
-    const { inventories } = await this.sdk.getProductInventories(
-      productCode,
-      locations.map((l) => l.code),
-    );
+
+    let inventories = [];
+
+    if (validateConfigForProduct(this.config)) {
+      ({ inventories } = await this.sdk.getProductInventories(
+        productCode,
+        locations.map((l) => l.code),
+      ));
+    }
+
     this.setState({
+      buttonDisabled: isButtonDisabled(this.config),
       locations: locations
         .map((l) => ({
           ...l,
@@ -69,6 +89,7 @@ class LiveInventoryController extends Controller {
       variant,
       locationCode,
       inventoryConfig: inventory,
+      buttonDisabled: isButtonDisabled(this.config),
     };
   }
 
@@ -86,12 +107,16 @@ class LiveInventoryController extends Controller {
       this._updateLocation(locationCode);
     }
 
+    const buttonDisabled = isButtonDisabled(config);
+
     // React to product changes.
-    if (product && product.code) {
-      this.setState({ location: null, inventory: null });
+    if (product && product.code && config.locationCode) {
+      this.setState({ location: null, inventory: null, buttonDisabled });
       requestAnimationFrame(() => {
         this._loadLocationData(config.locationCode);
       });
+    } else {
+      this.setState({ buttonDisabled });
     }
   }
 

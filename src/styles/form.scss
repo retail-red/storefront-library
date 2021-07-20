@@ -242,7 +242,7 @@
     color: rgba(var(--color-primary, 0, 0, 0), 0.38);
     background-color: rgba(var(--color-primary, 0, 0, 0), 0.12);
     box-shadow: none;
-    cursor: initial;
+    cursor: not-allowed;
     &::before {
       opacity: 0;
     }

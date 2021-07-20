@@ -2,6 +2,7 @@ import Controller from './controller';
 import Cache, { locationInventoryKey } from '../cache';
 import { t } from '../locales';
 import { getImmediateGeolocation } from '../util/geolocation';
+import { validateConfigForProduct } from '../config';
 
 class StoreListController extends Controller {
   constructor(...params) {
@@ -61,13 +62,16 @@ class StoreListController extends Controller {
   }
 
   async _receiveLocations() {
-    const { unitSystem } = this.config;
+    const { unitSystem, product } = this.config;
 
     this.app.setLoading(true);
+
+    const isValidProduct = validateConfigForProduct(this.config);
+
     try {
       // Fetch location data
       const { locations } = await this.sdk.getLocations({
-        productCode: this.config.product.code,
+        productCode: product ? this.config.product.code : undefined,
         postalCode: this.state.postalCode,
         countryCode: this.countryCode,
         ...(this.state.postalCode || this.geolocation ? ({
@@ -79,11 +83,15 @@ class StoreListController extends Controller {
         }) : {}),
       });
 
-      // Fetch inventory data.
-      const { inventories } = await this.sdk.getProductInventories(
-        this.config.product.code,
-        locations.map((l) => l.code),
-      );
+      let inventories = [];
+
+      if (isValidProduct) {
+        // Fetch inventory data.
+        ({ inventories } = await this.sdk.getProductInventories(
+          this.config.product.code,
+          locations.map((l) => l.code),
+        ));
+      }
 
       // Aggregate inventory data onto location
       const aggregatedLocations = locations
@@ -97,7 +105,7 @@ class StoreListController extends Controller {
             .length
             ? location.operationHours : null,
         }))
-        .filter((l) => !!l.inventory);
+        .filter((l) => (isValidProduct ? !!l.inventory : true));
 
       if (aggregatedLocations.length !== 0) {
         this.state.emptyList = false;
