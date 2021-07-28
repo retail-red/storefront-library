@@ -15,6 +15,18 @@ class ReserveButtonController extends Controller {
       buttonDisabled: isButtonDisabled(this.config),
     });
   }
+
+  domUpdated() {
+    const button = document.querySelector('#rr-omni-reserve-button');
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      this.state.callback(() => {
+        const modalPlaceholder = this.app.publicInterface.Class._globalModalPlaceholderSingleton();
+        this.app.start(modalPlaceholder);
+      });
+    });
+  }
 }
 
 ReserveButtonController.templateName = 'reserveButton';
