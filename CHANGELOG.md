@@ -1,5 +1,10 @@
 # retail.red Storefront Library Changelog
 
+## v1.3.7
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.7.js
+- Styling improvements in reserve modal
+- Handled situations where customer numbers where set as numeric values instead of strings
+
 ## v1.3.6
 https://cdn.retail.red/omni/retailred-storefront-library-1.3.6.js
 - Fixed an issue causing the reserve modal to stay closed when a custom template was used.

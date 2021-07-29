@@ -237,7 +237,7 @@ class ReserveController extends Controller {
 
     // Append external customer number if available.
     if (this.config.customer.code) {
-      orderData.externalCustomerNumber = this.config.customer.code;
+      orderData.externalCustomerNumber = `${this.config.customer.code}`;
     }
 
     // Custom pickup person.
