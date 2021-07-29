@@ -1,5 +1,13 @@
 # retail.red Storefront Library Changelog
 
+## v1.3.6
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.6.js
+- Fixed an issue causing the reserve modal to stay closed when a custom template was used.
+
+## v1.3.5
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.5.js
+- `config.product` is now allowed to be `null` but will lead to an disabled reserve button.
+
 ## v1.3.4
 https://cdn.retail.red/omni/retailred-storefront-library-1.3.4.js
 - Improved behavior with geolocation and no longer displays geolocation result if browser takes too long.
