@@ -34,6 +34,10 @@ const pickupValidation = {
 };
 
 class ReserveController extends Controller {
+  constructor(routeName, templateName, app, config, sdk) {
+    super(routeName, templateName, app, config, sdk, 'rr-modal-inner');
+  }
+
   getTitle() {
     return t('reserve.title');
   }
@@ -241,7 +245,7 @@ class ReserveController extends Controller {
 
     // Append external customer number if available.
     if (this.config.customer.code) {
-      orderData.externalCustomerNumber = this.config.customer.code;
+      orderData.externalCustomerNumber = `${this.config.customer.code}`;
     }
 
     // Custom pickup person.

@@ -173,6 +173,16 @@ These will be used to prefill the reservation form with the currently logged in 
   }
 }
 ```
+#### Special Strings
+Besides the strings which are available via the locale files, there are some where the storefront library doesn't provide default translations.
+
+| Locale Key | Purpose |
+|-----|----|
+|`liveInventory.footerText`| A text rendered within the `liveInventory` template that is shown between the availability and the reserve button. |
+|`reserve.footerText`| A text rendered within the `reservationModal` right before the reservation button. |
+|`liveInventory.noProductText`| A text rendered within the `liveInventory` template that indicates that the script configuration doesn't contain a product. |
+
+
 
 ### Legal Configuration
 
@@ -305,6 +315,7 @@ sdk.getLocations({ countryCode: 'de', postalCode: '35510' }).then(function(resul
 |                                  | `productCode`                 | The target product code                                                                                     |
 |                                  | `selectedOptions[].code`      | The code of a selected option                                                                               |
 |                                  | `selectedOptions[].valueCode` | The code of the value                                                                                       |
+|                                  | `locationCode`                | The location code. Only needed if the locations inventory should be checked                                 |
 
 ## Development
 

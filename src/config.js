@@ -10,12 +10,15 @@ const requiredProperties = [
 ];
 const requiredRenderProperties = [
   ...requiredProperties,
+];
+const requiredProductProperties = [
   'product.code',
   'product.name',
   'product.quantity',
   'product.price',
   'product.currencyCode',
 ];
+
 const storedProperties = [
   'locationCode',
   'customer.firstName',
@@ -129,3 +132,28 @@ export const validateConfigForRendering = (config) => requiredRenderProperties.e
   }
   return true;
 });
+
+export const validateConfigForProduct = (config, logErrors = true) => requiredProductProperties
+  .every((property) => {
+    if (!get(config, 'product') || config.product === null) {
+      return false;
+    }
+
+    if (!get(config, property)) {
+      if (logErrors) {
+      // eslint-disable-next-line no-console
+        console.error(
+          `[SG Enablement] The property '${property}' is required and needs to be set before calling the render functions`,
+        );
+      }
+
+      return false;
+    }
+    return true;
+  });
+
+/**
+ * Validates the given config for the rendering phase.
+ * @param {Object} config Config to be validated.
+ */
+export const isButtonDisabled = (config) => !validateConfigForProduct(config, false);

@@ -1,28 +1,30 @@
 <div class="rr-store-list">
   {{!-- Header --}}
   <div class="rr-header">
-    {{!-- Product infos --}}
-    <div class="rr-header-product">
-      <div class="rr-product-image-wrapper">
-        <img src="{{product.imageUrl}}" />
+    {{#if product }}
+      {{!-- Product infos --}}
+      <div class="rr-header-product">
+        <div class="rr-product-image-wrapper">
+          <img src="{{product.imageUrl}}" />
+        </div>
+        <div class="rr-product-info">
+          <span>{{product.name}}</span>
+          <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
+          <span>
+            {{#each product.options}}
+              {{#if value.name}}
+                {{name}}: {{value.name}}
+              {{else}}
+                {{name}}: {{value}}
+              {{/if}}
+              {{#unless @last}}
+              ,&nbsp;
+              {{/unless}}
+            {{/each}}
+          </span>
+        </div>
       </div>
-      <div class="rr-product-info">
-        <span>{{product.name}}</span>
-        <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
-        <span>
-          {{#each product.options}}
-            {{#if value.name}}
-              {{name}}: {{value.name}}
-            {{else}}
-              {{name}}: {{value}}
-            {{/if}}
-            {{#unless @last}}
-            ,&nbsp;
-            {{/unless}}
-          {{/each}}
-        </span>
-      </div>
-    </div>
+     {{/if}}
 
     {{!-- Search header --}}
     <div class="rr-header-search">
@@ -34,10 +36,10 @@
             {{/each}}
           {{/select}}
         {{/if}}
-        {{> textField 
-          id="rr-store-list-search-input" 
-          label="storeList.search.label" 
-          autocomplete="postal-code" 
+        {{> textField
+          id="rr-store-list-search-input"
+          label="storeList.search.label"
+          autocomplete="postal-code"
           value=postalCode
         }}
       </div>
@@ -109,32 +111,33 @@
               </div>
             </div>
             <div class="rr-action">
-              {{!-- Product not available --}}
-              {{#unless inventory.isAvailable }}
-                <span class="rr-available-negative">
-                  {{t "storeList.inventory.unavailable"}}
-                </span>
-              {{else}}
-                {{!-- Only show if product is available or not --}}
-                {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
-                  <span class="rr-available-positive">
-                    {{t "storeList.inventory.available"}}
+              {{#if inventory }}
+                {{!-- Product not available --}}
+                {{#unless inventory.isAvailable }}
+                  <span class="rr-available-negative">
+                    {{t "storeList.inventory.unavailable"}}
                   </span>
                 {{else}}
-                  {{!-- Rough numbers (10+) --}}
-                  {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
-                    <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                      {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
+                  {{!-- Only show if product is available or not --}}
+                  {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
+                    <span class="rr-available-positive">
+                      {{t "storeList.inventory.available"}}
                     </span>
                   {{else}}
-                    {{!-- Detailed numbers --}}
-                    <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                      {{t "storeList.inventory.exact" x=inventory.visible }}
-                    </span>
+                    {{!-- Rough numbers (10+) --}}
+                    {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
+                      <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                        {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
+                      </span>
+                    {{else}}
+                      {{!-- Detailed numbers --}}
+                      <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                        {{t "storeList.inventory.exact" x=inventory.visible }}
+                      </span>
+                    {{/if}}
                   {{/if}}
-                {{/if}}
-              {{/unless}}
-
+                {{/unless}}
+              {{/if}}
               {{#if isComingSoon }}
                {{> button label="storeList.comingSoon" disabled=true}}
               {{else}}

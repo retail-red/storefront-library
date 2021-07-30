@@ -1,12 +1,12 @@
-import { createConfig, validateConfigForRendering } from './config';
+import { createConfig, validateConfigForRendering, validateConfigForProduct } from './config';
 import { updateCustomTranslations, updateLanguage } from './locales';
 import StoreListController from './ui/storeList';
 import ReserveController from './ui/reserve';
 import LiveInventoryController from './ui/liveInventory';
+import ReserveButtonController from './ui/reserveButton';
 import SuccessController from './ui/success';
 import App from './ui/app';
 import { getQueryParameter } from './util/browser';
-import reserveButtonTemplate from './templates/reserveButton.hbs';
 import Sdk from './sdk';
 
 const LOCAL_STORAGE_KEY = 'rr-testing-v1';
@@ -80,6 +80,7 @@ class Instance {
     this.app.addController(ReserveController);
     this.app.addController(SuccessController);
     this.app.addController(LiveInventoryController);
+    this.app.addController(ReserveButtonController);
   }
 
   _triggerEvent(eventName, payload) {
@@ -109,7 +110,7 @@ class Instance {
   // eslint-disable-next-line no-unused-vars
   renderReserveButton(target, options = {}, callback = (cb) => cb()) {
     // Validate config
-    if (!this._isRenderAllowed() || !validateConfigForRendering(this.config)) {
+    if (!this._isRenderAllowed()) {
       return;
     }
 
@@ -119,17 +120,10 @@ class Instance {
     // Initialize application.
     this._createApp();
 
-    // Render button
-    const customTemplate = this.config.templates.customTemplates.reserveButton;
-    targetElement.innerHTML = customTemplate ? customTemplate() : reserveButtonTemplate();
-    const button = targetElement.querySelector('#rr-omni-reserve-button');
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      callback(() => {
-        const modalPlaceholder = Instance._globalModalPlaceholderSingleton();
-        this.app.start(modalPlaceholder);
-      });
+    // Render content.
+    this.app.renderInline(targetElement, 'reserveButton', {
+      ...options,
+      callback,
     });
   }
 
@@ -140,7 +134,7 @@ class Instance {
    */
   renderLiveInventory(target, options = { variant: 'modal' }) {
     // Validate config
-    if (!this._isRenderAllowed() || !validateConfigForRendering(this.config)) {
+    if (!this._isRenderAllowed()) {
       return;
     }
 
@@ -159,7 +153,11 @@ class Instance {
    */
   openReservationModal() {
     // Validate config
-    if (!this._isRenderAllowed() || !validateConfigForRendering(this.config)) {
+    if (
+      !this._isRenderAllowed()
+      || !validateConfigForRendering(this.config)
+      || !validateConfigForProduct(this.config)
+    ) {
       return;
     }
 

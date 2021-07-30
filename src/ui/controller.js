@@ -20,14 +20,14 @@ const executeScript = (node) => {
 };
 
 class Controller {
-  constructor(routeName, templateName, app, config, sdk) {
+  constructor(routeName, templateName, app, config, sdk, targetClassName) {
     this.routeName = routeName;
     this.templateName = templateName;
+    this.targetClassName = targetClassName;
     this.app = app;
     this.config = config;
     this.sdk = sdk;
     this.state = {};
-
     // Load template
     this.template = this.config.templates.customTemplates[templateName]
       || defaultTemplates[templateName];
@@ -50,7 +50,7 @@ class Controller {
   }
 
   /**
-   * Updates template state and triggers a rerender
+   * Updates template state and triggers a re-render
    * @param {Object} state State
    */
   setState(state) {
@@ -61,7 +61,7 @@ class Controller {
   domUpdated() {}
 
   /**
-   * Rerenders the template but only updates the DOM partially.
+   * Re-renders the template but only updates the DOM partially.
    * @param {String} targetSelector Selector for part that should be re-rendered.
    */
   partialRender(targetSelector) {
@@ -96,7 +96,11 @@ class Controller {
     /* eslint-disable no-param-reassign */
     target.innerHTML = '';
     const newContent = document.createElement('div');
-    newContent.className = 'rr-modal-inner';
+
+    if (this.targetClassName) {
+      newContent.className = this.targetClassName;
+    }
+
     newContent.innerHTML = html;
     target.appendChild(newContent);
     /* eslint-enable no-param-reassign */

@@ -74,7 +74,7 @@ export default {
     submit: 'Reservierung abschicken',
     terms: {
       text: 'Ich habe die {{child}} gelesen und erkläre mich einverstanden.',
-      link: 'Nutzungsbedingungen',
+      link: 'AGB',
     },
     privacy: {
       text: 'Ich habe die {{child}} gelesen und erkläre mich einverstanden.',

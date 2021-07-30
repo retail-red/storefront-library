@@ -204,12 +204,14 @@ class StorefrontAPI {
    * Each option looks like `{ code: 'codeOfOption', valueCode: 'codeOfValue' }`
    * @param {String} productCode
    * @param {Array} selectedOptions
+   * @param {String} locationCode
    * @returns {Object}
    */
-  async validateProductConfiguration(productCode, selectedOptions) {
+  async validateProductConfiguration(productCode, selectedOptions, locationCode) {
     return this._genericRequest({
       method: 'POST',
       endpoint: `/v1/products/${encodeURIComponent(productCode)}/validate`,
+      ...(locationCode ? { query: { locationCode } } : {}),
       body: {
         selectedOptions,
       },

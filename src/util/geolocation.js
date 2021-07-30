@@ -1,23 +1,21 @@
 /* eslint-disable import/prefer-default-export */
-export const getImmediateGeolocation = (fallback, timeout = 1500) => new Promise(
+export const getImmediateGeolocation = (timeout = 8000) => new Promise(
   (resolve, reject) => {
-    let timeouted = false;
+    let timedOut = false;
     const timeoutIndex = setTimeout(() => {
-      timeouted = true;
+      timedOut = true;
       reject(new Error('Timeout'));
     }, timeout);
     const safeReject = (err) => {
-      if (timeouted) return;
+      if (timedOut) return;
       reject(err);
     };
 
     try {
       navigator.geolocation.getCurrentPosition((position) => {
-        if (!timeouted) {
+        if (!timedOut) {
           resolve(position);
-          return;
         }
-        fallback(position);
       }, (err) => {
         clearTimeout(timeoutIndex);
         safeReject(err);

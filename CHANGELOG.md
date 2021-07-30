@@ -1,7 +1,27 @@
 # retail.red Storefront Library Changelog
 
+## v1.3.7
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.7.js
+- Styling improvements in reserve modal
+- Handled situations where customer numbers where set as numeric values instead of strings
+
+## v1.3.6
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.6.js
+- Fixed an issue causing the reserve modal to stay closed when a custom template was used.
+
+## v1.3.5
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.5.js
+- `config.product` is now allowed to be `null` but will lead to an disabled reserve button.
+
+## v1.3.4
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.4.js
+- Improved behavior with geolocation and no longer displays geolocation result if browser takes too long.
+- Added `locationCode` to `validateProductConfiguration` sdk function.
+- Fixed a bug that caused the reservation form to be rendered more than once.
+- The config `inventory.showExactUntil` now allows `null` as a value.
+
 ## v1.3.3
-https://cdn.retail.red/omni/retailred-storefront-library-1.3.2.js
+https://cdn.retail.red/omni/retailred-storefront-library-1.3.3.js
 - Text improvements. 
 
 ## v1.3.2
