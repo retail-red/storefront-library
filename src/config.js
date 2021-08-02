@@ -47,10 +47,7 @@ const defaultConfig = merge({
   useGeolocationImmediately: true,
   testMode: false,
   platform: null,
-  newsletterOptIn: {
-    enabled: false,
-    preselected: false,
-  },
+  newsletterOptIn: 'disabled',
   customer: {
     code: null,
     firstName: '',

@@ -194,8 +194,7 @@ Besides the strings which are available via the locale files, there are some whe
 ### Newsletter Opt-In Configuration
 | Property        | Default | Required | Description                                                                                                      |
 |-----------------|---------|----------|------------------------------------------------------------------------------------------------------------------|
-| `newsletterOptIn.enabled`     | `false`  | NO       | Add a checkbox to the reservation page, which allows customers to opt-in to a newsletter |
-| `newsletterOptIn.preselected` | `false`  | NO       | Whether the opt-in checkbox is checked by default        |
+| `newsletterOptIn`     | `disabled`  | NO       | Add a checkbox to the reservation page, which allows customers to opt-in to a newsletter.<br/>Use `enabled` to activate the checkbox. Use `enabledAndPreselected` to activate the checkbox in a preselected state.|
 
 ### Custom Templates
 

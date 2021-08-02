@@ -73,12 +73,15 @@ export default {
     email: 'Email Address',
     submit: 'Submit reservation',
     terms: {
-      text: 'I have read and accepted the {{child}}',
-      link: 'terms and conditions.',
+      text: 'I have read and accepted the {{child}}.',
+      link: 'terms and conditions',
     },
     privacy: {
-      text: 'I have read and accepted the {{child}}',
-      link: 'privacy policy.',
+      text: 'I have read and accepted the {{child}}.',
+      link: 'privacy policy',
+    },
+    termsPrivacy: {
+      text: 'I have read and accepted the {{child}} & {{child_1}}.',
     },
     newsletterOptIn: 'I want to subscribe to your newsletter and get updates about new products & offers. I can unsubscribe at any moment.',
   },

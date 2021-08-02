@@ -44,4 +44,23 @@ handlebars.registerPartial('link', linkPartial);
 handlebars.registerPartial('radio', radioPartial);
 handlebars.registerPartial('checkbox', checkboxPartial);
 handlebars.registerPartial('skeleton', skeletonPartial);
-handlebars.registerPartial('tt', (key, { data }) => t(key, { child: data['partial-block'](data.root) }));
+handlebars.registerPartial('tt', (key, { data }) => {
+  // Create DOM nodes of the children
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = data['partial-block'](data.root);
+
+  const children = Array.from(wrapper.children);
+
+  if (!children.length) {
+    // No children - no translation
+    return key;
+  }
+
+  // Create the options of the translation function
+  const options = children.reduce((acc, child, index) => {
+    acc[`child${index !== 0 ? `_${index}` : ''}`] = child.outerHTML;
+    return acc;
+  }, {});
+
+  return t(key, options);
+});

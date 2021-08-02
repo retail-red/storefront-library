@@ -80,6 +80,9 @@ export default {
       text: 'Ich habe die {{child}} gelesen und erkläre mich einverstanden.',
       link: 'Datenschutzerklärung',
     },
+    termsPrivacy: {
+      text: 'Ich habe die {{child}} und die {{child_1}} gelesen und erkläre mich einverstanden.',
+    },
     newsletterOptIn: 'Ich möchte mich für Ihren Newsletter anmelden und über neue Produkte & Angebote informiert werden. Ich kann mich jederzeit wieder abmelden.',
   },
   success: {

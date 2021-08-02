@@ -2,9 +2,10 @@
 
 ## v1.3.7
 https://cdn.retail.red/omni/retailred-storefront-library-1.3.7.js
-- Introduced `newsletterOptIn` config to display an additional checkbox in reserve modal for newsletter subscription
-- Styling improvements in reserve modal
-- Handled situations where customer numbers where set as numeric values instead of strings
+- Introduced `newsletterOptIn` config to display an additional checkbox in reserve modal for newsletter subscription.
+- Terms & Privacy Policy checkboxes are now combined to a single one when both links are set.
+- Styling improvements in reserve modal.
+- Handled situations where customer numbers where set as numeric values instead of strings.
 
 ## v1.3.6
 https://cdn.retail.red/omni/retailred-storefront-library-1.3.6.js

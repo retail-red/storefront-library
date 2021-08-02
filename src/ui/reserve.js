@@ -60,7 +60,10 @@ class ReserveController extends Controller {
       showLocation,
       location,
       legal,
-      newsletterOptIn,
+      newsletterOptIn: {
+        enabled: ['enabled', 'enabledAndPreselected'].includes(newsletterOptIn),
+        preselected: newsletterOptIn === 'enabledAndPreselected',
+      },
       product,
       formData: {
         ...customer,

@@ -89,6 +89,13 @@
         &:first-child {
           margin-top: 8px;
         }
+
+        &:last-child {
+          .rr-radio {
+            margin-bottom: 0;
+          }
+        }
+
         display: flex;
         flex-direction: row;
       }

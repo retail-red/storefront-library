@@ -103,19 +103,28 @@
         </div>
       </div>
       <div class="rr-section rr-legal">
-        {{#if legal.terms }}
+        {{#if (and legal.terms legal.privacy) }}
+          {{!-- combined terms and privacy checkbox --}}
+          {{#> checkbox id="rr-reserve-terms-and-privacy" }}
+            {{#> tt "reserve.termsPrivacy.text" }}
+              {{> link href=legal.terms label="reserve.terms.link" target="_blank" }}
+              {{> link href=legal.privacy label="reserve.privacy.link" target="_blank" }}
+            {{/tt}}
+          {{/checkbox}}
+        {{else if legal.terms }}
+          {{!-- terms checkbox --}}
           {{#> checkbox id="rr-reserve-terms" }}
             {{#> tt "reserve.terms.text" }}
               {{> link href=legal.terms label="reserve.terms.link" target="_blank" }}
             {{/tt}}
           {{/checkbox}}
-        {{/if}}
-        {{#if legal.privacy }}
-          {{#> checkbox id="rr-reserve-privacy" }}
-            {{#> tt "reserve.privacy.text" }}
-              {{> link href=legal.privacy label="reserve.privacy.link" target="_blank" }}
-            {{/tt}}
-          {{/checkbox}}
+        {{else if legal.privacy }}
+            {{!-- privacy checkbox --}}
+            {{#> checkbox id="rr-reserve-privacy" }}
+              {{#> tt "reserve.privacy.text" }}
+                {{> link href=legal.privacy label="reserve.privacy.link" target="_blank" }}
+              {{/tt}}
+            {{/checkbox}}
         {{/if}}
       </div>
       {{#if newsletterOptIn.enabled }}
