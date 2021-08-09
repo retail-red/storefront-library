@@ -66,7 +66,7 @@ class StorefrontAPI {
       return null;
     }
 
-    // Any other unexpect response type.
+    // Any other unexpected response type.
     if (response.status !== 200) {
       let errorBody = {};
       try {
@@ -146,14 +146,33 @@ class StorefrontAPI {
       ? locationCodesOrCode
       : [locationCodesOrCode];
 
-    return this._genericRequest({
-      endpoint: `/v1/products/${encodeURIComponent(productCode)}/inventories`,
-      query: {
-        locationCodes: locationCodes.join(','),
-        catalogCode,
-        productCode,
-      },
-    });
+    let response;
+
+    try {
+      response = await this._genericRequest({
+        endpoint: `/v1/products/${encodeURIComponent(productCode)}/inventories`,
+        query: {
+          locationCodes: locationCodes.join(','),
+          catalogCode,
+          productCode,
+        },
+      });
+    } catch (error) {
+      if (error.status !== 404) {
+        throw error;
+      }
+      // Return empty inventory when product is not found in the retail.red system
+      response = {
+        inventories: locationCodes.map((locationCode) => ({
+          locationCode,
+          available: 0,
+          isAvailable: false,
+          visible: 0,
+        })),
+      };
+    }
+
+    return response;
   }
 
   /**
@@ -167,10 +186,24 @@ class StorefrontAPI {
     const { productCode, ...query } = options;
 
     if (productCode) {
-      return this._genericRequest({
-        endpoint: `/v1/products/${encodeURIComponent(productCode)}/locations`,
-        query,
-      });
+      let response;
+
+      try {
+        response = await this._genericRequest({
+          endpoint: `/v1/products/${encodeURIComponent(productCode)}/locations`,
+          query,
+        });
+      } catch (error) {
+        if (error.status !== 404) {
+          throw error;
+        }
+
+        // Request common locations when product is not found in the retail.red system
+        const locations = await this.getLocations(query);
+        return locations;
+      }
+
+      return response;
     }
 
     return this._genericRequest({
