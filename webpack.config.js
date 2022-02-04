@@ -1,8 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const sass = require('sass');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = () => {
+module.exports = (env, argv) => {
+  const isProduction = argv.mode === 'production';
+
   const { STAGE } = process.env;
 
   const outputPath = path.join(__dirname, STAGE === 'production' ? 'dist/prod' : 'dist/dev/');
@@ -35,11 +39,19 @@ module.exports = () => {
         {
           test: /\.s[ac]ss$/i,
           use: [
-            'style-loader',
-            'css-loader',
+            isProduction
+              ? MiniCssExtractPlugin.loader
+              : 'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
             {
               loader: 'sass-loader',
               options: {
+                sourceMap: true,
                 implementation: sass,
               },
             },
@@ -86,9 +98,15 @@ module.exports = () => {
         filename: 'quick.html',
         template: './src/dev/quick.html',
       }),
+      new MiniCssExtractPlugin(),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'disabled',
+      }),
     ],
     devServer: {
-      contentBase: './dist',
+      static: {
+        directory: './dist',
+      },
       hot: true,
       host: '0.0.0.0',
     },

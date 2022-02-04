@@ -121,7 +121,7 @@ class App {
 
     // Build base.
     // eslint-disable-next-line no-param-reassign
-    target.innerHTML = modalTemplate();
+    target.innerHTML = modalTemplate({ willRenderStoreList: !this.config.locationCode });
     this.element = target;
 
     // Store modal content placeholder.

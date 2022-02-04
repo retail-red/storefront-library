@@ -14,9 +14,12 @@
 
     .rr-product-image-wrapper {
       margin-right: 24px;
-
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
       img {
-        width: 72px;
+        height: 100%;
       }
     }
 
@@ -61,12 +64,22 @@
       display: flex;
       flex-direction: row;
       font-size: 14px;
+
       >div:first-child {
         margin-right: 16px;
+        min-width: 200px;
+        @include xs {
+          min-width: initial;
+          margin-right: 50px;
+        }
       }
       .rr-bold {
         font-size: 15px;
         font-weight: bold;
+      }
+
+      .rr-store-address, .rr-store-hours {
+        padding-bottom: 8px;
       }
     }
   }

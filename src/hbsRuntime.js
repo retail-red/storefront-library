@@ -33,7 +33,8 @@ handlebars.registerHelper('distance', (distance, unitSystem) => `${distance
   .toFixed(2)
   .replace('.', t('format.decimalSymbol'))
   .replace(/(\d)(?=(\d{3})+(?!\d))/g, `${t('format.groupSymbol')}`)
-} ${unitSystem === 'metric' ? 'km' : 'miles'}`);
+// eslint-disable-next-line no-irregular-whitespace
+} ${unitSystem === 'metric' ? 'km' : 'miles'}`);
 handlebars.registerHelper('direction', (address) => createDirectionsLink(address));
 
 handlebars.registerPartial('textField', textFieldPartial);

@@ -1,6 +1,8 @@
 &.rr-modal-parent {
   opacity: 0;
   transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  z-index: 11000000;
+  position: relative;
 }
 
 &.rr-modal-open {
@@ -92,9 +94,44 @@
       display: flex;
       margin-left: 26px;
       flex-direction: column;
+
+      .rr-placeholder:first-child {
+        max-width: 150px;
+      }
     }
+
     .rr-placeholder:not(:last-child) {
       margin-bottom: 3px;
+    }
+  }
+
+  .rr-input-skeleton {
+    display: flex;
+    padding: 20px 0 4px 24px;
+    flex-direction: column;
+    .rr-placeholder {
+      margin-top: 4px;
+    }
+
+    .rr-input-skeleton-row {
+      display: flex;
+      .rr-placeholder {
+        @include xs {
+          max-width: 150px;
+        }
+      }
+
+      .rr-placeholder:first-child {
+        margin-right: 28px
+      }
+    }
+
+    > .rr-placeholder{
+      display: none;
+      @include xs {
+        display: block;
+        margin-top: 16px;
+      }
     }
   }
   .rr-skeleton-divider {

@@ -71,6 +71,9 @@ const defaultConfig = merge({
     countries: ['de'],
   },
   templates: {
+    ui: {
+      reserveButtonClasses: 'button btn btn-primary',
+    },
     customVariables: {},
     customTemplates: {},
   },

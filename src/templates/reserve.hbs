@@ -40,7 +40,7 @@
 
       <div class="rr-store-detail">
         <div>
-          <p class="rr-bold">{{t "storeList.location.address" }}</p>
+          <p class="rr-bold rr-store-address">{{t "storeList.location.address" }}</p>
 
           <p>{{t "addresses.line1" street=location.primaryAddress.street}}</p>
           {{#if location.primaryAddress.street2}}
@@ -56,7 +56,7 @@
         </div>
         <div>
           {{#if location.operationHours}}
-            <p class="rr-bold">{{t "storeList.location.storeHours" }}</p>
+            <p class="rr-bold rr-store-hours">{{t "storeList.location.storeHours" }}</p>
             {{#each location.operationHours}}
               {{#if this}}
                 <p>{{t (concat "date." @key) }}: {{this}}</p>
