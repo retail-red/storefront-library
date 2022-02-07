@@ -1,3 +1,6 @@
+@import "breakpoints";
+@import "mixins";
+
 .rr-store-list {
   display: flex;
   flex-direction: column;

@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const sass = require('sass');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const bundleName = 'retailred-storefront-library-v2';
+
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
 
@@ -98,7 +100,9 @@ module.exports = (env, argv) => {
         filename: 'quick.html',
         template: './src/dev/quick.html',
       }),
-      new MiniCssExtractPlugin(),
+      new MiniCssExtractPlugin({
+        filename: `${bundleName}.css`,
+      }),
       new BundleAnalyzerPlugin({
         analyzerMode: 'disabled',
       }),
@@ -112,6 +116,7 @@ module.exports = (env, argv) => {
     },
     output: {
       path: outputPath,
+      filename: `${bundleName}.js`,
     },
   };
 

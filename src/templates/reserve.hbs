@@ -132,6 +132,11 @@
             {{t "reserve.newsletterOptIn"}}
         {{/checkbox}}
       {{/if}}
+      {{#if persistDataOptIn.enabled }}
+        {{#> checkbox id="rr-reserve-persist-data-opt-in" checked=(and persistDataOptIn.preselected)}}
+           {{t "reserve.saveCustomerData"}}
+        {{/checkbox}}
+      {{/if}}
       {{#if (hasTranslation "reserve.footerText") }}
         <div class="rr-footer-text">
           {{t "reserve.footerText"}}

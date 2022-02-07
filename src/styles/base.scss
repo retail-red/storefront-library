@@ -2,8 +2,7 @@
   --color-primary: #000;
   --color-primary-contrast: #fff;
   --color-text: #000;
-  --color-text-medium-emphasis: #666666;
-  --color-text-low-emphasis: #9e9e9e;
+  --color-text-medium-emphasis: #787878;
   --color-link: #3c9bb5;
   --color-button-disabled: #7f7f7f;
   --color-button-background-disabled: #E0E0E0;
@@ -14,16 +13,12 @@
   --font-family: "Roboto", "Helvetica", "Arial", sans-serif
 }
 
-#rr-omni.rr-omni-int, #rr-inventory {
+#rr-omni.rr-omni-int {
   * {
     font-family: var(--font-family);
     color: var(--color-text);
   }
 
-
-
-  @import "breakpoints";
-  @import "mixins";
   @import "reset";
   @import "modal";
   @import "form";
@@ -31,11 +26,13 @@
   @import "reserve";
   @import "success";
   @import "loading";
-}
 
-#rr-omni.rr-omni-int {
   $flagsImagePath: '../static/';
   @import "~intl-tel-input/src/css/intlTelInput";
+}
+
+#rr-inventory {
+  @import "form";
 }
 
 @import "liveInventory";

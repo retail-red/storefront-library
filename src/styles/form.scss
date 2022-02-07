@@ -1,4 +1,6 @@
 @use "sass:math";
+@import "breakpoints";
+@import "mixins";
 
 $input-border-radius: 5px;
 
@@ -76,6 +78,7 @@ $input-border-radius: 5px;
       max-width: 0.01px;
       transition: max-width 0.1s cubic-bezier(0, 0, 0.2, 1) 0ms;
       white-space: nowrap;
+      padding: 0
     }
   }
 
@@ -97,7 +100,7 @@ $input-border-radius: 5px;
     }
 
     .iti__dial-code {
-      color: var( --color-text-low-emphasis);
+      color: var(--color-text-medium-emphasis);
       vertical-align: middle;
     }
 

@@ -67,20 +67,27 @@ For colors we provided CSS variables that can be overridden once for all usages.
 ```css
 #rr-omni #rr-omni-custom, #rr-omni-reserve-button, #rr-inventory-custom {
   /* Color for common text */
-  --color-text: 0, 0, 0;
+  --color-text: #000;
+  /* Color for text with a medium emphasis */
+  --color-text-medium-emphasis: #787878;
   /* Primary color used for form elements and buttons */
-  --color-primary: 0, 0, 0;
+  --color-primary: #000;
   /* Contrast color for the primary color - used as button text color  */
-  --color-primary-contrast: 255, 255, 255;
+  --color-primary-contrast: #fff;
   /* Color used for links */
-  --color-link: 60, 155, 181;
+  --color-link: #3c9bb5;
+  /* Text color for disabled buttons */
+  --color-button-disabled: #7f7f7f;
+  /* Background color for disabled buttons */
+  --color-button-background-disabled: #E0E0E0;
   /* Color used for alerting texts like errors */
-  --color-state-alarm : 176, 0, 32;
+  --color-state-alarm : #b00020;
   /* Color used for highlighting problems like low stock */
-  --color-state-warning: 241, 156, 69;
+  --color-state-warning: #f19c45;
   /* Color used for positive highlighting like successful reservation text */
-  --color-state-success: 50, 172, 92;
-
+  --color-state-success: #32ac5c;
+  /* Font family for the modal */
+  --font-family: "Roboto", "Helvetica", "Arial", sans-serif
 }
 ```
 
@@ -107,14 +114,14 @@ retailred.updateConfig({
 | `useGeolocationImmediately` | `true`       | NO       | If enabled, whenever the user opens the store list the browsers geolocation will be requested immediately instead of only after pressing the locate me button.                                                                                                |
 | `testMode`                  | `false`      | NO       | When set to `true` no buttons will be rendered within the users browser, till the page was once opened with a query parameter like `rrTesting=start`. A testing session can be stopped by opening the page with `rrTesting=end`                               |
 | `platform`                  | `null`       | NO       | The platform from which the order came. Can be one of `engage`, `desktop`, `mobile`, `checkoutPage` or `other`                                                                                                                                                |
-
+| `saveCustomerData`          | `on` | NO     | Controls how user data is persisted within the `localStorage`. Can be one of `off` (data will not be saved), `on` (data will be saved in any case), `checkbox` (users can decide via a checkbox on the reservation page). The label of the checkbox can be changed via the localization configuration by changing the value of `localization.[lang].saveCustomerData`.                                                                                                                                                                                 |
 
 
 ### Product Configuration
 
 | Property                  | Default | Required        | Description                                     |
 |---------------------------|---------|-----------------|-------------------------------------------------|
-| `product.code`            |         | *before render* | The unique identifer for the active product     |
+| `product.code`            |         | *before render* | The unique identifier for the active product     |
 | `product.quantity`        |         | *before render* | The amount of products that should be reserved  |
 | `product.name`            |         | *before render* | Name - Visible to the user                      |
 | `product.imageUrl`        |         | *before render* | Url to an image of the product.                 |
@@ -139,14 +146,12 @@ These will be used to prefill the reservation form with the currently logged in 
 
 | Property                | Default | Required | Description                                                                                                  |
 |-------------------------|---------|----------|--------------------------------------------------------------------------------------------------------------|
-| `customer.code`         | `null`  | NO       | Add a unique identifier to the customer, inside the order this will be stored as the `externalCustomerNumer` |
+| `customer.code`         | `null`  | NO       | Add a unique identifier to the customer, inside the order this will be stored as the `externalCustomerNumber` |
 | `customer.firstName`    | `""`    | NO       | First name                                                                                                   |
 | `customer.lastName`     | `""`    | NO       | Last name                                                                                                    |
 | `customer.emailAddress` | `""`    | NO       | Email address                                                                                                |
 | `customer.phone`        | `""`    | NO       | Phone number, ex. `"+49123456"` or `"0123456"`                                                               |
 | `customer.country`      | `"DE"`  | NO       | The customers country (ISO 3166-1 alpha-2). Also used for correct phone number formatting.                   |
-| `customer.remember`     | `true`  | NO       | If enabled the customers entered data will be stored for the next time he initiates a reservation.           |
-
 
 ### Inventory Configuration
 
@@ -195,6 +200,20 @@ Besides the strings which are available via the locale files, there are some whe
 | Property        | Default | Required | Description                                                                                                      |
 |-----------------|---------|----------|------------------------------------------------------------------------------------------------------------------|
 | `newsletterOptIn`     | `disabled`  | NO       | Add a checkbox to the reservation page, which allows customers to opt-in to a newsletter.<br/>Use `enabled` to activate the checkbox. Use `enabledAndPreselected` to activate the checkbox in a preselected state.|
+
+### UI Configuration
+```js
+{
+  ...,
+  ui: {
+    reserveButtonClasses: 'my-custom-button button-primary'
+  }
+}
+```
+
+| Property                    | Default                  | Required | Description                                              |
+|-----------------------------|--------------------------|----------|----------------------------------------------------------|
+| `ui.reserveButtonClasses`   | `button btn btn-primary` | NO       | Applies classes to the reserve button. This setting can be used to style the button according to your CI.  |
 
 ### Custom Templates
 

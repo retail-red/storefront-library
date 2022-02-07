@@ -3,7 +3,7 @@ import { isButtonDisabled } from '../config';
 
 class ReserveButtonController extends Controller {
   async load(state) {
-    const ui = this.config.templates.ui || {};
+    const { ui } = this.config || {};
 
     return {
       ...state,
