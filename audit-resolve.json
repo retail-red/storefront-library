@@ -1,6 +1,15 @@
 {
   "decisions": {
-
+    "1006883|markdown-loader>marked": {
+      "decision": "ignore",
+      "madeAt": 1644237592066,
+      "expiresAt": 1646829575310
+    },
+    "1006884|markdown-loader>marked": {
+      "decision": "ignore",
+      "madeAt": 1644237594194,
+      "expiresAt": 1646829575310
+    }
   },
   "rules": {},
   "version": 1
