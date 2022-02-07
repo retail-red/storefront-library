@@ -113,20 +113,12 @@ export const createConfig = (config = {}, previous = {}) => {
     set(toBeStored, property, get(merged, property));
   });
 
-  let persist = false;
-
-  if (merged.saveCustomerData === 'on'
-  || (merged.saveCustomerData === 'checkbox' && toBeStored.customer.remember === true)
-  ) {
-    persist = true;
+  if (merged.saveCustomerData === 'off' || (merged.saveCustomerData === 'checkbox' && toBeStored.customer.remember !== true)) {
+    delete toBeStored.customer;
   }
 
   try {
-    if (persist) {
-      window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toBeStored));
-    } else {
-      window.localStorage.removeItem(LOCAL_STORAGE_KEY);
-    }
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toBeStored));
   } catch (err) {
     // Ignore local storage access issues
   }

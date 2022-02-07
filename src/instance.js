@@ -9,7 +9,7 @@ import App from './ui/app';
 import { getQueryParameter } from './util/browser';
 import Sdk from './sdk';
 
-const LOCAL_STORAGE_TESTING_KEY = 'rr-testing-v1';
+const LOCAL_STORAGE_TESTING_KEY = 'rr-testing-v2';
 
 class Instance {
   /**
