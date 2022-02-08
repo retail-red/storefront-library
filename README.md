@@ -2,7 +2,7 @@
 [![retail.red](https://img.shields.io/badge/retail-.red-red)](https://retail.red/)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/retail-red/storefront-library)
 [![Changelog](https://img.shields.io/github/package-json/v/retail-red/storefront-library?label=changelog)](CHANGELOG.md)
-[![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
+[![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index_v2.html)
 ![GitHub](https://img.shields.io/github/license/retail-red/storefront-library)
 
 This library enables merchants to easily offer click & reserve functionality to their existing ecommerce website. The script can add a “reserve” button to the product detail page, via which a new reservation can be placed.
@@ -38,7 +38,7 @@ As a last step you need to define the place where the reservation button should 
 ```
 
 ### Example Integration
-See `src/dev/index.html` for a basic integration example or visit the [demo page.](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index.html)
+See `src/dev/index.html` for a basic integration example or visit the [demo page.](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index_v2.html)
 
 ## Interface
 

@@ -93,12 +93,13 @@ module.exports = (env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         inject: 'head',
-        template: './src/dev/index.html',
+        filename: 'index_v2.html',
+        template: './src/dev/index_v2.html',
       }),
       new HtmlWebpackPlugin({
         inject: 'head',
-        filename: 'quick.html',
-        template: './src/dev/quick.html',
+        filename: 'quick_v2.html',
+        template: './src/dev/quick_v2.html',
       }),
       new MiniCssExtractPlugin({
         filename: `${bundleName}.css`,
@@ -110,6 +111,11 @@ module.exports = (env, argv) => {
     devServer: {
       static: {
         directory: './dist',
+      },
+      onBeforeSetupMiddleware: (devServer) => {
+        devServer.app.get('/', (req, res) => {
+          res.redirect('/index_v2.html');
+        });
       },
       hot: true,
       host: '0.0.0.0',
