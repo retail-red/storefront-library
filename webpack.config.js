@@ -1,8 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const sass = require('sass');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = () => {
+const bundleName = 'retailred-storefront-library-v2';
+
+module.exports = (env, argv) => {
+  const isProduction = argv.mode === 'production';
+
   const { STAGE } = process.env;
 
   const outputPath = path.join(__dirname, STAGE === 'production' ? 'dist/prod' : 'dist/dev/');
@@ -35,11 +41,19 @@ module.exports = () => {
         {
           test: /\.s[ac]ss$/i,
           use: [
-            'style-loader',
-            'css-loader',
+            isProduction
+              ? MiniCssExtractPlugin.loader
+              : 'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
             {
               loader: 'sass-loader',
               options: {
+                sourceMap: true,
                 implementation: sass,
               },
             },
@@ -79,21 +93,36 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         inject: 'head',
-        template: './src/dev/index.html',
+        filename: 'index_v2.html',
+        template: './src/dev/index_v2.html',
       }),
       new HtmlWebpackPlugin({
         inject: 'head',
-        filename: 'quick.html',
-        template: './src/dev/quick.html',
+        filename: 'quick_v2.html',
+        template: './src/dev/quick_v2.html',
+      }),
+      new MiniCssExtractPlugin({
+        filename: `${bundleName}.css`,
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'disabled',
       }),
     ],
     devServer: {
-      contentBase: './dist',
+      static: {
+        directory: './dist',
+      },
+      onBeforeSetupMiddleware: (devServer) => {
+        devServer.app.get('/', (req, res) => {
+          res.redirect('/index_v2.html');
+        });
+      },
       hot: true,
       host: '0.0.0.0',
     },
     output: {
       path: outputPath,
+      filename: `${bundleName}.js`,
     },
   };
 

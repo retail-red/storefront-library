@@ -9,7 +9,7 @@ import App from './ui/app';
 import { getQueryParameter } from './util/browser';
 import Sdk from './sdk';
 
-const LOCAL_STORAGE_KEY = 'rr-testing-v1';
+const LOCAL_STORAGE_TESTING_KEY = 'rr-testing-v2';
 
 class Instance {
   /**
@@ -49,11 +49,11 @@ class Instance {
 
     if (rrTesting === 'start') {
       try {
-        window.localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+        window.localStorage.setItem(LOCAL_STORAGE_TESTING_KEY, 'true');
       } catch (r) { /* */ }
     } else if (rrTesting === 'end') {
       try {
-        window.localStorage.removeItem(LOCAL_STORAGE_KEY);
+        window.localStorage.removeItem(LOCAL_STORAGE_TESTING_KEY);
       } catch (e) { /* */ }
     }
   }
@@ -68,7 +68,7 @@ class Instance {
     let rrTesting;
 
     try {
-      rrTesting = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+      rrTesting = window.localStorage.getItem(LOCAL_STORAGE_TESTING_KEY);
     } catch (r) { /* */ }
 
     return rrTesting === 'true';

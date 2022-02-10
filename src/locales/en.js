@@ -84,6 +84,7 @@ export default {
       text: 'I have read and accepted the {{child}} & {{child_1}}.',
     },
     newsletterOptIn: 'I want to subscribe to your newsletter and get updates about new products & offers. I can unsubscribe at any moment.',
+    saveCustomerData: 'Save input for next time.',
   },
   success: {
     title: 'Reservation Confirmation',

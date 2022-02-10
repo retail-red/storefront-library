@@ -1,84 +1,14 @@
 {
   "decisions": {
-    "1751|webpack-dev-server>chokidar>glob-parent": {
-      "decision": "ignore",
-      "madeAt": 1623849586504,
-      "expiresAt": 1631010124000
-    },
-    "1004946|webpack-dev-server>yargs>cliui>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1004946|webpack-dev-server>yargs>cliui>string-width>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1004946|webpack-dev-server>yargs>cliui>wrap-ansi>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1004946|webpack-dev-server>yargs>cliui>wrap-ansi>string-width>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1004946|webpack-dev-server>yargs>string-width>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1005154|webpack-dev-server>chokidar>glob-parent": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1006852|webpack-dev-server>selfsigned>node-forge": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1006854|webpack-dev-server>selfsigned>node-forge": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
-    "1006898|webpack-dev-server>selfsigned>node-forge": {
-      "decision": "ignore",
-      "madeAt": 1644308454905,
-      "expiresAt": 1646900442291
-    },
     "1006883|markdown-loader>marked": {
       "decision": "ignore",
-      "madeAt": 1644308457659,
-      "expiresAt": 1646900442291
+      "madeAt": 1644237592066,
+      "expiresAt": 1646829575310
     },
     "1006884|markdown-loader>marked": {
       "decision": "ignore",
-      "madeAt": 1644308457660,
-      "expiresAt": 1646900442291
-    },
-    "1004946|npm-audit-resolver>yargs-unparser>yargs>cliui>string-width>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308459158,
-      "expiresAt": 1646900442291
-    },
-    "1004946|npm-audit-resolver>yargs-unparser>yargs>cliui>wrap-ansi>string-width>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308459158,
-      "expiresAt": 1646900442291
-    },
-    "1004946|npm-audit-resolver>yargs-unparser>yargs>string-width>strip-ansi>ansi-regex": {
-      "decision": "ignore",
-      "madeAt": 1644308459158,
-      "expiresAt": 1646900442291
-    },
-    "1005059|webpack-dev-server>ansi-html": {
-      "decision": "ignore",
-      "madeAt": 1644308461108,
-      "expiresAt": 1646900442291
+      "madeAt": 1644237594194,
+      "expiresAt": 1646829575310
     }
   },
   "rules": {},

@@ -1,10 +1,13 @@
+@import "breakpoints";
+@import "mixins";
+
 @keyframes rr-running-progress {
   0% { margin-left: 0px; margin-right: 100%; }
   50% { margin-left: 25%; margin-right: 0%; }
   100% { margin-left: 100%; margin-right: 0; }
 }
 
-.rr-progress-line, .rr-progress-line:before {
+.rr-progress-line, .rr-progress-line:before, .rr-progress-line:after {
   height: 3px;
   width: 100%;
   margin: 0;
@@ -14,15 +17,21 @@
   position: absolute;
   z-index: 3;
   bottom: 0;
-  background-color: rgba(var(--color-primary), 0.4);
   display: flex;
   opacity: 0;
   transition: opacity 257ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:after {
+    position: absolute;
+    background-color: var(--color-primary);
+    opacity: 0.4;
+    content: '';
+  }
   &.rr-progress-visible {
     opacity: 1;
     &:before {
+      z-index: 2;
       animation: rr-running-progress 1.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-      background-color: rgb(var(--color-primary));
+      background-color: var(--color-primary);
       content: '';
     }
   }

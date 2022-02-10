@@ -26,11 +26,12 @@ const storedProperties = [
   'customer.phone',
   'customer.emailAddress',
   'customer.country',
+  'customer.remember',
   ...getExtraStoredConfig(),
 ];
 
 // Load default config from location code.
-const LOCAL_STORAGE_KEY = 'rr-config-v1';
+const LOCAL_STORAGE_KEY = 'rr-config-v2';
 let storedConfig = {};
 try {
   const storedConfigString = window.localStorage.getItem(LOCAL_STORAGE_KEY) || '{}';
@@ -45,6 +46,7 @@ const defaultConfig = merge({
   unitSystem: 'metric',
   browserHistory: true,
   useGeolocationImmediately: true,
+  saveCustomerData: 'on',
   testMode: false,
   platform: null,
   newsletterOptIn: 'disabled',
@@ -55,7 +57,6 @@ const defaultConfig = merge({
     phone: '',
     emailAddress: '',
     country: 'DE',
-    remember: true,
   },
   legal: {
     terms: null,
@@ -69,6 +70,9 @@ const defaultConfig = merge({
   localization: {
     localeCode: getBrowserLanguage(),
     countries: ['de'],
+  },
+  ui: {
+    reserveButtonClasses: 'button btn btn-primary',
   },
   templates: {
     customVariables: {},
@@ -108,6 +112,11 @@ export const createConfig = (config = {}, previous = {}) => {
   storedProperties.forEach((property) => {
     set(toBeStored, property, get(merged, property));
   });
+
+  if (merged.saveCustomerData === 'off' || (merged.saveCustomerData === 'checkbox' && toBeStored.customer.remember !== true)) {
+    delete toBeStored.customer;
+  }
+
   try {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toBeStored));
   } catch (err) {

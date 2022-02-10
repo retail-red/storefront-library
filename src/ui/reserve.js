@@ -17,6 +17,7 @@ const formData = {
   pickupPhone: 'rr-reserve-pickup-phone-number',
   pickupEmailAddress: 'rr-reserve-pickup-email',
   pickupCountry: 'rr-reserve-pickup-country',
+  remember: 'rr-reserve-persist-data-opt-in',
 };
 
 const validation = {
@@ -53,7 +54,9 @@ class ReserveController extends Controller {
   async load({
     location, product, showHeader = true, showLocation = true,
   }) {
-    const { customer, legal, newsletterOptIn } = this.config;
+    const {
+      customer, legal, newsletterOptIn, saveCustomerData,
+    } = this.config;
 
     return {
       showHeader,
@@ -63,6 +66,10 @@ class ReserveController extends Controller {
       newsletterOptIn: {
         enabled: ['enabled', 'enabledAndPreselected'].includes(newsletterOptIn),
         preselected: newsletterOptIn === 'enabledAndPreselected',
+      },
+      persistDataOptIn: {
+        enabled: saveCustomerData === 'checkbox',
+        preselected: customer.remember === true,
       },
       product,
       formData: {
@@ -79,7 +86,16 @@ class ReserveController extends Controller {
   prefillFormData() {
     Object.entries(formData).forEach(([formField, id]) => {
       const field = document.querySelector(`#${id}`);
-      field.value = this.state.formData[formField];
+      if (!field) return;
+
+      const { type } = field;
+      const value = this.state.formData[formField];
+
+      if (type === 'checkbox') {
+        field.checked = [true, false].includes(value) ? value : false;
+      } else {
+        field.value = value;
+      }
     });
   }
 
@@ -96,17 +112,19 @@ class ReserveController extends Controller {
   }
 
   syncCustomerData() {
-    if (!this.config.customer.remember) {
-      return;
-    }
-
-    const stored = ['firstName', 'lastName', 'phone', 'emailAddress', 'country'];
+    const stored = ['firstName', 'lastName', 'phone', 'emailAddress', 'country', 'remember'];
     stored.forEach((property) => {
       const element = document.querySelector(`#${formData[property]}`);
-      element.addEventListener('blur', (e) => {
+      if (!element) return;
+      const { type } = element;
+      const event = type === 'checkbox' ? 'change' : 'blur';
+
+      element.addEventListener(event, (e) => {
         e.preventDefault();
         e.stopImmediatePropagation();
-        this.app.publicInterface.updateConfig({ customer: { [property]: e.target.value } });
+        const value = type === 'checkbox' ? e.target.checked : e.target.value;
+
+        this.app.publicInterface.updateConfig({ customer: { [property]: value } });
       });
     });
   }

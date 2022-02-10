@@ -1,19 +1,21 @@
+@use "sass:math";
+@import "breakpoints";
+@import "mixins";
+
+$input-border-radius: 5px;
+
 .rr-text-field {
   position: relative;
-  height: 44px;
   font-size: 16px;
 
   label {
-    background: #fff;
     position: absolute;
     font-size: 1em;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #fff;
-    color: gray;
-    padding: 0 0.3em;
-    margin: 0 0.5em;
+    color: var(--color-text-medium-emphasis);
+    margin: 0 12px;
     transition: .1s ease-out;
     transform-origin: left top;
     pointer-events: none;
@@ -23,26 +25,61 @@
     background: #fff;
     font-size: 0.9em;
     outline: none;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 0.8em 0.7em;
-    color: rgb(var(--color-input));
+    border: 0px;
+    padding: 12px;
+    color: var(--color-input);
     transition: 0.1s ease-out;
     min-height: auto;
     height: auto;
+    border-radius:$input-border-radius;
   }
   input:focus {
     outline: 0;
-    border-color: rgb(var(--color-primary));
+    ~ fieldset {
+      border-color: var(--color-primary);
+    }
   }
-  input:focus + label {
-    color: rgb(var(--color-primary));
-    top: 0;
-    transform: translateY(-50%) scale(.9);
+  input:focus {
+    + label {
+      color: var(--color-primary);
+      top: 0;
+      transform: translateY(-50%) scale(.9);
+    }
+
+    ~ fieldset > legend {
+      max-width: 100%;
+      transform: translateX(-4%) scale(.9);
+    }
   }
-  input:not(:placeholder-shown) + label {
-    top: 0;
-    transform: translateY(-50%) scale(.9);
+  input:not(:placeholder-shown) {
+    + label {
+      top: 0;
+      transform: translateY(-50%) scale(.9);
+    }
+
+    ~ fieldset > legend {
+      max-width: 100%;
+      transform: translateX(-4%) scale(.9);
+    }
+  }
+
+  fieldset {
+    text-align: left;
+    position: absolute;
+    inset: -8px 0px 0px;
+    padding: 0 8px;
+    pointer-events: none;
+    border: 1px solid gray;
+    border-radius:$input-border-radius;
+    overflow: hidden;
+
+    legend {
+      visibility: hidden;
+      max-width: 0.01px;
+      transition: max-width 0.1s cubic-bezier(0, 0, 0.2, 1) 0ms;
+      white-space: nowrap;
+      padding: 0
+    }
   }
 
   div.iti {
@@ -63,7 +100,7 @@
     }
 
     .iti__dial-code {
-      color: rgb(var(--color-text, 0, 0, 0), 0.53);
+      color: var(--color-text-medium-emphasis);
       vertical-align: middle;
     }
 
@@ -78,7 +115,7 @@
   flex-direction: column;
   .rr-field-error {
     margin-top: 6px;
-    color: rgb(var(--color-state-alarm));
+    color: var(--color-state-alarm);
     font-size: 0.85em;
     &.rr-hidden {
       display: none;
@@ -96,8 +133,7 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    background-color: white;
-    color: gray;
+    color: var(--color-text-medium-emphasis);
     padding: 0 0.3em;
     margin: 0 0.5em;
     transition: .1s ease-out;
@@ -112,10 +148,10 @@
     background-color: transparent;
     font-size: 1em;
     outline: none;
-    border: 1px solid gray;
     border-radius: 5px;
+    border: none;
     padding: 0.8em 2.0em 0.7em 0.8em;
-    color: gray;
+    color: var(--color-text-medium-emphasis);
     transition: 0.1s ease-out;
     appearance: none;
     -webkit-appearance: none;
@@ -133,19 +169,52 @@
     background-repeat: no-repeat;
   }
 
+  select:focus ~ fieldset {
+    border-color: var(--color-primary);
+  }
+
   select:focus {
-    border-color: rgb(var(--color-primary));
+    + label {
+      color: var(--color-primary);
+      top: 0;
+      transform: translateY(-50%) scale(.9);
+    }
+
+    ~ fieldset > legend {
+      max-width: 100%;
+      transform: translateX(4%) scale(.9);
+    }
   }
 
-  select:focus + label {
-    color: rgb(var(--color-primary));
-    top: 0;
-    transform: translateY(-50%) scale(.9);
+  select:not(:placeholder-shown) {
+    + label {
+      top: 0;
+      transform: translateY(-50%) scale(.9);
+    }
+
+    ~ fieldset > legend {
+      max-width: 100%;
+      transform: translateX(4%) scale(.9);
+    }
   }
 
-  select:not(:placeholder-shown) + label {
-    top: 0;
-    transform: translateY(-50%) scale(.9);
+  fieldset {
+    text-align: left;
+    position: absolute;
+    inset: -8px 6px 0px;
+    padding: 0 8px;
+    pointer-events: none;
+    border: 1px solid gray;
+    border-radius:$input-border-radius;
+    overflow: hidden;
+
+    legend {
+      visibility: hidden;
+      max-width: 0.01px;
+      transition: max-width 0.1s cubic-bezier(0, 0, 0.2, 1) 0ms;
+      white-space: nowrap;
+      padding-left: 4px
+    }
   }
 }
 
@@ -164,8 +233,8 @@
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
-  color: rgb(var(--color-primary-contrast, 255, 255, 255));
-  background-color: rgb(var(--color-primary, 33, 150, 243));
+  color: var(--color-primary-contrast);
+  background-color: var(--color-primary);
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   font-size: 14px;
   font-weight: 500;
@@ -176,7 +245,7 @@
 
   // Icon button
   svg {
-    fill: rgb(var(--color-primary-contrast, 255, 255, 255));;
+    fill: var(--color-primary-contrast);
     width: 24px;
     height: 24px;
   }
@@ -239,8 +308,8 @@
   }
 
   &:disabled {
-    color: rgba(var(--color-primary, 0, 0, 0), 0.38);
-    background-color: rgba(var(--color-primary, 0, 0, 0), 0.12);
+    color: var(--color-button-disabled);
+    background-color: var(--color-button-background-disabled);
     box-shadow: none;
     cursor: not-allowed;
     &::before {
@@ -253,7 +322,7 @@
 }
 
 .rr-link {
-  color: rgb(var(--color-link));
+  color: var(--color-link);
   text-decoration: underline;
   font-size: 16px;
   outline: none;
@@ -283,15 +352,15 @@
   }
   label {
     display: block;
-    padding: 0 0 0 24px;
+    padding: 0 0 0 2em;
     &:before {
       content: '';
       box-sizing: border-box;
       position: absolute;
-      top: 4px;
+      top: 2px;
       left: 0;
-      width: 16px !important;
-      height: 16px !important;
+      width: 20px !important;
+      height: 20px !important;
       background-color: transparent;
       border: 2px solid rgba(0, 0, 0 , .54);
       border-radius: 14px;
@@ -302,11 +371,11 @@
       box-sizing: border-box;
       content: '';
       position: absolute;
-      top: 8px;
-      left: 4px;
-      width: 8px;
-      height: 8px;
-      background-color: rgb(var(--color-primary));
+      top: 7px;
+      left: 5px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--color-primary);
       border-radius: 50%;
       z-index: 2;
       transform: scale(0, 0);
@@ -315,7 +384,7 @@
   }
   input:checked + label {
     &:before {
-      border-color: rgb(var(--color-primary));
+      border-color: var(--color-primary);
     }
     &:after {
       transform: scale(1, 1);
@@ -324,7 +393,7 @@
 }
 
 
-$md-checkbox-checked-color: rgb(var(--color-primary));
+$md-checkbox-checked-color: var(--color-primary);
 $md-checkbox-border-color: rgba(0, 0, 0, 0.54);
 $md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
 $md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);
@@ -408,9 +477,9 @@ $md-checkbox-label-padding: 2em;
       + label:after {
         $md-checkmark-size: $md-checkbox-size - 2 * $md-checkbox-padding;
 
-        transform: translate($md-checkbox-padding, ($md-checkbox-size / 2) - ($md-checkmark-size / 2.6)) rotate(-45deg);
+        transform: translate($md-checkbox-padding, math.div($md-checkbox-size, 2) -  math.div($md-checkmark-size, 2.6)) rotate(-45deg);
         width: $md-checkmark-size;
-        height: $md-checkmark-size / 2;
+        height: math.div($md-checkmark-size, 2);
 
         border: $md-checkmark-width solid $md-checkmark-color;
         border-top-style: none;

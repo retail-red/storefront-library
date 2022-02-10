@@ -1,3 +1,6 @@
+@import "breakpoints";
+@import "mixins";
+
 #rr-inventory {
     display: flex;
     flex-direction: column;
@@ -31,7 +34,7 @@
             }
         }
         .rr-button {
-            margin-top: -3px;
+            margin-top: -2px;
             font-size: 12px;
             height: 41px;
         }
@@ -49,7 +52,15 @@
     }
 
     .rr-select-field {
-        margin-top:  16px;
+        margin-top: 16px;
+
+        select {
+            padding-left: 1.2em;
+        }
+
+        select + label {
+            left: 8px;
+        }
     }
 
     #rr-inventory-select {
@@ -65,6 +76,7 @@
         display: flex;
         flex-direction: row;
         line-height: 1.6;
+        text-align: left;
         a:first-child {
             flex: 1;
         }
@@ -104,13 +116,13 @@
         margin-top: 8px;
         margin-bottom: 6px;
         .rr-available-positive {
-            color: rgb(var(--color-state-success));
+            color: var(--color-state-success);
         }
         .rr-available-negative {
-            color: rgb(var(--color-state-alarm));
+            color: var(--color-state-alarm);
         }
         .rr-available-neutral {
-            color: rgb(var(--color-state-warning));
+            color: var(--color-state-warning);
         }
     }
 }
