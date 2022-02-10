@@ -1,5 +1,9 @@
 # retail.red Storefront Library Changelog
 
+## v2.0.1
+### Fixed
+- CSS issues
+
 ## v2.0.0
 https://cdn.retail.red/omni/retailred-storefront-library-2.0.0.js
 ### Breaking Changes

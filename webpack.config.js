@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const sass = require('sass');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -41,19 +40,17 @@ module.exports = (env, argv) => {
         {
           test: /\.s[ac]ss$/i,
           use: [
-            isProduction
-              ? MiniCssExtractPlugin.loader
-              : 'style-loader',
+            'style-loader',
             {
               loader: 'css-loader',
               options: {
-                sourceMap: true,
+                sourceMap: !isProduction,
               },
             },
             {
               loader: 'sass-loader',
               options: {
-                sourceMap: true,
+                sourceMap: !isProduction,
                 implementation: sass,
               },
             },
@@ -101,9 +98,6 @@ module.exports = (env, argv) => {
         filename: 'quick_v2.html',
         template: './src/dev/quick_v2.html',
       }),
-      new MiniCssExtractPlugin({
-        filename: `${bundleName}.css`,
-      }),
       new BundleAnalyzerPlugin({
         analyzerMode: 'disabled',
       }),
@@ -120,6 +114,7 @@ module.exports = (env, argv) => {
       hot: true,
       host: '0.0.0.0',
     },
+    entry: ['./src/styles/base.scss', './src/index.js'],
     output: {
       path: outputPath,
       filename: `${bundleName}.js`,
