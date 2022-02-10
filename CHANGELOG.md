@@ -1,4 +1,8 @@
 # retail.red Storefront Library Changelog
+## v2.0.2
+### Changes
+- Library styling is now inserted at top of the document head to improve possibilities to overwrite styling
+- Moved styling for quick reserve button from ID to class to improve customization
 
 ## v2.0.1
 ### Fixed

@@ -1,4 +1,4 @@
-#rr-omni.rr-omni-int, #rr-inventory, #rr-omni-reserve-button  {
+#rr-omni.rr-omni-int, #rr-inventory, .rr-omni-reserve-button  {
   --color-primary: #000;
   --color-primary-contrast: #fff;
   --color-text: #000;
@@ -41,7 +41,7 @@
   overflow: hidden;
 }
 
-#rr-omni-reserve-button {
+.rr-omni-reserve-button {
   background: var(--color-primary);
   color: var(--color-primary-contrast);
 }

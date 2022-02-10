@@ -72,7 +72,7 @@ const defaultConfig = merge({
     countries: ['de'],
   },
   ui: {
-    reserveButtonClasses: 'button btn btn-primary',
+    reserveButtonClasses: 'rr-omni-reserve-button button btn btn-primary',
   },
   templates: {
     customVariables: {},

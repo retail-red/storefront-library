@@ -40,7 +40,27 @@ module.exports = (env, argv) => {
         {
           test: /\.s[ac]ss$/i,
           use: [
-            'style-loader',
+            {
+              loader: 'style-loader',
+              options: {
+                /* eslint-disable no-var */
+                insert: function insertAtTop(element) {
+                  var parent = document.querySelector('head');
+                  var lastInsertedElement = window._lastElementInsertedByStyleLoader;
+
+                  if (!lastInsertedElement) {
+                    parent.insertBefore(element, parent.firstChild);
+                  } else if (lastInsertedElement.nextSibling) {
+                    parent.insertBefore(element, lastInsertedElement.nextSibling);
+                  } else {
+                    parent.appendChild(element);
+                  }
+
+                  window._lastElementInsertedByStyleLoader = element;
+                },
+                /* eslint-enable no-var */
+              },
+            },
             {
               loader: 'css-loader',
               options: {
