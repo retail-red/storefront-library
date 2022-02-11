@@ -122,7 +122,7 @@
 
     .rr-error {
       font-size: 14px;
-      color: var(--color-state-alarm);
+      color: var(--rr-color-state-alarm);
     }
 
     .rr-store {
@@ -232,7 +232,7 @@
       background: var(--rr-color-state-success);
     }
     .rr-available-negative::before {
-      background: var(--color-state-alarm);
+      background: var(--rr-color-state-alarm);
     }
     .rr-available-neutral::before {
       background: var(--rr-color-state-warning);

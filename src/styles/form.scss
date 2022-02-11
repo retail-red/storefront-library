@@ -115,7 +115,7 @@ $input-border-radius: 5px;
   flex-direction: column;
   .rr-field-error {
     margin-top: 6px;
-    color: var(--color-state-alarm);
+    color: var(--rr-color-state-alarm);
     font-size: 0.85em;
     &.rr-hidden {
       display: none;
