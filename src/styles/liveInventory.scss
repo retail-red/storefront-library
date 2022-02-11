@@ -116,13 +116,13 @@
         margin-top: 8px;
         margin-bottom: 6px;
         .rr-available-positive {
-            color: var(--color-state-success);
+            color: var(--rr-color-state-success);
         }
         .rr-available-negative {
             color: var(--color-state-alarm);
         }
         .rr-available-neutral {
-            color: var(--color-state-warning);
+            color: var(--rr-color-state-warning);
         }
     }
 }

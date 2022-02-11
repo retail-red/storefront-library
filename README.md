@@ -67,27 +67,27 @@ For colors we provided CSS variables that can be overridden once for all usages.
 ```css
 #rr-omni #rr-omni-custom, #rr-omni-reserve-button, #rr-inventory-custom {
   /* Color for common text */
-  --color-text: #000;
+  --rr-color-text: #000;
   /* Color for text with a medium emphasis */
-  --color-text-medium-emphasis: #787878;
+  --rr-color-text-medium-emphasis: #787878;
   /* Primary color used for form elements and buttons */
-  --color-primary: #000;
+  --rr-color-primary: #000;
   /* Contrast color for the primary color - used as button text color  */
-  --color-primary-contrast: #fff;
+  --rr-color-primary-contrast: #fff;
   /* Color used for links */
-  --color-link: #3c9bb5;
+  --rr-color-link: #3c9bb5;
   /* Text color for disabled buttons */
-  --color-button-disabled: #7f7f7f;
+  --rr-color-button-disabled: #7f7f7f;
   /* Background color for disabled buttons */
-  --color-button-background-disabled: #E0E0E0;
+  --rr-color-button-background-disabled: #E0E0E0;
   /* Color used for alerting texts like errors */
-  --color-state-alarm : #b00020;
+  --rr-color-state-alarm : #b00020;
   /* Color used for highlighting problems like low stock */
-  --color-state-warning: #f19c45;
+  --rr-color-state-warning: #f19c45;
   /* Color used for positive highlighting like successful reservation text */
-  --color-state-success: #32ac5c;
+  --rr-color-state-success: #32ac5c;
   /* Font family for the modal */
-  --font-family: "Roboto", "Helvetica", "Arial", sans-serif
+  --rr-font-family: inherit
 }
 ```
 

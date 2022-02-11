@@ -1,22 +1,22 @@
 #rr-omni.rr-omni-int, #rr-inventory, .rr-omni-reserve-button  {
-  --color-primary: #000;
-  --color-primary-contrast: #fff;
-  --color-text: #000;
-  --color-text-medium-emphasis: #787878;
-  --color-link: #3c9bb5;
-  --color-button-disabled: #7f7f7f;
-  --color-button-background-disabled: #E0E0E0;
-  --color-state-alarm : #b00020;
-  --color-state-warning: #f19c45;
-  --color-state-success: #32ac5c;
-  --color-input: var(--color-text);
-  --font-family: "Roboto", "Helvetica", "Arial", sans-serif
+  --rr-color-primary: #000;
+  --rr-color-primary-contrast: #fff;
+  --rr-color-text: #000;
+  --rr-color-text-medium-emphasis: #787878;
+  --rr-color-link: #3c9bb5;
+  --rr-color-button-disabled: #7f7f7f;
+  --rr-color-button-background-disabled: #E0E0E0;
+  --rr-color-state-alarm : #b00020;
+  --rr-color-state-warning: #f19c45;
+  --rr-color-state-success: #32ac5c;
+  --rr-color-input: var(--rr-color-text);
+  --rr-font-family: inherit;
 }
 
 #rr-omni.rr-omni-int {
-  * {
-    font-family: var(--font-family);
-    color: var(--color-text);
+  #rr-omni-custom {
+    font-family: var(--rr-font-family);
+    color: var(--rr-color-text);
   }
 
   @import "reset";
@@ -42,6 +42,6 @@
 }
 
 .rr-omni-reserve-button {
-  background: var(--color-primary);
-  color: var(--color-primary-contrast);
+  background: var(--rr-color-primary);
+  color: var(--rr-color-primary-contrast);
 }

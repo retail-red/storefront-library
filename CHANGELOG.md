@@ -11,16 +11,16 @@
 ## v2.0.0
 https://cdn.retail.red/omni/retailred-storefront-library-2.0.0.js
 ### Breaking Changes
+- Prefixed custom properties with to avoid conflicts with global CSS
 - Revised custom properties for color customization. Instead of RGB values, they now accept regular CSS colors as values.
 
 ### Added
-- Custom property `--color-text-medium-emphasis` to change the color of text with a lower emphasis, than the main text color
-- Custom property `--color-button-disabled` text color for disabled buttons
-- Custom property `--color-button-background-disabled` background color for disabled buttons
-- Custom property `--font-family` font family for elements that don't inherit the font family of the surrounding page
+- Custom property `--rr-color-text-medium-emphasis` to change the color of text with a lower emphasis, than the main text color
+- Custom property `--rr-color-button-disabled` text color for disabled buttons
+- Custom property `--rr-color-button-background-disabled` background color for disabled buttons
+- Custom property `--rr-font-family` to apply a custom font-family to the modal content
 - `saveCustomerData` config to control how user data form the reservation form is handled
 - `ui.reserveButtonClasses` config to set custom classes for the reserve button
-- CSS is now shipped as a separate file
 
 ### Fixed
 - Minor UI tweaks
