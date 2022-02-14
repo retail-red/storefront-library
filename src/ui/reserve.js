@@ -152,7 +152,14 @@ class ReserveController extends Controller {
     // Retrieve form data from document.
     const submitData = Object.assign({}, ...Object
       .entries(formData)
-      .map(([name, id]) => ({ [name]: document.querySelector(`#${id}`).value })));
+      .map(([name, id]) => {
+        const element = document.querySelector(`#${id}`);
+        if (!element) {
+          return null;
+        }
+
+        return ({ [name]: element.value });
+      }).filter(Boolean));
     const customPickupPerson = !document.querySelector('#rr-reserve-pickup-me').checked;
     let marketingOptIn;
 
