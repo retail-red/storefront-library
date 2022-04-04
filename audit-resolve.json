@@ -9,6 +9,16 @@
       "decision": "ignore",
       "madeAt": 1644237594194,
       "expiresAt": 1646829575310
+    },
+    "1064654|markdown-loader>marked": {
+      "decision": "ignore",
+      "madeAt": 1649085777830,
+      "expiresAt": 1651677757001
+    },
+    "1064655|markdown-loader>marked": {
+      "decision": "ignore",
+      "madeAt": 1649085777830,
+      "expiresAt": 1651677757001
     }
   },
   "rules": {},
