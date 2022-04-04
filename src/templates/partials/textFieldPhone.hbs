@@ -56,7 +56,7 @@
         {{!-- Update the module with the persisted value from localStorage --}}
         iti.setNumber(apiInput.value);
 
-         {{!-- Update fields on change --}}
+        {{!-- Update fields on change --}}
         function handleChange() {
           apiInput.setAttribute('value', iti.isValidNumber() ? iti.getNumber() : '');
         }
@@ -68,18 +68,23 @@
           (input || apiInput ).dispatchEvent(e);
         }
 
+        {{!-- Sync the country id to the country input --}}
+        function updateCountryInput() {
+          const { iso2 } = iti.getSelectedCountryData();
+          if (countryInput && iso2) {
+            countryInput.setAttribute('value', iso2.toUpperCase());
+          }
+        }
+
+        updateCountryInput();
+
         {{!-- Initialize the various event listeners --}}
         userInput.addEventListener('change', handleChange);
         userInput.addEventListener('keyup', handleChange);
         userInput.addEventListener('blur', handleBlur);
 
         userInput.addEventListener('countrychange', function() {
-          const { iso2 } = iti.getSelectedCountryData();
-
-          if (countryInput && iso2) {
-            countryInput.setAttribute('value', iso2.toUpperCase());
-          }
-
+          updateCountryInput();
           handleChange();
           handleBlur(null, apiInput);
           handleBlur(null, countryInput);
