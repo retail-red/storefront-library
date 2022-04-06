@@ -1,4 +1,11 @@
 # retail.red Storefront Library Changelog
+
+## v2.0.3
+### Changes
+- Added `noopener`rel attribute to google maps links
+
+### Fixes
+- Country code for pickup contact is reliably set in reservation request
 ## v2.0.2
 ### Changes
 - Library styling is now inserted at top of the document head to improve possibilities to overwrite styling
