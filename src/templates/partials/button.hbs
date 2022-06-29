@@ -1,5 +1,6 @@
 <button
   {{#if id}}id={{id}}{{/if}}
+  {{#if aria-label }}aria-label="{{t aria-label}}"{{/if}}
   class="{{#if (not noPrefix)}}rr-button {{/if}}{{#if class}}{{class}}{{/if}}"
   {{#if disabled}}disabled {{/if}}
   {{#if data }}
