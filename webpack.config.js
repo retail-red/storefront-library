@@ -126,10 +126,12 @@ module.exports = (env, argv) => {
       static: {
         directory: './dist',
       },
-      onBeforeSetupMiddleware: (devServer) => {
+      setupMiddlewares: (middlewares, devServer) => {
         devServer.app.get('/', (req, res) => {
           res.redirect('/index_v2.html');
         });
+
+        return middlewares;
       },
       hot: true,
       host: '0.0.0.0',
