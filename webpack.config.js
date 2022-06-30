@@ -2,6 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const sass = require('sass');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const TerserPlugin = require('terser-webpack-plugin');
+const PACKAGE = require('./package.json');
+
+const libVersion = PACKAGE.version;
 
 const bundleName = 'retailred-storefront-library-v2';
 
@@ -122,6 +126,18 @@ module.exports = (env, argv) => {
         analyzerMode: 'disabled',
       }),
     ],
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          extractComments: {
+            condition: /^\**!|@preserve|@license|@cc_on/i,
+            // The "fileData" arg contains object with "filename", "basename", "query" and "hash"
+            filename: (fileData) => `${fileData.filename}.LICENSE.txt${fileData.query}`,
+            banner: (licenseFile) => `(v${libVersion}) License information can be found in ${licenseFile}`,
+          },
+        }),
+      ],
+    },
     devServer: {
       static: {
         directory: './dist',
