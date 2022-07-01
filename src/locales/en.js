@@ -48,6 +48,7 @@ export default {
       label: 'Postal Code',
       countryLabel: 'Country',
       buttonLabel: 'Search',
+      ariaLabel: 'Search by geo-location',
     },
     inventory: {
       available: 'Available',

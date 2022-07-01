@@ -48,6 +48,7 @@ export default {
       label: 'Postleitzahl',
       countryLabel: 'Land',
       buttonLabel: 'Suchen',
+      ariaLabel: 'Suchen nach Standort',
     },
     inventory: {
       available: 'Verfügbar',
