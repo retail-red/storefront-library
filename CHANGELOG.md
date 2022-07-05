@@ -1,5 +1,9 @@
 # retail.red Storefront Library Changelog
 
+## v2.1.0
+### Changes
+- Improved accessibility
+
 ## v2.0.3
 ### Changes
 - Added `noopener`rel attribute to google maps links
