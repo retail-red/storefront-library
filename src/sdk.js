@@ -218,7 +218,7 @@ class StorefrontAPI {
    * @param {Array} fields Data fields that should be fetched.
    * @returns {Object}
    */
-  async getProduct(productCode, fields) {
+  async getProduct(productCode, fields = []) {
     return this._genericRequest({
       endpoint: `/v1/products/${encodeURIComponent(productCode)}`,
       query: {

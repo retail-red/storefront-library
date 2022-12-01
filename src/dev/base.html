@@ -187,7 +187,6 @@
   }
 
   .page-wrapper {
-    width: 960px;
     margin: 0 auto
   }
 
@@ -213,11 +212,13 @@
   }
 
   .catalog-product-view .product_flexbox {
-    display: flex
+    display: flex;
   }
 
   .product_page_form {
-    padding: 2%
+    padding: 16px;
+    flex: 1;
+    display: flex;
   }
 
   .content-wrapper .content .product-shop {
@@ -340,9 +341,38 @@
   }
 
   .content-wrapper .content .product-shop {
-    width: 35%;
-    padding: 2% 2% 2% 0;
-    margin-left: auto;
+    padding: 16px;
+    flex: 1;
+  }
+
+  .helper-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px
+  }
+
+  #retailred-storefront-library {
+    line-height: 36px;
+  }
+
+  @media (max-width: 480px) {
+    .catalog-product-view .product_flexbox {
+      flex-direction: column;
+    }
+
+    .demos textarea {
+      width: 95% !important;
+    }
+
+    .demos .demo {
+      width: 85%;
+    }
+
+    .docs {
+      overflow: auto;
+    }
   }
 
   #product_addtocart_form .big-column .row .box {
@@ -358,7 +388,9 @@
   }
 
   .main_image {
-    cursor: pointer
+    cursor: pointer;
+    max-width: 100%;
+    height: auto;
   }
 
   .delivery_time .availability {
@@ -481,16 +513,11 @@
             <form action="#" method=post id=product_addtocart_form class=product_page_form>
               <div class="big-column product_styling_id_27265">
                 <div class=product-img-box>
-                  <div class=product-img-box>
-                    <div class=product-img-box>
-                      <img class=main_image id=main_image rel=image_src width=500
-                        src="https://demo.elliselaine.com/pub/media/catalog/product/cache/5e62a3e057e3c5cc5f2bb9763ad693f7/k/l/kleid_dunkelblau_5.jpg" alt=base>
-                      <div id=media_overlay_bg class="product_media_overlay_bg hidden sf-hidden">
-                      </div>
-                      <div id=media_overlay class="product_media_overlay hidden sf-hidden">
-                      </div>
-                    </div>
+                  <img class=main_image id=main_image rel=image_src width=500
+                    src="https://demo.elliselaine.com/pub/media/catalog/product/cache/5e62a3e057e3c5cc5f2bb9763ad693f7/k/l/kleid_dunkelblau_5.jpg" alt=base>
+                  <div id=media_overlay_bg class="product_media_overlay_bg hidden sf-hidden">
                   </div>
+                  <div id=media_overlay class="product_media_overlay hidden sf-hidden"></div>
                 </div>
                 <div class="row clearfix">
                   <div class=box>
@@ -659,7 +686,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 64px;
+      margin-bottom: 32px;
     }
 
     .demo {
@@ -692,6 +719,8 @@
       display: flex;
       flex-direction: row;
       margin: -8px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   </style>
 
@@ -714,12 +743,17 @@
         <span>Showcases the integration of a simple reservation button.</span>
         <button>Open</button>
       </a>
+      <a href="api_product.html" class="demo">
+        <h4>API Product</h4>
+        <span>Showcases the integration with product requests via the Storefront API</span>
+        <button>Open</button>
+      </a>
     </div>
   </div>
 
   <div class="demos">
     <h3>Helper</h3>
-    <div style="display: flex; flex-direction: row;">
+    <div class="helper-buttons">
       <button id="reset">Reset</button>
       <button style="margin-left: 8px;" id="setUnavailable">Set to Unavailable Store</button>
       <button style="margin-left: 8px;" id="changeProduct">Change Product</button>
