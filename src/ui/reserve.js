@@ -146,8 +146,8 @@ class ReserveController extends Controller {
   }
 
   async submit() {
-    const { product, platform } = this.config;
-    const { location } = this.state;
+    const { platform } = this.config;
+    const { location, product } = this.state;
 
     // Retrieve form data from document.
     const submitData = Object.assign({}, ...Object

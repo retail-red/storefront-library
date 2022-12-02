@@ -1,0 +1,76 @@
+.rr-api-product-options {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+
+  @include xs {
+    display: none;
+  }
+
+  .rr-api-product-options-option-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+    &:not(:first-child) {
+      padding-top: 24px;
+    }
+  }
+
+  .rr-api-product-options-option-values {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+
+  .rr-api-product-options-option-radio {
+    align-items: center;
+
+    input[type=radio] {
+      display: none;
+
+      &:checked ~ label {
+        background: var(--rr-color-primary);
+        color: var(--rr-color-primary-contrast);
+      }
+
+      &:disabled ~ label {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    label {
+      display: flex;
+      border-radius: 5px;
+      border: 1px solid var(--rr-color-text-medium-emphasis);
+      padding: 10px;
+      justify-content: center;
+      min-width: 25px;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}
+
+.rr-api-product-options-select {
+  display: none;
+
+  @include xs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rr-select-field {
+    padding: 0 6px;
+    margin: 16px 12px 0px 12px;
+
+    select {
+      width: 100%;
+    }
+
+    select + label {
+      left: 8px
+    }
+  }
+}
+

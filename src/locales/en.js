@@ -115,4 +115,9 @@ export default {
       comingSoon: '(Coming Soon)',
     },
   },
+  apiProduct: {
+    options: {
+      pleaseSelect: 'Pick a {{option_name}}',
+    },
+  },
 };

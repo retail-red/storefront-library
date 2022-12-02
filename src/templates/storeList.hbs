@@ -4,27 +4,36 @@
     {{#if product }}
       {{!-- Product infos --}}
       <div class="rr-header-product">
-        <div class="rr-product-image-wrapper">
-          <img src="{{product.imageUrl}}" alt="{{product.name}}" />
+        <div class="rr-product-info-container{{#if isApiProduct}} rr-api-product-info-container{{/if}}">
+          <div class="rr-product-image-wrapper">
+            <img src="{{product.imageUrl}}" alt="{{product.name}}" />
+          </div>
+          <div class="rr-product-info">
+            <span>{{product.name}}</span>
+            <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
+            {{#if (not isApiProduct)}}
+            <span>
+              {{#each product.options}}
+                {{#if value.name}}
+                  {{name}}: {{value.name}}
+                {{else}}
+                  {{name}}: {{value}}
+                {{/if}}
+                {{#unless @last}}
+                ,&nbsp;
+                {{/unless}}
+              {{/each}}
+            </span>
+            {{/if}}
+          </div>
         </div>
-        <div class="rr-product-info">
-          <span>{{product.name}}</span>
-          <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
-          <span>
-            {{#each product.options}}
-              {{#if value.name}}
-                {{name}}: {{value.name}}
-              {{else}}
-                {{name}}: {{value}}
-              {{/if}}
-              {{#unless @last}}
-              ,&nbsp;
-              {{/unless}}
-            {{/each}}
-          </span>
-        </div>
+        {{#if isApiProduct }}
+          {{> apiProductOptions}}
+        {{/if}}
       </div>
-     {{/if}}
+      {{/if}}
+
+      {{> apiProductOptions renderSelect=true}}
 
     {{!-- Search header --}}
     <div class="rr-header-search">
@@ -199,5 +208,46 @@
         controller.selectLocation(e.target.dataset.code);
       }
     });
-  });
+
+    {{!-- Listen to api product options changes --}}
+    document.querySelectorAll('form[id^="rr-api-product-options"]').forEach(function(el) {
+      el.addEventListener('change', function (event) {
+        var target = event.target;
+
+        {{!-- Sync select box changes with radio buttons --}}
+        if (target.tagName === 'SELECT') {
+          var code = target.getAttribute('data-code');
+          var valueCode = target.value
+
+          document.querySelectorAll('#rr-api-product-options input[name='+ code + ']')
+            .forEach(function(el) {
+              el.removeAttribute('checked');
+            });
+
+          document.querySelector('#rr-api-product-options input#input-' + code + '-' + valueCode )
+            .setAttribute('checked', true);
+        }
+
+        {{!-- Sync radio button changes with selects --}}
+        if (target.tagName === 'INPUT') {
+          var code = target.getAttribute('name');
+          var valueCode = target.getAttribute('value');
+
+          document.querySelector('#rr-api-product-options-select select[data-code=' + code + ']')
+            .value = valueCode;
+        }
+
+        var selections = [];
+
+        document.querySelectorAll('#rr-api-product-options input:checked').forEach(function(el) {
+          selections.push({
+            code: el.getAttribute('name'),
+            valueCode: el.getAttribute('value'),
+          })
+        });
+
+        controller.updateOptionSelection(selections);
+      })
+    });
+  })
 </script>

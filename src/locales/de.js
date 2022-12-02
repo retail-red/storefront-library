@@ -115,4 +115,9 @@ export default {
       comingSoon: '(Bald Verfügbar)',
     },
   },
+  apiProduct: {
+    options: {
+      pleaseSelect: '{{option_name}} auswählen',
+    },
+  },
 };
