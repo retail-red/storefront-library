@@ -10,8 +10,14 @@
     position: relative;
   }
 
+  .rr-header-content-container {
+    padding: 0 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .rr-header-product {
-    padding: 0 24px;
     display: flex;
     flex-direction: row;
 
@@ -23,18 +29,17 @@
         .rr-product-info {
           width: 230px;
         }
-        
+
         .rr-product-image-wrapper {
           aspect-ratio: 1;
         }
       }
 
       .rr-product-image-wrapper {
-        margin-right: 24px;
+        margin-right: 16px;
         height: 100px;
         display: flex;
         justify-content: center;
-
 
         img {
           height: 100%;
@@ -44,6 +49,23 @@
       .rr-product-info {
         display: flex;
         flex-direction: column;
+        gap: 8px;
+
+        .rr-product-info-product-name {
+          font-weight: 500;
+          line-height: 19px;
+        }
+
+        .rr-product-info-options {
+          li:not(:last-child) {
+            padding-bottom: 8px;
+          }
+        }
+
+        .rr-product-info-value {
+          font-weight: bold;
+        }
+
         span {
           font-size: 15px;
         }
@@ -56,25 +78,31 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 24px 16px;
-    padding-bottom: 8px;
     flex-wrap: wrap;
-    margin: 0 -12px;
+    gap: 32px;
 
     @include xs {
       flex-direction: column;
+      gap: 16px;
     }
 
     .rr-store-list-search-fields,
     .rr-store-list-search-buttons {
       display: flex;
       flex-direction: row;
-      padding: 12px 0 0;
       align-items: center;
 
       @include xs {
         width: 100%;
       }
+    }
+
+    .rr-store-list-search-fields {
+      gap: 16px;
+    }
+
+    .rr-store-list-search-buttons {
+      gap: 8px;
     }
 
     @include xs {
@@ -86,20 +114,10 @@
 
     .rr-store-list-search-fields {
       flex-grow: 1;
-      margin-right: 24px;
-      @include xs {
-        margin-right: 0;
-      }
     }
 
     .rr-field,
     .rr-select-field {
-      padding: 0 6px;
-
-      select + label {
-        left: 8px;
-      }
-
       input {
         width: 100%;
       }
@@ -111,22 +129,15 @@
     }
 
     .rr-button {
-      margin: 0 6px;
-
       &:first-child {
         flex-grow: 1;
-        margin-right: 6px;
-      }
-
-      &:last-child {
-        margin-left: 6px;
       }
     }
   }
 
   .rr-divider {
     height: 8px;
-    background-color: #fff;
+    margin-top: -8px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
     width: 100%;
     position: relative;
@@ -136,7 +147,7 @@
   .rr-list {
     flex: 1;
     overflow: auto;
-    padding: 16px 24px;
+    padding: 16px;
 
     .rr-error {
       font-size: 14px;
@@ -144,91 +155,58 @@
     }
 
     .rr-store {
-      margin-top: 8px;
-      margin-bottom: 12px;
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
 
-      .rr-name-row {
-        font-size: 15px;
-        font-weight: bold;
-        .rr-distance {
-          font-weight: normal;
-          color: var(--rr-color-text-medium-emphasis);
-        }
-      }
-
-      .rr-detail {
+      .rr-store-content {
         display: flex;
-        flex-direction: column;
-        line-height: 18px;
+        gap: 32px;
 
-        .rr-detail-header {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 8px;
-        }
-
-        .rr-left {
-          flex: 1;
-          display: flex;
+        @include xs {
           flex-direction: column;
-          justify-content: flex-end;
-          margin-right: 8px;
-        }
-
-        .rr-directions {
-          margin-top: 4px;
-          display: inline-block;
-        }
-
-        .rr-link {
-          &.rr-phone-number {
-            text-decoration: none;
-            font-size: 14px;
-          }
-
-          &.rr-closed::after {
-            content: attr(data-label-closed)
-          }
-
-          &.rr-opened::after {
-            content: attr(data-label-opened)
-          }
+          gap: 16px;
         }
 
         .rr-store-details {
-          display: flex;
-          flex-direction: row;
-          font-size: 14px;
+          width: 300px;
+          flex-shrink: 0;
+        }
 
-          @include xs {
-            flex-direction: column;
-          }
+        .rr-store-details,
+        .rr-opening-hours {
+          line-height: 19.3px;
+        }
 
-          > div {
-            margin-top: 12px;
-          }
+        .rr-name-row {
+          font-size: 16px;
+          font-weight: bold;
+        }
 
-          > div:first-child {
-            margin-right: 24px;
-            width: 200px;
-            @include xs {
-              min-width: initial;
-            }
-          }
+        .rr-name-row,
+        .rr-store-hours {
+          padding-bottom: 8px;
+        }
 
-          .rr-store-address, .rr-store-hours {
-            padding-bottom: 8px;
-          }
+        .rr-store-address,
+        .rr-store-hours {
+          font-weight: 500;
+        }
 
-          .rr-bold {
-            font-weight: bold;
-          }
+        .rr-store-address {
+          padding-bottom: 4px;
+        }
+
+        .rr-store-address-container,
+        .rr-phone-number-container {
+          padding-bottom: 8px;
         }
       }
     }
   }
 
-  .rr-action {
+  .rr-store-actions{
     display: flex;
     flex-direction: column;
     align-items: flex-end;

@@ -117,6 +117,7 @@ export default {
   },
   apiProduct: {
     options: {
+      headline: 'Select your preferred variant',
       pleaseSelect: 'Pick a {{option_name}}',
     },
   },

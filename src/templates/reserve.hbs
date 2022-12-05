@@ -3,26 +3,31 @@
   {{#if showHeader }}
     {{!-- Header --}}
     <div class="rr-header">
-      {{!-- Product infos --}}
-      <div class="rr-header-product">
-        <div class="rr-product-image-wrapper">
-          <img src="{{product.imageUrl}}" alt="{{product.name}}"/>
-        </div>
-        <div class="rr-product-info">
-          <span>{{product.name}}</span>
-          <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
-          <span>
-            {{#each product.options}}
-              {{#if value.name}}
-                {{name}}: {{value.name}}
-              {{else}}
-                {{name}}: {{value}}
-              {{/if}}
-              {{#unless @last}}
-              ,&nbsp;
-              {{/unless}}
-            {{/each}}
-          </span>
+      <div class="rr-header-content-container">
+        {{!-- Product infos --}}
+        <div class="rr-header-product">
+          <div class="rr-product-image-wrapper">
+            <img src="{{product.imageUrl}}" alt="{{product.name}}"/>
+          </div>
+          <div class="rr-product-info">
+            <span class="rr-product-info-product-name">{{product.name}}</span>
+            <span><span class="rr-product-info-label">{{t 'storeList.quantity'}}:</span> <span class="rr-product-info-value">{{product.quantity}}</span></span>
+            {{#if (not isApiProduct)}}
+            <ul class="rr-product-info-options">
+              {{#each product.options}}
+                {{#if value.name}}
+                  <li>
+                    <span class="rr-product-info-label">{{name}}:</span> <span class="rr-product-info-value">{{value.name}}</span>
+                  </li>
+                {{else}}
+                  <li>
+                    <span class="rr-product-info-label">{{name}}:</span> <span class="rr-product-info-value">{{value}}</span>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
         </div>
       </div>
       <div class="rr-progress-line"></div>

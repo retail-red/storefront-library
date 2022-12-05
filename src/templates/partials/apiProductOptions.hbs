@@ -1,6 +1,7 @@
 {{#if parentProduct }}
   {{#unless renderSelect}}
     <form id="rr-api-product-options" class="rr-api-product-options">
+      <span class="rr-api-product-options-headline">{{ t "apiProduct.options.headline" }}</span>
       <dl>
         {{#each parentProduct.options as | option | }}
           <dt class="rr-api-product-options-option-name">{{ option.name }}</dt>
@@ -25,26 +26,25 @@
       </dl>
     </form>
   {{ else }}
-    <form  id="rr-api-product-options-select">
-      <div class="rr-api-product-options-select">
-        {{#each parentProduct.options as | option | }}
-          {{#> select id=(concat "rr-api-product-select-" option.code) label=option.name value=option.selectedCode }}
-            {{#if (not option.selectedCode)}}
-              <option>{{t "apiProduct.options.pleaseSelect" option_name=option.name }}</option>
-            {{/if}}
-            {{#each option.values as | optionValue |  }}
-              <option
-                value="{{optionValue.code}}"
-                {{#if optionValue.selected}}
-                  selected
-                {{/if}}
-              >
-                {{optionValue.name}}
-              </option>
-            {{/each}}
-          {{/select}}
-        {{/each}}
-      </div>
+    <form  id="rr-api-product-options-select" class="rr-api-product-options-select">
+      <span class="rr-api-product-options-headline">{{ t "apiProduct.options.headline" }}</span>
+      {{#each parentProduct.options as | option | }}
+        {{#> select id=(concat "rr-api-product-select-" option.code) label=option.name value=option.selectedCode }}
+          {{#if (not option.selectedCode)}}
+            <option>{{t "apiProduct.options.pleaseSelect" option_name=option.name }}</option>
+          {{/if}}
+          {{#each option.values as | optionValue |  }}
+            <option
+              value="{{optionValue.code}}"
+              {{#if optionValue.selected}}
+                selected
+              {{/if}}
+            >
+              {{optionValue.name}}
+            </option>
+          {{/each}}
+        {{/select}}
+      {{/each}}
     </form>
   {{/unless}}
 {{/if}}
