@@ -38,12 +38,12 @@ $input-border-radius: 5px;
   input:focus {
     outline: 0;
     ~ fieldset {
-      border-color: var(--rr-color-primary);
+      border-color: var(--rr-color-secondary);
     }
   }
   input:focus {
     + label {
-      color: var(--rr-color-primary);
+      color: var(--rr-color-secondary);
       top: 0;
       transform: translateY(-50%) scale(.9);
     }
@@ -172,12 +172,12 @@ $input-border-radius: 5px;
   }
 
   select:focus ~ fieldset {
-    border-color: var(--rr-color-primary);
+    border-color: var(--rr-color-secondary);
   }
 
   select:focus {
     + label {
-      color: var(--rr-color-primary);
+      color: var(--rr-color-secondary);
       top: 0;
       transform: translateY(-50%) scale(.9);
     }
@@ -239,7 +239,6 @@ $input-border-radius: 5px;
   text-transform: uppercase;
   color: var(--rr-color-primary-contrast);
   background-color: var(--rr-color-primary);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   font-size: 14px;
   font-weight: 500;
   overflow: hidden;
@@ -252,6 +251,15 @@ $input-border-radius: 5px;
     fill: var(--rr-color-primary-contrast);
     width: 24px;
     height: 24px;
+  }
+
+  &.rr-button-secondary {
+    color: var(--rr-color-secondary-contrast);
+    background-color: var(--rr-color-secondary);
+
+    svg {
+      fill: var(--rr-color-secondary-contrast);
+    }
   }
 
   &::-moz-focus-inner {
@@ -283,10 +291,6 @@ $input-border-radius: 5px;
     opacity: 0;
     transform: translate(-50%, -50%) scale(1);
     transition: opacity 1s, transform 0.5s;
-  }
-
-  &:hover, &:focus {
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
   }
 
   &:hover::before {
@@ -379,7 +383,7 @@ $input-border-radius: 5px;
       left: 5px;
       width: 10px;
       height: 10px;
-      background-color: var(--rr-color-primary);
+      background-color: var(--rr-color-secondary);
       border-radius: 50%;
       z-index: 2;
       transform: scale(0, 0);
@@ -388,7 +392,7 @@ $input-border-radius: 5px;
   }
   input:checked + label {
     &:before {
-      border-color: var(--rr-color-primary);
+      border-color: var(--rr-color-secondary);
     }
     &:after {
       transform: scale(1, 1);
@@ -397,7 +401,7 @@ $input-border-radius: 5px;
 }
 
 
-$md-checkbox-checked-color: var(--rr-color-primary);
+$md-checkbox-checked-color: var(--rr-color-secondary);
 $md-checkbox-border-color: rgba(0, 0, 0, 0.54);
 $md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
 $md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);
