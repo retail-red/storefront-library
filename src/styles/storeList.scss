@@ -194,6 +194,16 @@
           }
         }
 
+        .rr-store-name-row {
+          display: flex;
+          flex-wrap: wrap;
+
+          .rr-store-name {
+            padding-right: 8px;
+          }
+
+        }
+
         .rr-store-details,
         .rr-opening-hours {
           line-height: 19.3px;

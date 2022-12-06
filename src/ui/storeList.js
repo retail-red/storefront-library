@@ -191,7 +191,7 @@ class StoreListController extends Controller {
 
       let inventories = [];
 
-      if (isValidProduct) {
+      if (isValidProduct && locations.length) {
         // Fetch inventory data.
         ({ inventories } = await this.sdk.getProductInventories(
           product.code,
