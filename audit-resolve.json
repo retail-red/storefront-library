@@ -19,6 +19,21 @@
       "decision": "ignore",
       "madeAt": 1649085777830,
       "expiresAt": 1651677757001
+    },
+    "1084924|handlebars-loader>loader-utils": {
+      "decision": "ignore",
+      "madeAt": 1670344161025,
+      "expiresAt": 1672936120568
+    },
+    "1084993|handlebars-loader>loader-utils": {
+      "decision": "ignore",
+      "madeAt": 1670344161025,
+      "expiresAt": 1672936120568
+    },
+    "1085034|handlebars-loader>loader-utils": {
+      "decision": "ignore",
+      "madeAt": 1670344161025,
+      "expiresAt": 1672936120568
     }
   },
   "rules": {},
