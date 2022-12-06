@@ -76,51 +76,54 @@
 
     {{#each locations }}
       <div class="rr-store">
-        <div class="rr-store-content">
-          <div class="rr-store-details">
-            {{!-- Name, distance, availability row --}}
-            <div class="rr-store-name-row">
-              <h4 class="rr-bold rr-store-name">{{name}}</h4>
-              {{#if distance}}
-                <span class="rr-distance">
-                  - {{distance distance unitSystem}}
-                </span>
-              {{/if}}
-            </div>
-            <address class="rr-store-address-container">
-              <h4 class="rr-store-address">{{t "storeList.location.address" }}</h4>
-              <p>{{t "addresses.line1" street=primaryAddress.street}}</p>
-              {{#if primaryAddress.street2}}
-              <p>{{t "addresses.line2" street2=primaryAddress.street2}}</p>
-              {{/if}}
-              <p>{{t "addresses.line3" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
-            </address>
-            {{#if primaryAddress.phoneNumber}}
-              <p class="rr-phone-number-container">
-                {{t "addresses.tel" }}
-                {{> link class="rr-phone-number" href=(concat "tel:" primaryAddress.phoneNumber) label=primaryAddress.phoneNumber }}
-              </p>
+        {{!-- Name, distance, availability row --}}
+        <div class="rr-store-name-row">
+          <h4 class="rr-bold rr-store-name">
+            {{name}}
+            {{#if distance}}
+              <span class="rr-distance">
+                - {{distance distance unitSystem}}
+              </span>
             {{/if}}
-            {{> link
-                class="rr-directions"
-                label="storeList.location.directions"
-                href=(direction primaryAddress)
-                target="_blank"
-                rel="noopener"
-            }}
-          </div>
-          {{#if operationHours}}
-            <div class="rr-opening-hours">
-              <h4 class="rr-store-hours">{{t "storeList.location.storeHours" }}</h4>
-              {{#each operationHours}}
-                {{#if this}}
-                  <p>{{t (concat "date." @key) }}: {{this}}</p>
-                {{/if}}
-              {{/each}}
-            </div>
-          {{/if}}
+          </h4>
         </div>
-        <div class="rr-store-actions">
+        <div class="rr-store-main-row">
+          <div class="rr-store-content">
+            <div class="rr-store-details">
+              <address class="rr-store-address-container">
+                <h4 class="rr-store-address">{{t "storeList.location.address" }}</h4>
+                <p>{{t "addresses.line1" street=primaryAddress.street}}</p>
+                {{#if primaryAddress.street2}}
+                <p>{{t "addresses.line2" street2=primaryAddress.street2}}</p>
+                {{/if}}
+                <p>{{t "addresses.line3" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
+              </address>
+              {{#if primaryAddress.phoneNumber}}
+                <p class="rr-phone-number-container">
+                  {{t "addresses.tel" }}
+                  {{> link class="rr-phone-number" href=(concat "tel:" primaryAddress.phoneNumber) label=primaryAddress.phoneNumber }}
+                </p>
+              {{/if}}
+              {{> link
+                  class="rr-directions"
+                  label="storeList.location.directions"
+                  href=(direction primaryAddress)
+                  target="_blank"
+                  rel="noopener"
+              }}
+            </div>
+            {{#if operationHours}}
+              <div class="rr-opening-hours">
+                <h4 class="rr-store-hours">{{t "storeList.location.storeHours" }}</h4>
+                {{#each operationHours}}
+                  {{#if this}}
+                    <p>{{t (concat "date." @key) }}: {{this}}</p>
+                  {{/if}}
+                {{/each}}
+              </div>
+            {{/if}}
+          </div>
+          <div class="rr-store-actions">
           {{#if inventory }}
             {{!-- Product not available --}}
             {{#unless inventory.isAvailable }}
@@ -158,6 +161,7 @@
                 disabled=(and (not inventory.isAvailable) (not ../select))
             }}
           {{/if}}
+        </div>
         </div>
       </div>
 

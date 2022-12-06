@@ -173,49 +173,35 @@
     .rr-store {
       padding: 20px 0;
       display: flex;
-      justify-content: space-between;
-      gap: 16px;
+      gap: 8px;
+      flex-direction: column;
 
-      .rr-store-content {
+      .rr-store-name-row {
         display: flex;
-        gap: 32px;
+      }
 
-        @include xs {
-          flex-direction: column;
-          gap: 16px;
-        }
+      .rr-store-main-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
 
-        .rr-store-details {
-          width: 300px;
-          flex-shrink: 0;
+        .rr-store-content {
+          display: flex;
+          line-height: 19.3px;
 
           @include xs {
-            width: inherit;
-          }
-        }
-
-        .rr-store-name-row {
-          display: flex;
-          flex-wrap: wrap;
-
-          .rr-store-name {
-            padding-right: 8px;
+            flex-wrap: wrap;
+            gap: 16px;
           }
 
-        }
+          .rr-store-details {
+            width: 300px;
+            flex-shrink: 0;
 
-        .rr-store-details,
-        .rr-opening-hours {
-          line-height: 19.3px;
-        }
-
-        .rr-store-name-row,
-        .rr-store-hours {
-          padding-bottom: 8px;
-        }
-
-         .rr-store-address {
-          padding-bottom: 4px;
+            @include xs {
+              width: inherit;
+            }
+          }
         }
 
         .rr-store-address-container,

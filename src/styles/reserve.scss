@@ -9,7 +9,7 @@
   h3 {
     font-size: 20px;
     font-weight: 600;
-    padding-bottom: 16px;
+    padding-bottom: 20px;
   }
 
   h4 {
@@ -92,6 +92,7 @@
       display: flex;
       flex-direction: column;
       padding-bottom: 24px;
+      line-height: 19.3px;
 
       .rr-store-name-row {
         display: flex;
@@ -116,11 +117,6 @@
           @include xs {
             width: inherit;
           }
-        }
-
-        .rr-store-details,
-        .rr-opening-hours {
-          line-height: 19.3px;
         }
 
         .rr-store-address-container,

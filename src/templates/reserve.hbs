@@ -40,12 +40,14 @@
       {{#if showLocation }}
         {{!-- Name, distance, availability row --}}
         <div class="rr-store-name-row">
-          <h4 class="rr-bold">{{location.name}}</h4>
-          {{#if location.distance}}
-            <span class="rr-distance">
-              - {{distance location.distance location.unitSystem}}
-            </span>
-          {{/if}}
+          <h4 class="rr-bold">
+            {{location.name}}
+            {{#if location.distance}}
+              <span class="rr-distance">
+                - {{distance location.distance location.unitSystem}}
+              </span>
+            {{/if}}
+          </h4>
           {{>link label="reserve.changeStore" href="#" class="rr-store-change"}}
         </div>
         <div class="rr-store-content">
