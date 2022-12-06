@@ -246,11 +246,12 @@ class StoreListController extends Controller {
     if (!navigator.geolocation) {
       return;
     }
-
+    this.app.setLoading(true);
     // Ask for the current location and update store list.
     navigator.geolocation.getCurrentPosition(({ coords }) => {
       this.state.postalCode = null;
       this.geolocation = coords;
+      this.app.setLoading(false);
       this._updateStoreList();
     });
   }
