@@ -5,7 +5,7 @@
     <div class="rr-header">
       <div class="rr-header-content-container">
         {{!-- Product infos --}}
-        <div class="rr-header-product">
+        <div class="rr-header-product {{#if isApiProduct}} rr-api-product{{/if}}">
           <div class="rr-product-image-wrapper">
             <img src="{{product.imageUrl}}" alt="{{product.name}}"/>
           </div>

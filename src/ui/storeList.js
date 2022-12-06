@@ -58,14 +58,15 @@ class StoreListController extends Controller {
 
     // Initiate reservation at given location.
     const location = locations.find((l) => l.code === locationCode);
-    if (location && !select) {
+
+    if (location && !select && !useApiProduct) {
       requestAnimationFrame(() => {
         this.selectLocation(locationCode, true);
       });
     }
 
     return {
-      skipRendering: !!location && !select,
+      skipRendering: !!location && !select && !useApiProduct,
       select,
       parentProduct,
       product,
@@ -94,17 +95,35 @@ class StoreListController extends Controller {
       // need preparation so that the UI renders correctly.
       ({ parentProduct, product } = this._sanitizeOrderableProduct(product, parentProduct));
     } else if (product?.modelType === 'configurable') {
-      // Fetched product is a parent product, so we need to validate the (empty) option selection
+      let selection = [];
+
+      // Check if the product just has a single child product
+      const hasSingleChildProduct = product.options.every((option) => option.values.length === 1);
+
+      if (hasSingleChildProduct) {
+        // Simulate selection of the child product for validation request
+        selection = product.options.map((option) => ({
+          code: option.code,
+          valueCode: option.values[0].code,
+        }));
+      }
+
+      // Fetched product is a parent product, so we need to validate the option selection
       // to figure out which options can be selected
       const validation = await this.sdk.validateProductConfiguration(
         product.code,
-        [],
+        selection,
       );
 
       if (validation?.possibleOptions) {
         ({ parentProduct } = this._sanitizeProductDataForIncompleteOptionSelection(
           parentProduct,
         ));
+      } else if (validation?.matchingVariant?.productCode) {
+        // Retrieved product code of the one and only child product
+        product = await this._receiveProduct(validation.matchingVariant.productCode);
+        // Prepare data for the UI
+        ({ parentProduct, product } = this._sanitizeOrderableProduct(product, parentProduct));
       }
     } else if (product?.modelType === 'standard') {
       ({ parentProduct, product } = this._sanitizeOrderableProduct(product));

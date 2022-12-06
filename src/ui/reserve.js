@@ -55,7 +55,7 @@ class ReserveController extends Controller {
     location, product, showHeader = true, showLocation = true,
   }) {
     const {
-      customer, legal, newsletterOptIn, saveCustomerData,
+      customer, legal, newsletterOptIn, saveCustomerData, useApiProduct,
     } = this.config;
 
     return {
@@ -72,6 +72,7 @@ class ReserveController extends Controller {
         preselected: customer.remember === true,
       },
       product,
+      isApiProduct: useApiProduct,
       formData: {
         ...customer,
         pickupFirstName: '',

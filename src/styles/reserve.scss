@@ -48,6 +48,16 @@
       }
     }
 
+    &.rr-api-product {
+      .rr-product-info {
+        width: 230px;
+      }
+
+      .rr-product-image-wrapper {
+        aspect-ratio: 1;
+      }
+    }
+
     .rr-product-info {
       display: flex;
       flex-direction: column;

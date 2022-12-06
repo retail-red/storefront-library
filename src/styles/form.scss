@@ -32,6 +32,8 @@ $input-border-radius: 5px;
     min-height: auto;
     height: auto;
     border-radius:$input-border-radius;
+    box-sizing: border-box;
+    width: 100%;
   }
   input:focus {
     outline: 0;
