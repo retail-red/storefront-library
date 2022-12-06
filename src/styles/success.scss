@@ -57,13 +57,20 @@
 
     .rr-location-info {
       display: flex;
+      line-height: 19px;
 
       .rr-directions {
-        margin-top: 6px;
         display: inline-block;
+
+       &.rr-link {
+          font-weight: 500;
+        }
       }
 
       > div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         width: 50%;
         margin-bottom: 18px;
       }

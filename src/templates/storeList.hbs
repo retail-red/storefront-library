@@ -11,17 +11,17 @@
             </div>
             <div class="rr-product-info">
               <span class="rr-product-info-product-name">{{product.name}}</span>
-              <span><span class="rr-product-info-label">{{t 'storeList.quantity'}}:</span> <span class="rr-product-info-value">{{product.quantity}}</span></span>
+              <span><span>{{t 'storeList.quantity'}}:</span> <span class="rr-product-info-value">{{product.quantity}}</span></span>
               {{#if (not isApiProduct)}}
               <ul class="rr-product-info-options">
                 {{#each product.options}}
                   {{#if value.name}}
                     <li>
-                      <span class="rr-product-info-label">{{name}}:</span> <span class="rr-product-info-value">{{value.name}}</span>
+                      <span>{{name}}:</span> <span class="rr-product-info-value">{{value.name}}</span>
                     </li>
                   {{else}}
                     <li>
-                      <span class="rr-product-info-label">{{name}}:</span> <span class="rr-product-info-value">{{value}}</span>
+                      <span>{{name}}:</span> <span class="rr-product-info-value">{{value}}</span>
                     </li>
                   {{/if}}
                 {{/each}}
@@ -67,7 +67,7 @@
   </div>
 
   {{!-- Store list --}}
-  <div class="rr-list">
+  <div class="rr-content-container rr-list">
     {{#if emptyList}}
       <span class="rr-error">
         {{t 'storeList.emptyList' }}
@@ -79,22 +79,22 @@
         <div class="rr-store-content">
           <div class="rr-store-details">
             {{!-- Name, distance, availability row --}}
-            <div class="rr-name-row">
-              {{name}}
+            <div class="rr-store-name-row">
+              <h4 class="rr-bold">{{name}}</h4>
               {{#if distance}}
                 <span class="rr-distance">
                   - {{distance distance unitSystem}}
                 </span>
               {{/if}}
             </div>
-            <div class="rr-store-address-container">
-              <p class="rr-bold rr-store-address">{{t "storeList.location.address" }}</p>
+            <address class="rr-store-address-container">
+              <h4 class="rr-store-address">{{t "storeList.location.address" }}</h4>
               <p>{{t "addresses.line1" street=primaryAddress.street}}</p>
               {{#if primaryAddress.street2}}
               <p>{{t "addresses.line2" street2=primaryAddress.street2}}</p>
               {{/if}}
               <p>{{t "addresses.line3" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
-            </div>
+            </address>
             {{#if primaryAddress.phoneNumber}}
               <p class="rr-phone-number-container">
                 {{t "addresses.tel" }}
@@ -109,16 +109,16 @@
                 rel="noopener"
             }}
           </div>
-            {{#if operationHours}}
+          {{#if operationHours}}
             <div class="rr-opening-hours">
-              <p class="rr-bold rr-store-hours">{{t "storeList.location.storeHours" }}</p>
+              <h4 class="rr-store-hours">{{t "storeList.location.storeHours" }}</h4>
               {{#each operationHours}}
                 {{#if this}}
                   <p>{{t (concat "date." @key) }}: {{this}}</p>
                 {{/if}}
               {{/each}}
             </div>
-            {{/if}}
+          {{/if}}
         </div>
         <div class="rr-store-actions">
           {{#if inventory }}
