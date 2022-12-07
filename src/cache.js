@@ -1,7 +1,9 @@
 const DEFAULT_CACHE_TIME = 60 * 1000;
+export const API_PRODUCT_CACHE_TIME = 1000 * 60 * 5;
 
 export const locationInventoryKey = (locationCode) => `l/${locationCode}/i`;
-export const geolocationKey = 'geolocation';
+export const geolocationKey = () => 'geolocation';
+export const getAPIProductKey = (configProductCode) => `api_product_${configProductCode}`;
 
 class Cache {
   constructor() {

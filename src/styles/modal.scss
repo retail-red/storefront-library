@@ -72,6 +72,7 @@
     }
 
     .rr-modal-close {
+      z-index: 100;
       > svg {
         fill: #9e9e9e;
         cursor: pointer;

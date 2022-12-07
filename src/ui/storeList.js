@@ -1,5 +1,10 @@
 import Controller from './controller';
-import Cache, { locationInventoryKey, geolocationKey } from '../cache';
+import Cache, {
+  locationInventoryKey,
+  geolocationKey,
+  getAPIProductKey,
+  API_PRODUCT_CACHE_TIME,
+} from '../cache';
 import { t } from '../locales';
 import { getImmediateGeolocation } from '../util/geolocation';
 import { formatImageServiceUrl } from '../util/format';
@@ -90,11 +95,17 @@ class StoreListController extends Controller {
    * @returns {Object}
    */
   async _receiveProductInitial(configProductCode) {
+    const cachedProducts = Cache.get(getAPIProductKey(configProductCode));
+
+    if (cachedProducts) {
+      return cachedProducts;
+    }
+
     // Fetch the product that's configured within the config
     let product = await this._receiveProduct(configProductCode);
 
     let parentProduct = product;
-    // TODO Add product pre-selection when only one child product is available
+
     if (product?.parentProductCode) {
       // Request the parent product when product in config is a child product
       parentProduct = await this._receiveProduct(product.parentProductCode);
@@ -135,6 +146,13 @@ class StoreListController extends Controller {
     } else if (product?.modelType === 'standard') {
       ({ parentProduct, product } = this._sanitizeOrderableProduct(product));
     }
+
+    // Put product data to the cache, for easy re-hydration of the modal after re-opening when
+    // users already selected option values before closing.
+    Cache.set(getAPIProductKey(configProductCode), {
+      parentProduct,
+      product,
+    }, API_PRODUCT_CACHE_TIME);
 
     return {
       parentProduct,
@@ -278,7 +296,7 @@ class StoreListController extends Controller {
       this.state.postalCode = null;
       this.geolocation = coords;
       this.app.setLoading(false);
-      Cache.set(geolocationKey, coords);
+      Cache.set(geolocationKey(), coords);
       this._updateStoreList();
     });
   }
@@ -415,6 +433,8 @@ class StoreListController extends Controller {
   async updateOptionSelection(optionSelection) {
     try {
       const productCode = this.state?.parentProduct?.code;
+      let product;
+      let parentProduct;
 
       // Validate the product selection
       const validation = await this.sdk.validateProductConfiguration(
@@ -429,27 +449,38 @@ class StoreListController extends Controller {
         );
 
         // Sanitize product entity for the Storefront Library
-        const data = this._sanitizeOrderableProduct(
+        ({ product, parentProduct } = this._sanitizeOrderableProduct(
           matchingVariant,
           this.state.parentProduct,
-        );
+        ));
 
         // Update state with product and location data
         this.setState({
-          ...data,
-          locations: await this._receiveLocations(data?.product),
+          parentProduct,
+          product,
+          locations: await this._receiveLocations(product),
         });
       } else if (Array.isArray(validation?.possibleOptions)) {
+        ({ parentProduct } = this._sanitizeProductDataForIncompleteOptionSelection(
+          this.state.parentProduct,
+          optionSelection,
+        ));
+
         // Current product selection does not match a productCode yet. Update state with sanitized
         // product and location data.
         this.setState({
-          ...this._sanitizeProductDataForIncompleteOptionSelection(
-            this.state.parentProduct,
-            optionSelection,
-          ),
+          parentProduct,
           locations: await this._receiveLocations(),
         });
       }
+
+      const { product: { code } } = this.config;
+
+      // Update the products within the cache
+      Cache.set(getAPIProductKey(code), {
+        parentProduct,
+        product: product ?? this.state.product,
+      }, API_PRODUCT_CACHE_TIME);
     } catch (e) {
       // Nothing to do here
     }
