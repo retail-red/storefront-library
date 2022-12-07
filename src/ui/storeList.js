@@ -185,7 +185,9 @@ class StoreListController extends Controller {
       const extended = {
         quantity: this.config?.product?.quantity ?? 1,
         ...product,
-        imageUrl: formatImageServiceUrl(product?.media[0]?.url, { width: 400, height: 400 }),
+        imageUrl: product?.media[0]?.url
+          ? formatImageServiceUrl(product?.media[0]?.url, { width: 400, height: 400 })
+          : '',
       };
 
       delete extended.media;
@@ -376,6 +378,8 @@ class StoreListController extends Controller {
     return {
       product: {
         ...finalProduct,
+        // Product image fallback to parent product image when child has no image
+        imageUrl: finalProduct?.imageUrl || parentProduct.imageUrl,
         options: productOptions,
       },
       parentProduct: {

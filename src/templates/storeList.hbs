@@ -6,9 +6,11 @@
         {{!-- Product infos --}}
         <div class="rr-header-product">
           <div class="rr-product-details{{#if isApiProduct}} rr-api-product{{/if}}">
-            <div class="rr-product-image-wrapper">
-              <img src="{{product.imageUrl}}" alt="{{product.name}}" />
-            </div>
+            {{#if product.imageUrl}}
+              <div class="rr-product-image-wrapper">
+                <img src="{{product.imageUrl}}" alt="{{product.name}}" />
+              </div>
+            {{/if}}
             <div class="rr-product-info">
               <span class="rr-product-info-product-name rr-bold">{{product.name}}</span>
               <span><span>{{t 'storeList.quantity'}}:</span> <span class="rr-product-info-value rr-bold">{{product.quantity}}</span></span>
