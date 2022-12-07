@@ -1,6 +1,7 @@
 const DEFAULT_CACHE_TIME = 60 * 1000;
 
 export const locationInventoryKey = (locationCode) => `l/${locationCode}/i`;
+export const geolocationKey = 'geolocation';
 
 class Cache {
   constructor() {

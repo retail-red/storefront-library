@@ -1,5 +1,5 @@
 import Controller from './controller';
-import Cache, { locationInventoryKey } from '../cache';
+import Cache, { locationInventoryKey, geolocationKey } from '../cache';
 import { t } from '../locales';
 import { getImmediateGeolocation } from '../util/geolocation';
 import { formatImageServiceUrl } from '../util/format';
@@ -40,11 +40,18 @@ class StoreListController extends Controller {
 
     // Get geolocation immediately
     if (useGeolocationImmediately && !locationCode && !options.postalCode) {
-      try {
-        const { coords } = await getImmediateGeolocation();
-        this.geolocation = coords;
-      } catch (err) {
-        // Error can be ignored / user probably just rejected geolocation permission.
+      const cachedCoords = Cache.get(geolocationKey);
+
+      if (cachedCoords) {
+        this.geolocation = cachedCoords;
+      } else {
+        try {
+          const { coords } = await getImmediateGeolocation();
+          this.geolocation = coords;
+          Cache.set(geolocationKey, coords);
+        } catch (err) {
+          // Error can be ignored / user probably just rejected geolocation permission.
+        }
       }
     }
 
@@ -271,6 +278,7 @@ class StoreListController extends Controller {
       this.state.postalCode = null;
       this.geolocation = coords;
       this.app.setLoading(false);
+      Cache.set(geolocationKey, coords);
       this._updateStoreList();
     });
   }

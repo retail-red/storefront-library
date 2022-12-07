@@ -73,6 +73,10 @@
           }
         }
 
+        .rr-product-info-product-name {
+          line-height: 1.25em;
+        }
+
         span {
           font-size: 16px;
         }
@@ -109,7 +113,7 @@
     }
 
     .rr-store-list-search-buttons {
-      gap: 8px;
+      gap: 16px;
     }
 
     @include xs {
