@@ -214,7 +214,7 @@
             flex-shrink: 0;
 
             @include xs {
-              width: inherit;
+              width: initial;
             }
           }
         }
