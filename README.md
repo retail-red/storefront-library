@@ -66,14 +66,18 @@ All of the rendered UI are using CSS classes that can be used to override **any*
 For colors we provided CSS variables that can be overridden once for all usages.
 ```css
 #rr-omni #rr-omni-custom, #rr-omni-reserve-button, #rr-inventory-custom {
-  /* Color for common text */
-  --rr-color-text: #000;
+  /* Color for common text. If not set, the primary page color will be used */
+  --rr-color-text: inherit;
   /* Color for text with a medium emphasis */
-  --rr-color-text-medium-emphasis: #787878;
-  /* Primary color used for form elements and buttons */
+  --rr-color-text-medium-emphasis: #666666;
+  /* Primary color used for form elements and reserve buttons */
   --rr-color-primary: #000;
   /* Contrast color for the primary color - used as button text color  */
   --rr-color-primary-contrast: #fff;
+  /* Secondary color used for search buttons, variant selection and form elements. Falls back to --rr-color-primary when not set */
+  --rr-color-secondary: var(--rr-color-primary);
+  /* Contrast color for the secondary color - used as button text color. Falls back to --rr-color-primary-contrast when not set.  */
+  --rr-color-secondary-contrast: var(--rr-color-primary-contrast);
   /* Color used for links */
   --rr-color-link: #3c9bb5;
   /* Text color for disabled buttons */
