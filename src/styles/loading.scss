@@ -22,7 +22,7 @@
   transition: opacity 257ms cubic-bezier(0.4, 0, 0.2, 1);
   &:after {
     position: absolute;
-    background-color: var(--rr-color-secondary);
+    background-color: var(--rr-color-secondary), var(--rr-color-primary);
     opacity: 0.4;
     content: '';
   }
@@ -31,7 +31,7 @@
     &:before {
       z-index: 2;
       animation: rr-running-progress 1.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-      background-color: var(--rr-color-secondary);
+      background-color: var(--rr-color-secondary, var(--rr-color-primary));
       content: '';
     }
   }

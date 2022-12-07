@@ -42,8 +42,8 @@
       display: none;
 
       &:checked ~ label {
-        background-color: var(--rr-color-secondary);
-        color: var(--rr-color-secondary-contrast);
+        background-color: var(--rr-color-secondary, var(--rr-color-primary));
+        color: var(--rr-color-secondary-contrast, var(--rr-color-primary-contrast));
       }
 
       &:disabled ~ label {
@@ -55,7 +55,7 @@
     label {
       display: flex;
       border-radius: 5px;
-      color: var(--rr-color-secondary);
+      color: var(--rr-color-secondary, var(--rr-color-primary));
       border: 1px solid var(--rr-color-button-background-disabled);
       padding: 10px;
       justify-content: center;
