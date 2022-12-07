@@ -2,31 +2,30 @@
 <div class="rr-reserve">
   {{#if showHeader }}
     {{!-- Header --}}
+    {{ debug product}}
     <div class="rr-header">
-      <div class="rr-header-content-container">
+      <div class="rr-header-content">
         {{!-- Product infos --}}
         <div class="rr-header-product {{#if isApiProduct}} rr-api-product{{/if}}">
           <div class="rr-product-image-wrapper">
             <img src="{{product.imageUrl}}" alt="{{product.name}}"/>
           </div>
           <div class="rr-product-info">
-            <span class="rr-product-info-product-name">{{product.name}}</span>
-            <span><span>{{t 'storeList.quantity'}}:</span> <span class="rr-product-info-value">{{product.quantity}}</span></span>
-            {{#if (not isApiProduct)}}
+            <span class="rr-product-info-product-name rr-bold">{{product.name}}</span>
+            <span><span>{{t 'storeList.quantity'}}:</span> <span class="rr-product-info-value rr-bold">{{product.quantity}}</span></span>
             <ul class="rr-product-info-options">
               {{#each product.options}}
                 {{#if value.name}}
                   <li>
-                    <span>{{name}}:</span> <span class="rr-product-info-value">{{value.name}}</span>
+                    <span>{{name}}:</span> <span class="rr-product-info-value rr-bold">{{value.name}}</span>
                   </li>
                 {{else}}
                   <li>
-                    <span>{{name}}:</span> <span class="rr-product-info-value">{{value}}</span>
+                    <span>{{name}}:</span> <span class="rr-product-info-value rr-bold">{{value}}</span>
                   </li>
                 {{/if}}
               {{/each}}
             </ul>
-            {{/if}}
           </div>
         </div>
       </div>
@@ -34,13 +33,13 @@
       <div class="rr-divider"></div>
     </div>
   {{/if}}
-  <div class="rr-content-container">
+  <div class="rr-reserve-content">
     {{!-- Store infos --}}
     <div class="rr-store">
       {{#if showLocation }}
         {{!-- Name, distance, availability row --}}
         <div class="rr-store-name-row">
-          <h4 class="rr-bold">
+          <h4>
             {{location.name}}
             {{#if location.distance}}
               <span class="rr-distance">

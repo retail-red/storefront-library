@@ -63,16 +63,24 @@
         display: inline-block;
 
        &.rr-link {
-          font-weight: 500;
+          font-weight: bold;
         }
       }
 
       > div {
         display: flex;
         flex-direction: column;
-        gap: 8px;
         width: 50%;
         margin-bottom: 18px;
+
+        .rr-store-address-container,
+        .rr-phone-number-container {
+          padding-bottom: 8px;
+        }
+
+        .rr-phone-number-container a {
+          text-decoration: none;
+        }
       }
 
       @include xs {
