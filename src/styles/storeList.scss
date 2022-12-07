@@ -59,6 +59,23 @@
 
         img {
           height: 100%;
+
+          + svg {
+            display: none;
+          }
+
+          &.rr-image-error {
+            display: none;
+
+            + svg {
+              display: flex;
+              height: 80%;
+              width: 80%;
+              aspect-ratio: 1;
+              align-self: center;
+              fill: var(--rr-color-button-background-disabled);
+            }
+          }
         }
       }
 

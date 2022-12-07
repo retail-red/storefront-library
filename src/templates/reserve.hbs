@@ -7,9 +7,7 @@
         {{!-- Product infos --}}
         <div class="rr-header-product {{#if isApiProduct}} rr-api-product{{/if}}">
           {{#if product.imageUrl}}
-            <div class="rr-product-image-wrapper">
-              <img src="{{product.imageUrl}}" alt="{{product.name}}"/>
-            </div>
+            {{> productImage src=product.imageUrl alt=product.name}}
           {{/if}}
           <div class="rr-product-info">
             <span class="rr-product-info-product-name rr-bold">{{product.name}}</span>
