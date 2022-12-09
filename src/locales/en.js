@@ -86,6 +86,7 @@ export default {
     },
     newsletterOptIn: 'I want to subscribe to your newsletter and get updates about new products & offers. I can unsubscribe at any moment.',
     saveCustomerData: 'Save input for next time.',
+    formInfoText: '',
   },
   success: {
     title: 'Reservation Confirmation',

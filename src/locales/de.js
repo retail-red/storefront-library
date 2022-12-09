@@ -86,6 +86,7 @@ export default {
     },
     newsletterOptIn: 'Ich möchte mich für Ihren Newsletter anmelden und über neue Produkte & Angebote informiert werden. Ich kann mich jederzeit wieder abmelden.',
     saveCustomerData: 'Eingaben für die nächste Reservierung speichern.',
+    formInfoText: '',
   },
   success: {
     title: 'Reservierungsbestätigung',

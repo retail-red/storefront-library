@@ -213,6 +213,14 @@
         }
       }
 
+      .rr-form-info-text {
+        line-height: 1.25em;
+
+        &:empty {
+          display: none;
+        }
+      }
+
       .rr-legal .rr-link {
         font-weight: bold;
       }
