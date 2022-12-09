@@ -11,16 +11,21 @@
           {{/if}}
           <div class="rr-product-info">
             <span class="rr-product-info-product-name rr-bold">{{product.name}}</span>
-            <span><span>{{t 'storeList.quantity'}}:</span> <span class="rr-product-info-value rr-bold">{{product.quantity}}</span></span>
+            <span>
+              <span>{{t 'storeList.quantity'}}:</span>
+              <span class="rr-product-info-value rr-bold">{{product.quantity}}</span>
+            </span>
             <ul class="rr-product-info-options">
               {{#each product.options}}
                 {{#if value.name}}
                   <li>
-                    <span>{{name}}:</span> <span class="rr-product-info-value rr-bold">{{value.name}}</span>
+                    <span>{{name}}:</span>
+                    <span class="rr-product-info-value rr-bold">{{value.name}}</span>
                   </li>
                 {{else}}
                   <li>
-                    <span>{{name}}:</span> <span class="rr-product-info-value rr-bold">{{value}}</span>
+                    <span>{{name}}:</span>
+                    <span class="rr-product-info-value rr-bold">{{value}}</span>
                   </li>
                 {{/if}}
               {{/each}}
