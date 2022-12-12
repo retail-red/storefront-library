@@ -9,6 +9,8 @@ import linkPartial from './templates/partials/link.hbs';
 import radioPartial from './templates/partials/radio.hbs';
 import checkboxPartial from './templates/partials/checkbox.hbs';
 import skeletonPartial from './templates/partials/skeleton.hbs';
+import productImage from './templates/partials/productImage.hbs';
+import apiProductOptions from './templates/partials/apiProductOptions.hbs';
 
 handlebars.registerHelper('t', (p, options) => new handlebars.SafeString(t(p, options.hash || {})));
 handlebars.registerHelper('hasTranslation', (p) => hasTranslation(p));
@@ -45,6 +47,8 @@ handlebars.registerPartial('link', linkPartial);
 handlebars.registerPartial('radio', radioPartial);
 handlebars.registerPartial('checkbox', checkboxPartial);
 handlebars.registerPartial('skeleton', skeletonPartial);
+handlebars.registerPartial('apiProductOptions', apiProductOptions);
+handlebars.registerPartial('productImage', productImage);
 handlebars.registerPartial('tt', (key, { data }) => {
   // Create DOM nodes of the children
   const wrapper = document.createElement('div');

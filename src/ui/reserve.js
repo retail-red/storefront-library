@@ -55,7 +55,7 @@ class ReserveController extends Controller {
     location, product, showHeader = true, showLocation = true,
   }) {
     const {
-      customer, legal, newsletterOptIn, saveCustomerData,
+      customer, legal, newsletterOptIn, saveCustomerData, useApiProduct,
     } = this.config;
 
     return {
@@ -72,6 +72,7 @@ class ReserveController extends Controller {
         preselected: customer.remember === true,
       },
       product,
+      isApiProduct: useApiProduct,
       formData: {
         ...customer,
         pickupFirstName: '',
@@ -146,8 +147,8 @@ class ReserveController extends Controller {
   }
 
   async submit() {
-    const { product, platform } = this.config;
-    const { location } = this.state;
+    const { platform } = this.config;
+    const { location, product } = this.state;
 
     // Retrieve form data from document.
     const submitData = Object.assign({}, ...Object

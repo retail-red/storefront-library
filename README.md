@@ -2,7 +2,7 @@
 [![retail.red](https://img.shields.io/badge/retail-.red-red)](https://retail.red/)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/retail-red/storefront-library)
 [![Changelog](https://img.shields.io/github/package-json/v/retail-red/storefront-library?label=changelog)](CHANGELOG.md)
-[![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index_v2.html)
+[![Example](https://img.shields.io/badge/example-Demo-brightgreen)](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index_v3.html)
 ![GitHub](https://img.shields.io/github/license/retail-red/storefront-library)
 
 This library enables merchants to easily offer click & reserve functionality to their existing ecommerce website. The script can add a “reserve” button to the product detail page, via which a new reservation can be placed.
@@ -11,7 +11,7 @@ This library enables merchants to easily offer click & reserve functionality to 
 
 To include our scripts and all its dependencies you need to add the following snippet to your shops core template. It's recommended to place it next to your other JavaScript dependencies.
 ```html
-<script type='text/javascript' src='https://cdn.retail.red/omni/retailred-storefront-library-v2.js'></script>
+<script type='text/javascript' src='https://cdn.retail.red/omni/retailred-storefront-library-v3.js'></script>
 ```
 The next step is to execute the retail.red script with your own config. This needs to be executed after the product page has been completely rendered. For static pages its enough to put the following snippet at the end of your HTML page. If you are unsure when the product page is completely rendered you can use the browser `load` event.
 ```html
@@ -38,7 +38,7 @@ As a last step you need to define the place where the reservation button should 
 ```
 
 ### Example Integration
-See `src/dev/index.html` for a basic integration example or visit the [demo page.](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index_v2.html)
+See `src/dev/index.html` for a basic integration example or visit the [demo page.](https://s3.eu-central-1.amazonaws.com/retail.red-dev-public/omni-enablement/latest/index_v3.html)
 
 ## Interface
 
@@ -66,14 +66,18 @@ All of the rendered UI are using CSS classes that can be used to override **any*
 For colors we provided CSS variables that can be overridden once for all usages.
 ```css
 #rr-omni #rr-omni-custom, #rr-omni-reserve-button, #rr-inventory-custom {
-  /* Color for common text */
-  --rr-color-text: #000;
+  /* Color for common text. If not set, the primary page color will be used */
+  --rr-color-text: inherit;
   /* Color for text with a medium emphasis */
-  --rr-color-text-medium-emphasis: #787878;
-  /* Primary color used for form elements and buttons */
+  --rr-color-text-medium-emphasis: #666666;
+  /* Primary color used for form elements and reserve buttons */
   --rr-color-primary: #000;
   /* Contrast color for the primary color - used as button text color  */
   --rr-color-primary-contrast: #fff;
+  /* Secondary color used for search buttons, variant selection and form elements. Falls back to --rr-color-primary when not set */
+  --rr-color-secondary: var(--rr-color-primary);
+  /* Contrast color for the secondary color - used as button text color. Falls back to --rr-color-primary-contrast when not set.  */
+  --rr-color-secondary-contrast: var(--rr-color-primary-contrast);
   /* Color used for links */
   --rr-color-link: #3c9bb5;
   /* Text color for disabled buttons */
@@ -115,6 +119,7 @@ retailred.updateConfig({
 | `testMode`                  | `false`      | NO       | When set to `true` no buttons will be rendered within the users browser, till the page was once opened with a query parameter like `rrTesting=start`. A testing session can be stopped by opening the page with `rrTesting=end`                               |
 | `platform`                  | `null`       | NO       | The platform from which the order came. Can be one of `engage`, `desktop`, `mobile`, `checkoutPage` or `other`                                                                                                                                                |
 | `saveCustomerData`          | `on` | NO     | Controls how user data is persisted within the `localStorage`. Can be one of `off` (data will not be saved), `on` (data will be saved in any case), `checkbox` (users can decide via a checkbox on the reservation page). The label of the checkbox can be changed via the localization configuration by changing the value of `localization.[lang].saveCustomerData`.                                                                                                                                                                                 |
+| `useApiProduct`                  | `false` | NO       |  When set to `true`, product data is fetched from the Storefront API. In that case the product configuration only needs to contain `code` and `quantity` as parameters                          |
 
 
 ### Product Configuration

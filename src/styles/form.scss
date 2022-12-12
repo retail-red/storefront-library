@@ -32,16 +32,18 @@ $input-border-radius: 5px;
     min-height: auto;
     height: auto;
     border-radius:$input-border-radius;
+    box-sizing: border-box;
+    width: 100%;
   }
   input:focus {
     outline: 0;
     ~ fieldset {
-      border-color: var(--rr-color-primary);
+      border-color: var(--rr-color-secondary, var(--rr-color-primary));
     }
   }
   input:focus {
     + label {
-      color: var(--rr-color-primary);
+      color: var(--rr-color-secondary, var(--rr-color-primary));
       top: 0;
       transform: translateY(-50%) scale(.9);
     }
@@ -170,12 +172,12 @@ $input-border-radius: 5px;
   }
 
   select:focus ~ fieldset {
-    border-color: var(--rr-color-primary);
+    border-color: var(--rr-color-secondary, var(--rr-color-primary));
   }
 
   select:focus {
     + label {
-      color: var(--rr-color-primary);
+      color: var(--rr-color-secondary, var(--rr-color-primary));
       top: 0;
       transform: translateY(-50%) scale(.9);
     }
@@ -201,7 +203,7 @@ $input-border-radius: 5px;
   fieldset {
     text-align: left;
     position: absolute;
-    inset: -8px 6px 0px;
+    inset: -8px 0 0;
     padding: 0 8px;
     pointer-events: none;
     border: 1px solid gray;
@@ -228,17 +230,16 @@ $input-border-radius: 5px;
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
-  padding: 0 16px;
+  padding: 10px 16px;
   min-width: 48px;
-  height: 36px;
+  height: 40px;
   vertical-align: middle;
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
   color: var(--rr-color-primary-contrast);
   background-color: var(--rr-color-primary);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   overflow: hidden;
   outline: none;
@@ -250,6 +251,15 @@ $input-border-radius: 5px;
     fill: var(--rr-color-primary-contrast);
     width: 24px;
     height: 24px;
+  }
+
+  &.rr-button-secondary {
+    color: var(--rr-color-secondary-contrast, var(--rr-color-primary-contrast));
+    background-color: var(--rr-color-secondary, var(--rr-color-primary));
+
+    svg {
+      fill: var(--rr-color-secondary-contrast, var(--rr-color-primary-contrast));
+    }
   }
 
   &::-moz-focus-inner {
@@ -283,24 +293,8 @@ $input-border-radius: 5px;
     transition: opacity 1s, transform 0.5s;
   }
 
-  &:hover, &:focus {
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
-  }
-
   &:hover::before {
     opacity: 0.08;
-  }
-
-  &:focus::before {
-    opacity: 0.24;
-  }
-
-  &:hover:focus::before {
-    opacity: 0.3;
-  }
-
-  &:active {
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
   }
 
   &:active::after {
@@ -377,7 +371,7 @@ $input-border-radius: 5px;
       left: 5px;
       width: 10px;
       height: 10px;
-      background-color: var(--rr-color-primary);
+      background-color: var(--rr-color-secondary, var(--rr-color-primary));
       border-radius: 50%;
       z-index: 2;
       transform: scale(0, 0);
@@ -386,7 +380,7 @@ $input-border-radius: 5px;
   }
   input:checked + label {
     &:before {
-      border-color: var(--rr-color-primary);
+      border-color: var(--rr-color-secondary, var(--rr-color-primary));
     }
     &:after {
       transform: scale(1, 1);
@@ -395,11 +389,11 @@ $input-border-radius: 5px;
 }
 
 
-$md-checkbox-checked-color: var(--rr-color-primary);
+$md-checkbox-checked-color: var(--rr-color-secondary, var(--rr-color-primary));
 $md-checkbox-border-color: rgba(0, 0, 0, 0.54);
 $md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
 $md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);
-$md-checkbox-margin: 1em 0;
+$md-checkbox-margin: 0 0 1em 0;
 $md-checkbox-size: 1.25em;
 $md-checkbox-padding: .25em;
 $md-checkbox-border-width: 2px;

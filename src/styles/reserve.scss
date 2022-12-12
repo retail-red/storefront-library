@@ -6,147 +6,222 @@
   flex-direction: column;
   height: 100%;
 
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  .rr-bold {
+    font-weight: bold;
+  }
+
   .rr-header {
     position: relative;
   }
 
+  .rr-header-content {
+    padding: 0 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .rr-header-product {
-    padding: 0 24px;
     display: flex;
     flex-direction: row;
 
     .rr-product-image-wrapper {
-      margin-right: 24px;
-      width: 80px;
-      height: 80px;
+      margin-right: 16px;
+      height: 100px;
       display: flex;
       justify-content: center;
+
       img {
         height: 100%;
+
+        + svg {
+          display: none;
+        }
+
+        &.rr-image-error {
+          display: none;
+
+          + svg {
+            display: flex;
+            height: 80%;
+            width: 80%;
+            aspect-ratio: 1;
+            align-self: center;
+            fill: var(--rr-color-button-background-disabled);
+          }
+        }
+      }
+    }
+
+    &.rr-api-product {
+      .rr-product-image-wrapper {
+        aspect-ratio: 1;
       }
     }
 
     .rr-product-info {
-      flex: 1;
       display: flex;
       flex-direction: column;
+      gap: 8px;
+
+      .rr-product-info-options {
+        li:not(:last-child) {
+          padding-bottom: 8px;
+        }
+      }
+
+      .rr-product-info-product-name {
+        line-height: 1.25em;
+      }
+
       span {
-        font-size: 15px;
+        font-size: 16px;
       }
     }
   }
 
   .rr-divider {
     height: 8px;
-    background-color: #fff;
+    margin-top: -8px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
     width: 100%;
-    margin-top: 12px;
     position: relative;
     z-index: 2;
   }
 
-  .rr-store {
+  .rr-reserve-content {
+    flex: 1;
     overflow: auto;
-    padding: 16px 24px;
-    .rr-store-name {
-      margin-top: 8px;
+    padding: 24px 16px 16px 16px;
+
+    .rr-store {
       display: flex;
-      flex-direction: row;
-      font-size: 16px;
-      font-weight: bold;
-      .rr-store-change {
-        font-size: 14px;
-        font-weight: normal;
-        margin-left: 12px;
-      }
-    }
+      flex-direction: column;
+      padding-bottom: 24px;
+      line-height: 1.25em;
 
-    .rr-store-detail {
-      margin-top: 16px;
-      display: flex;
-      flex-direction: row;
-      font-size: 14px;
-
-      >div:first-child {
-        margin-right: 16px;
-        width: 200px;
-        @include xs {
-          min-width: initial;
-          margin-right: 50px;
-        }
-      }
-      .rr-bold {
-        font-size: 15px;
-        font-weight: bold;
-      }
-
-      .rr-store-address, .rr-store-hours {
-        padding-bottom: 8px;
-      }
-    }
-  }
-  .rr-hidden {
-    display: none;
-  }
-  .rr-form {
-    .rr-section {
-      margin-top: 32px;
-      >span {
-        font-size: 16px;
-        font-weight: bold;
-
-        + .rr-form-row {
-          margin-top: 12px;
-        }
-      }
-
-      .rr-form-radio-row {
-        &:first-child {
-          margin-top: 8px;
-        }
-
-        &:last-child {
-          .rr-radio {
-            margin-bottom: 0;
-          }
-        }
-
+      .rr-store-name-row {
         display: flex;
-        flex-direction: row;
+        gap: 8px;
+        padding-bottom: 16px;
+        flex-wrap: wrap;
       }
 
-      .rr-form-row {
-        margin: 0 -12px;
+      .rr-store-content {
         display: flex;
-        flex-direction: row;
-
-        .rr-field {
-          padding: 12px 12px 6px;
-          flex-grow: 1;
-          max-width: 400px;
-          width: 50%;
-
-          input {
-            width: 100%;
-          }
-        }
+        gap: 32px;
 
         @include xs {
           flex-direction: column;
+          gap: 16px;
+        }
 
-          .rr-field {
-            max-width: 100%;
-            width: initial;
+        .rr-store-details {
+          width: 300px;
+          flex-shrink: 0;
+
+          @include xs {
+            width: inherit;
           }
+        }
+
+        .rr-store-address-container,
+        .rr-phone-number-container {
+          padding-bottom: 8px;
+        }
+
+        .rr-phone-number-container a {
+          text-decoration: none;
+        }
+
+        .rr-directions.rr-link {
+          font-weight: bold;
         }
       }
     }
 
-    .rr-footer-text {
-      margin-top: 8px;
-      margin-bottom: 8px;
-      font-size: 15px;
+    .rr-hidden {
+      display: none;
+    }
+
+    .rr-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .rr-section {
+        .rr-form-radio-row {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .rr-form-input-grid {
+          display: flex;
+          gap: 24px;
+          flex-wrap: wrap;
+          justify-content: space-between;
+
+          .rr-field {
+            display: flex;
+            width: 45%;
+            flex-grow: 1;
+          }
+
+          @include xs {
+            flex-direction: column;
+
+            .rr-field {
+              width: 100%
+            }
+          }
+        }
+
+        .rr-form-row {
+          display: flex;
+          flex-direction: row;
+
+          .rr-field {
+            flex-grow: 1;
+            max-width: 400px;
+            width: 50%;
+
+            input {
+              width: 100%;
+            }
+          }
+
+          @include xs {
+            flex-direction: column;
+
+            .rr-field {
+              max-width: 100%;
+              width: initial;
+            }
+          }
+        }
+      }
+
+      .rr-legal .rr-link {
+        font-weight: bold;
+      }
+
+      .rr-footer-text {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        font-size: 15px;
+      }
     }
   }
 }

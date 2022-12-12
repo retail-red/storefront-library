@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns=http://www.w3.org/1999/xhtml xml:lang=de lang=de>
 <meta charset=utf-8>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>Retail Red Storefront Library</title>
 <style>
   .docs {
@@ -178,7 +178,7 @@
 
   body {
     background: 0;
-    color: #111;
+    color: #0e3a5a;
     font: normal normal normal 16px/1em 'Neue Kabel', sans-serif;
     height: 100%;
     margin: 0;
@@ -187,8 +187,8 @@
   }
 
   .page-wrapper {
-    width: 960px;
-    margin: 0 auto
+    max-width: 960px;
+    margin: 0 auto;
   }
 
   p {
@@ -213,11 +213,13 @@
   }
 
   .catalog-product-view .product_flexbox {
-    display: flex
+    display: flex;
   }
 
   .product_page_form {
-    padding: 2%
+    padding: 16px;
+    flex: 1;
+    display: flex;
   }
 
   .content-wrapper .content .product-shop {
@@ -340,9 +342,38 @@
   }
 
   .content-wrapper .content .product-shop {
-    width: 35%;
-    padding: 2% 2% 2% 0;
-    margin-left: auto;
+    padding: 16px;
+    flex: 1;
+  }
+
+  .helper-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px
+  }
+
+  #retailred-storefront-library {
+    line-height: 36px;
+  }
+
+  @media (max-width: 700px) {
+    .catalog-product-view .product_flexbox {
+      flex-direction: column;
+    }
+
+    .demos textarea {
+      width: 95% !important;
+    }
+
+    .demos .demo {
+      width: 85%;
+    }
+
+    .docs {
+      overflow: auto;
+    }
   }
 
   #product_addtocart_form .big-column .row .box {
@@ -358,7 +389,9 @@
   }
 
   .main_image {
-    cursor: pointer
+    cursor: pointer;
+    max-width: 100%;
+    height: auto;
   }
 
   .delivery_time .availability {
@@ -481,16 +514,11 @@
             <form action="#" method=post id=product_addtocart_form class=product_page_form>
               <div class="big-column product_styling_id_27265">
                 <div class=product-img-box>
-                  <div class=product-img-box>
-                    <div class=product-img-box>
-                      <img class=main_image id=main_image rel=image_src width=500
-                        src="https://demo.elliselaine.com/pub/media/catalog/product/cache/5e62a3e057e3c5cc5f2bb9763ad693f7/k/l/kleid_dunkelblau_5.jpg" alt=base>
-                      <div id=media_overlay_bg class="product_media_overlay_bg hidden sf-hidden">
-                      </div>
-                      <div id=media_overlay class="product_media_overlay hidden sf-hidden">
-                      </div>
-                    </div>
+                  <img class=main_image id=main_image rel=image_src width=500
+                    src="https://demo.elliselaine.com/pub/media/catalog/product/cache/5e62a3e057e3c5cc5f2bb9763ad693f7/k/l/kleid_dunkelblau_5.jpg" alt=base>
+                  <div id=media_overlay_bg class="product_media_overlay_bg hidden sf-hidden">
                   </div>
+                  <div id=media_overlay class="product_media_overlay hidden sf-hidden"></div>
                 </div>
                 <div class="row clearfix">
                   <div class=box>
@@ -659,7 +687,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 64px;
+      margin-bottom: 32px;
     }
 
     .demo {
@@ -692,26 +720,33 @@
       display: flex;
       flex-direction: row;
       margin: -8px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   </style>
 
   <div class="demos">
     <h3>Demos</h3>
     <div class="wrapper">
-      <a href="index_v2.html" class="demo">
+      <a href="index_v3.html" class="demo">
         <h4>Live Inventory (Default Variant)</h4>
         <span>Showcases the live inventory function on a pdp</span>
         <button>Open</button>
       </a>
-      <a href="index_v2.html?variant=list" class="demo">
+      <a href="index_v3.html?variant=list" class="demo">
         <h4>Live Inventory (List Variant)</h4>
         <span>Showcases the live inventory function. This variant can be used for shops with a low amount of
           locations</span>
         <button>Open</button>
       </a>
-      <a href="quick_v2.html" class="demo">
+      <a href="quick_v3.html" class="demo">
         <h4>Quick Button</h4>
         <span>Showcases the integration of a simple reservation button.</span>
+        <button>Open</button>
+      </a>
+      <a href="api_product_v3.html" class="demo">
+        <h4>Storefront API Product</h4>
+        <span>Showcases the integration with product requests via the Storefront API</span>
         <button>Open</button>
       </a>
     </div>
@@ -719,7 +754,7 @@
 
   <div class="demos">
     <h3>Helper</h3>
-    <div style="display: flex; flex-direction: row;">
+    <div class="helper-buttons">
       <button id="reset">Reset</button>
       <button style="margin-left: 8px;" id="setUnavailable">Set to Unavailable Store</button>
       <button style="margin-left: 8px;" id="changeProduct">Change Product</button>

@@ -7,7 +7,7 @@ const PACKAGE = require('./package.json');
 
 const libVersion = PACKAGE.version;
 
-const bundleName = 'retailred-storefront-library-v2';
+const bundleName = 'retailred-storefront-library-v3';
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -114,13 +114,18 @@ module.exports = (env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         inject: 'head',
-        filename: 'index_v2.html',
-        template: './src/dev/index_v2.html',
+        filename: 'index_v3.html',
+        template: './src/dev/index_v3.html',
       }),
       new HtmlWebpackPlugin({
         inject: 'head',
-        filename: 'quick_v2.html',
-        template: './src/dev/quick_v2.html',
+        filename: 'quick_v3.html',
+        template: './src/dev/quick_v3.html',
+      }),
+      new HtmlWebpackPlugin({
+        inject: 'head',
+        filename: 'api_product_v3.html',
+        template: './src/dev/api_product_v3.html',
       }),
       new BundleAnalyzerPlugin({
         analyzerMode: 'disabled',
@@ -144,7 +149,7 @@ module.exports = (env, argv) => {
       },
       setupMiddlewares: (middlewares, devServer) => {
         devServer.app.get('/', (req, res) => {
-          res.redirect('/index_v2.html');
+          res.redirect('/index_v3.html');
         });
 
         return middlewares;

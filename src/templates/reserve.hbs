@@ -3,86 +3,106 @@
   {{#if showHeader }}
     {{!-- Header --}}
     <div class="rr-header">
-      {{!-- Product infos --}}
-      <div class="rr-header-product">
-        <div class="rr-product-image-wrapper">
-          <img src="{{product.imageUrl}}" alt="{{product.name}}"/>
-        </div>
-        <div class="rr-product-info">
-          <span>{{product.name}}</span>
-          <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
-          <span>
-            {{#each product.options}}
-              {{#if value.name}}
-                {{name}}: {{value.name}}
-              {{else}}
-                {{name}}: {{value}}
-              {{/if}}
-              {{#unless @last}}
-              ,&nbsp;
-              {{/unless}}
-            {{/each}}
-          </span>
+      <div class="rr-header-content">
+        {{!-- Product infos --}}
+        <div class="rr-header-product {{#if isApiProduct}} rr-api-product{{/if}}">
+          {{#if product.imageUrl}}
+            {{> productImage src=product.imageUrl alt=product.name}}
+          {{/if}}
+          <div class="rr-product-info">
+            <span class="rr-product-info-product-name rr-bold">{{product.name}}</span>
+            <span>
+              <span>{{t 'storeList.quantity'}}:</span>
+              <span class="rr-product-info-value rr-bold">{{product.quantity}}</span>
+            </span>
+            <ul class="rr-product-info-options">
+              {{#each product.options}}
+                {{#if value.name}}
+                  <li>
+                    <span>{{name}}:</span>
+                    <span class="rr-product-info-value rr-bold">{{value.name}}</span>
+                  </li>
+                {{else}}
+                  <li>
+                    <span>{{name}}:</span>
+                    <span class="rr-product-info-value rr-bold">{{value}}</span>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ul>
+          </div>
         </div>
       </div>
       <div class="rr-progress-line"></div>
       <div class="rr-divider"></div>
     </div>
   {{/if}}
-
-  {{!-- Store infos --}}
-  <div class="rr-store">
-    {{#if showLocation }}
-      <div class="rr-store-name">
-        {{location.name}}
-        {{>link label="reserve.changeStore" href="#" class="rr-store-change"}}
-      </div>
-
-      <div class="rr-store-detail">
-        <div>
-          <p class="rr-bold rr-store-address">{{t "storeList.location.address" }}</p>
-
-          <p>{{t "addresses.line1" street=location.primaryAddress.street}}</p>
-          {{#if location.primaryAddress.street2}}
-            <p>{{t "addresses.line2" street2=location.primaryAddress.street2}}</p>
-          {{/if}}
-          <p>{{t "addresses.line3" city=location.primaryAddress.city region=location.primaryAddress.region postalCode=location.primaryAddress.postalCode}}</p>
-          {{> link
-              class="rr-directions"
-              label="storeList.location.directions"
-              href=(direction location.primaryAddress)
-              target="_blank"
-              rel="noopener"
-          }}
+  <div class="rr-reserve-content">
+    {{!-- Store infos --}}
+    <div class="rr-store">
+      {{#if showLocation }}
+        {{!-- Name, distance, availability row --}}
+        <div class="rr-store-name-row">
+          <h4>
+            {{location.name}}
+            {{#if location.distance}}
+              <span class="rr-distance">
+                - {{distance location.distance location.unitSystem}}
+              </span>
+            {{/if}}
+          </h4>
+          {{>link label="reserve.changeStore" href="#" class="rr-store-change"}}
         </div>
-        <div>
-          {{#if location.operationHours}}
-            <p class="rr-bold rr-store-hours">{{t "storeList.location.storeHours" }}</p>
-            {{#each location.operationHours}}
-              {{#if this}}
-                <p>{{t (concat "date." @key) }}: {{this}}</p>
+        <div class="rr-store-content">
+          <div class="rr-store-details">
+            <address class="rr-store-address-container">
+              <h4 class="rr-store-address">{{t "storeList.location.address" }}</h4>
+              <p>{{t "addresses.line1" street=location.primaryAddress.street}}</p>
+              {{#if location.primaryAddress.street2}}
+              <p>{{t "addresses.line2" street2=location.primaryAddress.street2}}</p>
               {{/if}}
-            {{/each}}
+              <p>{{t "addresses.line3" city=location.primaryAddress.city region=location.primaryAddress.region postalCode=location.primaryAddress.postalCode}}</p>
+            </address>
+            {{#if location.primaryAddress.phoneNumber}}
+              <p class="rr-phone-number-container">
+                {{t "addresses.tel" }}
+                {{> link class="rr-phone-number" href=(concat "tel:" location.primaryAddress.phoneNumber) label=location.primaryAddress.phoneNumber }}
+              </p>
+            {{/if}}
+            {{> link
+                class="rr-directions"
+                label="storeList.location.directions"
+                href=(direction location.primaryAddress)
+                target="_blank"
+                rel="noopener"
+            }}
+          </div>
+          {{#if location.operationHours}}
+            <div class="rr-opening-hours">
+              <h4 class="rr-store-hours">{{t "storeList.location.storeHours" }}</h4>
+              {{#each location.operationHours}}
+                {{#if this}}
+                  <p>{{t (concat "date." @key) }}: {{this}}</p>
+                {{/if}}
+              {{/each}}
+            </div>
           {{/if}}
         </div>
-      </div>
-    {{/if}}
-
+      {{/if}}
+    </div>
     {{!-- Form --}}
     <div class="rr-form">
       <div class="rr-section">
-        <span>{{t "reserve.contactInfo" }}</span>
-        <div class="rr-form-row">
+        <h3>{{t "reserve.contactInfo" }}</h3>
+        <div class="rr-form-input-grid">
           {{> textField id="rr-reserve-first-name" label="reserve.firstName" autocomplete="given-name" }}
           {{> textField id="rr-reserve-last-name" label="reserve.lastName" autocomplete="family-name" }}
-        </div>
-        <div class="rr-form-row">
           {{> textFieldPhone id="rr-reserve-phone-number" countryFieldId="rr-reserve-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
           {{> textField id="rr-reserve-email" label="reserve.email" type="email" autocomplete="email" }}
         </div>
       </div>
       <div class="rr-section">
-        <span>{{t "reserve.pickupQuestion" }}</span>
+        <h3>{{t "reserve.pickupQuestion" }}</h3>
         <fieldset id="rr-reserve-pickup">
           <div class="rr-form-radio-row">
             {{>radio id="rr-reserve-pickup-me" name="rr-reserve-pickup" value="me" label="reserve.me" checked=true}}
@@ -93,17 +113,16 @@
         </fieldset>
       </div>
       <div class="rr-section rr-pickup-contact rr-hidden">
-        <span>{{t "reserve.pickupInfo" }}</span>
-        <div class="rr-form-row">
+        <h3>{{t "reserve.pickupInfo" }}</h3>
+        <div class="rr-form-input-grid">
           {{> textField id="rr-reserve-pickup-first-name" label="reserve.firstName" autocomplete="given-name" }}
           {{> textField id="rr-reserve-pickup-last-name" label="reserve.lastName" autocomplete="family-name" }}
-        </div>
-        <div class="rr-form-row">
           {{> textFieldPhone id="rr-reserve-pickup-phone-number" countryFieldId="rr-reserve-pickup-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
           {{> textField id="rr-reserve-pickup-email" label="reserve.email" type="email" autocomplete="email" }}
         </div>
       </div>
-      <div class="rr-section rr-legal">
+      <div class="rr-section">
+        <div class="rr-legal">
         {{#if (and legal.terms legal.privacy) }}
           {{!-- combined terms and privacy checkbox --}}
           {{#> checkbox id="rr-reserve-terms-and-privacy" }}
@@ -127,17 +146,19 @@
               {{/tt}}
             {{/checkbox}}
         {{/if}}
+         </div>
+        {{#if newsletterOptIn.enabled }}
+          {{#> checkbox id="rr-reserve-newsletter-opt-in" checked=(and newsletterOptIn.preselected) }}
+              {{t "reserve.newsletterOptIn"}}
+          {{/checkbox}}
+        {{/if}}
+        {{#if persistDataOptIn.enabled }}
+          {{#> checkbox id="rr-reserve-persist-data-opt-in" checked=(and persistDataOptIn.preselected)}}
+              {{t "reserve.saveCustomerData"}}
+          {{/checkbox}}
+        {{/if}}
       </div>
-      {{#if newsletterOptIn.enabled }}
-        {{#> checkbox id="rr-reserve-newsletter-opt-in" checked=(and newsletterOptIn.preselected) }}
-            {{t "reserve.newsletterOptIn"}}
-        {{/checkbox}}
-      {{/if}}
-      {{#if persistDataOptIn.enabled }}
-        {{#> checkbox id="rr-reserve-persist-data-opt-in" checked=(and persistDataOptIn.preselected)}}
-           {{t "reserve.saveCustomerData"}}
-        {{/checkbox}}
-      {{/if}}
+
       {{#if (hasTranslation "reserve.footerText") }}
         <div class="rr-footer-text">
           {{t "reserve.footerText"}}

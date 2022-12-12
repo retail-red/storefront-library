@@ -1,53 +1,70 @@
 <div class="rr-store-list">
   {{!-- Header --}}
   <div class="rr-header">
-    {{#if product }}
-      {{!-- Product infos --}}
-      <div class="rr-header-product">
-        <div class="rr-product-image-wrapper">
-          <img src="{{product.imageUrl}}" alt="{{product.name}}" />
-        </div>
-        <div class="rr-product-info">
-          <span>{{product.name}}</span>
-          <span>{{t 'storeList.quantity'}}: {{product.quantity}}</span>
-          <span>
-            {{#each product.options}}
-              {{#if value.name}}
-                {{name}}: {{value.name}}
-              {{else}}
-                {{name}}: {{value}}
+    <div class="rr-header-content">
+      {{#if product }}
+        {{!-- Product infos --}}
+        <div class="rr-header-product">
+          <div class="rr-product-details{{#if isApiProduct}} rr-api-product{{/if}}">
+            {{#if product.imageUrl}}
+              {{> productImage src=product.imageUrl alt=product.name}}
+            {{/if}}
+            <div class="rr-product-info">
+              <span class="rr-product-info-product-name rr-bold">{{product.name}}</span>
+              <span>
+                <span>{{t 'storeList.quantity'}}:</span>
+                <span class="rr-product-info-value rr-bold">{{product.quantity}}</span>
+              </span>
+              {{#if (not isApiProduct)}}
+              <ul class="rr-product-info-options">
+                {{#each product.options}}
+                  {{#if value.name}}
+                    <li>
+                      <span>{{name}}:</span>
+                      <span class="rr-product-info-value rr-bold">{{value.name}}</span>
+                    </li>
+                  {{else}}
+                    <li>
+                      <span>{{name}}:</span>
+                      <span class="rr-product-info-value rr-bold">{{value}}</span>
+                    </li>
+                  {{/if}}
+                {{/each}}
+              </ul>
               {{/if}}
-              {{#unless @last}}
-              ,&nbsp;
-              {{/unless}}
-            {{/each}}
-          </span>
+            </div>
+          </div>
+          {{#if isApiProduct }}
+            {{> apiProductOptions}}
+          {{/if}}
         </div>
-      </div>
-     {{/if}}
-
-    {{!-- Search header --}}
-    <div class="rr-header-search">
-      <div class="rr-store-list-search-fields">
-        {{#if (gt countries.length 1) }}
-          {{#> select id="rr-store-list-country" label="storeList.search.countryLabel" }}
-            {{#each countries}}
-              <option value="{{code}}">{{name}}</option>
-            {{/each}}
-          {{/select}}
         {{/if}}
-        {{> textField
-          id="rr-store-list-search-input"
-          label="storeList.search.label"
-          autocomplete="postal-code"
-          value=postalCode
-        }}
-      </div>
-      <div class="rr-store-list-search-buttons">
-        {{> button id="rr-store-list-search" label="storeList.search.buttonLabel" }}
-        {{#> button id="rr-store-list-geo" aria-label="storeList.search.ariaLabel" }}
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
-        {{/button}}
+
+        {{> apiProductOptions renderSelect=true}}
+
+      {{!-- Search header --}}
+      <div class="rr-header-search">
+        <div class="rr-store-list-search-fields">
+          {{#if (gt countries.length 1) }}
+            {{#> select id="rr-store-list-country" label="storeList.search.countryLabel" }}
+              {{#each countries}}
+                <option value="{{code}}">{{name}}</option>
+              {{/each}}
+            {{/select}}
+          {{/if}}
+          {{> textField
+            id="rr-store-list-search-input"
+            label="storeList.search.label"
+            autocomplete="postal-code"
+            value=postalCode
+          }}
+        </div>
+        <div class="rr-store-list-search-buttons">
+          {{> button id="rr-store-list-search" class="rr-button-secondary" label="storeList.search.buttonLabel" }}
+          {{#> button id="rr-store-list-geo" class="rr-button-secondary" aria-label="storeList.search.ariaLabel" }}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+          {{/button}}
+        </div>
       </div>
     </div>
     <div class="rr-progress-line"></div>
@@ -64,94 +81,92 @@
 
     {{#each locations }}
       <div class="rr-store">
-        {{!-- Details row--}}
-        <div class="rr-detail">
-          <div class="rr-detail-header">
-            <div class="rr-left">
-              {{!-- Name, distance, availability row --}}
-              <div class="rr-name-row">
-                {{name}}
-                {{#if distance}}
-                  <span class="rr-distance">
-                    - {{distance distance unitSystem}}
-                  </span>
+        {{!-- Name, distance, availability row --}}
+        <div class="rr-store-name-row">
+          <h4 class="rr-bold rr-store-name">
+            {{name}}
+            {{#if distance}}
+              <span class="rr-distance">
+                - {{distance distance unitSystem}}
+              </span>
+            {{/if}}
+          </h4>
+        </div>
+        <div class="rr-store-main-row">
+          <div class="rr-store-content">
+            <div class="rr-store-details">
+              <address class="rr-store-address-container">
+                <h4 class="rr-store-address">{{t "storeList.location.address" }}</h4>
+                <p>{{t "addresses.line1" street=primaryAddress.street}}</p>
+                {{#if primaryAddress.street2}}
+                <p>{{t "addresses.line2" street2=primaryAddress.street2}}</p>
                 {{/if}}
-              </div>
-              <div class="rr-store-details">
-                <div>
-                  <p class="rr-bold rr-store-address">{{t "storeList.location.address" }}</p>
-                  <p>{{t "addresses.line1" street=primaryAddress.street}}</p>
-                  {{#if primaryAddress.street2}}
-                  <p>{{t "addresses.line2" street2=primaryAddress.street2}}</p>
-                  {{/if}}
-                  <p>{{t "addresses.line3" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
-                  {{#if primaryAddress.phoneNumber}}
-                    <p>
-                      {{t "addresses.tel" }}
-                      {{> link class="rr-phone-number" href=(concat "tel:" primaryAddress.phoneNumber) label=primaryAddress.phoneNumber }}
-                    </p>
-                  {{/if}}
-                  {{> link
-                      class="rr-directions"
-                      label="storeList.location.directions"
-                      href=(direction primaryAddress)
-                      target="_blank"
-                      rel="noopener"
-                  }}
-                </div>
-                <div>
-                  {{#if operationHours}}
-                    <p class="rr-bold rr-store-hours">{{t "storeList.location.storeHours" }}</p>
-                    {{#each operationHours}}
-                      {{#if this}}
-                        <p>{{t (concat "date." @key) }}: {{this}}</p>
-                      {{/if}}
-                    {{/each}}
-                  {{/if}}
-                </div>
-              </div>
+                <p>{{t "addresses.line3" city=primaryAddress.city region=primaryAddress.region postalCode=primaryAddress.postalCode}}</p>
+              </address>
+              {{#if primaryAddress.phoneNumber}}
+                <p class="rr-phone-number-container">
+                  {{t "addresses.tel" }}
+                  {{> link class="rr-phone-number" href=(concat "tel:" primaryAddress.phoneNumber) label=primaryAddress.phoneNumber }}
+                </p>
+              {{/if}}
+              {{> link
+                  class="rr-directions"
+                  label="storeList.location.directions"
+                  href=(direction primaryAddress)
+                  target="_blank"
+                  rel="noopener"
+              }}
             </div>
-            <div class="rr-action">
-              {{#if inventory }}
-                {{!-- Product not available --}}
-                {{#unless inventory.isAvailable }}
-                  <span class="rr-available-negative">
-                    {{t "storeList.inventory.unavailable"}}
+            {{#if operationHours}}
+              <div class="rr-opening-hours">
+                <h4 class="rr-store-hours">{{t "storeList.location.storeHours" }}</h4>
+                {{#each operationHours}}
+                  {{#if this}}
+                    <p>{{t (concat "date." @key) }}: {{this}}</p>
+                  {{/if}}
+                {{/each}}
+              </div>
+            {{/if}}
+          </div>
+          <div class="rr-store-actions">
+          {{#if inventory }}
+            {{!-- Product not available --}}
+            {{#unless inventory.isAvailable }}
+              <span class="rr-available-negative">
+                {{t "storeList.inventory.unavailable"}}
+              </span>
+            {{else}}
+              {{!-- Only show if product is available or not --}}
+              {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
+                <span class="rr-available-positive">
+                  {{t "storeList.inventory.available"}}
+                </span>
+              {{else}}
+                {{!-- Rough numbers (10+) --}}
+                {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
+                  <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                    {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
                   </span>
                 {{else}}
-                  {{!-- Only show if product is available or not --}}
-                  {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
-                    <span class="rr-available-positive">
-                      {{t "storeList.inventory.available"}}
-                    </span>
-                  {{else}}
-                    {{!-- Rough numbers (10+) --}}
-                    {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
-                      <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                        {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
-                      </span>
-                    {{else}}
-                      {{!-- Detailed numbers --}}
-                      <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                        {{t "storeList.inventory.exact" x=inventory.visible }}
-                      </span>
-                    {{/if}}
-                  {{/if}}
-                {{/unless}}
+                  {{!-- Detailed numbers --}}
+                  <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
+                    {{t "storeList.inventory.exact" x=inventory.visible }}
+                  </span>
+                {{/if}}
               {{/if}}
-              {{#if isComingSoon }}
-               {{> button label="storeList.comingSoon" disabled=true}}
-              {{else}}
-                {{> button
-                    class="rr-store-select"
-                    label=(select ../select "storeList.select" "storeList.reserve")
-                    data=(object code=code)
-                    disabled=(and (not inventory.isAvailable) (not ../select))
-                }}
-              {{/if}}
-            </div>
-          </div>
-
+            {{/unless}}
+          {{/if}}
+          {{#if isComingSoon }}
+            {{> button label="storeList.comingSoon" disabled=true}}
+          {{else}}
+            {{> button
+                class="rr-store-select"
+                label=(select ../select "storeList.select" "storeList.reserve")
+                data=(object code=code)
+                disabled=(and (not inventory.isAvailable) (not ../select))
+            }}
+          {{/if}}
+        </div>
         </div>
       </div>
 
@@ -199,5 +214,49 @@
         controller.selectLocation(e.target.dataset.code);
       }
     });
-  });
+
+    {{#if isApiProduct }}
+
+    {{!-- Listen to api product options changes --}}
+    document.querySelectorAll('form[id^="rr-api-product-options"]').forEach(function(el) {
+      el.addEventListener('change', function (event) {
+        var target = event.target;
+
+        {{!-- Sync select box changes with radio buttons --}}
+        if (target.tagName === 'SELECT') {
+          var code = target.getAttribute('data-code');
+          var valueCode = target.value
+
+          document.querySelectorAll('#rr-api-product-options input[name='+ code + ']')
+            .forEach(function(el) {
+              el.removeAttribute('checked');
+            });
+
+          document.querySelector('#rr-api-product-options input#input-' + code + '-' + valueCode )
+            .setAttribute('checked', true);
+        }
+
+        {{!-- Sync radio button changes with selects --}}
+        if (target.tagName === 'INPUT') {
+          var code = target.getAttribute('name');
+          var valueCode = target.getAttribute('value');
+
+          document.querySelector('#rr-api-product-options-select select[data-code=' + code + ']')
+            .value = valueCode;
+        }
+
+        var selections = [];
+
+        document.querySelectorAll('#rr-api-product-options input:checked').forEach(function(el) {
+          selections.push({
+            code: el.getAttribute('name'),
+            valueCode: el.getAttribute('value'),
+          })
+        });
+
+        controller.updateOptionSelection(selections);
+      })
+    });
+    {{/if}}
+  })
 </script>

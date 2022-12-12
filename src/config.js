@@ -19,6 +19,11 @@ const requiredProductProperties = [
   'product.currencyCode',
 ];
 
+const requiredRenderPropertiesApiProduct = [
+  'product.code',
+  'product.quantity',
+];
+
 const storedProperties = [
   'locationCode',
   'customer.firstName',
@@ -46,6 +51,7 @@ const defaultConfig = merge({
   unitSystem: 'metric',
   browserHistory: true,
   useGeolocationImmediately: true,
+  useApiProduct: false,
   saveCustomerData: 'on',
   testMode: false,
   platform: null,
@@ -139,8 +145,14 @@ export const validateConfigForRendering = (config) => requiredRenderProperties.e
   return true;
 });
 
-export const validateConfigForProduct = (config, logErrors = true) => requiredProductProperties
-  .every((property) => {
+export const validateConfigForProduct = (config, logErrors = true) => {
+  let required = requiredProductProperties;
+
+  if (config?.useApiProduct === true) {
+    required = requiredRenderPropertiesApiProduct;
+  }
+
+  return required.every((property) => {
     if (!get(config, 'product') || config.product === null) {
       return false;
     }
@@ -157,6 +169,7 @@ export const validateConfigForProduct = (config, logErrors = true) => requiredPr
     }
     return true;
   });
+};
 
 /**
  * Validates the given config for the rendering phase.

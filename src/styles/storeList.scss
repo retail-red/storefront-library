@@ -6,30 +6,97 @@
   flex-direction: column;
   height: 100%;
 
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 16px;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 4px;
+  }
+
+  .rr-bold {
+    font-weight: bold;
+  }
+
   .rr-header {
     position: relative;
   }
 
+  .rr-header-content {
+    padding: 0 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .rr-header-product {
-    padding: 0 24px;
     display: flex;
     flex-direction: row;
 
-    .rr-product-image-wrapper {
-      margin-right: 24px;
-      height: 100px;
+    .rr-product-details {
       display: flex;
-      justify-content: center;
-      img {
-        height: 100%;
-      }
-    }
+      flex-direction: row;
 
-    .rr-product-info {
-      display: flex;
-      flex-direction: column;
-      span {
-        font-size: 15px;
+      &.rr-api-product {
+        .rr-product-info {
+          width: 230px;
+        }
+
+        .rr-product-image-wrapper {
+          aspect-ratio: 1;
+        }
+      }
+
+      .rr-product-image-wrapper {
+        margin-right: 16px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+
+        img {
+          height: 100%;
+
+          + svg {
+            display: none;
+          }
+
+          &.rr-image-error {
+            display: none;
+
+            + svg {
+              display: flex;
+              height: 80%;
+              width: 80%;
+              aspect-ratio: 1;
+              align-self: center;
+              fill: var(--rr-color-button-background-disabled);
+            }
+          }
+        }
+      }
+
+      .rr-product-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .rr-product-info-options {
+          li:not(:last-child) {
+            padding-bottom: 8px;
+          }
+        }
+
+        .rr-product-info-product-name {
+          line-height: 1.25em;
+        }
+
+        span {
+          font-size: 16px;
+        }
       }
     }
   }
@@ -39,24 +106,31 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 24px 16px;
-    padding-bottom: 8px;
     flex-wrap: wrap;
-    margin: 0 -12px;
+    gap: 32px;
 
     @include xs {
       flex-direction: column;
+      gap: 16px;
     }
 
     .rr-store-list-search-fields,
     .rr-store-list-search-buttons {
       display: flex;
       flex-direction: row;
-      padding: 12px 0 0;
+      align-items: center;
 
       @include xs {
         width: 100%;
       }
+    }
+
+    .rr-store-list-search-fields {
+      gap: 16px;
+    }
+
+    .rr-store-list-search-buttons {
+      gap: 16px;
     }
 
     @include xs {
@@ -68,20 +142,10 @@
 
     .rr-store-list-search-fields {
       flex-grow: 1;
-      margin-right: 24px;
-      @include xs {
-        margin-right: 0;
-      }
     }
 
     .rr-field,
     .rr-select-field {
-      padding: 0 6px;
-
-      select + label {
-        left: 8px;
-      }
-
       input {
         width: 100%;
       }
@@ -93,22 +157,15 @@
     }
 
     .rr-button {
-      margin: 0 6px;
-
       &:first-child {
         flex-grow: 1;
-        margin-right: 6px;
-      }
-
-      &:last-child {
-        margin-left: 6px;
       }
     }
   }
 
   .rr-divider {
     height: 8px;
-    background-color: #fff;
+    margin-top: -8px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
     width: 100%;
     position: relative;
@@ -118,7 +175,7 @@
   .rr-list {
     flex: 1;
     overflow: auto;
-    padding: 16px 24px;
+    padding: 16px;
 
     .rr-error {
       font-size: 14px;
@@ -126,91 +183,59 @@
     }
 
     .rr-store {
-      margin-top: 8px;
-      margin-bottom: 12px;
+      padding: 20px 0;
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
 
-      .rr-name-row {
-        font-size: 15px;
-        font-weight: bold;
-        .rr-distance {
-          font-weight: normal;
-          color: var(--rr-color-text-medium-emphasis);
-        }
+      .rr-store-name-row {
+        display: flex;
       }
 
-      .rr-detail {
+      .rr-store-main-row {
         display: flex;
-        flex-direction: column;
-        line-height: 18px;
+        justify-content: space-between;
+        gap: 16px;
 
-        .rr-detail-header {
+        .rr-store-content {
           display: flex;
-          justify-content: space-between;
-          margin-top: 8px;
-        }
 
-        .rr-left {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          margin-right: 8px;
-        }
-
-        .rr-directions {
-          margin-top: 4px;
-          display: inline-block;
-        }
-
-        .rr-link {
-          &.rr-phone-number {
-            text-decoration: none;
-            font-size: 14px;
+          p {
+            line-height: 1.25em;
           }
-
-          &.rr-closed::after {
-            content: attr(data-label-closed)
-          }
-
-          &.rr-opened::after {
-            content: attr(data-label-opened)
-          }
-        }
-
-        .rr-store-details {
-          display: flex;
-          flex-direction: row;
-          font-size: 14px;
 
           @include xs {
-            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 16px;
           }
 
-          > div {
-            margin-top: 12px;
-          }
+          .rr-store-details {
+            width: 300px;
+            flex-shrink: 0;
 
-          > div:first-child {
-            margin-right: 24px;
-            width: 200px;
             @include xs {
-              min-width: initial;
+              width: initial;
             }
           }
+        }
 
-          .rr-store-address, .rr-store-hours {
-            padding-bottom: 8px;
-          }
+        .rr-store-address-container,
+        .rr-phone-number-container {
+          padding-bottom: 8px;
+        }
 
-          .rr-bold {
-            font-weight: bold;
-          }
+        .rr-phone-number-container .rr-link {
+          text-decoration: none;
+        }
+
+        .rr-directions.rr-link {
+          font-weight: bold;
         }
       }
     }
   }
 
-  .rr-action {
+  .rr-store-actions {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -218,6 +243,7 @@
     .rr-available-positive, .rr-available-neutral, .rr-available-negative {
       margin-left: 8px;
       margin-bottom: 16px;
+
       &::before {
         content: "";
         width: 12px;
