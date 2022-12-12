@@ -11,7 +11,7 @@
 - Added option `useApiProduct` to fetch product data via the Storefront API. Required properties within the product configuration are `code` and `quantity`
 - Introduced optional `--rr-color-secondary` and `--rr-color-secondary-contrast` custom properties to enable special color styling for search buttons and form inputs
 - Added field for customer notes to the reservation form
-- Added optional translation string that can be used to show an info text below the reservation contact form. This text will get visible when a translation string for `reserve.formInfoText` is set via the config
+- Added optional translation string that can be used to show an info text below the reservation contact form. This text will becomes visible when a translation string for `reserve.formInfoText` is set via the config
 
 ## v2.1.0
 ### Changes
