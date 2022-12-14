@@ -21,7 +21,13 @@ $input-border-radius: 5px;
     pointer-events: none;
     z-index: 1000;
   }
-  input {
+
+  textarea + label {
+    top: 16px;
+  }
+
+  input,
+  textarea {
     background: #fff;
     font-size: 0.9em;
     outline: none;
@@ -34,14 +40,22 @@ $input-border-radius: 5px;
     border-radius:$input-border-radius;
     box-sizing: border-box;
     width: 100%;
+    font-family: var(--rr-font-family);
   }
-  input:focus {
+
+  &:has(textarea) {
+    padding-top: 8px;
+  }
+
+  input:focus,
+  textarea:focus {
     outline: 0;
     ~ fieldset {
       border-color: var(--rr-color-secondary, var(--rr-color-primary));
     }
   }
-  input:focus {
+  input:focus,
+  textarea:focus {
     + label {
       color: var(--rr-color-secondary, var(--rr-color-primary));
       top: 0;
@@ -53,7 +67,9 @@ $input-border-radius: 5px;
       transform: translateX(-4%) scale(.9);
     }
   }
-  input:not(:placeholder-shown) {
+
+  input:not(:placeholder-shown),
+  textarea:not(:placeholder-shown) {
     + label {
       top: 0;
       transform: translateY(-50%) scale(.9);
