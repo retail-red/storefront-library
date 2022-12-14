@@ -2,6 +2,7 @@ import handlebars from 'handlebars';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
 import set from 'lodash/set';
+import noop from 'lodash/noop';
 import { getBrowserLanguage } from './util/browser';
 import { getExtraDefaultConfig, getExtraStoredConfig } from './internal';
 
@@ -83,6 +84,9 @@ const defaultConfig = merge({
   templates: {
     customVariables: {},
     customTemplates: {},
+  },
+  hooks: {
+    onCreateLocationAvailability: noop,
   },
 }, getExtraDefaultConfig(), storedConfig);
 

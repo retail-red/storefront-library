@@ -66,7 +66,7 @@ class StoreListController extends Controller {
     }
 
     // Receive all locations for initial loading.
-    const locations = await this._receiveLocations(useApiProduct ? product : null);
+    const locations = await this._receiveLocations(useApiProduct ? product : null, parentProduct);
 
     // Initiate reservation at given location.
     const location = locations.find((l) => l.code === locationCode);
@@ -206,8 +206,8 @@ class StoreListController extends Controller {
    * the Storefront API
    * @returns {Array} Fetched locations
    */
-  async _receiveLocations(apiProduct = null) {
-    const { unitSystem, useApiProduct } = this.config;
+  async _receiveLocations(apiProduct = null, parentProduct = null) {
+    const { unitSystem, useApiProduct, hooks: { onCreateLocationAvailability } } = this.config;
     let { product } = this.config;
 
     this.app.setLoading(true);
@@ -247,16 +247,38 @@ class StoreListController extends Controller {
 
       // Aggregate inventory data onto location
       const aggregatedLocations = locations
-        .map((location) => ({
-          ...location,
-          primaryAddress: location.addresses.find((a) => a.isPrimary) || location.addresses[0],
-          inventory: inventories.find((i) => i.locationCode === location.code),
-          operationHours: Object
-            .entries(location.operationHours || {})
-            .filter(([, v]) => !!v)
-            .length
-            ? location.operationHours : null,
-        }))
+        .map((location) => {
+          const inventory = inventories.find((i) => i.locationCode === location.code);
+
+          let custom;
+
+          try {
+            // Invoke optional hook to create custom data for the inventory section of a location
+            custom = onCreateLocationAvailability({
+              t,
+              inventory,
+              product: apiProduct || undefined,
+              baseProduct: parentProduct || undefined,
+            });
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error(e);
+          }
+
+          return {
+            ...location,
+            primaryAddress: location.addresses.find((a) => a.isPrimary) || location.addresses[0],
+            inventory: {
+              ...inventory,
+              custom,
+            },
+            operationHours: Object
+              .entries(location.operationHours || {})
+              .filter(([, v]) => !!v)
+              .length
+              ? location.operationHours : null,
+          };
+        })
         .filter((l) => (isValidProduct ? !!l.inventory : true));
 
       if (aggregatedLocations.length !== 0) {
