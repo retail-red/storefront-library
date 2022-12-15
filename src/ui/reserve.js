@@ -18,6 +18,7 @@ const formData = {
   pickupEmailAddress: 'rr-reserve-pickup-email',
   pickupCountry: 'rr-reserve-pickup-country',
   remember: 'rr-reserve-persist-data-opt-in',
+  customerNotes: 'rr-reserve-customer-notes',
 };
 
 const validation = {
@@ -80,6 +81,7 @@ class ReserveController extends Controller {
         pickupEmailAddress: '',
         pickupPhone: '',
         pickupCountry: '',
+        customerNotes: '',
       },
     };
   }
@@ -270,6 +272,7 @@ class ReserveController extends Controller {
       total: orderPrice,
       primaryBillToAddressSequenceIndex: 0,
       primaryShipToAddressSequenceIndex: 1,
+      ...(submitData.customerNotes ? { notes: submitData.customerNotes } : null),
     };
 
     // Append external customer number if available.

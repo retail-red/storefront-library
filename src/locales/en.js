@@ -68,6 +68,8 @@ export default {
     me: 'Me',
     someoneElse: 'Someone else',
     pickupInfo: 'Who will pick up this reservation?',
+    customerNotesHeadline: 'Do you have any comments for the reservation (e.g. a desired pick-up date)?',
+    customerNotes: 'Notes',
     firstName: 'First Name',
     lastName: 'Last Name',
     phoneNumber: 'Phone Number',
@@ -86,6 +88,7 @@ export default {
     },
     newsletterOptIn: 'I want to subscribe to your newsletter and get updates about new products & offers. I can unsubscribe at any moment.',
     saveCustomerData: 'Save input for next time.',
+    formInfoText: '',
   },
   success: {
     title: 'Reservation Confirmation',

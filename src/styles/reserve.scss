@@ -10,6 +10,7 @@
     font-size: 20px;
     font-weight: bold;
     padding-bottom: 20px;
+    line-height: 24px;
   }
 
   h4 {
@@ -210,6 +211,14 @@
               width: initial;
             }
           }
+        }
+      }
+
+      .rr-form-info-text {
+        line-height: 1.25em;
+
+        &:empty {
+          display: none;
         }
       }
 

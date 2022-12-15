@@ -59,10 +59,11 @@ export const updateLanguage = (locale) => {
  * @returns {String}
  */
 export const t = (key, parameters = {}) => {
-  let value = activeTranslations[activeLanguage][key] || key;
+  let value = activeTranslations[activeLanguage][key] ?? key;
   Object.entries(parameters).forEach(([paramName, paramValue]) => {
     value = value.replace(`{{${paramName}}}`, paramValue || '');
   });
+
   return value;
 };
 
