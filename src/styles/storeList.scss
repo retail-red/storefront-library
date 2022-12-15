@@ -111,7 +111,7 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 16px 32px;
 
     @include xs {
       flex-direction: column;
@@ -188,7 +188,7 @@
 
     .rr-error {
       font-size: 14px;
-      color: var(--rr-color-state-alarm);
+      color: var(--rr-color-status-alarm);
     }
 
     .rr-store {
@@ -253,6 +253,67 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      padding-bottom: 16px;
+
+      .rr-inventory-info {
+        display: flex;
+
+        .rr-status-badge {
+          width: 15px;
+          height: 15px;
+          background: var(--rr-color-status-none);
+          display: inline-block;
+          border-radius: 100%;
+          margin-right: 8px;
+          align-self: center;
+        }
+
+        .rr-status-text {
+          font-weight: bold;
+        }
+
+        .rr-status-info-text {
+          padding-left: 24px;
+        }
+      }
+
+      &.rr-available-positive {
+        .rr-status-badge  {
+          background: var(--rr-color-status-success);
+        }
+
+        .rr-status-text {
+          color: var(--rr-color-status-success);
+        }
+      }
+
+      &.rr-available-negative {
+        .rr-status-badge {
+          background: var(--rr-color-status-alarm);
+        }
+
+        .rr-status-text {
+          color: var(--rr-color-status-alarm);
+        }
+      }
+
+      &.rr-available-neutral {
+        .rr-status-badge {
+          background: var(--rr-color-status-warning);
+        }
+
+        .rr-status-text {
+          color: var(--rr-color-status-warning);
+        }
+      }
+    }
+
+
+
+    .rr-inventoryx {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
       margin-bottom: 16px;
 
       .rr-inventory-row {
@@ -270,41 +331,41 @@
         }
       }
 
-      .rr-state-badge {
+      .rr-status-badge {
         width: 15px;
         height: 15px;
-        background: #000;
+        background: var(--rr-color-status-none);
         display: inline-block;
         border-radius: 100%;
       }
 
       &.rr-available-positive {
-        .rr-state-badge  {
-          background: var(--rr-color-state-success);
+        .rr-status-badge  {
+          background: var(--rr-color-status-success);
         }
 
         .rr-inventory-row:first-child {
-          color: var(--rr-color-state-success);
+          color: var(--rr-color-status-success);
         }
       }
 
       &.rr-available-negative {
-        .rr-state-badge {
-          background: var(--rr-color-state-alarm);
+        .rr-status-badge {
+          background: var(--rr-color-status-alarm);
         }
 
         .rr-inventory-row:first-child {
-          color: var(--rr-color-state-alarm);
+          color: var(--rr-color-status-alarm);
         }
       }
 
       &.rr-available-neutral {
-        .rr-state-badge {
-          background: var(--rr-color-state-warning);
+        .rr-status-badge {
+          background: var(--rr-color-status-warning);
         }
 
         .rr-inventory-row:first-child {
-          color: var(--rr-color-state-warning);
+          color: var(--rr-color-status-warning);
         }
       }
     }

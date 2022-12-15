@@ -6,9 +6,10 @@
   --rr-color-link: #3c9bb5;
   --rr-color-button-disabled: #7f7f7f;
   --rr-color-button-background-disabled: #E0E0E0;
-  --rr-color-state-alarm: #b00020;
-  --rr-color-state-warning: #f19c45;
-  --rr-color-state-success: #32ac5c;
+  --rr-color-status-alarm: #b00020;
+  --rr-color-status-warning: #f19c45;
+  --rr-color-status-success: #32ac5c;
+  --rr-color-status-none: #918e8c;
   --rr-color-input: var(--rr-color-text);
   --rr-font-family: inherit;
 }

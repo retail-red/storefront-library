@@ -129,77 +129,22 @@
             {{/if}}
           </div>
           <div class="rr-store-actions">
-          {{#if inventory }}
-            {{#unless inventory.custom}}
-              {{!-- Product not available --}}
-              {{#unless inventory.isAvailable }}
-                <div class="rr-inventory rr-available-negative">
-                  <div class="rr-inventory-row">
-                    <div class="rr-inventory-col">
-                      <span class="rr-state-badge" />
-                    </div>
-                    <div class="rr-inventory-col rr-bold">
-                      {{t "storeList.inventory.unavailable"}}
-                    </div>
-                  </div>
-                </div>
-              {{else}}
-                {{!-- Only show if product is available or not --}}
-                {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
-                  <div class="rr-inventory rr-available-positive">
-                    <div class="rr-inventory-row">
-                      <div class="rr-inventory-cell">
-                        <span class="rr-state-badge" />
-                      </div>
-                      <div class="rr-inventory-cell rr-bold">
-                        {{t "storeList.inventory.available"}}
-                      </div>
-                    </div>
-                  </div>
-                {{else}}
-                  {{!-- Rough numbers (10+) --}}
-                  {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
-                    <div class="rr-inventory rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                      <div class="rr-inventory-row">
-                        <div class="rr-inventory-cell">
-                          <span class="rr-state-badge" />
-                        </div>
-                        <div class="rr-inventory-cell rr-bold">
-                           {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
-                        </div>
-                      </div>
-                    </div>
-                  {{else}}
-                    {{!-- Detailed numbers --}}
-                    <div class="rr-inventory rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                      <div class="rr-inventory-row">
-                        <div class="rr-inventory-cell">
-                          <span class="rr-state-badge" />
-                        </div>
-                        <div class="rr-inventory-cell rr-bold">
-                          {{t "storeList.inventory.exact" x=inventory.visible }}
-                        </div>
-                      </div>
-                    </div>
-                  {{/if}}
-                {{/if}}
-              {{/unless}}
-            {{else}}
-              <div class="rr-inventory rr-available-{{inventory.custom.state}}">
-                <div class="rr-inventory-row">
-                  <div class="rr-inventory-cell">
-                    <span class="rr-state-badge" />
-                  </div>
-                  <div class="rr-inventory-cell rr-bold">{{{inventory.custom.stateText}}}</div>
-                </div>
-                {{#if inventory.custom.infoText}}
-                  <div class="rr-inventory-row">
-                    <div class="rr-inventory-cell"></div>
-                    <div class="rr-inventory-cell ">{{{inventory.custom.infoText}}}</div>
-                  </div>
-                {{/if}}
+          {{#if displayProps }}
+            <div class="rr-inventory rr-available-{{displayProps.status}}">
+              <div class="rr-inventory-info">
+                <span class="rr-status-badge"></span>
+                <span class="rr-status-text">
+                  {{{displayProps.statusText}}}
+                </span>
               </div>
-            {{/unless}}
+              {{#if displayProps.infoText}}
+                <div class="rr-inventory-info">
+                  <span class="rr-status-info-text">
+                    {{{displayProps.infoText}}}
+                  </span>
+                </div>
+              {{/if}}
+            </div>
           {{/if}}
           {{#if isComingSoon }}
             {{> button label="storeList.comingSoon" disabled=true}}
@@ -208,7 +153,7 @@
                 class="rr-store-select"
                 label=(select ../select "storeList.select" "storeList.reserve")
                 data=(object code=code)
-                disabled=(select inventory.custom (not inventory.custom.reservable) (and (not inventory.isAvailable) (not ../select)))
+                disabled=displayProps.buttonDisabled
             }}
           {{/if}}
         </div>

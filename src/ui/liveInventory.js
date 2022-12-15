@@ -1,6 +1,7 @@
 import Controller from './controller';
 import Cache, { locationInventoryKey } from '../cache';
 import { validateConfigForProduct, isButtonDisabled } from '../config';
+import { createLocationDisplayProps } from '../util/format';
 
 class LiveInventoryController extends Controller {
   /**
@@ -13,7 +14,10 @@ class LiveInventoryController extends Controller {
       locationCode,
       location: cachedLocation,
       ...(cachedLocation
-        ? ({ inventory: cachedLocation.inventory })
+        ? ({
+          inventory: cachedLocation.inventory,
+          displayProps: createLocationDisplayProps(this.config, cachedLocation?.inventory),
+        })
         : ({})),
     });
     this._loadLocationData(locationCode);
@@ -41,6 +45,7 @@ class LiveInventoryController extends Controller {
       this.setState({
         location: locations[0],
         inventory: inventories[0],
+        displayProps: createLocationDisplayProps(this.config, inventories[0]),
         buttonDisabled,
       });
     } catch (err) {

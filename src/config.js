@@ -86,7 +86,7 @@ const defaultConfig = merge({
     customTemplates: {},
   },
   hooks: {
-    onCreateLocationAvailability: noop,
+    afterCreateStoreListLocations: noop,
   },
 }, getExtraDefaultConfig(), storedConfig);
 

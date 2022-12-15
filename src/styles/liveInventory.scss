@@ -110,19 +110,37 @@
         margin-bottom: 4px;
     }
 
-    .rr-inventory-availability {
-        font-weight: bold;
-        text-align: left;
+    .rr-inventory {
+        display: flex;
+        flex-direction: column;
         margin-top: 8px;
         margin-bottom: 6px;
-        .rr-available-positive {
-            color: var(--rr-color-state-success);
+
+
+        .rr-inventory-info {
+          display: flex;
+
+          .rr-status-text {
+            font-weight: bold;
+          }
         }
-        .rr-available-negative {
-            color: var(--rr-color-state-alarm);
+
+        &.rr-available-positive {
+          .rr-status-text {
+            color: var(--rr-color-status-success);
+          }
         }
-        .rr-available-neutral {
-            color: var(--rr-color-state-warning);
+
+        &.rr-available-negative {
+          .rr-status-text {
+            color: var(--rr-color-status-alarm);
+          }
         }
-    }
+
+        &.rr-available-neutral {
+          .rr-status-text {
+            color: var(--rr-color-status-warning);
+          }
+        }
+      }
 }

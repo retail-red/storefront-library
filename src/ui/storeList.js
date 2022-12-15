@@ -7,7 +7,7 @@ import Cache, {
 } from '../cache';
 import { t } from '../locales';
 import { getImmediateGeolocation } from '../util/geolocation';
-import { formatImageServiceUrl } from '../util/format';
+import { formatImageServiceUrl, createLocationDisplayProps } from '../util/format';
 import { validateConfigForProduct } from '../config';
 
 class StoreListController extends Controller {
@@ -66,7 +66,11 @@ class StoreListController extends Controller {
     }
 
     // Receive all locations for initial loading.
-    const locations = await this._receiveLocations(useApiProduct ? product : null, parentProduct);
+    const locations = await this._receiveLocations(
+      useApiProduct ? product : null,
+      parentProduct,
+      select,
+    );
 
     // Initiate reservation at given location.
     const location = locations.find((l) => l.code === locationCode);
@@ -204,10 +208,20 @@ class StoreListController extends Controller {
    * Fetch locations for the current situation and enriches location data with inventory if possible
    * @param {Object} [apiProduct=null] Optional API product entity when product data is fetched via
    * the Storefront API
+   * @param {Object} [apiParentProduct=null] Optional API parent product entity when product data
+   * is fetched via the Storefront API and the product from the config is a "configurable" product.
+   * @param {boolean} [select=null] Whether the store list was opened from the live inventory
+   * element and the location button just selects a location, but doesn't open the reservation form.
    * @returns {Array} Fetched locations
    */
-  async _receiveLocations(apiProduct = null, parentProduct = null) {
-    const { unitSystem, useApiProduct, hooks: { onCreateLocationAvailability } } = this.config;
+  async _receiveLocations(apiProduct = null, apiParentProduct = null, select = null) {
+    let isLocationSelectMode = select;
+
+    if (isLocationSelectMode === null) {
+      isLocationSelectMode = this.state.select;
+    }
+
+    const { unitSystem, useApiProduct, hooks: { afterCreateStoreListLocations } } = this.config;
     let { product } = this.config;
 
     this.app.setLoading(true);
@@ -246,32 +260,15 @@ class StoreListController extends Controller {
       }
 
       // Aggregate inventory data onto location
-      const aggregatedLocations = locations
+      let aggregatedLocations = locations
         .map((location) => {
           const inventory = inventories.find((i) => i.locationCode === location.code);
-
-          let custom;
-
-          try {
-            // Invoke optional hook to create custom data for the inventory section of a location
-            custom = onCreateLocationAvailability({
-              t,
-              inventory,
-              product: apiProduct || undefined,
-              baseProduct: parentProduct || undefined,
-            });
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.error(e);
-          }
 
           return {
             ...location,
             primaryAddress: location.addresses.find((a) => a.isPrimary) || location.addresses[0],
-            inventory: {
-              ...inventory,
-              custom,
-            },
+            inventory,
+            displayProps: createLocationDisplayProps(this.config, inventory, isLocationSelectMode),
             operationHours: Object
               .entries(location.operationHours || {})
               .filter(([, v]) => !!v)
@@ -280,6 +277,25 @@ class StoreListController extends Controller {
           };
         })
         .filter((l) => (isValidProduct ? !!l.inventory : true));
+
+      try {
+        const hookResult = await afterCreateStoreListLocations(
+          aggregatedLocations,
+          product,
+          {
+            sdk: this.sdk,
+            t,
+            ...(apiParentProduct ? { parentProduct: apiParentProduct } : null),
+          },
+        );
+
+        if (Array.isArray(hookResult)) {
+          aggregatedLocations = hookResult;
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      }
 
       if (aggregatedLocations.length !== 0) {
         this.state.emptyList = false;
@@ -296,7 +312,12 @@ class StoreListController extends Controller {
   async _updateStoreList() {
     const { useApiProduct } = this.config;
     const product = this.state?.product ?? null;
-    this.state.locations = await this._receiveLocations(useApiProduct ? product : null);
+    const parentProduct = this.state?.parentProduct ?? null;
+
+    this.state.locations = await this._receiveLocations(
+      useApiProduct ? product : null,
+      parentProduct,
+    );
     this.partialRender('.rr-list');
   }
 
@@ -484,7 +505,7 @@ class StoreListController extends Controller {
         this.setState({
           parentProduct,
           product,
-          locations: await this._receiveLocations(product),
+          locations: await this._receiveLocations(product, parentProduct),
         });
       } else if (Array.isArray(validation?.possibleOptions)) {
         ({ parentProduct } = this._sanitizeProductDataForIncompleteOptionSelection(
@@ -496,7 +517,7 @@ class StoreListController extends Controller {
         // product and location data.
         this.setState({
           parentProduct,
-          locations: await this._receiveLocations(),
+          locations: await this._receiveLocations(parentProduct, parentProduct),
         });
       }
 
