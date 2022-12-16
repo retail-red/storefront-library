@@ -3,6 +3,15 @@
 <meta charset=utf-8>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>Retail Red Storefront Library</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/lint/lint.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/lint/json-lint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/lint/lint.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
 <style>
   .docs {
     margin-top: 64px;
@@ -352,6 +361,15 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px
+  }
+
+  .CodeMirror {
+    width: 98%;
+    max-width: 650px;
+    height: 200px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 14px;
   }
 
   #retailred-storefront-library {
@@ -808,13 +826,45 @@
   </div>
 
   <div class="demos">
-    <h3>Custom Config</h3>
-    <textarea id="custom-config" title="custom configuration" style="width: 50%; height: 200px"></textarea>
+    <h3>Custom JSON Config</h3>
+    <textarea id="custom-config"></textarea>
+    <h3>Custom CSS</h3>
+    <textarea id="custom-css"></textarea>
+    <style id="custom-css-styles"></style>
     <script>
       window.customConfig = JSON.parse(window.localStorage.getItem('rr-custom-config') || '{}');
       document.querySelector('#custom-config').value = JSON.stringify(window.customConfig, null, 2);
-      document.querySelector('#custom-config').addEventListener('change', e => {
-        window.localStorage.setItem('rr-custom-config', e.target.value);
+
+      var customCSS = window.localStorage.getItem('rr-custom-css') || '';
+      document.querySelector('#custom-css').value = customCSS;
+      document.querySelector('#custom-css-styles').innerHTML = customCSS;
+
+      var jsonEditor = CodeMirror.fromTextArea(document.querySelector('#custom-config'), {
+        mode: 'application/json',
+        gutters: ["CodeMirror-lint-markers"],
+        lint: true,
+        lineNumbers: true,
+        tabSize: 2,
+        autoCloseBrackets: true
+      });
+
+      jsonEditor.on('change', (instance) => {
+        try {
+          window.jsonlint.parse(jsonEditor.getValue());
+          window.localStorage.setItem('rr-custom-config', instance.getValue());
+        } catch (e) {}
+      });
+
+      var cssEditor = CodeMirror.fromTextArea(document.querySelector('#custom-css'), {
+        mode: 'text/css',
+        lineNumbers: true,
+        tabSize: 2,
+        autoCloseBrackets: true
+      });
+
+      cssEditor.on('change', () => {
+        document.querySelector('#custom-css-styles').innerHTML = cssEditor.getValue();
+        window.localStorage.setItem('rr-custom-css', cssEditor.getValue());
       });
     </script>
   </div>
