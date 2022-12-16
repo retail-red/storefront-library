@@ -363,15 +363,6 @@
     gap: 8px
   }
 
-  .CodeMirror {
-    width: 98%;
-    max-width: 650px;
-    height: 200px;
-    border: 1px solid;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-
   #retailred-storefront-library {
     line-height: 36px;
   }
@@ -379,14 +370,6 @@
   @media (max-width: 700px) {
     .catalog-product-view .product_flexbox {
       flex-direction: column;
-    }
-
-    .demos textarea {
-      width: 95% !important;
-    }
-
-    .demos .demo {
-      width: 85%;
     }
 
     .docs {
@@ -741,6 +724,43 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+
+    .demos.editors {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .demos.editors .editor {
+      width: 100%
+    }
+
+    .demos.editors .editor h3 {
+      text-align: center
+    }
+
+    .demos .CodeMirror {
+      height: 200px;
+      border: 1px solid;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+      .demos.editors {
+        flex-direction: column;
+      }
+
+      .demos .CodeMirror {
+        height: 150px;
+      }
+
+      .demos .demo {
+        width: 85%;
+      }
+    }
   </style>
 
   <div class="demos">
@@ -825,46 +845,53 @@
     </script>
   </div>
 
-  <div class="demos">
-    <h3>Custom JSON Config</h3>
-    <textarea id="custom-config"></textarea>
-    <h3>Custom CSS</h3>
-    <textarea id="custom-css"></textarea>
-    <style id="custom-css-styles"></style>
-    <script>
-      window.customConfig = JSON.parse(window.localStorage.getItem('rr-custom-config') || '{}');
-      document.querySelector('#custom-config').value = JSON.stringify(window.customConfig, null, 2);
-
-      var customCSS = window.localStorage.getItem('rr-custom-css') || '';
-      document.querySelector('#custom-css').value = customCSS;
-      document.querySelector('#custom-css-styles').innerHTML = customCSS;
-
-      var jsonEditor = CodeMirror.fromTextArea(document.querySelector('#custom-config'), {
-        mode: 'application/json',
-        gutters: ["CodeMirror-lint-markers"],
-        lint: true,
-        lineNumbers: true,
-        tabSize: 2,
-        autoCloseBrackets: true
-      });
-
-      jsonEditor.on('change', (instance) => {
-        try {
-          window.jsonlint.parse(jsonEditor.getValue());
-          window.localStorage.setItem('rr-custom-config', instance.getValue());
-        } catch (e) {}
-      });
-
-      var cssEditor = CodeMirror.fromTextArea(document.querySelector('#custom-css'), {
-        mode: 'text/css',
-        lineNumbers: true,
-        tabSize: 2,
-        autoCloseBrackets: true
-      });
-
-      cssEditor.on('change', () => {
-        document.querySelector('#custom-css-styles').innerHTML = cssEditor.getValue();
-        window.localStorage.setItem('rr-custom-css', cssEditor.getValue());
-      });
-    </script>
+  <div>
+    <div class="demos editors">
+      <div class="editor">
+        <h3>Custom JSON Config</h3>
+        <textarea id="custom-config"></textarea>
+      </div>
+      <div class="editor">
+        <h3>Custom CSS</h3>
+        <textarea id="custom-css"></textarea>
+        <style id="custom-css-styles"></style>
+      </div>
+    </div>
   </div>
+
+  <script>
+    window.customConfig = JSON.parse(window.localStorage.getItem('rr-custom-config') || '{}');
+    document.querySelector('#custom-config').value = JSON.stringify(window.customConfig, null, 2);
+
+    var customCSS = window.localStorage.getItem('rr-custom-css') || '';
+    document.querySelector('#custom-css').value = customCSS;
+    document.querySelector('#custom-css-styles').innerHTML = customCSS;
+
+    var jsonEditor = CodeMirror.fromTextArea(document.querySelector('#custom-config'), {
+      mode: 'application/json',
+      gutters: ["CodeMirror-lint-markers"],
+      lint: true,
+      lineNumbers: true,
+      tabSize: 2,
+      autoCloseBrackets: true
+    });
+
+    jsonEditor.on('change', (instance) => {
+      try {
+        window.jsonlint.parse(jsonEditor.getValue());
+        window.localStorage.setItem('rr-custom-config', instance.getValue());
+      } catch (e) {}
+    });
+
+    var cssEditor = CodeMirror.fromTextArea(document.querySelector('#custom-css'), {
+      mode: 'text/css',
+      lineNumbers: true,
+      tabSize: 2,
+      autoCloseBrackets: true
+    });
+
+    cssEditor.on('change', () => {
+      document.querySelector('#custom-css-styles').innerHTML = cssEditor.getValue();
+      window.localStorage.setItem('rr-custom-css', cssEditor.getValue());
+    });
+  </script>
