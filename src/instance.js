@@ -94,6 +94,17 @@ class Instance {
    * @param {Object} config Config
    */
   updateConfig(config) {
+    const updateSdk = (config?.apiKey && config?.apiKey !== this.config.apiKey)
+      || (config?.apiStage && config?.apiStage !== this.config.apiStage);
+
+    if (updateSdk) {
+      // Update the SDK when relevant config keys change
+      this.sdk._update(
+        config?.apiKey || this.config.apiKey,
+        config?.apiStage || this.config.apiStage,
+      );
+    }
+
     this.config = createConfig(config, this.config);
     if (this.app) {
       this.app.updateConfig(this.config, config);

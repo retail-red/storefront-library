@@ -104,10 +104,21 @@ class LiveInventoryController extends Controller {
    * @param {Object} updated Updated
    */
   updateConfig(config, updated) {
+    const sdkUpdated = (updated?.apiKey && updated.apiKey !== this.config?.apiKey)
+    || (updated?.apiStage && updated.apiStage !== this.config?.apiStage);
+
     super.updateConfig(config, updated);
 
     // React to location code changes
-    const { locationCode, product } = updated;
+    const {
+      locationCode, product,
+    } = updated;
+
+    if (sdkUpdated && this.state.variant === 'list') {
+      // Take care the location list show refreshes when SDK config was changed during config update
+      this._loadLocations();
+    }
+
     if (locationCode) {
       this._updateLocation(locationCode);
     }
