@@ -1,5 +1,6 @@
 import handlebars from 'handlebars';
 import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergeWith';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import noop from 'lodash/noop';
@@ -98,7 +99,14 @@ const defaultConfig = merge({
  */
 export const createConfig = (config = {}, previous = {}) => {
   // Merge with defaults.
-  const merged = merge({}, defaultConfig, previous, config);
+  const merged = mergeWith({}, defaultConfig, previous, config, (objValue, srcValue, key) => {
+    if (key === 'countries') {
+      // Do not merge countries arrays, but return the new value
+      return objValue;
+    }
+
+    return undefined;
+  });
   requiredProperties.forEach((property) => {
     if (!get(merged, property)) {
       // eslint-disable-next-line no-console
