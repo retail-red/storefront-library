@@ -19,10 +19,6 @@ class RequestError extends Error {
  */
 class StorefrontAPI {
   constructor(apiKey, stage) {
-    this._update(apiKey, stage);
-  }
-
-  _update(apiKey, stage = 'production') {
     this.apiKey = apiKey;
 
     // Build base url for all requests.
