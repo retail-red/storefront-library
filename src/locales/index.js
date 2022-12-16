@@ -53,6 +53,23 @@ export const updateLanguage = (locale) => {
 };
 
 /**
+ * Returns the currently active language
+ * @param {boolean} withRegion Whether to return the language with region suffix
+ * @returns {string}
+ */
+export const getActiveLanguage = (withRegion = false) => {
+  if (withRegion) {
+    if (activeLanguage.startsWith('de')) {
+      return 'de-de';
+    }
+
+    return 'en-us';
+  }
+
+  return activeLanguage;
+};
+
+/**
  * Translates the given string.
  * @param {String} key Translation key.
  * @param {Object} parameters Custom template parameters for the translation.

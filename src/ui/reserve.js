@@ -2,7 +2,9 @@ import intlTelInput from 'intl-tel-input';
 // Static file import
 import utilsScript from '../static/utils';
 import Controller from './controller';
-import { t, hasTranslation, getCountries } from '../locales';
+import {
+  t, hasTranslation, getCountries, getActiveLanguage,
+} from '../locales';
 import { isRequired, isEmail, isPhone } from '../util/validation';
 import Cache, { locationInventoryKey } from '../cache';
 
@@ -221,7 +223,7 @@ class ReserveController extends Controller {
     const orderData = {
       platform: platform || undefined,
       currencyCode: product.currencyCode,
-      localeCode: location.localeCode,
+      localeCode: getActiveLanguage(true),
       ...(typeof marketingOptIn !== 'undefined' ? { marketingOptIn } : {}),
       addressSequences: [
         {
