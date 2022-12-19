@@ -6,13 +6,14 @@
 - Set default value for `--rr-color-text` custom property to `inherit`, so that by default the primary page text color is used for texts within the modal
 - Renamed `--rr-color-state-*` custom properties to `--rr-color-status-*`
 - Moved logic to determine product availability for locations from templates to the controllers
-
+- Reservations are now created with the locale code from the Storefront Library modal, instead of the location locale the reservation is placed at
 ### Added
 - Added option `useApiProduct` to fetch product data via the Storefront API. Required properties within the product configuration are `code` and `quantity`
 - Introduced optional `--rr-color-secondary` and `--rr-color-secondary-contrast` custom properties to enable special color styling for search buttons and form inputs
 - Added field for customer notes to the reservation form
 - Added optional translation string that can be used to show an info text below the reservation contact form. This text will becomes visible when a translation string for `reserve.formInfoText` is set via the config
 - Added hook to enable modifications of location inventory data before rendered within the store list template
+- Added `localeCode` parameter to `getProduct` request from the SDK
 
 ## v2.1.0
 ### Changes
