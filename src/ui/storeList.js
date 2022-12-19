@@ -170,6 +170,20 @@ class StoreListController extends Controller {
    * @returns {Object}
    */
   async _receiveProduct(productCode) {
+    const {
+      localization: {
+        localeCode,
+        isCustomLocaleCode,
+      },
+    } = this.config;
+
+    let requestLocaleCode;
+
+    if (isCustomLocaleCode && /^[a-z]{2}-[a-z]{2}$/i.test(localeCode)) {
+      // Use locale from config when it includes a region and was not automatically set
+      requestLocaleCode = localeCode.toLowerCase();
+    }
+
     try {
       // Fetch the product
       const product = await this.sdk.getProduct(productCode, [
@@ -183,7 +197,7 @@ class StoreListController extends Controller {
         'properties',
         'modelType',
         'identifiers',
-      ]);
+      ], requestLocaleCode);
 
       // Add quantity from config and complete the product image url
       const extended = {

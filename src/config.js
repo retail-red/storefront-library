@@ -125,6 +125,10 @@ export const createConfig = (config = {}, previous = {}) => {
   merged.inventory.showExactUntil = merged.inventory.showExactUntil === null
     ? Number.MAX_VALUE : merged.inventory.showExactUntil;
 
+  // Check if locale code comes from the config (not set automatically)
+  merged.localization.isCustomLocaleCode = !!previous?.localization?.isCustomLocaleCode
+    || !!config?.localization?.localeCode;
+
   // Store config in local storage.
   const toBeStored = {};
   storedProperties.forEach((property) => {

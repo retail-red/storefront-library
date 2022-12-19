@@ -134,6 +134,17 @@ class ReserveController extends Controller {
     });
   }
 
+  getOrderLocaleCode() {
+    const { localization: { localeCode } } = this.config;
+
+    if (/^[a-z]{2}-[a-z]{2}$/i.test(localeCode)) {
+      // Use locale from config when it includes a region
+      return localeCode.toLowerCase();
+    }
+
+    return getActiveLanguage(true);
+  }
+
   sanitizeOrderTrackingData(orderData) {
     const {
       addressSequences,
@@ -223,7 +234,7 @@ class ReserveController extends Controller {
     const orderData = {
       platform: platform || undefined,
       currencyCode: product.currencyCode,
-      localeCode: getActiveLanguage(true),
+      localeCode: this.getOrderLocaleCode(),
       ...(typeof marketingOptIn !== 'undefined' ? { marketingOptIn } : {}),
       addressSequences: [
         {
