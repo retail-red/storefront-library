@@ -97,12 +97,12 @@ const defaultConfig = merge({
  * @param {Object} previous Previous configuration that is updated.
  * @returns {Object}
  */
-export const createConfig = (config = {}, previous = {}) => {
+export const createConfig = (config = {}, previous = null) => {
   // Merge with defaults.
   const merged = mergeWith({}, defaultConfig, previous, config, (objValue, srcValue, key) => {
-    if (key === 'countries') {
+    if (key === 'countries' && previous !== null) {
       // Do not merge countries arrays, but return the new value
-      return objValue;
+      return srcValue;
     }
 
     return undefined;
