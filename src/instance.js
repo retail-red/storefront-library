@@ -99,7 +99,7 @@ class Instance {
 
     if (updateSdk) {
       // Update the SDK when relevant config keys change
-      this.sdk = new Sdk(
+      this.sdk._update(
         config?.apiKey || this.config.apiKey,
         config?.apiStage || this.config.apiStage,
       );
