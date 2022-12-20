@@ -18,7 +18,11 @@ class RequestError extends Error {
  * Wrapper around the Storefront API
  */
 class StorefrontAPI {
-  constructor(apiKey, stage = 'production') {
+  constructor(apiKey, stage) {
+    this._update(apiKey, stage);
+  }
+
+  _update(apiKey, stage = 'production') {
     this.apiKey = apiKey;
 
     // Build base url for all requests.

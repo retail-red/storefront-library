@@ -75,33 +75,15 @@
                     }}
                 </div>
                 {{#if (not buttonDisabled) }}
-                    <div class="rr-inventory-availability">
-                        {{!-- Product not available --}}
-                        {{#unless inventory.isAvailable }}
-                            <span class="rr-available-negative">
-                                {{t "storeList.inventory.unavailable"}}
-                            </span>
-                        {{else}}
-                            {{!-- Only show if product is available or not --}}
-                            {{#if (or ../inventoryConfig.hideNumber (isNull inventory.available))}}
-                            <span class="rr-available-positive">
-                                {{t "storeList.inventory.available"}}
-                            </span>
-                            {{else}}
-                            {{!-- Rough numbers (10+) --}}
-                            {{#if (gte inventory.visible ../inventoryConfig.showExactUntil) }}
-                                <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                                {{t "storeList.inventory.rough" x=../inventoryConfig.showExactUntil }}
+                    {{#if displayProps }}
+                        <div class="rr-inventory rr-available-{{displayProps.status}}">
+                            <div class="rr-inventory-info">
+                                <span class="rr-status-text">
+                                    {{{displayProps.statusText}}}
                                 </span>
-                            {{else}}
-                                {{!-- Detailed numbers --}}
-                                <span class="rr-available-{{select (lte inventory.visible ../inventoryConfig.showLowUntil) "neutral" "positive"}}">
-                                {{t "storeList.inventory.exact" x=inventory.visible }}
-                                </span>
-                            {{/if}}
-                            {{/if}}
-                        {{/unless}}
-                    </div>
+                            </div>
+                        </div>
+                    {{/if}}
                 {{/if}}
                 {{#if (and buttonDisabled (hasTranslation "liveInventory.noProductText")) }}
                     <span class="rr-no-product-text">

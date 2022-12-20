@@ -1,6 +1,7 @@
 import Controller from './controller';
 import Cache, { locationInventoryKey } from '../cache';
 import { validateConfigForProduct, isButtonDisabled } from '../config';
+import { createLocationDisplayProps } from '../util/format';
 
 class LiveInventoryController extends Controller {
   /**
@@ -13,7 +14,10 @@ class LiveInventoryController extends Controller {
       locationCode,
       location: cachedLocation,
       ...(cachedLocation
-        ? ({ inventory: cachedLocation.inventory })
+        ? ({
+          inventory: cachedLocation.inventory,
+          displayProps: createLocationDisplayProps(this.config, cachedLocation?.inventory),
+        })
         : ({})),
     });
     this._loadLocationData(locationCode);
@@ -41,6 +45,7 @@ class LiveInventoryController extends Controller {
       this.setState({
         location: locations[0],
         inventory: inventories[0],
+        displayProps: createLocationDisplayProps(this.config, inventories[0]),
         buttonDisabled,
       });
     } catch (err) {
@@ -99,10 +104,21 @@ class LiveInventoryController extends Controller {
    * @param {Object} updated Updated
    */
   updateConfig(config, updated) {
+    const sdkUpdated = (updated?.apiKey && updated.apiKey !== this.config?.apiKey)
+    || (updated?.apiStage && updated.apiStage !== this.config?.apiStage);
+
     super.updateConfig(config, updated);
 
     // React to location code changes
-    const { locationCode, product } = updated;
+    const {
+      locationCode, product,
+    } = updated;
+
+    if (sdkUpdated && this.state.variant === 'list') {
+      // Take care the location list show refreshes when SDK config was changed during config update
+      this._loadLocations();
+    }
+
     if (locationCode) {
       this._updateLocation(locationCode);
     }

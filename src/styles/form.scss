@@ -133,7 +133,7 @@ $input-border-radius: 5px;
   flex-direction: column;
   .rr-field-error {
     margin-top: 6px;
-    color: var(--rr-color-state-alarm);
+    color: var(--rr-color-status-alarm);
     font-size: 0.85em;
     &.rr-hidden {
       display: none;
@@ -248,7 +248,7 @@ $input-border-radius: 5px;
   border-radius: 4px;
   padding: 10px 16px;
   min-width: 48px;
-  height: 40px;
+  min-height: 40px;
   vertical-align: middle;
   text-align: center;
   text-overflow: ellipsis;

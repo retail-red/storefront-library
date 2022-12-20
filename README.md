@@ -85,11 +85,11 @@ For colors we provided CSS variables that can be overridden once for all usages.
   /* Background color for disabled buttons */
   --rr-color-button-background-disabled: #E0E0E0;
   /* Color used for alerting texts like errors */
-  --rr-color-state-alarm : #b00020;
+  --rr-color-status-alarm : #b00020;
   /* Color used for highlighting problems like low stock */
-  --rr-color-state-warning: #f19c45;
+  --rr-color-status-warning: #f19c45;
   /* Color used for positive highlighting like successful reservation text */
-  --rr-color-state-success: #32ac5c;
+  --rr-color-status-success: #32ac5c;
   /* Font family for the modal */
   --rr-font-family: inherit
 }
@@ -164,7 +164,7 @@ These will be used to prefill the reservation form with the currently logged in 
 |----------------------------|---------|----------|----------------------------------------------------------------------------------------------------------|
 | `inventory.hideNumber`     | `false` | NO       | Hides the stock number and therefore display only if the product is available or not.                    |
 | `inventory.showExactUntil` | `null`  | NO       | If inventory is higher than the given number the inventory will be displayed as `X+ Available`           |
-| `inventory.showLowUntil`   | `5`     | NO       | If inventory is lower than the given number the inventory will be displayed in the `state-warning` color |
+| `inventory.showLowUntil`   | `5`     | NO       | If inventory is lower than the given number the inventory will be displayed in the `status-warning` color |
 
 ### Localization Configuration
 
@@ -219,6 +219,36 @@ Besides the strings which are available via the locale files, there are some whe
 | Property                    | Default                  | Required | Description                                              |
 |-----------------------------|--------------------------|----------|----------------------------------------------------------|
 | `ui.reserveButtonClasses`   | `button btn btn-primary` | NO       | Applies classes to the reserve button. This setting can be used to style the button according to your CI.  |
+
+### Hooks Configuration
+The Storefront Library provides hooks that can be used to intercept default logic and modify existing, or inject custom data.
+Hooks are `async` functions that should return a `Promise` that resolves with the result.
+
+#### afterCreateStoreListLocations
+
+This hook can be used to modify the location data before it's rendered inside the store list template.
+
+| Parameters                    | Type | Description      |
+|---------------------------|------|-------------------|
+| `locations` | `Object[]`| Array of location data that's used to render the location list. |
+| `product` | `Object`| The product entity that's used to display current product information within the modal. |
+| `tools`| `Object`| The tools object contains additional tools that can be used within the hook. |
+| `tools.sdk` | `Object`| The SDK property is a reference to the current [API Client SDK](#api-client-sdk) instance. |
+| `tools.t` |`Function`| Helper function to create strings via the translation system. It accepts translation keys and optional replacement parameters for the translated string. Example: `t("some.key", { replacement: "42" })`.|
+
+```js
+{
+  ...,
+  hooks: {
+    afterCreateStoreListLocations: function (locations, product, { t, sdk }) {
+      return new Promise(function (resolve) {
+        // Dispatch additional requests... modify locations data... resolve with the updated location data
+        resolve(locations);
+      })
+    }
+  }
+}
+```
 
 ### Custom Templates
 
