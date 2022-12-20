@@ -170,7 +170,7 @@ These will be used to prefill the reservation form with the currently logged in 
 
 | Property                    | Default             | Required | Description                                              |
 |-----------------------------|---------------------|----------|----------------------------------------------------------|
-| `localization.localeCode`   | The browsers locale | NO       | Overrides the users locale which will affect UI language |
+| `localization.localeCode`   | The browsers locale | NO       | Overrides the users locale which will affect UI language. Examples: `de-de`, `en-us`|
 | `localization.countries`    | `['de']`            | NO       | Set the available countries for the store list search    |
 | `localization.[lang].[key]` | `null`              | NO       | Add or overrides a translation key. See example below    |
 
@@ -364,6 +364,7 @@ sdk.getLocations({ countryCode: 'de', postalCode: '35510' }).then(function(resul
 | **getProduct**                   |                               | Fetches the data of a given product.                                                                        |
 |                                  | `productCode`                 | The target product code                                                                                     |
 |                                  | `fields`                      | An array of fields that should be fetched for example: `['code', 'parentProductCode']`                      |
+|                                  | `localeCode`                  | Optional locale code to change the language of the product (only use when ensured that products are available in multiple languages).  Example: `de-de`                 |
 | **validateProductConfiguration** |                               | Validates the given product configuration and returns all further available configurations from this point. |
 |                                  | `productCode`                 | The target product code                                                                                     |
 |                                  | `selectedOptions[].code`      | The code of a selected option                                                                               |

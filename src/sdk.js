@@ -220,13 +220,15 @@ class StorefrontAPI {
    * Receives data of a specific product.
    * @param {String} productCode The target product code.
    * @param {Array} [fields=[]] Data fields that should be fetched.
+   * @param {String} [localeCode] Optional locale code for the product.
    * @returns {Object}
    */
-  async getProduct(productCode, fields = []) {
+  async getProduct(productCode, fields = [], localeCode = undefined) {
     return this._genericRequest({
       endpoint: `/v1/products/${encodeURIComponent(productCode)}`,
       query: {
         fields: fields.join(','),
+        localeCode,
       },
     });
   }

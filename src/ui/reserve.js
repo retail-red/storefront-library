@@ -2,7 +2,9 @@ import intlTelInput from 'intl-tel-input';
 // Static file import
 import utilsScript from '../static/utils';
 import Controller from './controller';
-import { t, hasTranslation, getCountries } from '../locales';
+import {
+  t, hasTranslation, getCountries, getActiveLanguage,
+} from '../locales';
 import { isRequired, isEmail, isPhone } from '../util/validation';
 import Cache, { locationInventoryKey } from '../cache';
 
@@ -132,6 +134,17 @@ class ReserveController extends Controller {
     });
   }
 
+  getOrderLocaleCode() {
+    const { localization: { localeCode } } = this.config;
+
+    if (/^[a-z]{2}-[a-z]{2}$/i.test(localeCode)) {
+      // Use locale from config when it includes a region
+      return localeCode.toLowerCase();
+    }
+
+    return getActiveLanguage(true);
+  }
+
   sanitizeOrderTrackingData(orderData) {
     const {
       addressSequences,
@@ -221,7 +234,7 @@ class ReserveController extends Controller {
     const orderData = {
       platform: platform || undefined,
       currencyCode: product.currencyCode,
-      localeCode: location.localeCode,
+      localeCode: this.getOrderLocaleCode(),
       ...(typeof marketingOptIn !== 'undefined' ? { marketingOptIn } : {}),
       addressSequences: [
         {

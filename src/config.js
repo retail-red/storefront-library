@@ -97,12 +97,12 @@ const defaultConfig = merge({
  * @param {Object} previous Previous configuration that is updated.
  * @returns {Object}
  */
-export const createConfig = (config = {}, previous = {}) => {
+export const createConfig = (config = {}, previous = null) => {
   // Merge with defaults.
   const merged = mergeWith({}, defaultConfig, previous, config, (objValue, srcValue, key) => {
-    if (key === 'countries') {
+    if (key === 'countries' && previous !== null) {
       // Do not merge countries arrays, but return the new value
-      return objValue;
+      return srcValue;
     }
 
     return undefined;
@@ -124,6 +124,10 @@ export const createConfig = (config = {}, previous = {}) => {
   // Post processing of config
   merged.inventory.showExactUntil = merged.inventory.showExactUntil === null
     ? Number.MAX_VALUE : merged.inventory.showExactUntil;
+
+  // Check if locale code comes from the config (not set automatically)
+  merged.localization.isCustomLocaleCode = !!previous?.localization?.isCustomLocaleCode
+    || !!config?.localization?.localeCode;
 
   // Store config in local storage.
   const toBeStored = {};
