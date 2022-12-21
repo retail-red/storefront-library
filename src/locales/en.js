@@ -55,6 +55,7 @@ export default {
       unavailable: 'Unavailable',
       exact: 'Available ({{x}})',
       rough: 'Available ({{x}}+)',
+      selectVariant: 'Choose your preferred variant',
     },
   },
   reserveButton: {

@@ -55,6 +55,7 @@ export default {
       unavailable: 'Nicht verfügbar',
       exact: 'Verfügbar ({{x}})',
       rough: 'Verfügbar ({{x}}+)',
+      selectVariant: 'Wähle deine gewünschte Variante aus',
     },
   },
   reserveButton: {
@@ -68,7 +69,7 @@ export default {
     me: 'Ich',
     someoneElse: 'Jemand anderes',
     pickupInfo: 'Wer wird die Bestellung abholen?',
-    customerNotesHeadline: 'Hast Du Anmerkungen für die Reservierung (z.B. ein gewünschtes Abholdatum)?',
+    customerNotesHeadline: 'Hast du Anmerkungen für die Reservierung (z.B. ein gewünschtes Abholdatum)?',
     customerNotes: 'Anmerkungen',
     firstName: 'Vorname',
     lastName: 'Nachname',
@@ -93,7 +94,7 @@ export default {
   success: {
     title: 'Reservierungsbestätigung',
     headline: 'Danke für Deine Reservierung!',
-    text: 'Wir senden eine Benachrichtigung, sobald Deine Reservierung abholbereit ist.',
+    text: 'Wir senden eine Benachrichtigung, sobald deine Reservierung abholbereit ist.',
     reservationNumber: 'Deine Reservierungsnummer:',
     location: {
       address: 'Adresse',

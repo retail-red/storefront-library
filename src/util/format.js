@@ -45,20 +45,29 @@ export function formatImageServiceUrl(url, options = {}) {
  * but doesn't open the reservation screen.
  * @returns {Object} The generated location display props
  */
-export function createLocationDisplayProps(config, inventory, isLocationSelectMode = false) {
+export function createLocationDisplayProps(
+  config,
+  inventory,
+  isLocationSelectMode = false,
+  product = null,
+) {
   const {
     inventory: {
       hideNumber,
       showExactUntil,
       showLowUntil,
     } = {},
+    useApiProduct,
   } = config;
 
   let status = 'negative';
   let statusText = t('storeList.inventory.unavailable');
   const infoText = '';
 
-  if (inventory) {
+  if (useApiProduct && product?.modelType === 'configurable') {
+    status = 'none';
+    statusText = t('storeList.inventory.selectVariant');
+  } else if (inventory) {
     if (!inventory?.isAvailable) {
       // Product is not available
       status = 'negative';
@@ -84,6 +93,6 @@ export function createLocationDisplayProps(config, inventory, isLocationSelectMo
     status,
     statusText,
     infoText,
-    buttonDisabled: status === 'negative' && !isLocationSelectMode,
+    buttonDisabled: ['negative', 'none'].includes(status) && !isLocationSelectMode,
   };
 }

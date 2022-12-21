@@ -308,6 +308,16 @@
           color: var(--rr-color-status-warning);
         }
       }
+
+      &.rr-available-none {
+        .rr-status-badge  {
+          background: var(--rr-color-status-none);
+        }
+
+        .rr-status-text {
+          font-weight: initial;
+        }
+      }
     }
 
 

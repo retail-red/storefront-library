@@ -282,7 +282,12 @@ class StoreListController extends Controller {
             ...location,
             primaryAddress: location.addresses.find((a) => a.isPrimary) || location.addresses[0],
             inventory,
-            displayProps: createLocationDisplayProps(this.config, inventory, isLocationSelectMode),
+            displayProps: createLocationDisplayProps(
+              this.config,
+              inventory,
+              isLocationSelectMode,
+              product,
+            ),
             operationHours: Object
               .entries(location.operationHours || {})
               .filter(([, v]) => !!v)
