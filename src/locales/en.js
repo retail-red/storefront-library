@@ -68,8 +68,8 @@ export default {
     me: 'Me',
     someoneElse: 'Someone else',
     pickupInfo: 'Who will pick up this reservation?',
-    customerNotesHeadline: 'Do you have any comments for the reservation (e.g. a desired pick-up date)?',
-    customerNotes: 'Notes',
+    customerNotesHeadline: 'Do you have any comments for the reservation (e.g. a desired pickup date)?',
+    customerNotes: 'Comments',
     firstName: 'First Name',
     lastName: 'Last Name',
     phoneNumber: 'Phone Number',
@@ -120,8 +120,8 @@ export default {
   },
   apiProduct: {
     options: {
-      headline: 'Select your preferred variant',
-      pleaseSelect: 'Pick a {{option_name}}',
+      headline: 'Choose your preferred variant',
+      pleaseSelect: 'Choose a {{option_name}}',
     },
   },
 };

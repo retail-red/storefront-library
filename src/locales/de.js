@@ -52,7 +52,7 @@ export default {
     },
     inventory: {
       available: 'Verfügbar',
-      unavailable: 'Nicht Verfügbar',
+      unavailable: 'Nicht verfügbar',
       exact: 'Verfügbar ({{x}})',
       rough: 'Verfügbar ({{x}}+)',
     },
@@ -68,7 +68,7 @@ export default {
     me: 'Ich',
     someoneElse: 'Jemand anderes',
     pickupInfo: 'Wer wird die Bestellung abholen?',
-    customerNotesHeadline: 'Hast du Anmerkungen für die Reservierung (z.B. ein gewünschtes Abholdatum)?',
+    customerNotesHeadline: 'Hast Du Anmerkungen für die Reservierung (z.B. ein gewünschtes Abholdatum)?',
     customerNotes: 'Anmerkungen',
     firstName: 'Vorname',
     lastName: 'Nachname',
@@ -114,8 +114,8 @@ export default {
     pleaseSelect: 'Bitte wählen Sie Ihre Filiale',
     cancel: 'abbrechen',
     list: {
-      unavailable: '(Nicht Verfügbar)',
-      comingSoon: '(Bald Verfügbar)',
+      unavailable: '(Nicht verfügbar)',
+      comingSoon: '(Bald verfügbar)',
     },
   },
   apiProduct: {

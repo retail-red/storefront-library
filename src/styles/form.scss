@@ -43,6 +43,10 @@ $input-border-radius: 5px;
     font-family: var(--rr-font-family);
   }
 
+  textarea {
+    padding-top: 4px;
+  }
+
   &:has(textarea) {
     padding-top: 8px;
   }
