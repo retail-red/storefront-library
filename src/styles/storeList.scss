@@ -319,68 +319,6 @@
         }
       }
     }
-
-
-
-    .rr-inventoryx {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 16px;
-
-      .rr-inventory-row {
-        display: flex;
-        gap: 8px;
-      }
-
-      .rr-inventory-cell {
-        &:first-child {
-          width: 15px;
-          justify-content: center;
-          flex-shrink: 0;
-          display: flex;
-          flex-direction: column;
-        }
-      }
-
-      .rr-status-badge {
-        width: 15px;
-        height: 15px;
-        background: var(--rr-color-status-none);
-        display: inline-block;
-        border-radius: 100%;
-      }
-
-      &.rr-available-positive {
-        .rr-status-badge  {
-          background: var(--rr-color-status-success);
-        }
-
-        .rr-inventory-row:first-child {
-          color: var(--rr-color-status-success);
-        }
-      }
-
-      &.rr-available-negative {
-        .rr-status-badge {
-          background: var(--rr-color-status-alarm);
-        }
-
-        .rr-inventory-row:first-child {
-          color: var(--rr-color-status-alarm);
-        }
-      }
-
-      &.rr-available-neutral {
-        .rr-status-badge {
-          background: var(--rr-color-status-warning);
-        }
-
-        .rr-inventory-row:first-child {
-          color: var(--rr-color-status-warning);
-        }
-      }
-    }
   }
 
   .rr-hr {

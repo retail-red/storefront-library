@@ -34,7 +34,9 @@
       </legend>
     </fieldset>
   </div>
-  <span class="rr-field-error rr-hidden {{id}}-error"></span>
+  {{#if supportsErrors}}
+    <span class="rr-field-error {{id}}-error"></span>
+  {{/if}}
 </div>
 
 <script>

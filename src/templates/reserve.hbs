@@ -95,10 +95,10 @@
       <div class="rr-section">
         <h3>{{t "reserve.contactInfo" }}</h3>
         <div class="rr-form-input-grid">
-          {{> textField id="rr-reserve-first-name" label="reserve.firstName" autocomplete="given-name" }}
-          {{> textField id="rr-reserve-last-name" label="reserve.lastName" autocomplete="family-name" }}
-          {{> textFieldPhone id="rr-reserve-phone-number" countryFieldId="rr-reserve-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
-          {{> textField id="rr-reserve-email" label="reserve.email" type="email" autocomplete="email" }}
+          {{> textField id="rr-reserve-first-name" label="reserve.firstName" autocomplete="given-name" supportsErrors=true }}
+          {{> textField id="rr-reserve-last-name" label="reserve.lastName" autocomplete="family-name" supportsErrors=true }}
+          {{> textFieldPhone id="rr-reserve-phone-number" countryFieldId="rr-reserve-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" supportsErrors=true }}
+          {{> textField id="rr-reserve-email" label="reserve.email" type="email" autocomplete="email" supportsErrors=true }}
           <div class="rr-form-info-text">{{t "reserve.formInfoText" }}</div>
         </div>
       </div>
@@ -120,10 +120,10 @@
       <div class="rr-section rr-pickup-contact rr-hidden">
         <h3>{{t "reserve.pickupInfo" }}</h3>
         <div class="rr-form-input-grid">
-          {{> textField id="rr-reserve-pickup-first-name" label="reserve.firstName" autocomplete="given-name" }}
-          {{> textField id="rr-reserve-pickup-last-name" label="reserve.lastName" autocomplete="family-name" }}
-          {{> textFieldPhone id="rr-reserve-pickup-phone-number" countryFieldId="rr-reserve-pickup-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" }}
-          {{> textField id="rr-reserve-pickup-email" label="reserve.email" type="email" autocomplete="email" }}
+          {{> textField id="rr-reserve-pickup-first-name" label="reserve.firstName" autocomplete="given-name" supportsErrors=true }}
+          {{> textField id="rr-reserve-pickup-last-name" label="reserve.lastName" autocomplete="family-name" supportsErrors=true }}
+          {{> textFieldPhone id="rr-reserve-pickup-phone-number" countryFieldId="rr-reserve-pickup-country" label="reserve.phoneNumber" type="tel" autocomplete="tel" supportsErrors=true }}
+          {{> textField id="rr-reserve-pickup-email" label="reserve.email" type="email" autocomplete="email" supportsErrors=true }}
         </div>
       </div>
       <div class="rr-section">

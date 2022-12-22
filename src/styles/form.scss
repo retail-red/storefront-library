@@ -112,7 +112,6 @@ $input-border-radius: 5px;
     }
 
     input {
-    //  padding-left: 50px;
       &:focus + label {
         left: 0;
       }
@@ -135,7 +134,9 @@ $input-border-radius: 5px;
 .rr-field {
   display: flex;
   flex-direction: column;
+
   .rr-field-error {
+    min-height: 24px;
     margin-top: 6px;
     color: var(--rr-color-status-alarm);
     font-size: 0.85em;
