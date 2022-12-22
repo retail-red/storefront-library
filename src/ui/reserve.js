@@ -194,7 +194,6 @@ class ReserveController extends Controller {
       Object.entries(rules).forEach(([ruleName, ruleEval]) => {
         const outcome = ruleEval(submitData[property]);
         if (!outcome) {
-          elementError.classList.remove('rr-hidden');
           elementError.innerText = t(`errors.validation.${ruleName}`);
           isValid = false;
           if (!firstError) {
@@ -202,7 +201,8 @@ class ReserveController extends Controller {
           }
           return;
         }
-        elementError.classList.add('rr-hidden');
+
+        elementError.innerText = '';
       });
     });
     if (!isValid) {
