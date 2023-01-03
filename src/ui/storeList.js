@@ -463,12 +463,22 @@ class StoreListController extends Controller {
     selection = [],
   ) {
     const parentProductOptions = (parentProduct.options ?? []).map((option) => {
+      const hasSingleValue = option.values.length === 1;
+
       const values = option.values.map((value) => {
         // Flag selected options within the parent product options array
-        const selected = selection.find((selectionOption) => (
-          selectionOption.code === option.code
-                && selectionOption.valueCode === value.code
-        ));
+        let selected;
+
+        if (hasSingleValue) {
+          // When the current option only has a single value, we preselect it for user convenience
+          selected = true;
+        } else {
+          // Check if the current option value is included in the active user selection
+          selected = selection.find((selectionOption) => (
+            selectionOption.code === option.code
+                  && selectionOption.valueCode === value.code
+          ));
+        }
 
         return {
           ...value,
