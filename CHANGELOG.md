@@ -1,5 +1,9 @@
 # retail.red Storefront Library Changelog
 
+## v3.0.1
+### Added
+- When a Storefront API product is shown within the modal that has options with just a single value, those values are preselected for user convenience
+
 ## v3.0.0
 ### Breaking changes
 - Reworked big parts of HTML markup and CSS
