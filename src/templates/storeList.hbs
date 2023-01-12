@@ -46,9 +46,14 @@
       <div class="rr-header-search">
         <div class="rr-store-list-search-fields">
           {{#if (gt countries.length 1) }}
-            {{#> select id="rr-store-list-country" label="storeList.search.countryLabel" }}
+            {{#> select id="rr-store-list-country" label="storeList.search.countryLabel" value=countryCode }}
               {{#each countries}}
-                <option value="{{code}}">{{name}}</option>
+                <option
+                  value="{{code}}"
+                  {{#if (eq ../countryCode code)}}
+                  selected
+                  {{/if}}
+                >{{name}}</option>
               {{/each}}
             {{/select}}
           {{/if}}

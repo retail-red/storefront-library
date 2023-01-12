@@ -20,13 +20,20 @@ class ReserveButtonController extends Controller {
   }
 
   domUpdated() {
+    const {
+      postalCode,
+      localization: {
+        countryCode,
+      } = {},
+    } = this.config || {};
+
     const button = document.querySelector('#rr-omni-reserve-button');
     button.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
       this.state.callback(() => {
         const modalPlaceholder = this.app.publicInterface.Class._globalModalPlaceholderSingleton();
-        this.app.start(modalPlaceholder);
+        this.app.start(modalPlaceholder, { options: { postalCode, countryCode } });
       });
     });
   }
