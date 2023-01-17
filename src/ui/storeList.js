@@ -28,6 +28,11 @@ class StoreListController extends Controller {
       useApiProduct,
     } = this.config;
 
+    const {
+      postalCode,
+      countryCode,
+    } = options;
+
     let { product } = this.config ?? {};
     let parentProduct;
 
@@ -41,10 +46,14 @@ class StoreListController extends Controller {
       code,
       name: t(`countries.${code}`),
     }));
-    this.countryCode = countries[0].code;
+
+    // Prefill country select
+    this.state.countryCode = countryCode && countries.find(({ code }) => code === countryCode)
+      ? countryCode
+      : countries[0].code;
 
     // Get geolocation immediately
-    if (useGeolocationImmediately && !locationCode && !options.postalCode) {
+    if (useGeolocationImmediately && !locationCode && !postalCode) {
       const cachedCoords = Cache.get(geolocationKey);
 
       if (cachedCoords) {
@@ -61,8 +70,8 @@ class StoreListController extends Controller {
     }
 
     // Prefill search
-    if (options.postalCode) {
-      this.state.postalCode = options.postalCode;
+    if (postalCode) {
+      this.state.postalCode = postalCode;
     }
 
     // Receive all locations for initial loading.
@@ -253,7 +262,7 @@ class StoreListController extends Controller {
       const { locations } = await this.sdk.getLocations({
         productCode: product ? product.code : undefined,
         postalCode: this.state.postalCode,
-        countryCode: this.countryCode,
+        countryCode: this.state.countryCode,
         ...(this.state.postalCode || this.geolocation ? ({
           unitSystem,
         }) : {}),
@@ -347,7 +356,9 @@ class StoreListController extends Controller {
   }
 
   setCountryCode(code) {
-    this.countryCode = code;
+    this.setState({
+      countryCode: code,
+    });
   }
 
   setGeolocation() {

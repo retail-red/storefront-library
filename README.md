@@ -114,6 +114,7 @@ retailred.updateConfig({
 | `apiStage`                  | `production` | NO       | Use `staging` to use our `staging` environment when testing.                                                                                                                                                                                                  |
 | `unitSystem`                | `metric`     | NO       | Either `metric` or `imperial`                                                                                                                                                                                                                                 |
 | `locationCode`              | `null`       | NO       | Preselect a location to bring the user directly to reservation form.                                                                                                                                                                                          |
+| `postalCode`              | `null`       | NO       | Prefill the postal code input with a value that's used for the initial location request at the store list.                                                                                                                                                                                           |
 | `browserHistory`            | `true`       | NO       | If enabled the browsers history will be used within the reservation modal allowing the users to navigate with the native controls. Can be disabled when your store is already using the browsers history internally and the modals history conflicts with it. |
 | `useGeolocationImmediately` | `true`       | NO       | If enabled, whenever the user opens the store list the browsers geolocation will be requested immediately instead of only after pressing the locate me button.                                                                                                |
 | `testMode`                  | `false`      | NO       | When set to `true` no buttons will be rendered within the users browser, till the page was once opened with a query parameter like `rrTesting=start`. A testing session can be stopped by opening the page with `rrTesting=end`                               |
@@ -172,6 +173,7 @@ These will be used to prefill the reservation form with the currently logged in 
 |-----------------------------|---------------------|----------|----------------------------------------------------------|
 | `localization.localeCode`   | The browsers locale | NO       | Overrides the users locale which will affect UI language. Examples: `de-de`, `en-us`|
 | `localization.countries`    | `['de']`            | NO       | Set the available countries for the store list search    |
+| `localization.countryCode`   | `null` | NO       | Preselects one of the available countries from the `localization.countries` array within the store list search |
 | `localization.[lang].[key]` | `null`              | NO       | Add or overrides a translation key. See example below    |
 
 ```js
