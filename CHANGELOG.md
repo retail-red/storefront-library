@@ -1,5 +1,10 @@
 # retail.red Storefront Library Changelog
 
+## v3.1.0
+### Added
+- Introduced `postalCode` configuration parameter that can be used to prefill the postal code field at the store list screen
+- Added `localization.countryCode` configuration parameter that can be used to preselect one of the countries configured within `localization.countries`
+
 ## v3.0.0
 ### Breaking changes
 - Reworked big parts of HTML markup and CSS

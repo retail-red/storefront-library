@@ -50,6 +50,7 @@ try {
 const defaultConfig = merge({
   apiStage: 'production',
   locationCode: null,
+  postalCode: null,
   unitSystem: 'metric',
   browserHistory: true,
   useGeolocationImmediately: true,
@@ -78,6 +79,7 @@ const defaultConfig = merge({
   localization: {
     localeCode: getBrowserLanguage(),
     countries: ['de'],
+    countryCode: null,
   },
   ui: {
     reserveButtonClasses: 'rr-omni-reserve-button button btn btn-primary',
