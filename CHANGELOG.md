@@ -1,11 +1,16 @@
 # retail.red Storefront Library Changelog
 
 ## v3.1.0
+https://cdn.retail.red/omni/retailred-storefront-library-3.1.0.js
+
 ### Added
 - Introduced `postalCode` configuration parameter that can be used to prefill the postal code field at the store list screen
 - Added `localization.countryCode` configuration parameter that can be used to preselect one of the countries configured within `localization.countries`
+- When a Storefront API product is shown within the modal that has options with just a single value, those values are preselected for user convenience
 
 ## v3.0.0
+https://cdn.retail.red/omni/retailred-storefront-library-3.0.0.js
+
 ### Breaking changes
 - Reworked big parts of HTML markup and CSS
 - Set default value for `--rr-color-text` custom property to `inherit`, so that by default the primary page text color is used for texts within the modal
