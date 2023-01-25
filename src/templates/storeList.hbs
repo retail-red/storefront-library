@@ -222,13 +222,17 @@
           var code = target.getAttribute('data-code');
           var valueCode = target.value
 
-          document.querySelectorAll('#rr-api-product-options input[name='+ code + ']')
-            .forEach(function(el) {
+          document.querySelectorAll('#rr-api-product-options input').forEach((el) => {
+            if (el.getAttribute('name') === code) {
+              {{!-- Remove checked states from the entries of the corresponding radio group --}}
               el.removeAttribute('checked');
-            });
 
-          document.querySelector('#rr-api-product-options input#input-' + code + '-' + valueCode )
-            .setAttribute('checked', true);
+              if (el.value === valueCode) {
+                {{!-- Check the radio group element that matches the changed select option --}}
+                el.setAttribute('checked', true);
+              }
+            }
+          });
         }
 
         {{!-- Sync radio button changes with selects --}}
@@ -236,8 +240,11 @@
           var code = target.getAttribute('name');
           var valueCode = target.getAttribute('value');
 
-          document.querySelector('#rr-api-product-options-select select[data-code=' + code + ']')
-            .value = valueCode;
+          document.querySelectorAll('#rr-api-product-options-select select').forEach((el) => {
+            if (el?.dataset?.code === code) {
+              el.value = valueCode;
+            }
+          });
         }
 
         var selections = [];

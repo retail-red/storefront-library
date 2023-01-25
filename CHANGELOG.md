@@ -1,5 +1,11 @@
 # retail.red Storefront Library Changelog
 
+## v3.1.1
+
+https://cdn.retail.red/omni/retailred-storefront-library-3.1.1.js
+### Fixes
+- Fixed an issue with DOM exceptions that where caused by automatically created query selectors
+
 ## v3.1.0
 https://cdn.retail.red/omni/retailred-storefront-library-3.1.0.js
 
