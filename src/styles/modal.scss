@@ -40,7 +40,7 @@
   }
 
   .rr-modal-container {
-    height: calc(100% - 58px);
+    height: calc(100% - (var(--rr-modal-header-height, 58) * 1px));
     .rr-modal-content {
       height: 100%;
     }

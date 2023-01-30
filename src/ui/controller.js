@@ -61,6 +61,34 @@ class Controller {
   domUpdated() {}
 
   /**
+   * Updates a custom css property that contains the current height of the header element.
+   * This is necessary, since inside the .rr-modal-container class the height property is calculated
+   * by subtract the header height from 100%. Since headers have different heights based on their
+   * content, this value needs to be determined whenever the view inside the modal changes.
+   */
+  updateHeaderHeightCustomProperty() {
+    // Name of the custom property for the header height
+    const key = '--rr-modal-header-height';
+    // Select header and modal elements
+    const headerEl = document.querySelector('.rr-modal-header');
+    const modalEl = document.getElementById('rr-omni');
+
+    // Only proceed when both elements are available
+    if (!headerEl || !modalEl) {
+      return;
+    }
+
+    // Get the height of the modal header
+    const headerHeight = headerEl.offsetHeight;
+
+    const { style } = modalEl;
+    if (style.getPropertyValue(key) !== headerHeight) {
+      // Apply the value to the custom property at the modal element
+      style.setProperty(key, headerHeight);
+    }
+  }
+
+  /**
    * Re-renders the template but only updates the DOM partially.
    * @param {String} targetSelector Selector for part that should be re-rendered.
    */
@@ -113,6 +141,7 @@ class Controller {
     }
     requestAnimationFrame(() => {
       this.domUpdated(target, silent);
+      this.updateHeaderHeightCustomProperty();
     });
   }
 }
