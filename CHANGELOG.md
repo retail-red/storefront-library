@@ -1,5 +1,14 @@
 # retail.red Storefront Library Changelog
 
+## v3.2.0
+https://cdn.retail.red/omni/retailred-storefront-library-3.2.0.js
+
+### Fixes
+- Fixed phone number country picker dropdown on mobile
+
+### Changes
+- Countries from `localization.countries` array inside the config are now displayed on top of the phone number country picker
+
 ## v3.1.1
 
 https://cdn.retail.red/omni/retailred-storefront-library-3.1.1.js

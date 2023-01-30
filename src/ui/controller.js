@@ -32,6 +32,9 @@ class Controller {
     this.template = this.config.templates.customTemplates[templateName]
       || defaultTemplates[templateName];
     this.renderDebounced = debounce(() => this.render(this.previousTarget), 200);
+    // isMobile check from intl-tel-input module. this module needs special markup on mobile, so
+    // we adopt its check to enable mobile markup preparation.
+    this.isMobile = /Android.+Mobile|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
   // eslint-disable-next-line no-empty-function

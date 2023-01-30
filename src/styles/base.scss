@@ -33,6 +33,22 @@
   @import "~intl-tel-input/src/css/intlTelInput";
 }
 
+.iti-mobile #rr-omni.rr-omni-int .rr-iti-mobile-dropdown-container .iti--container {
+  top: 30px;
+  top: max(env(safe-area-inset-top), 30px);
+  bottom: 30px;
+  bottom: max(env(safe-area-inset-bottom), 30px);
+  left: 30px;
+  right: 30px;
+  position: fixed;
+  z-index: 1000;
+
+  .iti__country-list {
+    max-height: 100%;
+    width: 100%;
+  }
+}
+
 #rr-inventory {
   @import "form";
 }

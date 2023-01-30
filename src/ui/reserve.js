@@ -112,6 +112,12 @@ class ReserveController extends Controller {
       localizedCountries: getCountries() || {},
       nationalMode: true,
       utilsScript,
+      ...(Array.isArray(this.config?.localization?.countries) && {
+        preferredCountries: this.config?.localization?.countries,
+      }),
+      ...(this.isMobile && {
+        dropdownContainer: document.querySelector('.rr-iti-mobile-dropdown-container'),
+      }),
       ...extraOptions,
     });
   }
