@@ -86,6 +86,18 @@ class Controller {
       // Apply the value to the custom property at the modal element
       style.setProperty(key, headerHeight);
     }
+
+    if (window?.ResizeObserver && !this.headerObserver) {
+      // Create an observer to update the custom property when the header size changes
+      this.headerObserver = new ResizeObserver(() => {
+        if ((this.app?.lastHistory?.pathname ?? '').includes(this.templateName)) {
+          // Only update the value when the observer of the current controller is invoked
+          this.updateHeaderHeightCustomProperty();
+        }
+      });
+
+      this.headerObserver.observe(headerEl);
+    }
   }
 
   /**
