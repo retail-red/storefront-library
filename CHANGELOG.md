@@ -5,6 +5,10 @@ https://cdn.retail.red/omni/retailred-storefront-library-3.2.0.js
 
 ### Fixes
 - Fixed cut off reservation button when modal header displayed more than one line of text
+- Fixed phone number country picker dropdown on mobile
+
+### Changes
+- Countries from `localization.countries` array inside the config are now displayed on top of the phone number country picker
 
 ## v3.1.1
 
