@@ -1,5 +1,11 @@
 # retail.red Storefront Library Changelog
 
+## v3.2.1
+https://cdn.retail.red/omni/retailred-storefront-library-3.2.1.js
+
+### Fixes
+- Fixed still cut off reservation button when modal was closed an re-opened again
+
 ## v3.2.0
 https://cdn.retail.red/omni/retailred-storefront-library-3.2.0.js
 
