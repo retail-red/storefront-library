@@ -99,7 +99,9 @@ class App {
       // Update title.
       this.modalTitle.innerText = controller.getTitle();
 
-      this.updateHeaderHeightCustomProperty();
+      requestAnimationFrame(() => {
+        this.updateHeaderHeightCustomProperty();
+      });
 
       // Update back button
       if (this.historyIndex >= 2 && this.modalBack.classList.contains('rr-back-hidden')) {
@@ -264,6 +266,7 @@ class App {
         this.element.innerHTML = '';
         this.element = null;
         this.endReached = false;
+        this.headerObserver = null;
       }, 225);
     });
 
