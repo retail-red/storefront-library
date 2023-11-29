@@ -1,5 +1,11 @@
 # retail.red Storefront Library Changelog
 
+## v3.2.2
+https://cdn.retail.red/omni/retailred-storefront-library-3.2.2.js
+
+### Fixes
+- Updated default styling of input fields to avoid bleeding of external css into the modal
+
 ## v3.2.1
 https://cdn.retail.red/omni/retailred-storefront-library-3.2.1.js
 
