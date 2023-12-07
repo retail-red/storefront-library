@@ -203,7 +203,17 @@ class ReserveController extends Controller {
           elementError.innerText = t(`errors.validation.${ruleName}`);
           isValid = false;
           if (!firstError) {
-            firstError = elementId;
+            /**
+             * When the textFieldPhone partial is used for the phone number fields, the input for
+             * the elementId is a hidden input which can't be targeted by scrollIntoView().
+             * Therefore we need to manipulate the elementId and add a "-user" suffix to target the
+             * visible input.
+             */
+            if (typeof elementId === 'string' && elementId.includes('phone-number') && document.querySelector(`#${elementId}-user`)) {
+              firstError = `${elementId}-user`;
+            } else {
+              firstError = elementId;
+            }
           }
           return;
         }
@@ -211,6 +221,7 @@ class ReserveController extends Controller {
         elementError.innerText = '';
       });
     });
+
     if (!isValid) {
       document.querySelector(`#${firstError}`).scrollIntoView({ behavior: 'smooth' });
       return;

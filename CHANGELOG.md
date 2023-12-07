@@ -1,5 +1,14 @@
 # retail.red Storefront Library Changelog
 
+## v.3.3.0
+https://cdn.retail.red/omni/retailred-storefront-library-3.3.0.js
+
+### Fixes
+- When users enter a wrong phone number, the view automatically scrolls to the invalid field as expected again
+
+### Changes
+- Changed phone number input field placeholders from "Phone Number" to "Mobile Number" to prevent customers from entering landline numbers
+
 ## v3.2.2
 https://cdn.retail.red/omni/retailred-storefront-library-3.2.2.js
 

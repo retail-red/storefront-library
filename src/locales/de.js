@@ -73,7 +73,7 @@ export default {
     customerNotes: 'Anmerkungen',
     firstName: 'Vorname',
     lastName: 'Nachname',
-    phoneNumber: 'Tel. Nr.',
+    phoneNumber: 'Mobiltelefonnummer',
     email: 'E-Mail-Adresse',
     submit: 'Reservierung abschicken',
     terms: {
