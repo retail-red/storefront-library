@@ -73,7 +73,7 @@ export default {
     customerNotes: 'Comments',
     firstName: 'First Name',
     lastName: 'Last Name',
-    phoneNumber: 'Phone Number',
+    phoneNumber: 'Mobile Number',
     email: 'Email Address',
     submit: 'Submit reservation',
     terms: {
