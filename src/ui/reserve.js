@@ -209,7 +209,7 @@ class ReserveController extends Controller {
              * Therefore we need to manipulate the elementId and add a "-user" suffix to target the
              * visible input.
              */
-            if (elementId && elementId.includes('phone-number') && document.querySelector(`#${elementId}-user`)) {
+            if (typeof elementId === 'string' && elementId.includes('phone-number') && document.querySelector(`#${elementId}-user`)) {
               firstError = `${elementId}-user`;
             } else {
               firstError = elementId;
