@@ -69,7 +69,7 @@ export default {
     me: 'Me',
     someoneElse: 'Someone else',
     pickupInfo: 'Who will pick up this reservation?',
-    customerNotesHeadline: 'Do you have any comments for the reservation (e.g. a desired pickup date)?',
+    customerNotesHeadline: 'Do you have any comments for the reservation?',
     customerNotes: 'Comments',
     firstName: 'First Name',
     lastName: 'Last Name',

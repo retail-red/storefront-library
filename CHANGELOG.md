@@ -1,5 +1,11 @@
 # retail.red Storefront Library Changelog
 
+## v.3.3.1
+https://cdn.retail.red/omni/retailred-storefront-library-3.3.1.js
+
+### Changes
+- Changed default translation for customer notes headline
+
 ## v.3.3.0
 https://cdn.retail.red/omni/retailred-storefront-library-3.3.0.js
 

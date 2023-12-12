@@ -69,7 +69,7 @@ export default {
     me: 'Ich',
     someoneElse: 'Jemand anderes',
     pickupInfo: 'Wer wird die Bestellung abholen?',
-    customerNotesHeadline: 'Hast du Anmerkungen für die Reservierung (z.B. ein gewünschtes Abholdatum)?',
+    customerNotesHeadline: 'Hast du Anmerkungen für die Reservierung?',
     customerNotes: 'Anmerkungen',
     firstName: 'Vorname',
     lastName: 'Nachname',
